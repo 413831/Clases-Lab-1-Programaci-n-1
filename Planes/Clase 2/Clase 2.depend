@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1535065465 source:/home/alumno/Documentos/Planes/Clase 2/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+
