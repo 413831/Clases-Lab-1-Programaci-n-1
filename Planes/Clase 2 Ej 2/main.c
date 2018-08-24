@@ -1,20 +1,20 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 
 #define LIMITE 5
 
 int main()
-{int numero[LIMITE];
+{float numero[LIMITE];
 int i;
-int acumulador = 0;
-int promedio;
+float acumulador = 0;
+float promedio;
 
 
 for(i=0;i<LIMITE;i++)
 {
     printf("Ingrese un número \n");
 
-    while(scanf("%d",&numero[i]) != 1)//
+    while(scanf("%f",&numero[i]) != 1)//
     {
        printf("\nError - Numero %d:",i+1);
        __fpurge(stdin);//función para borrar el dato en el buffer, "stdin" ubicación del buffer del teclado
@@ -25,7 +25,7 @@ acumulador+=numero[i];
 }
 
 promedio = acumulador / LIMITE;
-printf("\nEl promedio total es: %d",promedio);
+printf("\nEl promedio total es: %f",promedio);
 
     printf("\nHello world!\n");
     return 0;
