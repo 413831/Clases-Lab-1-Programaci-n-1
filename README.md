@@ -1,2 +1,5 @@
 # Clases-Lab-1-Programaci-n-1
-Ejercicios de clase
+Ejercicios realizados en clase
+Funciones creadas
+Librerias creadas
+Ejemplos
