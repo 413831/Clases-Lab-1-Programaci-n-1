@@ -1,4 +1,6 @@
-# Clases-Lab-1-Programaci-n-1
+
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+# Clases de Programación I y Laboratorio I
 Ejercicios realizados en clase<br>
 Funciones creadas<br>
 Librerias creadas<br>
