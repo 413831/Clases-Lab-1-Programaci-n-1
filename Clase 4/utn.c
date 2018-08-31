@@ -11,19 +11,19 @@ static void myFpurge()
 static int getInt(int *numeroIngresado)//se prohibe para uso exlusivo interno
 {
     myFpurge();
-    return scanf("%d",*numeroIngresado);
+    return scanf("%d",numeroIngresado);
 }
 
 static int getFloat(float *numeroIngresado)
 {
     myFpurge();
-    return scanf("%f",&numeroIngresado);
+    return scanf("%f",numeroIngresado);
 }
 
 static int getChar(char *caracterIngresado)
 {
     myFpurge();
-    return scanf("%c",&caracterIngresado);
+    return scanf("%c",caracterIngresado);
 }
 
 static int getString(char textoIngresado[])
@@ -60,7 +60,7 @@ int utn_getNumero(  int * pResultado,  //dejar el resultado
     for(i=reintentos;i>0;reintentos--)
     {
         printf(mensaje);
-        getInt("%d",&numeroUsuario);
+        getInt(&numeroUsuario);
 
             if(numeroUsuario >= minimo && numeroUsuario <= maximo)
             {
@@ -98,7 +98,7 @@ int utn_getCaracter(char *pCaracter,
     for(i=reintentos;i>0;reintentos--)
     {
         printf(mensaje);
-        getChar("%c",&auxiliarCaracter);
+        getChar(auxiliarCaracter);
 
             if(auxiliarCaracter > minimo && auxiliarCaracter < maximo)
             {
