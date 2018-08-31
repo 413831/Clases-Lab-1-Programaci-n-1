@@ -1,11 +1,11 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "utn.h"
 
 static void myFpurge()
 {
-    __fpurge(stdin);
-    //fflush(stdin);
+    //__fpurge(stdin);
+    fflush(stdin);
 }
 
 static int getInt(int *numeroIngresado)//se prohibe para uso exlusivo interno
@@ -14,11 +14,11 @@ static int getInt(int *numeroIngresado)//se prohibe para uso exlusivo interno
     return scanf("%d",numeroIngresado);
 }
 
-static int getFloat(float *numeroIngresado)
+/*static int getFloat(float *numeroIngresado)
 {
     myFpurge();
     return scanf("%f",numeroIngresado);
-}
+}*/
 
 static int getChar(char *caracterIngresado)
 {
@@ -26,18 +26,18 @@ static int getChar(char *caracterIngresado)
     return scanf("%c",caracterIngresado);
 }
 
-static int getString(char textoIngresado[])
+/*static int getString(char textoIngresado[])
 {
     myFpurge();
     return scanf("%s",textoIngresado);
-}
+}*/
 
 
 
 
 /**
-*\brief Solicita un número al usuario y devuelve el resultado
-*\param pResultado Puntero a la variable resultado
+*\brief Solicita un número entero al usuario y devuelve el resultado
+*\param pResultado Puntero a la variable donde se guarda el resultado
 *\param mensaje Es el mensaje a ser mostrado
 *\param mensajeError Es el mensaje a ser mostrado en caso de error
 *\param minimo Es el limite minimo incluido
@@ -47,30 +47,64 @@ static int getString(char textoIngresado[])
 */
 
 
-int utn_getNumero(  int * pResultado,  //dejar el resultado
+int utn_getEntero(  int * pResultado,  //dejar el resultado
                 char* mensaje,     //mensaje para ingresar
                 char* mensajeError,//mensaje de error
                 int minimo,        //limite minimo
                 int maximo,        //limite maximo
                 int reintentos)    //cantidad de intentos
 {
-    int numeroUsuario;
+    int enteroAuxiliar;
     int i;
 
     for(i=reintentos;i>0;reintentos--)
     {
         printf(mensaje);
-        getInt(&numeroUsuario);
+        getInt(&enteroAuxiliar);
 
-            if(numeroUsuario >= minimo && numeroUsuario <= maximo)
+            if(enteroAuxiliar >= minimo && enteroAuxiliar <= maximo)
             {
-            *pResultado = numeroUsuario;
+            *pResultado = enteroAuxiliar;
             break;
             }
         printf(mensajeError);
     }
 
     return 0;
+}
+/**
+*\brief Solicito un numero con coma al usuario y devuelvo resultado
+*\param pResutado Es el puntero de la variable donde se guarda el resultado
+*\param mensaje Es el mensaje que se muestra al usuario para ingresar numero
+*\param mensajeError Es el mensaje que se muestra al ingresar dato incorrecto
+*\param minimo Es el limite minimo inclusive disponible para el ingreso
+*\param maximo Es el limite maximo inclusive disponible para el ingreso
+*\param reintentos Es la cantidad de reintentos disponibles para el ingreso
+*\return Si es correcto el dato devuelve 0 si es incorrecto devuelve -1
+*/
+int utn_getNumeroDecimal(  float * pResultado,  //dejar el resultado
+                char* mensaje,     //mensaje para ingresar
+                char* mensajeError,//mensaje de error
+                float minimo,        //limite minimo
+                float maximo,        //limite maximo
+                int reintentos)
+{
+    int floatAuxiliar;
+    int i;
+
+    for(i=reintentos;i>0;i--)
+    printf(mensaje);
+    getFloat(&floatAuxiliar);
+    if(floatAuxiliar < minimo && floatAuxiliar > maximo)
+    {
+    *pResultado = floatAuxiliar;
+    return 0;
+    }
+
+    printf(mensajeError);
+
+
+
 }
 
 /**
@@ -98,9 +132,9 @@ int utn_getCaracter(char *pCaracter,
     for(i=reintentos;i>0;reintentos--)
     {
         printf(mensaje);
-        getChar(auxiliarCaracter);
+        getChar(&auxiliarCaracter);
 
-            if(auxiliarCaracter > minimo && auxiliarCaracter < maximo)
+            if(auxiliarCaracter > *minimo && auxiliarCaracter < *maximo)
             {
             *pCaracter = auxiliarCaracter;
             break;
