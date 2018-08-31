@@ -1,0 +1,9 @@
+# depslib dependency file v1.0
+1535673251 source:/home/alumno/Documentos/Planes/Funciones/Funciones 3/main.c
+	<stdio.h>
+	<stdlib.h>
+
+1535673261 source:/home/alumno/Documentos/Planes/Funciones/Funciones 3/utn.c
+	<stdio.h>
+	<stdlib.h>
+
