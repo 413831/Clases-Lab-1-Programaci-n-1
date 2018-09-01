@@ -40,28 +40,38 @@ int main()
     getNumero(&numeroUno);
     getCaracter(&operacion,"Elija una opción ");
 
-
-
     switch(operacion)
     {
         case '+' :
         {
         getNumero(&numeroDos);
         resultado = funcionSuma(numeroUno,numeroDos);
-        printf("\nEl resultado de la suma %d + %d es: %d",numeroUno,numeroDos,resultado);
+        printf("\nEl resultado de la suma %d + %d = %d",numeroUno,numeroDos,resultado);
         return 0;
         break;
         }
         case '-' :
         {
+        getNumero(&numeroDos);
+        resultado = funcionResta(numeroUno,numeroDos);
+        printf("\nEl resultado de la resta %d - %d = %d",numeroUno,numeroDos,resultado);
+        return 0;
         break;
         }
         case '*' :
         {
+        getNumero(&numeroDos);
+        resultado = funcionMultiplicar(numeroUno,numeroDos);
+        printf("\nEl resultado de la multiplicación %d * %d = %d",numeroUno,numeroDos,resultado);
+        return 0;
         break;
         }
         case '/' :
         {
+        getNumero(&numeroDos);
+        resultado = funcionDividir(numeroUno,numeroDos);
+        printf("\nEl resultado de la división %d / %d = %d",numeroUno,numeroDos,resultado);
+        return 0;
         break;
         }
         //case 'n!' :
