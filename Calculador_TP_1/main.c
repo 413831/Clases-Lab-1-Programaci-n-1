@@ -37,20 +37,18 @@ int main()
     printf("Ingrese los numeros para realizar la operacion\n");
     printf("\nSuma (+)\nResta (-)\nMultiplicación(*)\nDivisión(/)\nFactorial(!n)\n");
 
-    numeroUno = getNumero(&numeroUno);
-    getCaracter(&operacion);
-    numeroDos = getNumero(&numeroDos);
+    getNumero(&numeroUno);
+    getCaracter(&operacion,"Elija una opción ");
 
-     resultado = funcionSuma(numeroUno,numeroDos);
-        printf("El resultado de la suma %d + %d es: %d",numeroUno,numeroDos,resultado);
 
 
     switch(operacion)
     {
         case '+' :
         {
+        getNumero(&numeroDos);
         resultado = funcionSuma(numeroUno,numeroDos);
-        printf("El resultado de la suma %d + %d es: %d",numeroUno,numeroDos,resultado);
+        printf("\nEl resultado de la suma %d + %d es: %d",numeroUno,numeroDos,resultado);
         return 0;
         break;
         }

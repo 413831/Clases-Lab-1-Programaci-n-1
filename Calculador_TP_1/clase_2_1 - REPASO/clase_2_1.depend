@@ -1,0 +1,16 @@
+# depslib dependency file v1.0
+1535806026 source:/home/profesor/Ernesto/LABO1/Clase04/clase_2_1/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1535807922 source:/home/alumno/Entregas/clase_2_1 - REPASO/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1535809308 source:z:\clase_2_1 - repaso\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
