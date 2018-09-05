@@ -10,17 +10,18 @@ int main()
 
     int listadoDeNotas[CANTIDAD];
     int numeroIngresado;//Pedimos un dato y lo ingresamos en el array
-    int i = 0;
+    int i;
 
 
     for(i=0;i<CANTIDAD;i++)
     {
-        printf("\nIngrese nota :");//Se cargan las notas en el array y luego se carga el resultado en la variable para mostrar
+        limpiarMemoria();
+        printf("\nIngrese nota: ");//Se cargan las notas en el array y luego se carga el resultado en la variable para mostrar
         scanf("%d",&numeroIngresado);
         listadoDeNotas[i]=numeroIngresado;
     }
 
     mostrarInfoArray(listadoDeNotas,CANTIDAD);
-
+    getchar();
     return 0;
 }

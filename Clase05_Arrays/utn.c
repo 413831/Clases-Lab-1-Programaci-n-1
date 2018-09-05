@@ -2,6 +2,14 @@
 #include <stdlib.h>
 #include "utn.h"
 
+void limpiarMemoria()
+{
+    //__fpurge(stdin);
+    fflush(stdin);
+}
+
+
+
 
 /**
 *\brief Mostrar
@@ -14,7 +22,7 @@
 
 void mostrarInfoArray(int array[],int size)
 {
-    int promedio;
+    float promedio;
     int sumaTotal;
     int numeroMenor;
     int numeroMayor;
@@ -23,7 +31,7 @@ void mostrarInfoArray(int array[],int size)
     int desaprobados;
     int alumnosFinales;
 
-
+    printf("\n>>Listado de notas<<\n");
     cargarListado(array,size);
 
     promedio = promedioNotas(array,size);
@@ -34,11 +42,11 @@ void mostrarInfoArray(int array[],int size)
 
 
     aprobados = alumnosAprobadosDesaprobados(array,size,6,10);
-    desaprobados = alumnosAprobadosDesaprobados(array,size,4,5);
+    desaprobados = alumnosAprobadosDesaprobados(array,size,1,5);
     alumnosFinales = alumnosAprobadosDesaprobados(array,size,1,3);
 
 
-    printf("\n\nEl promedio de las notas es: %d",promedio);
+    printf("\n\nEl promedio de las notas es: %.1f",promedio);
     printf("\nLa suma total de las notas es: %d",sumaTotal);
     printf("\nLa nota mayor es: %d",numeroMayor);
     printf("\nLa nota menor es: %d",numeroMenor);
@@ -47,18 +55,17 @@ void mostrarInfoArray(int array[],int size)
     printf("\nLa cantidad de alumnos desaprobados es: %d",desaprobados);
     printf("\nLa cantidad de alumnos que rinden directo final es: %d",alumnosFinales);
 
-
 }
 
 
 int retornarNumeroMenor(int array[],int size)
 {
-    int menor = 0;
+    int menor;
     int i;
 
-    for(i=size;i>=0;i--)
+    for(i=size;i>0;i--)
     {
-        if(i == 0 || array [i]<menor)//Entra la primera vez por i ser 0 luego va comparando cual es el elemento menor
+        if(i == 0 || array[i]<menor)//Entra la primera vez por i ser 0 luego va comparando cual es el elemento menor
         {
         menor = array[i];
         }
@@ -69,7 +76,7 @@ int retornarNumeroMenor(int array[],int size)
 }
 int retornarNumeroMayor(int array[],int size)
 {
-    int mayor = 0;
+    int mayor;
     int i;
 
     for(i=0;i<size;i++)
@@ -90,7 +97,7 @@ int retornarNumerosPares(int array[],int size)
 
     for(i=size;i>=0;i--)
     {
-        if(i == 0 || array[i] % 2 == 0)
+        if(array[i] % 2 == 0)
         {
         contadorPares++;
         }
@@ -115,10 +122,10 @@ int retornarTotal(int array[],int size)
     return acumulador;
 }
 
-int promedioNotas(int array[],int size)
+float promedioNotas(int array[],int size)
 {
     int suma;
-    int promedio;
+    float promedio;
     suma = retornarTotal(array,size);
     promedio = suma / size;
     return promedio;
