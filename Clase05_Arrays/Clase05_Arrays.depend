@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1536109979 source:/home/alumno/Documentos/Planes/Funciones/Clase05_Arrays/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536110104 source:/home/alumno/Documentos/Planes/Funciones/Clase05_Arrays/utn.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536109132 /home/alumno/Documentos/Planes/Funciones/Clase05_Arrays/utn.h
+
+1536108654 source:/home/alumno/Documentos/Planes/Funciones/Clase05_Arrays/apunteClase.c
+
