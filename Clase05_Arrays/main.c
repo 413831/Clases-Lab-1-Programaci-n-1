@@ -6,22 +6,36 @@
 
 int main()
 {
-    printf("Hello world!\n");
-
     int listadoDeNotas[CANTIDAD];
     int numeroIngresado;//Pedimos un dato y lo ingresamos en el array
     int i;
+    char opcion;
 
-
-    for(i=0;i<CANTIDAD;i++)
+    do
     {
-        limpiarMemoria();
-        printf("\nIngrese nota: ");//Se cargan las notas en el array y luego se carga el resultado en la variable para mostrar
-        scanf("%d",&numeroIngresado);
-        listadoDeNotas[i]=numeroIngresado;
-    }
+        printf("Hello world!\n");
 
-    mostrarInfoArray(listadoDeNotas,CANTIDAD);
-    getchar();
+        for(i=0;i<CANTIDAD;i++)
+            {
+                printf("\nIngrese nota: ");//Se cargan las notas en el array y luego se carga el resultado en la variable para mostrar
+                scanf("%d",&numeroIngresado);
+                listadoDeNotas[i]=numeroIngresado;
+            }
+
+        mostrarInfoArray(listadoDeNotas,CANTIDAD);
+        getchar();
+        getCaracter(&opcion,"\n\nContinuar? S/N ");
+            while(!(opcion == 'S' || opcion == 's' || opcion == 'N' || opcion == 'n'))
+            {
+            printf("Ingrese una opcion valida");
+            limpiarMemoria();
+            getCaracter(&opcion,"\n\nContinuar? S/N ");
+            limpiarPantalla();
+            }
+        limpiarPantalla();
+
+    }while(opcion == 'S' || opcion == 's');
+
+
     return 0;
 }

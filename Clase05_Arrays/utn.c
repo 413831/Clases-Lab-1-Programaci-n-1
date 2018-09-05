@@ -2,13 +2,44 @@
 #include <stdlib.h>
 #include "utn.h"
 
+/**
+*\brief Se limpia el buffer del teclado
+*\param void
+*\return void
+*/
+
 void limpiarMemoria()
 {
     //__fpurge(stdin);
     fflush(stdin);
 }
 
+/**
+*\brief Se limpia la pantalla
+*\param void
+*\return void
+*/
 
+void limpiarPantalla()
+{
+    //system("clear");
+    system("cls");
+}
+
+
+/**
+*\brief Se solicita ingresar un caracter al usuario
+*\param caracterAuxiliar Puntero del caracter ingresado
+*\param mensaje Mensaje que se muestra al usuario para ingresar caracter
+*\return Retorna 0 si es correcto si es incorrecto retorna -1
+*/
+int getCaracter(char * caracterAuxiliar,char mensaje[50])
+{
+    limpiarMemoria();
+    printf("%s",mensaje);
+    scanf("%c",caracterAuxiliar);
+    return 0;
+}
 
 
 /**
@@ -22,6 +53,8 @@ void limpiarMemoria()
 
 void mostrarInfoArray(int array[],int size)
 {
+
+
     float promedio;
     int sumaTotal;
     int numeroMenor;
@@ -54,6 +87,7 @@ void mostrarInfoArray(int array[],int size)
     printf("\nLa cantidad de alumnos aprobados es: %d",aprobados);
     printf("\nLa cantidad de alumnos desaprobados es: %d",desaprobados);
     printf("\nLa cantidad de alumnos que rinden directo final es: %d",alumnosFinales);
+    getchar();
 
 }
 
@@ -63,7 +97,7 @@ int retornarNumeroMenor(int array[],int size)
     int menor;
     int i;
 
-    for(i=size;i>0;i--)
+    for(i=0;i<size;i++)
     {
         if(i == 0 || array[i]<menor)//Entra la primera vez por i ser 0 luego va comparando cual es el elemento menor
         {
@@ -158,3 +192,34 @@ int alumnosAprobadosDesaprobados(int array[],int size,int limiteInferior,int lim
     }
     return contadorNotas;
 }
+
+/**
+*\brief Crear un menú con 5 calculos para dos números ingresados por el usuario hasta que no quiera ingresar más
+*\param void
+*\return Retorna 0 si esta bien, sino retorna -1
+*/
+
+int menuNotasIngresadas(int array[],int size)
+{
+    char opcion;
+
+    do
+    {
+        mostrarInfoArray(array,size);
+        getchar();
+        getCaracter(&opcion,"\n\nContinuar? S/N ");
+            while(!(opcion == 'S' || opcion == 's' || opcion == 'N' || opcion == 'n'))
+            {
+            printf("Ingrese una opcion valida");
+            limpiarMemoria();
+            getCaracter(&opcion,"\n\nContinuar? S/N ");
+            limpiarPantalla();
+            }
+        limpiarPantalla();
+
+    }while(opcion == 'S' || opcion == 's');
+
+    return 0;
+}
+
+
