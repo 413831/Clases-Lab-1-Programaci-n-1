@@ -1,4 +1,3 @@
-
 /*
     printf( " tamaño : %d", sizeof(numeroIngresado));//Se le pasa el dato de cualquier variable, se muestra la CANTIDAD
     printf( " tamaño : %d", sizeof(listadoDeNotas));//Se muestra el tamaño de variable listadoDeNotas

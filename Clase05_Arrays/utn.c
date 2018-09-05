@@ -38,14 +38,14 @@ void mostrarInfoArray(int array[],int size)
     alumnosFinales = alumnosAprobadosDesaprobados(array,size,1,3);
 
 
-    printf("\nEl promedio de las notas es: %d",promedio);
+    printf("\n\nEl promedio de las notas es: %d",promedio);
     printf("\nLa suma total de las notas es: %d",sumaTotal);
-    printf("\nEl numero mayor es: %d",numeroMayor);
-    printf("\nEl numero menor es: %d",numeroMenor);
-    printf("\nLa cantidad de pares es: %d",cantidadPares);
-    printf("\nLa cantidad de alumnos aprobados es %d",aprobados);
-    printf("\nLa cantidad de alumnos desaprobados es %d",desaprobados);
-    printf("\nLa cantidad de alumnos que van a final es %d",alumnosFinales);
+    printf("\nLa nota mayor es: %d",numeroMayor);
+    printf("\nLa nota menor es: %d",numeroMenor);
+    printf("\nLa cantidad de notas pares es: %d",cantidadPares);
+    printf("\nLa cantidad de alumnos aprobados es: %d",aprobados);
+    printf("\nLa cantidad de alumnos desaprobados es: %d",desaprobados);
+    printf("\nLa cantidad de alumnos que rinden directo final es: %d",alumnosFinales);
 
 
 }
@@ -130,7 +130,7 @@ void cargarListado(int array[],int size)
 
     for(i=0;i<size;i++)
     {
-        printf("\nLa nota es : %d",array[i]);//Se muestran las notas cargadas
+        printf("\nLa nota es: %d",array[i]);//Se muestran las notas cargadas
 
     }
 
