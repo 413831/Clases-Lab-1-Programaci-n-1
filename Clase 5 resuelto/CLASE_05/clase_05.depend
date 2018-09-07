@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1536190708 source:/home/profesor/Ernesto/LABO1/Clase04/clase_05/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1535674282 /home/profesor/Ernesto/LABO1/Clase04/clase_05/utn.h
+
+1536188598 source:/home/profesor/Ernesto/LABO1/Clase04/clase_05/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536278813 source:/home/profesor/Documentos/davilas/CLASE_05/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"array.h"
+
+1536272239 /home/profesor/Documentos/davilas/CLASE_05/utn.h
+
+1536188598 source:/home/profesor/Documentos/davilas/CLASE_05/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536278842 /home/profesor/Documentos/davilas/CLASE_05/array.h
+
+1536279225 source:/home/profesor/Documentos/davilas/CLASE_05/array.c
+	<stdio.h>
+	<stdlib.h>
+	"array.h"
+
+1536279536 source:/home/alumno/Entregas/CLASE_05/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536279536 /home/alumno/Entregas/CLASE_05/utn.h
+
+1536281625 source:/home/alumno/Entregas/CLASE_05/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"array.h"
+
+1536281103 /home/alumno/Entregas/CLASE_05/array.h
+
+1536282239 source:/home/alumno/Entregas/CLASE_05/array.c
+	<stdio.h>
+	<stdlib.h>
+	"array.h"
+
