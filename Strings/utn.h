@@ -22,7 +22,7 @@ int getInt(int* pResultado,int j,int limite);
 
 void insertionSort(int array[], int size);
 void bubbleSort(int array[],int size);
-
+void insertionSortString(int array[], int size);
 
 
 #endif // UTN_H_INCLUDED

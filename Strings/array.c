@@ -200,6 +200,37 @@ void insertionSort(int array[], int size)
 }
 
 
+void insertionSortString(int array[], int size)
+{
+    int i;
+    int j;
+    int auxiliar;
+
+
+    for(i = 1; i < size ; i++)
+    {
+        auxiliar = array[i];//Valor actual a ser comaprado
+        j = 1;
+        while(j > 0 && auxiliar < array[j - 1])//Compara el dato de la posición del auxiliar con el dato de la posicion del array - 1
+        {
+            array[j] = array[j - 1];
+            j--;
+
+        }
+        array[j] = auxiliar;//Se escribe el dato ordenado guardado en auxiliar sobre la posicion del del array
+
+    }
+
+
+
+}
+
+
+
+
+
+
+
 
 
 
