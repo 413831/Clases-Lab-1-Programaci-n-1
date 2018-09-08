@@ -1,17 +1,17 @@
 # depslib dependency file v1.0
-1536415573 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/array.c
+1536418960 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/array.c
 	<stdio.h>
 	<stdlib.h>
 	"utn.h"
 
-1536414510 /home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/utn.h
+1536419631 /home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/utn.h
 
-1536413976 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/main.c
+1536419860 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/main.c
 	<stdio_ext.h>
 	<stdlib.h>
 	"utn.h"
 
-1536414510 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/utn.c
+1536419956 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Clase_Apoyo_2/utn.c
 	<stdio_ext.h>
 	<stdlib.h>
 	"utn.h"

@@ -1,0 +1,19 @@
+# depslib dependency file v1.0
+1536418960 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Strings/array.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536419631 /home/alumno/Documentos/Workspace/Programacion_1_Clases/Strings/utn.h
+
+1536420332 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Strings/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536419956 source:/home/alumno/Documentos/Workspace/Programacion_1_Clases/Strings/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+

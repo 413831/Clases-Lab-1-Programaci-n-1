@@ -5,14 +5,34 @@
 
 int main()
 {
-    int numeros[LIMITE];
-    int i;
-    int indice;
-    int nuevoValor;
-    int numeroMayor;
 
 
 
+
+
+   // int numeros[LIMITE];
+   // int i;
+   // int indice;
+   // int nuevoValor;
+   // int numeroMayor;
+
+
+
+
+
+    /* for(i=0;i<LIMITE;i++)
+    {
+        getInt(numeros,i,LIMITE);
+        array_ordenar(numeros,LIMITE,0);
+
+        insertionSort(numeros,LIMITE);
+        printf("%d\n",numeros[i]);
+
+    }
+*/
+
+
+/*
     //pepe[3] - 17;
     for(i=0;i<LIMITE;i++)//Carga secuencial
     {
@@ -59,19 +79,14 @@ int main()
             numeroMayor = numeros[i];
         }
 
-        /*if(i==LIMITE-1);
+        if(i==LIMITE-1);
         {
             printf("\n ULTIMA VUELTA!");
-        }*/
+        }
 
       }
+*/
 
-    for(i=0;i<LIMITE;i++)
-    {
-      array_ordenar(numeros,LIMITE,0);
-      printf(&numeros);
-    }
 
-    printf("Hello world!\n");
     return 0;
 }
