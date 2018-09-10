@@ -1,0 +1,18 @@
+# depslib dependency file v1.0
+1536372850 source:/home/alexei/Documents/Workspace/Practica/funciones.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536373339 /home/alexei/Documents/Workspace/Practica/utn.h
+
+1536374955 source:/home/alexei/Documents/Workspace/Practica/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536375185 source:/home/alexei/Documents/Workspace/Practica/utn.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
