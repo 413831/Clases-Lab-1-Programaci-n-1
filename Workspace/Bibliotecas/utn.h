@@ -27,5 +27,15 @@ void array_mostrarInt(int* pArray,int* pIndice,int* pSize,char* pMensaje);
 
 
 /**
-*Funciones de ORDENAMIENTO
+*Funciones de ORDENAMIENTO de Array
 */
+void sort_Bubble(int* pArray,int size);
+int sort_Selection(int* pArray, int limite, int orden);
+int sort_Insertion(int* pArray, int limite, int orden);
+
+/**
+*Funciones de STRING
+*/
+void getString(char mensaje[],char input[]);
+int getStringLetras(char mensaje[],char input[]);
+int getStringNumeros(char mensaje[],char input[]);

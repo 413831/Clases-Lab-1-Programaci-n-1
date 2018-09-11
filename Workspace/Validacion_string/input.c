@@ -3,6 +3,27 @@
 #include "utn.h"
 
 /**
+ * \brief Limpiar el buffer de lo ingresado
+ * \return Retorna void
+ */
+
+void limpiarMemoria()
+{
+    fflush(stdin);
+    //__fpurge(stdin);
+}
+
+/**
+ * \brief Limpiar la pantalla
+ * \return Retorna void
+ */
+
+void limpiarPantalla()
+{
+    system(clear);
+}
+
+/**
  * \brief Solicita un número entero y lo retorna
  * \param *mensaje Es el mensaje para mostrar al usuario
  * \return Entero ingresado por el usuario
