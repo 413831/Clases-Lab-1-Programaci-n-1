@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/calculo.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536704119 /home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/utn.h
+
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536704021 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/list.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536706297 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07/sort.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+

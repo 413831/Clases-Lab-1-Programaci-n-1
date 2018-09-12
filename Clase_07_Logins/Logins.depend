@@ -1,0 +1,44 @@
+# depslib dependency file v1.0
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/calculo.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536711852 /home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/utn.h
+
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536704021 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/list.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536714355 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536703512 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/sort.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536714938 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/string.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536713805 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_07_Logins/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+
