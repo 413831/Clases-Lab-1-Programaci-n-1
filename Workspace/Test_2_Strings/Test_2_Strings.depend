@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1536859819 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\input.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536859819 c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\utn.h
+
+1536850458 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\list.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1536860264 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+
+1536859997 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\string.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1536860410 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+
+1536848372 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\workspace\test_2_strings\sort.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
