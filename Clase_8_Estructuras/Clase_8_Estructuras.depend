@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1536881178 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_8_Estructuras/utn.c
+	<stdio_ext.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"utn.h"
+
+1536878368 /home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_8_Estructuras/utn.h
+
