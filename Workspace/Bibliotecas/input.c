@@ -1,16 +1,16 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include "utn.h"
 
 void limpiarMemoria()
 {
-    fflush(stdin);  //WINDOWS
-    //__fpurge(stdin);  //LINUX
+    //fflush(stdin);  //WINDOWS
+    __fpurge(stdin);  //LINUX
 }
 void limpiarPantalla()
 {
-    system("cls"); //WINDOWS
-    //system(clear); //LINUX
+    //system("cls"); //WINDOWS
+    system("clear"); //LINUX
 }
 
 

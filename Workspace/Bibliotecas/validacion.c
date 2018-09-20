@@ -27,7 +27,7 @@ char test_RandomInt(int desde , int hasta, int iniciar)
  * \return 1 si es númerico y 0 si no lo es
  */
 
-int validacion_Int(char* array,int minimo,int maximo)
+int validacion_Int(char* array,int size,int minimo,int maximo)
 {
    int i=0;
    int retorno = 0;
@@ -51,33 +51,36 @@ int validacion_Int(char* array,int minimo,int maximo)
  * \param array Es el array para validar su tipo
  * \return 1 si contiene solo un '.' y numeros y 0 si no cumple
  */
-int validacion_Float(char* array)
+int validacion_Float(char* array,int size,int minimo,int maximo)
 {
    int i=0;
    int retorno = 0;
-   int contadorSimbolo = 0;
-   while(array != '\0' && array != NULL)
-   {
-       if((array[i] != '.') && (array[i] < 'a' || array[i] > 'z') && (array[i] < 'A' || array[i] > 'Z'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '.')
-       {
-        contadorSimbolo++;
-       }
-       else
-       {
-        array[i] = atof(array) ;
-       }
-       i++;
-   }
+   int contadorSimbolos = 0;
+   int digitosIngresados;
 
-    if(contadorSimbolo == 1)
-    {
-     retorno = 1;
-    }
+   digitosIngresados = strlen(array)-1;
+
+   if(array != NULL && size > 0)
+   {
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+
+            if(array[i] < '0' || array[i] > '9')
+            {
+                if(array[i] != '.' || array[0] == '.' || contadorSimbolos > 1 || array[digitosIngresados] == '.')
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '.')
+            {
+                contadorSimbolos++;
+            }
+       }
+   }
 
    return retorno;
 }
@@ -141,31 +144,37 @@ int validacion_AlfaNumerico(char* array)
  * \return 1 si contiene solo numeros, espacios y un guion.
  *
  */
-int validacion_Telefono(char* array)
+int validacion_Telefono(char* array,int size)
 {
    int i=0;
-   int contadorSimbolo = 0;
    int retorno = 0;
-   while(array[i] != '\0')
-   {
-       if((array[i] != ' ') && (array[i] != '-') && (array[i] != '+') && (array[i] < '0' || array[i] > '9'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '-' || array[i] == '+')
-       {
-        contadorSimbolo++;
-       }
+   int contadorSimbolos = 0;
+   int digitosIngresados;
 
-       i++;
-   }
-   if(contadorSimbolo <= 2) // Se acepta hasta dos simbolos
+   digitosIngresados = strlen(array)-1;
+
+   if(array != NULL && size > 0)
    {
-    retorno = 1;
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+            if(array[i] < '0' || array[i] > '9')
+            {
+                if(array[i] != '-' || array[4] != '-' || array[2] != '-' || contadorSimbolos > 2 || array[digitosIngresados] == '-')
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '-')
+            {
+                contadorSimbolos++;
+            }
+       }
    }
 
-    return retorno;
+   return retorno;
 }
 
 /**
@@ -174,29 +183,34 @@ int validacion_Telefono(char* array)
  * \return 1 si contiene solo numeros, espacios y un guion.
  *
  */
-int validacion_DNI(char* array)
+int validacion_DNI(char* array,int size)
 {
    int i=0;
-   int contadorSimbolo = 0;
    int retorno = 0;
-   while(array[i] != '\0')
-   {
-       if((array[i] != '.') && (array[i] < '0' || array[i] > '9'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '.')
-       {
-        contadorSimbolo++;
-       }
+   int contadorSimbolos = 0;
+   int digitosIngresados;
 
-       i++;
-   }
-   if(contadorSimbolo == 2 || contadorSimbolo == 0) // Se acepta dos simbolos o ningun simbolo
-   {
-    retorno = 1;
-   }
+   digitosIngresados = strlen(array);
 
-    return retorno;
+   if(array != NULL && size > 0)
+   {
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+            if(array[i] < '0' || array[i] > '9'|| array[i] != '.')
+            {
+                if(array[2] != '.' || array[6] != '.' || contadorSimbolos > 2 || digitosIngresados < 10)
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '.')
+            {
+                contadorSimbolos++;
+            }
+       }
+   }
+   return retorno;
 }
