@@ -6,6 +6,7 @@
 
 
 static void array_swap(Producto* elementoA,Producto* elementoB);
+static int getNextId();
 
 static void array_swap(Producto* elementoA,Producto* elementoB)
 {
@@ -26,26 +27,26 @@ void producto_initArrayProducto(Producto arrayProducto[],int size,int valor)
 
 }
 
-int producto_altaArray(Producto arrayProducto[],int indice,int size)
+int producto_altaArray(Producto arrayProducto[],int size)
 {
     char auxNombre[50];
     char auxDescripcion[100];
-    char auxPrecio[50];
+    float auxPrecio;
+    int indiceLibre;
     int retorno = -1;
-    int auxID;
 
-    if(arrayProducto[indice].isEmpty == 1)
+    producto_buscarIndiceArray(arrayProducto,size,&indiceLibre);
+    if(arrayProducto[indiceLibre].isEmpty == 1)
     {
-        if( !string_getStringLetras(auxNombre,50,"\n Ingrese el nombre del producto: ","\n Error,nombre invalido.")&&
-            !string_getStringLetras(auxDescripcion,100,"\n Ingrese la descripcion: ","\n Error,descripcion invalida.")&&
-            !string_getStringFloat(auxPrecio,50,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000))
+        if( !utn_getNombre(auxNombre,50,"\n Ingrese el nombre del producto: ","\n Error,nombre invalido.",2)&&
+            !utn_getDescription(auxDescripcion,100,"\n Ingrese la descripcion: ","\n Error,descripcion invalida.",2)&&
+            !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000,2))
         {
-            auxID = indice + 1;//SE ASIGNA ID EN BASE AL INDICE
-            strncpy(arrayProducto[indice].nombre,auxNombre,50);
-            strncpy(arrayProducto[indice].descripcion,auxDescripcion,100);
-            arrayProducto[indice].precio = atof(auxPrecio);
-            arrayProducto[indice].isEmpty = 0;
-            arrayProducto[indice].ID = auxID;//SE PASA ID ASIGNADO A LA ESTRUCTURA
+            strncpy(arrayProducto[indiceLibre].nombre,auxNombre,50);
+            strncpy(arrayProducto[indiceLibre].descripcion,auxDescripcion,100);
+            arrayProducto[indiceLibre].precio = auxPrecio;
+            arrayProducto[indiceLibre].isEmpty = 0;
+            arrayProducto[indiceLibre].ID = getNextId();//ALTERNATIVA- SE UTILIZA UN DATO ESTATICO PRECARGADO EN LA FUNCION
             retorno = 0;
         }
 
@@ -62,7 +63,6 @@ int producto_mostrarArray(Producto arrayProducto[],int indice,int size)
         printf("\n\nPRODUCTO -- %s",arrayProducto[indice].nombre);
         printf("\nDESCRIPCION -- %s",arrayProducto[indice].descripcion);
         printf("\nPRECIO -- $%.2f",arrayProducto[indice].precio);
-        printf("\nID -- %i",arrayProducto[indice].ID);
 
         retorno = 0;
 
@@ -94,7 +94,7 @@ int producto_IDproducto(Producto arrayProducto[],int size)
     int i;
     int auxID;
 
-    auxID = input_getInt("\nINGRESE ID: ");//SE PIDE ID A BUSCAR
+    auxID = getInt("\nINGRESE ID: ");//SE PIDE ID A BUSCAR
     printf("\nID ingresado %d", auxID);
 
     for(i=0;i < size; i++)
@@ -113,7 +113,7 @@ int producto_modificarProducto(Producto arrayProducto[],int size)
 {
     char auxNombre[50];
     char auxDescripcion[100];
-    char auxPrecio[50];
+    float auxPrecio;
     int retorno = -1;
     int indiceModificar;
 
@@ -122,13 +122,13 @@ int producto_modificarProducto(Producto arrayProducto[],int size)
 
     if(arrayProducto[indiceModificar].isEmpty == 0)
     {
-        if( !string_getStringLetras(auxNombre,50,"\n Ingrese el nombre del producto: ","\n Error,nombre invalido.")&&
-            !string_getStringLetras(auxDescripcion,100,"\n Ingrese la descripcion: ","\n Error,descripcion invalida.")&&
-            !string_getStringFloat(auxPrecio,50,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000) &&
+        if( !utn_getNombre(auxNombre,50,"\n Ingrese el nombre del producto: ","\n Error,nombre invalido.",2)&&
+            !utn_getDescription(auxDescripcion,100,"\n Ingrese la descripcion: ","\n Error,descripcion invalida.",2)&&
+            !utn_getNumeroConComa(&auxPrecio,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000,2) &&
             indiceModificar >= 0)
         {
             strncpy(arrayProducto[indiceModificar].nombre,auxNombre,50);
-            arrayProducto[indiceModificar].precio = atof(auxPrecio);
+            arrayProducto[indiceModificar].precio = auxPrecio;
             retorno = 0;
         }
 
@@ -181,4 +181,14 @@ void sort_BubbleNombre(Producto* pArray,int size)
             }
         }
     }
+}
+
+
+
+static int getNextId()
+{
+    static int ultimoId = -1;
+    ultimoId++;
+    return ultimoId;
+
 }

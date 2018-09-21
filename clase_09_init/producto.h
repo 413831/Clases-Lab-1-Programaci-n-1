@@ -10,7 +10,7 @@ typedef struct sProducto
 
 void producto_initArrayProducto(Producto arrayProducto[],int size,int valor);
 
-int producto_altaArray(Producto arrayProducto[],int indice,int size);
+int producto_altaArray(Producto arrayProducto[],int size);
 
 int producto_mostrarArray(Producto arrayProducto[],int indice,int size);
 

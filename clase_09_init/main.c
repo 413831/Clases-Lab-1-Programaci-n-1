@@ -62,12 +62,7 @@ int main()
         {
             case 1 :
 
-                if(producto_buscarIndiceArray(arrayProducto,CANTIDAD_PRODUCTO,&indiceVacio))//Busca el indice vacio cada vez que se hace un ALTA
-                {
-                    printf("\nNO HAY LUGARES VACIOS");
-                    break;
-                }
-                producto_altaArray(arrayProducto,indiceVacio,CANTIDAD_PRODUCTO);//Se realiza el ALTA en el indice vacio
+                producto_altaArray(arrayProducto,CANTIDAD_PRODUCTO);//Se realiza el ALTA en el indice vacio
                 break;
 
             case 2 :
