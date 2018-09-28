@@ -176,4 +176,58 @@ int contratacion_eliminar(Contratacion array[],int size)
     return retorno;
 }
 
+int contratacion_ordenarCuit(Contratacion array[],int size)
+{
+    int retorno = -1;
+    int i;
+    int j;
+    Pantalla auxiliar;
 
+    if(array != NULL && size > 0 && array->isEmpty == 0)
+    {
+        retorno = 0;
+
+        for(i=0;i<size;i++)
+        {
+            j= i++;
+
+            if(array[i].cuit > array[j].cuit)
+            {
+                auxiliar = array[i];
+                array[i] = array[j];
+                array[j] = auxiliar;
+            }
+        }
+
+    }
+    return retorno;
+}
+
+
+int contratacion_listar(Contratacion array[],int size)
+{
+    int retorno = -1;
+    int i;
+    int j;
+
+    if(array != NULL && size > 0 && array->isEmpty == 0)
+    {
+        contratacion_ordenarCuit(array,size);
+
+        for(i=0;i<size;i++)
+        {
+            for(j=i+1;i<size;j++)
+            {
+                if(array[i].cuit != array[j].cuit)
+                {
+                    printf("\n\nPRODUCTO -- %s",array->nombre);
+                    printf("\nDESCRIPCION -- %s",array->direccion);
+                    printf("\nPRECIO -- $%.2f",array->precio);
+                    printf("\nID -- %i",array->id);
+                }
+            }
+        }
+        retorno = 0;
+    }
+    return retorno;
+}

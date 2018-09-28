@@ -17,5 +17,6 @@ int contratacion_eliminar(Contratacion array[],int size);
 int contratacion_mostrar(Contratacion array[],int size);
 int contratacion_buscarIndice(Contratacion array[],int size);
 int contratacion_IDproducto(Contratacion array[],int size);
-
+int contratacion_ordenarCuit(Contratacion array[],int size);
+int contratacion_listar(Contratacion array[],int size);
 

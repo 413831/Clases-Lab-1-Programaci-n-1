@@ -227,3 +227,35 @@ int pantalla_ordenar(Pantalla array[],int size)
     }
     return retorno;
 }
+
+int pantalla_ingresoForzado(Pantalla array[],int size)
+{
+    char auxNombre[50] = {"Samsung","LG","Sony","BGH","Philip"};
+    char auxDireccion[100] = {"Azcuenaga 2000","Bulnes 200","Calle Falsa 1234","Juan Carlitos Gomez 540","Juan Carlos 4000"};
+    float auxPrecio ;
+    int auxTipo;
+    int retorno = -1;
+    int indice;
+
+    indice = pantalla_buscarIndice(array,size);
+
+        if(array->isEmpty == 1)
+        {
+            strncpy(array[indice].nombre,auxNombre,50);
+            strncpy(array[indice].direccion,auxDireccion,100);
+            array[indice].precio = auxPrecio;
+            array[indice].tipo = auxTipo;
+            array[indice].isEmpty = 0;
+            array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
+            retorno = 0;
+        }
+
+    }
+    return retorno;
+
+
+
+
+
+
+}
