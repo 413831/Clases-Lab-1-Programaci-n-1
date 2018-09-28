@@ -52,6 +52,10 @@ int main()
     char cuitIngresado[100];
     Pantalla* pantallaBuscada;
     Contratacion* contratacionBuscada;
+    float importeTotal;
+    float importePantalla;
+    int diasContratados;
+    float precioPantalla;
 
 do
 {
@@ -88,19 +92,31 @@ do
             {
                 if(arrayContratacion[i].cuit == cuitIngresado)
                 {
-
                 idIngresado = arrayContratacion[i].idPantalla;
                 pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
-
                 pantalla_mostrar(pantallaBuscada,QTY_PANTALLAS);
-
-
                 }
-
             }
         break;
         case 7 :
+        cuitIngresado = input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
 
+            for(i=0;i<QTY_CONTRATACIONES;i++)
+            {
+                if(arrayContratacion[i].cuit == cuitIngresado)
+                {
+                idIngresado = arrayContratacion[i].idPantalla;
+                diasContratados = arrayContratacion[i].dias;
+
+                pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
+                precioPantalla = pantallaBuscada->precio;
+
+                importeTotal = diasContratados + precioPantalla;
+
+                printf("\nCUIT -- %s\nIMPORTE -- %f",arrayContratacion[i].cuit,importeTotal);
+                }
+            }
+        break;
 
         break;
 
