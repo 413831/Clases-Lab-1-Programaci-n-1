@@ -100,7 +100,7 @@ do
         break;
         case 7 :
         cuitIngresado = input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
-
+        pantalla_ordenar(arrayContratacion,QTY_CONTRATACIONES);
             for(i=0;i<QTY_CONTRATACIONES;i++)
             {
                 if(arrayContratacion[i].cuit == cuitIngresado)
@@ -116,17 +116,34 @@ do
                 printf("\nCUIT -- %s\nIMPORTE -- %f",arrayContratacion[i].cuit,importeTotal);
                 }
             }
-        break;
 
         break;
+        case 8 :
+        contratacion_ordenarCuit(arrayContratacion,QTY_CONTRATACIONES);
+            for(i=0;0<QTY_CONTRATACIONES;i++)
+            {
+                idIngresado=arrayContratacion[i].idPantalla;
+                pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
+                pantalla_listar(pantallaBuscada,QTY_PANTALLAS);
+            }
 
+        break;
+        case 9 :
+        pantalla_ordenar(arrayPantallas,QTY_PANTALLAS);
 
+            for(i=0;i<QTY_PANTALLAS;i++)
+            {
+            idIngresado = i++;
+            pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
+            pantalla_listar(pantallaBuscada,QTY_PANTALLAS);
+            }
+        break;
 
     }
 
 
 
-}while(opcion != 8);
+}while(opcion != 10);
 
 
 
