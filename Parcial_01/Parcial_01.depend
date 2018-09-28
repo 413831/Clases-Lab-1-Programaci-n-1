@@ -1,0 +1,53 @@
+# depslib dependency file v1.0
+1538092825 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1538092701 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/utn.h
+
+1537492029 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/sort.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1538090751 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/string.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1538092878 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"pantalla.h"
+
+1538089125 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.h
+
+1538092933 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+
+1538091596 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/contrataciones.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"contrataciones.h"
+
+1538089245 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/contrataciones.h
+
+1538092729 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"pantalla.h"
+
