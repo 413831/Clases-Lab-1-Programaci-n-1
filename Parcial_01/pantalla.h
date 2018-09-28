@@ -23,5 +23,5 @@ int pantalla_buscarIndice(Pantalla array[],int size);
 int pantalla_IDproducto(Pantalla array[],int size);
 int pantalla_listar(Pantalla array[],int size);
 int pantalla_ordenar(Pantalla array[],int size);
-
+int pantalla_ingresoForzado(Pantalla* array,int size,char* nombre,char*direccion,int* tipo,float precio);
 

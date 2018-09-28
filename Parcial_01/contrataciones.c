@@ -181,7 +181,7 @@ int contratacion_ordenarCuit(Contratacion array[],int size)
     int retorno = -1;
     int i;
     int j;
-    Pantalla auxiliar;
+    Contratacion auxiliar;
 
     if(array != NULL && size > 0 && array->isEmpty == 0)
     {
@@ -220,10 +220,10 @@ int contratacion_listar(Contratacion array[],int size)
             {
                 if(array[i].cuit != array[j].cuit)
                 {
-                    printf("\n\nPRODUCTO -- %s",array->nombre);
-                    printf("\nDESCRIPCION -- %s",array->direccion);
-                    printf("\nPRECIO -- $%.2f",array->precio);
-                    printf("\nID -- %i",array->id);
+                    printf("\n\nCUIT -- %s",array->cuit);
+                    printf("\nNOMBRE DE VIDEO -- %s",array->nombreVideo);
+                    printf("\nCANTIDAD DE DIAS-- %d",array->dias);
+                    printf("\nID PANTALLA-- %i",array->idPantalla);
                 }
             }
         }

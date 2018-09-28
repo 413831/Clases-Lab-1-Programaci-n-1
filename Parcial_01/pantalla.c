@@ -228,14 +228,14 @@ int pantalla_ordenar(Pantalla array[],int size)
     return retorno;
 }
 
-int pantalla_ingresoForzado(Pantalla* array,int size,char* nombre,char*direccion,char* tipo,float precio)
+int pantalla_ingresoForzado(Pantalla* array,int size,char* nombre,char*direccion,int* tipo,float precio)
 {
     int indice;
     indice = pantalla_buscarIndice(array,size);
     strncpy(array[indice].nombre,nombre,100);
     array[indice].tipo = tipo;
     strncpy(array[indice].direccion,direccion,100);
-    array[indice].ID=generateID();
+    array[indice].id=generateID();
     array[indice].isEmpty=0;
     array[indice].precio=precio;
     return 0;

@@ -52,7 +52,7 @@ int main()
     char cuitIngresado[100];
     Pantalla* pantallaBuscada;
     Contratacion* contratacionBuscada;
-    float importeTotal;
+    float importeTotal = 0;
     float importePantalla;
     int diasContratados;
     float precioPantalla;
@@ -86,7 +86,7 @@ do
         contratacion_modificar(contratacionBuscada,QTY_CONTRATACIONES);
         break;
         case 6 :
-        cuitIngresado = input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
+        input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
 
             for(i=0;i<QTY_CONTRATACIONES;i++)
             {
@@ -99,8 +99,8 @@ do
             }
         break;
         case 7 :
-        cuitIngresado = input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
-        pantalla_ordenar(arrayContratacion,QTY_CONTRATACIONES);
+        input_getCuit(cuitIngresado,100,"\nIngrese CUIT","\nError");
+        pantalla_ordenar(arrayPantallas,QTY_CONTRATACIONES);
             for(i=0;i<QTY_CONTRATACIONES;i++)
             {
                 if(arrayContratacion[i].cuit == cuitIngresado)
@@ -111,10 +111,12 @@ do
                 pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
                 precioPantalla = pantallaBuscada->precio;
 
-                importeTotal = diasContratados + precioPantalla;
+                importePantalla = diasContratados + precioPantalla;
+                importeTotal = importeTotal + importePantalla;
 
                 printf("\nCUIT -- %s\nIMPORTE -- %f",arrayContratacion[i].cuit,importeTotal);
                 }
+                printf("\nIMPORTE TOTAL -- %f",importeTotal);
             }
 
         break;
@@ -140,8 +142,6 @@ do
         break;
 
     }
-
-
 
 }while(opcion != 10);
 
