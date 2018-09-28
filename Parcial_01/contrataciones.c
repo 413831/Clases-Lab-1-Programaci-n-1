@@ -60,9 +60,10 @@ int contratacion_alta(Contratacion array[],int size)
     int auxDias;
     int retorno = -1;
     int indice;
+    int idPantalla;
 
     indice = contratacion_buscarIndice(array,size);
-
+    idPantalla = input_ScanInt("\nIngrese ID de Pantalla");
 
     if(array->isEmpty == 1)
     {

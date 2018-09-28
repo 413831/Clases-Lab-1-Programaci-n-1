@@ -26,7 +26,7 @@
 	"utn.h"
 	"pantalla.h"
 
-1538089125 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.h
+1538093629 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.h
 
 1538092933 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/validacion.c
 	<stdio.h>
@@ -35,7 +35,7 @@
 	<time.h>
 	"utn.h"
 
-1538091596 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/contrataciones.c
+1538093718 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/contrataciones.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>
@@ -44,7 +44,7 @@
 
 1538089245 /home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/contrataciones.h
 
-1538092729 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.c
+1538093629 source:/home/alumno/Documentos/Planes/Programacion_1_Clases-master/Parcial_01/pantalla.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>

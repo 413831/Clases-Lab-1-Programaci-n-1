@@ -184,3 +184,46 @@ int pantalla_eliminar(Pantalla array[],int size)
 }
 
 
+int pantalla_listar(Pantalla array[],int size)
+{
+    int retorno = -1;
+
+    if(array != NULL && size > 0 && array->isEmpty == 0)
+    {
+        printf("\n\nPRODUCTO -- %s",array->nombre);
+        printf("\nDESCRIPCION -- %s",array->direccion);
+        printf("\nPRECIO -- $%.2f",array->precio);
+        printf("\nID -- %i",array->id);
+
+        retorno = 0;
+
+    }
+    return retorno;
+}
+
+int pantalla_ordenar(Pantalla array[],int size)
+{
+    int retorno = -1;
+    int i;
+    int j;
+    Pantalla auxiliar;
+
+    if(array != NULL && size > 0 && array->isEmpty == 0)
+    {
+        retorno = 0;
+
+        for(i=0;i<size;i++)
+        {
+            j= i++;
+
+            if(array[i].id > array[j].id)
+            {
+                auxiliar = array[i];
+                array[i] = array[j];
+                array[j] = auxiliar;
+            }
+        }
+
+    }
+    return retorno;
+}

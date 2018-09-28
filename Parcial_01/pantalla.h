@@ -21,5 +21,7 @@ int pantalla_eliminar(Pantalla array[],int size);
 int pantalla_mostrar(Pantalla array[],int size);
 int pantalla_buscarIndice(Pantalla array[],int size);
 int pantalla_IDproducto(Pantalla array[],int size);
+int pantalla_listar(Pantalla array[],int size);
+int pantalla_ordenar(Pantalla array[],int size);
 
 
