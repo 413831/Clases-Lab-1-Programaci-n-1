@@ -218,3 +218,51 @@
 	"utn.h"
 	"Contratacion.h"
 
+1538514910 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1538514910 c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\utn.h
+
+1538563022 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\contratacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"Contratacion.h"
+
+1538514910 c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\contratacion.h
+
+1538582709 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\informar.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"Contratacion.h"
+	"utn.h"
+	"pantalla.h"
+	"informar.h"
+
+1538582790 c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\pantalla.h
+
+1538571036 c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\informar.h
+
+1538563040 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1538563144 source:c:\documents and settings\usuario\mis documentos\2018c2-master\programacion_1_clases-master\clase_13\pantalla.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"pantalla.h"
+

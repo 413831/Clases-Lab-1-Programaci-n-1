@@ -20,7 +20,7 @@ int pantalla_alta(Pantalla* array,int size);
 int pantalla_eliminar(Pantalla* array,int size);
 int pantalla_modificar(Pantalla* array,int size);
 int pantalla_listar(Pantalla* array,int size);
-int pantalla_sortName(Pantalla* array,int size);
+int pantalla_sortName(Pantalla array[],int size);
 int pantalla_ordenar(Pantalla* array,int size,int orden);
 Pantalla* pantalla_getByID(Pantalla* array,int size, int id);
 int pantalla_ingresoForzado(Pantalla array[],int size,char nombre[],char direccion[],int precio,int tipo);

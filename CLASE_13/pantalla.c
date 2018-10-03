@@ -1,4 +1,4 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -9,7 +9,7 @@
 
 //Funciones privadas
 
-
+static void swap(Pantalla* valorA,Pantalla* valorB);
 
 /**
 *\brief Realiza el swap entre dos elementos
@@ -255,7 +255,7 @@ int pantalla_sortName(Pantalla array[],int size)
         {
             flag = 0;
 
-            for(i=0;i<size;i++)
+            for(i=0;i<size-1;i++)
             {
                 j=i+1;
 
