@@ -71,11 +71,11 @@ int main()
     pantalla_ingresoForzado(array,QTY,"LG","Lavalle 450",5000,1);
     pantalla_ingresoForzado(array,QTY,"Sony","Mitre 150",5000,1);
 
-    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,100,"video.avi");
-    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,400,"video1.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,5,"video.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,4,"video1.avi");
     cont_altaForzada(contrataciones,LEN_CONT,"30911911915",0,300,"video2.avi");
-    cont_altaForzada(contrataciones,LEN_CONT,"30911911915",2,400,"video3.avi");
-    cont_altaForzada(contrataciones,LEN_CONT,"40911911915",2,500,"video4.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"30911911915",2,7,"video3.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"40911911915",2,8,"video4.avi");
     cont_altaForzada(contrataciones,LEN_CONT,"40911911915",2,600,"video5.avi");
 
     informar_ConsultaFacturacion(contrataciones,LEN_CONT,array,QTY,"20911911915");
@@ -139,8 +139,15 @@ int main()
             break;
             case 8 :
 
-            pantalla_sortName(array,QTY);
-            pantalla_listar(array,QTY);
+       //     pantalla_sortName(array,QTY);
+        //    pantalla_listar(array,QTY);
+     //       __fpurge(stdin);
+       //     getchar();
+           informar_calculosPantallas(array,QTY,1);
+        //    informar_calculosPantallas(array,QTY,0);
+        //    informar_mostrarPantallas(array,QTY,1);
+         //   informar_mostrarPantallas(array,QTY,0);
+         //   informar_calculosContratacion(array,contrataciones,QTY,LEN_CONT);
 
 
 

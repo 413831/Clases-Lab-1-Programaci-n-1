@@ -161,7 +161,7 @@
 
 1538501324 /home/alumno/Documentos/Planes/CLASE_13/utn.h
 
-1538521994 source:/home/alumno/Documentos/Planes/CLASE_13/informar.c
+1538527516 source:/home/alumno/Documentos/Planes/CLASE_13/informar.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<time.h>
@@ -169,12 +169,13 @@
 	"Contratacion.h"
 	"utn.h"
 	"pantalla.h"
+	"informar.h"
 
 1538523173 /home/alumno/Documentos/Planes/CLASE_13/Contratacion.h
 
 1538523315 /home/alumno/Documentos/Planes/CLASE_13/pantalla.h
 
-1538523489 source:/home/alumno/Documentos/Planes/CLASE_13/main.c
+1538527436 source:/home/alumno/Documentos/Planes/CLASE_13/main.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<time.h>
@@ -184,7 +185,7 @@
 	"Contratacion.h"
 	"informar.h"
 
-1525305076 /home/alumno/Documentos/Planes/CLASE_13/informar.h
+1538526715 /home/alumno/Documentos/Planes/CLASE_13/informar.h
 
 1524691840 source:/home/alumno/Documentos/Planes/CLASE_13/utn.c
 	<stdio.h>
@@ -201,7 +202,7 @@
 	<ctype.h>
 	"utn.h"
 
-1538523330 source:/home/alumno/Documentos/Planes/CLASE_13/pantalla.c
+1538526175 source:/home/alumno/Documentos/Planes/CLASE_13/pantalla.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>

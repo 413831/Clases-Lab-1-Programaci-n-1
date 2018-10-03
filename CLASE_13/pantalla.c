@@ -165,6 +165,7 @@ int pantalla_alta(Pantalla* array,int size)
         array[indice].precio = precio;
         array[indice].isEmpty = 0;
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
+
         retorno = 0;
     }
 
