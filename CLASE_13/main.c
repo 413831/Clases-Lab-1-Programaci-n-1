@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <time.h>
 #include <string.h>
@@ -33,7 +33,7 @@ G.  Listado de clientes en el cual se indique la cantidad de contrataciones que 
         o Cuit (ascendentemente)
 
 H. La o las pantallas con mas contrataciones.
-
+8ik
 I. La o las pantallas con mas clientes.
 
 J. La o las pantallas que mas ha facturado.
@@ -48,7 +48,6 @@ int main()
 {
     Pantalla pantallas[QTY];
     Contratacion contrataciones[LEN_CONT];
-    int flag = 1;//CAMBIAR
     int menu;
     int auxiliarId;
     int contadorPantallas = 1;//CAMBIAR
@@ -72,9 +71,9 @@ int main()
     pantalla_ingresoForzado(pantallas,QTY,"LG","Lavalle 450",5000,1);
     pantalla_ingresoForzado(pantallas,QTY,"Sony","Mitre 150",5000,1);
 
-    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,5,"video.avi");
-    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",0,4,"video1.avi");
-    cont_altaForzada(contrataciones,LEN_CONT,"30911911915",0,300,"video2.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",1,5,"video.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"20911911915",1,4,"video1.avi");
+    cont_altaForzada(contrataciones,LEN_CONT,"30911911915",1,300,"video2.avi");
     cont_altaForzada(contrataciones,LEN_CONT,"30911911915",2,7,"video3.avi");
     cont_altaForzada(contrataciones,LEN_CONT,"40911911915",2,8,"video4.avi");
     cont_altaForzada(contrataciones,LEN_CONT,"40911911915",2,600,"video5.avi");
@@ -106,12 +105,9 @@ int main()
                 getchar();
             }
 
-
-
-
             break;
             case 2 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--BAJA PANTALLA--");
                 input_ScanInt("\nIngrese ID: ",&auxiliarId);
@@ -129,7 +125,7 @@ int main()
 
             break;
             case 3 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--MODIFICAR PANTALLA--");
                 input_ScanInt("\nIngrese ID: ",&auxiliarId);
@@ -147,7 +143,7 @@ int main()
 
             break;
             case 4 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--LISTAR PANTALLAS--");
                 pantalla_listar(pantallas,QTY);
@@ -163,7 +159,7 @@ int main()
 
             break;
             case 5 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--ORDENAR PANTALLAS--");
                 pantalla_sortName(pantallas,QTY);
@@ -179,7 +175,7 @@ int main()
 
             break;
             case 6 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--BUSCAR PANTALLA--");
                 input_ScanInt("\nIngrese ID: ",&auxiliarId);
@@ -198,7 +194,7 @@ int main()
 
             break;
             case 7 :
-            if(flag == 1 && contadorPantallas > 0)
+            if(contadorPantallas > 0)
             {
                 printf("\n--ALTA CONTRATACION--");
                 pantalla_listar(pantallas,QTY);
@@ -224,12 +220,12 @@ int main()
                 limpiarMemoria();
                 getchar();
 
-                printf("\n--Valor de pantallas mayores a 10--");
+                printf("\n--Valor de pantallas menores o igual a 10--");
                 informar_valorPantallas(pantallas,QTY,1);
                 printf("\nIngrese una tecla para continuar...");
                 limpiarMemoria();
                 getchar();
-                printf("\n--Valor de pantallas menores o igual a 10--");
+                printf("\n--Valor de pantallas mayores a 10--");
                 informar_valorPantallas(pantallas,QTY,0);
                 printf("\nIngrese una tecla para continuar...");
                 limpiarMemoria();
@@ -244,12 +240,12 @@ int main()
                 informar_promedioPantallas(pantallas,QTY,0);
 
                 printf("\n--Contrataciones con menos de 10 dias--");
-                informar_diasContratacion(contrataciones,pantallas,QTY,LEN_CONT);
+                informar_diasContratacion(contrataciones,pantallas,LEN_CONT,QTY);
                 printf("\nIngrese una tecla para continuar...");
                 limpiarMemoria();
                 getchar();
 
-                informar_importePorCuit(pantallas,QTY,contrataciones,LEN_CONT,"30911911915");
+         //       informar_importePorCuit(pantallas,QTY,contrataciones,LEN_CONT,"30911911915");
 
 
 

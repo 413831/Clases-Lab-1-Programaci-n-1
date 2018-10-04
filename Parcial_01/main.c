@@ -111,7 +111,7 @@ do
                 pantallaBuscada = pantalla_getByID(arrayPantallas,QTY_PANTALLAS,idIngresado);
                 precioPantalla = pantallaBuscada->precio;
 
-                importePantalla = diasContratados + precioPantalla;
+                importePantalla = diasContratados * precioPantalla;
                 importeTotal = importeTotal + importePantalla;
 
                 printf("\nCUIT -- %s\nIMPORTE -- %f",arrayContratacion[i].cuit,importeTotal);

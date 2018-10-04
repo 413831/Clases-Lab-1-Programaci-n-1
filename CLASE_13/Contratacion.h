@@ -21,7 +21,7 @@ int cont_eliminar(Contratacion* array,int size);
 int cont_modificar(Contratacion* array,int size);
 int cont_ordenar(Contratacion* array,int size, int orden);
 Contratacion* cont_getByID(Contratacion* array,int size, int id);
-int cont_altaForzada(Contratacion* array,int size,char* cuit,int idContratacion,int dias, char archivo[]);
+int cont_altaForzada(Contratacion* array,int size,char* cuit,int idPantalla,int dias, char archivo[]);
 
 #endif // PANTALLA_H_INCLUDED
 

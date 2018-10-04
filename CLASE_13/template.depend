@@ -7,7 +7,7 @@
 	"fantasma.h"
 	"utn.h"
 
-1525298482 h"
+1538563144 h"
 
 1524691839 source:d:\template\utn.c
 	<stdio.h>
@@ -16,7 +16,7 @@
 	<string.h>
 	"utn.h"
 
-1524691840 
+1538514910 
 
 1524691839 d:\template\utn.h
 
@@ -84,7 +84,7 @@
 	"utn.h"
 	"Contratacion.h"
 
-1524791042 ion.h"
+1538563022 ion.h"
 
 1524791107 source:d:\labo1\clase11\pantalla.c
 	<stdio.h>
@@ -265,4 +265,62 @@
 	<time.h>
 	"utn.h"
 	"pantalla.h"
+
+1538613486 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/Contratacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"Contratacion.h"
+
+1538586397 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/utn.h
+
+1538613486 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/Contratacion.h
+
+1538586291 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1538614199 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"pantalla.h"
+	"utn.h"
+	"Contratacion.h"
+	"informar.h"
+
+1538609173 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/pantalla.h
+
+1538587252 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.h
+
+1538586281 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1538608138 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/pantalla.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"pantalla.h"
+
+1538616048 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"Contratacion.h"
+	"utn.h"
+	"pantalla.h"
+	"informar.h"
 

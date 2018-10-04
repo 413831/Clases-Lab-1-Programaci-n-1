@@ -370,7 +370,7 @@ int cont_listar(Contratacion array[],int size)
 */
 
 
-int cont_altaForzada(Contratacion* array,int size,char* cuit,int idContratacion,int dias, char archivo[])
+int cont_altaForzada(Contratacion* array,int size,char* cuit,int idPantalla,int dias, char archivo[])
 {
     int retorno = -1;
     int indice;
@@ -383,6 +383,7 @@ int cont_altaForzada(Contratacion* array,int size,char* cuit,int idContratacion,
         strncpy(array[indice].archivo,archivo,100);
         array[indice].dias=dias;
         array[indice].id=generateID();
+        array[indice].idPantalla=idPantalla;
         array[indice].isEmpty=0;
     }
 

@@ -1,4 +1,4 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
@@ -9,7 +9,7 @@
 
 //Funciones privadas
 
-static void swap(Pantalla* valorA,Pantalla* valorB);
+
 
 /**
 *\brief Realiza el swap entre dos elementos
@@ -130,8 +130,8 @@ Pantalla* pantalla_getByID(Pantalla* array,int size,int id)
         {
            if(!array[i].isEmpty && array[i].id == id)
             {
-            retorno = array+i;
-            break;
+                retorno = array+i;
+                break;
             }
         }
     }
@@ -389,6 +389,7 @@ int pantalla_ingresoForzado(Pantalla array[],int size,char nombre[],char direcci
         indice = pantalla_buscarIndiceLibre(array,size);
         strncpy(array[indice].nombre,nombre,50);
         strncpy(array[indice].direccion,direccion,50);
+        array[indice].tipo = tipo;
         array[indice].precio = precio;
         array[indice].isEmpty = 0;
         array[indice].id = generateID();//SE PA
