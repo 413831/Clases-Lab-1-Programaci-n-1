@@ -9,6 +9,7 @@
 
 #define QTY 10
 #define LEN_CONT    1000
+#define CUIT 5
 
 /*
 
@@ -49,12 +50,14 @@ int main()
     Pantalla pantallas[QTY];
     Contratacion contrataciones[LEN_CONT];
     int menu;
+    int i;
     int auxiliarId;
     int contadorPantallas = 1;//CAMBIAR
     int contadorContrataciones = 0;
     float totalPrecios;
     float promedioPrecio;
     float precioContratacion;
+    char listadoCuit[CUIT];
     Pantalla* pantSeleccionada;
     Pantalla pantallaMayorCont;
     Pantalla pantallaMayorClientes;
@@ -147,6 +150,12 @@ int main()
             {
                 printf("\n--LISTAR PANTALLAS--");
                 pantalla_listar(pantallas,QTY);
+                informar_listadoCuit(contrataciones,LEN_CONT,14,listadoCuit);
+                    for(i=0;i<CUIT;i++)
+                    {
+                        printf("\nCUIT -- %s",listadoCuit[i]);
+
+                    }
             }
             else
             {
@@ -245,6 +254,12 @@ int main()
                 limpiarMemoria();
                 getchar();
 
+
+
+                informar_listadoCuit(contrataciones,LEN_CONT,CUIT,listadoCuit);
+                printf("\nIngrese una tecla para continuar...");
+                limpiarMemoria();
+                getchar();
          //       informar_importePorCuit(pantallas,QTY,contrataciones,LEN_CONT,"30911911915");
 
 

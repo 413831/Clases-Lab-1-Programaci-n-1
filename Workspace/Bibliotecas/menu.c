@@ -2,8 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
-#include "ventas.h"
-#include "clientes.h"
+#include "elemento.h"
 
 
 int elemento_menu(Employee array[],int size)
@@ -84,7 +83,7 @@ int elemento_menu(Employee array[],int size)
                  if(contador > 0)
                 {
                     printf("\n--INFORMES--\n");
-
+                   
                 }
                 else
                 {

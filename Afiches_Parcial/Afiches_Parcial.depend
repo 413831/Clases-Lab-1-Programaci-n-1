@@ -43,3 +43,47 @@
 	"utn.h"
 	"ventas.h"
 
+1538704043 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/clientes.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"clientes.h"
+
+1538704043 /home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/utn.h
+
+1538704043 /home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/clientes.h
+
+1538704043 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1538704043 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1538704043 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"ventas.h"
+
+1538704043 /home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.h
+
+1538705794 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"clientes.h"
+	"ventas.h"
+	"utn.h"
+

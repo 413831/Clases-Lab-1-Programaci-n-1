@@ -284,7 +284,7 @@
 	<string.h>
 	"utn.h"
 
-1538614199 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/main.c
+1538671935 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/main.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<time.h>
@@ -296,7 +296,7 @@
 
 1538609173 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/pantalla.h
 
-1538587252 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.h
+1538623567 /home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.h
 
 1538586281 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/validacion.c
 	<stdio_ext.h>
@@ -314,7 +314,7 @@
 	"utn.h"
 	"pantalla.h"
 
-1538616048 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.c
+1538672014 source:/home/alexei/Documents/UTN/Programacion_1_Clases/CLASE_13/informar.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<time.h>

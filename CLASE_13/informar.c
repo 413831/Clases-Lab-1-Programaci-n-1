@@ -195,7 +195,7 @@ int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
 {
     int retorno = -1;
     int i;
-    float importeTotal;
+    float importeTotal = 0;
     float importe;
     int contadorCont = 0;
     int idPantalla;
@@ -275,29 +275,38 @@ int informar_importePorCuit(Pantalla arrayUno[],
 }
 
 
-int informar_listadoCuit(Contratacion array[],int size,int length,char listado[])
+int informar_listadoCuit(Contratacion array[],int size,int length,char cuit[])
 {
     int retorno = -1;
     int i;
     int j;
-    int flag=1;
+    char auxCuit[length];
 
-    while(flag == 1)
-    {
+   // while(flag == 1)
 
-        for(i=0;i<size;i++)
+
+        for(i=0;i<size && ;i++)
         {
-            j=i+1;
-            flag = 0;
-
-            if(!array[i].isEmpty && strcmp(array[i].cuit,array[j].cuit) != 0 )
+            if(!array[i].isEmpty)
             {
-                strncpy(listado,array[i].cuit,length);
-                flag = 1;
+                strncpy(auxCuit,array[i].cuit,length);
             }
+
+        //    flag = 0;
+            for(j=i+1;j<size-1;j++)
+
+            {    printf("\nENTRO FOR");
+                if(!array[i].isEmpty && strcmp(auxCuit,array[j].cuit) == 0 )
+                {
+                    strncpy(auxCuit,array[j].cuit,length);
+                    strncpy(cuit,auxCuit,length);
+                    printf("\nCUIT %s",cuit);
+                }
+            }
+
         }
 
-    }
+
 
     retorno = 0;
 
@@ -358,56 +367,3 @@ int informar_ordenar(Contratacion array[],int size)
     return retorno;
 }
 
-
-int informar_mostrarPantallas(Pantalla array[],
-                                int size,
-                                int valor)//REVISAR
-{
-
-
-
-    float promedio;
-    int retorno = -1;
-    int i;
-
-    informar_calculoPromedio(array,size,&promedio);
-
-    if(valor == 1)//menor a 10
-    {
-
-        for(i=0;i<size;i++)
-        {
-            if(!array[i].isEmpty && array[i].precio > promedio)
-            {
-                 printf("\n%s",array[i].nombre);
-                 printf("\n%s",array[i].direccion);
-                 printf("\n$%.2f",array[i].precio);
-                 printf("\n%i",array[i].tipo);
-            }
-        }
-            retorno = 0;
-    }
-    if(valor == 0)//mayor a 10
-    {
-
-        for(i=0;i<size;i++)
-        {
-
-            if(!array[i].isEmpty && array[i].precio < promedio)
-            {
-                 printf("\n%s",array[i].nombre);
-                 printf("\n%s",array[i].direccion);
-                 printf("\n$%.2f",array[i].precio);
-                 printf("\n%i",array[i].tipo);
-
-            }
-        }
-
-
-
-        retorno = 0;
-
-    }
-
-    return retorno;
-}

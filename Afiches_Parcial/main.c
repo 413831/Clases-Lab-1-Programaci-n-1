@@ -18,6 +18,7 @@ int main()
     int contadorClientes = 5;//CAMBIAR PARA HARDCODE
     int contadorVentas = 5;//CAMBIAR PARA HARDCODE
     char respuesta[5];
+    char listadoCuit[13];
     int idIngresado;
     Cliente* clienteSeleccionado;
     Venta* ventaSeleccionada;
@@ -43,7 +44,7 @@ int main()
 
    do
    {
-      // limpiarPantalla();
+        limpiarPantalla();
        printf("\n<<<MENU>>>\n\n1) ALTA CLIENTE\n2) MODIFICAR DATOS CLIENTES\n3) BAJA CLIENTE");
        printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES\n8) SALIR\n");
        input_ScanInt("\nIngrese opcion: ",&opcion);
@@ -100,7 +101,6 @@ int main()
                     {
                         printf("\n--BAJA DE CLIENTE--\n");
 
-
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado);
                         cliente_eliminar(clienteSeleccionado);
 
@@ -140,15 +140,19 @@ int main()
 
             case 4 :
                  printf("\n--ALTA VENTA--\n");
-                if(venta_buscarIndiceLibre(arrayVentas,QTY_VENTAS) >= 0)
+                if(venta_buscarIndiceLibre(arrayVentas,QTY_VENTAS) >= 0 )
                 {
                     input_ScanInt("\nIngrese ID: ",&idIngresado);
                     if(cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado) != NULL)
                     {
                         venta_alta(arrayVentas,QTY_VENTAS,idIngresado);
-
-                    }
                         contadorVentas++;
+                    }
+                    else
+                    {
+                        printf("\nEl ID no existe.");
+                    }
+
                 }
                 else
                 {
@@ -226,7 +230,19 @@ int main()
 
                   break;
             case 8 :
+                 if(contadorClientes > 0)
+                {
+                    printf("\n--LISTADO DE CUIT--\n");
+                    informar_listadoCuit(arrayClientes,QTY_CLIENTES,13,listadoCuit);
 
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados.");
+                    printf("\nIngrese cualquier tecla para continuar...");
+                    limpiarMemoria();
+                    getchar();
+                }
                 break;
             default :
                 printf("\nOpcion invalida.:P");
@@ -237,7 +253,7 @@ int main()
 
         }
 
-   }while(opcion != 8);
+   }while(opcion != 9);
 
         return 0;
 
