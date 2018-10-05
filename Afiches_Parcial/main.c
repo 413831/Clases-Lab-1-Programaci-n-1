@@ -143,7 +143,7 @@ int main()
                 if(venta_buscarIndiceLibre(arrayVentas,QTY_VENTAS) >= 0)
                 {
                     input_ScanInt("\nIngrese ID: ",&idIngresado);
-                    if(venta_buscarIndiceLibre(arrayVentas,QTY_CLIENTES) >= 0)
+                    if(cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado) != NULL)
                     {
                         venta_alta(arrayVentas,QTY_VENTAS,idIngresado);
 
