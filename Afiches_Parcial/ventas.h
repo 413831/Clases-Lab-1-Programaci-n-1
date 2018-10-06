@@ -1,5 +1,10 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
+
+#define STATUS_0 "Disponible"
+#define STATUS_1 "A cobrar"
+#define STATUS_2 "Cobrado"
+
 typedef struct
 {
     char nombreAfiche[50];
@@ -21,6 +26,7 @@ int venta_modificar(Venta* array);
 int venta_eliminar(Venta* array);
 int venta_ordenar(Venta array[],int size);
 int venta_mostrar(Venta array[],int size,int idIngresado);
+int venta_cobradas(Venta array[],int size,int idIngresado);
 int venta_listar(Venta array[],int size);
 int venta_ingresoForzado(Venta array[],
                         int size,

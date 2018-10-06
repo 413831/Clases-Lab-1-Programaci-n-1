@@ -9,6 +9,7 @@
 #define QTY_VENTAS 10
 
 
+
 int main()
 {
     Cliente arrayClientes[QTY_CLIENTES];
@@ -25,7 +26,7 @@ int main()
     Venta* ventaSeleccionada;
 
     cliente_init(arrayClientes,QTY_CLIENTES,1);
-    venta_init(arrayVentas,QTY_VENTAS,"Disponible");
+    venta_init(arrayVentas,QTY_VENTAS,STATUS_0);
 
 
     cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Pepito","Gomez","23-33444555-1");
@@ -53,6 +54,7 @@ int main()
        switch(opcion)
        {
             case 1 :
+
                 printf("\n--ALTA CLIENTE--\n");
                 if(cliente_buscarIndiceLibre(arrayClientes,QTY_CLIENTES) >= 0)
                 {

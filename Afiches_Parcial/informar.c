@@ -6,7 +6,7 @@
 #include "clientes.h"
 #include "ventas.h"
 
-/*
+
 static void swapVentas(Venta* valorA,Venta* valorB)
 {
     Venta auxiliar;//TIPO pantalla
@@ -61,11 +61,12 @@ int informar_ListarVentas(Cliente clientes[],int sizeUno,
     return retorno;
 }
 
+///Listar todas las ventas segun STATUS
 
 
-int informar_valorClientes(Cliente array[],
+int informar_statusVentas(Venta array[],
                                 int size,
-                                int calculo)//OK
+                                int status)
 {
     int retorno = -1;
     int i;
@@ -73,17 +74,18 @@ int informar_valorClientes(Cliente array[],
     if(array != NULL && size > 0)
     {
 
-        switch(calculo)
+        switch(status)
         {
             case 1 :
              for(i=0;i<size;i++)
             {
-                if(!array[i].isEmpty && array[i].precio <= 10)
+                if(!strcmp(array[i].status,STATUS_1))
                 {
-                     printf("\n%s",array[i].nombre);
-                     printf("\n%s",array[i].direccion);
-                     printf("\n$%.2f",array[i].precio);
-                     printf("\n%i",array[i].tipo);
+                    printf("\nID CLIENTE -- %d",array[i].idCliente);
+                    printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
+                    printf("\nID CANTIDAD DE AFICHES-- %d",array[i].cantidad);
+                    printf("\nID ZONA-- %s",array[i].zona);
+                    printf("\nID STATUS-- %s",array[i].status);
                 }
             }
 
@@ -94,12 +96,13 @@ int informar_valorClientes(Cliente array[],
             for(i=0;i<size;i++)
             {
 
-                if(!array[i].isEmpty && array[i].precio > 10)
+                if(!strcmp(array[i].status,STATUS_1))
                 {
-                     printf("\n%s",array[i].nombre);
-                     printf("\n%s",array[i].direccion);
-                     printf("\n$%.2f",array[i].precio);
-                     printf("\n%i",array[i].tipo);
+                    printf("\nID CLIENTE -- %d",array[i].idCliente);
+                    printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
+                    printf("\nID CANTIDAD DE AFICHES-- %d",array[i].cantidad);
+                    printf("\nID ZONA-- %s",array[i].zona);
+                    printf("\nID STATUS-- %s",array[i].status);
 
                 }
             }
@@ -114,7 +117,10 @@ int informar_valorClientes(Cliente array[],
     return retorno;
 }
 
-int informar_promedioClientes(Cliente array[],
+
+///Listar todas las ventas que superan o no el promedio de cantidad de afiches
+
+int informar_promedioCantidad(Venta array[],
                                 int size,
                                 int calculo)//OK
 {
@@ -132,12 +138,13 @@ int informar_promedioClientes(Cliente array[],
             case 1 :
              for(i=0;i<size-1;i++)
             {
-                if(!array[i].isEmpty && array[i].precio > promedio)
+                if(!strcmp(array[i].status,STATUS_1) && array[i].cantidad > promedio)
                 {
-                     printf("\n%s",array[i].nombre);
-                     printf("\n%s",array[i].direccion);
-                     printf("\n$%.2f",array[i].precio);
-                     printf("\n%d",array[i].tipo);
+
+                     printf("\n%s",array[i].nombreAfiche);
+                     printf("\n%s",array[i].zona);
+                     printf("\n%d",array[i].cantidad);
+                     printf("\n%d",array[i].idCliente);
                 }
             }
             break;
@@ -146,12 +153,12 @@ int informar_promedioClientes(Cliente array[],
             for(i=0;i<size-1;i++)
             {
 
-                if(!array[i].isEmpty && array[i].precio < promedio)
+                if(!strcmp(array[i].status,STATUS_1) && array[i].cantidad < promedio)
                 {
-                     printf("\n%s",array[i].nombre);
-                     printf("\n%s",array[i].direccion);
-                     printf("\n$%.2f",array[i].precio);
-                     printf("\n%d",array[i].tipo);
+                     printf("\n%s",array[i].nombreAfiche);
+                     printf("\n%s",array[i].zona);
+                     printf("\n%d",array[i].cantidad);
+                     printf("\n%d",array[i].idCliente);
 
                 }
             }
@@ -165,14 +172,14 @@ int informar_promedioClientes(Cliente array[],
 }
 
 
+///Calculo del promedio de cantidad de afiches
 
-
-int informar_calculoPromedio(Cliente array[],
+int informar_calculoPromedioCantidad(Venta array[],
                                 int size,
                                 float* promedio)//OK
 {
     int retorno = -1;
-    float totalPrecio = 0;
+    float cantidadTotal = 0;
     int contador = 0;
     int i;
 
@@ -180,21 +187,108 @@ int informar_calculoPromedio(Cliente array[],
     {
         for(i=0;i<size;i++)
         {
-            if(!array[i].isEmpty)
+            if(!strcmp(array[i].status,STATUS_1))//CON STATUS "A COBRAR"
             {
-                totalPrecio = totalPrecio + array[i].precio;
+                cantidadTotal = cantidadTotal + array[i].cantidad;
                 contador++;
             }
         }
 
-        *promedio = totalPrecio / contador;
+        *promedio = cantidadTotal / contador;
         retorno = 0;
     }
 
     return retorno;
 }
 
+///Listar todas las ventas cobradas por zona
 
+int informar_calculoVentasZona(Venta array[],
+                                int size,
+                                int opcion)//OK
+{
+    int retorno = -1;
+    int contadorVentas = 0;
+    int i;
+
+    if(array != NULL && size > 0)
+    {
+        switch(opcion)
+        {
+            case 1 :
+
+                contadorVentas = 0;
+
+                for(i=0;i<size;i++)
+                {
+                    if(!strcmp(array[i].status,STATUS_2) && !strcmp(array[i].zona,"CABA"))//CON STATUS "COBRADA"
+                    {
+                        printf("\nID CLIENTE -- %d",array[i].idCliente);
+                        printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
+                        printf("\nID CANTIDAD DE AFICHES-- %d",array[i].cantidad);
+                        printf("\nID ZONA-- %s",array[i].zona);
+                        printf("\nID STATUS-- %s",array[i].status);
+                        contadorVentas++;
+                    }
+                }
+
+                printf("\nTotal de ventas realizadas en CABA: %d",contadorVentas);
+                retorno = 0;
+                break;
+            case 2 :
+
+                contadorVentas = 0;
+
+                for(i=0;i<size;i++)
+                {
+                    if(!strcmp(array[i].status,STATUS_2) && !strcmp(array[i].zona,"GBA SUR"))//CON STATUS "COBRADA"
+                    {
+                        printf("\nID CLIENTE -- %d",array[i].idCliente);
+                        printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
+                        printf("\nID CANTIDAD DE AFICHES-- %d",array[i].cantidad);
+                        printf("\nID ZONA-- %s",array[i].zona);
+                        printf("\nID STATUS-- %s",array[i].status);
+                        contadorVentas++;
+
+                    }
+
+                }
+
+                printf("\nTotal de ventas realizadas en CABA: %d",contadorVentas);
+                retorno = 0;
+                break;
+            case 3 :
+
+                contadorVentas = 0;
+
+                for(i=0;i<size;i++)
+                {
+                    if(!strcmp(array[i].status,STATUS_2) && !strcmp(array[i].zona,"GBA OESTE"))//CON STATUS "COBRADA"
+                    {
+                        printf("\nID CLIENTE -- %d",array[i].idCliente);
+                        printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
+                        printf("\nID CANTIDAD DE AFICHES-- %d",array[i].cantidad);
+                        printf("\nID ZONA-- %s",array[i].zona);
+                        printf("\nID STATUS-- %s",array[i].status);
+                        contadorVentas++;
+                    }
+                }
+
+                printf("\nTotal de ventas realizadas en CABA: %d",contadorVentas);
+                retorno = 0;
+                break;
+            default
+                {
+                    printf("\nZona invalida"):
+                }
+
+        }
+
+
+    }
+
+    return retorno;
+}
 
 
 
@@ -281,7 +375,7 @@ int informar_importePorCuit(Cliente arrayUno[],
     }
     return retorno;
 }
-*/
+
 int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
 {
     int retorno = -1;
