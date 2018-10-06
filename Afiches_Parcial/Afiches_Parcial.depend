@@ -43,7 +43,7 @@
 	"utn.h"
 	"ventas.h"
 
-1538792500 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/clientes.c
+1538853097 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/clientes.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>
@@ -69,7 +69,7 @@
 	<ctype.h>
 	"utn.h"
 
-1538839015 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.c
+1538860860 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>
@@ -77,13 +77,22 @@
 	"utn.h"
 	"ventas.h"
 
-1538839157 /home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.h
+1538859249 /home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/ventas.h
 
-1538839214 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/main.c
+1538859249 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/main.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>
 	"clientes.h"
 	"ventas.h"
 	"utn.h"
+
+1538860940 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Afiches_Parcial/informar.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+	"ventas.h"
 

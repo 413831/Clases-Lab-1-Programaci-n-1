@@ -1,3 +1,7 @@
+#include "clientes.h"
+#include "ventas.h"
+
+
 int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
               Pantalla* pantallas, int lenPantallas, char* cuit);
 
@@ -5,33 +9,33 @@ int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
 int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
               Contratacion contrataciones[], int sizeDos,int lenght);
 
+int informar_statusVentas(Venta array[],
+                                int size,
+                                int status);
 
-int informar_listadoCuit(Contratacion array[],int size,int length,char cuit[]);
-
-
-int informar_promedioPantallas(Pantalla array[],
+int informar_promedioCantidad(Venta array[],
                                 int size,
                                 int calculo);
 
-int informar_valorPantallas(Pantalla array[],
-                                int size,
-                                int calculo);
-
-int informar_calculoPromedio(Pantalla array[],
+int informar_calculoPromedioCantidad(Venta array[],
                                 int size,
                                 float* promedio);
 
-int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
-                                int sizeUno,int sizeDos);
-int informar_valorContratacion(Pantalla* pantalla,
-                               Contratacion* contratacion,
-                               float* valor);
+int informar_calculoVentasZona(Venta array[],
+                                int size,
+                                int opcion);
 
-int informar_importePorCuit(Pantalla arrayUno[],
+int informar_diasVenta(Venta arrayUno[],Cliente arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_importePorCuit(Cliente arrayUno[],
                             int sizeUno,
-                            Contratacion arrayDos[],
+                            Venta arrayDos[],
                             int sizeDos,
                             char cuit[]);
-int informar_initListadoCuit(char listadoCuit[],int qty_clientes);
 
-int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length);
+int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);

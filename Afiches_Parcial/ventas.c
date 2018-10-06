@@ -195,12 +195,12 @@ int venta_modificar(Venta* array)
 }
 
 /**
-*\brief Elimina una venta del array
+*\brief Cambia el status de una venta del array a cobrado
 *\param array Es el puntero que recibe del venta del array
 *\return Retorna 0 si no retorna -1
 */
 
-int venta_eliminar(Venta* array)
+int venta_baja(Venta* array)
 {
     int retorno = -1;
 
@@ -215,6 +215,29 @@ int venta_eliminar(Venta* array)
     }
     return retorno;
 }
+
+/**
+*\brief Elimina una venta del array a cobrado
+*\param array Es el puntero que recibe del venta del array
+*\return Retorna 0 si no retorna -1
+*/
+
+int venta_eliminar(Venta* array)
+{
+    int retorno = -1;
+
+    if(array != NULL)
+    {
+            strncpy(array->status,STATUS_0,LENGHT_STAT);
+            retorno = 0;
+    }
+    else
+    {
+        printf("\nCasillero vacio");
+    }
+    return retorno;
+}
+
 
 /**
 *\brief Ordena todos los ventas de un array

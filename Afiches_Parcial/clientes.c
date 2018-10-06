@@ -41,11 +41,6 @@ static int generateID()
 }
 
 
-
-//__________________
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -151,7 +146,6 @@ int cliente_alta(Cliente* array,int size,int* index)
         array[indice].isEmpty = 0;
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
         *index = indice;
-        printf("\nALTA ESITOSA");
         retorno = 0;
     }
 

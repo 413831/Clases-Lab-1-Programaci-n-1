@@ -266,7 +266,7 @@ int main()
                         input_getLetras(respuesta,3,"\nDesea cambiar el estado a cobrar?","Error.Dato invalido",2);
                         if(!strcmp(respuesta,"si"))
                         {
-                            venta_eliminar(ventaSeleccionada);
+                            venta_baja(ventaSeleccionada);
                             contadorVentas--;
                             printf("\nBAJA REALIZADA.");
                             printf("\nIngrese cualquier tecla para continuar...");

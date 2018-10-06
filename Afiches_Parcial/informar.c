@@ -5,6 +5,7 @@
 #include "utn.h"
 #include "clientes.h"
 #include "ventas.h"
+#include "informar.h"
 
 
 static void swapVentas(Venta* valorA,Venta* valorB)
@@ -24,7 +25,6 @@ static void swapClientes(Venta* valorA,Venta* valorB)
 }
 
 
-
 int informar_ConsultaFacturacion(Venta* arrayC,int limite,
               Cliente* clientes, int lenClientes, char* cuit)
 {
@@ -33,9 +33,7 @@ int informar_ConsultaFacturacion(Venta* arrayC,int limite,
     return retorno;
 }
 
-
-
-
+/*
 int informar_ListarVentas(Cliente clientes[],int sizeUno,
               Venta ventas[], int sizeDos,int lenght)
 {
@@ -60,7 +58,7 @@ int informar_ListarVentas(Cliente clientes[],int sizeUno,
 
     return retorno;
 }
-
+*/
 ///Listar todas las ventas segun STATUS
 
 
@@ -128,7 +126,7 @@ int informar_promedioCantidad(Venta array[],
     int i;
     float promedio;
 
-    informar_calculoPromedio(array,size,&promedio);
+    informar_calculoPromedioCantidad(array,size,&promedio);
 
     if(array != NULL && size > 0)
     {
@@ -277,9 +275,116 @@ int informar_calculoVentasZona(Venta array[],
                 printf("\nTotal de ventas realizadas en CABA: %d",contadorVentas);
                 retorno = 0;
                 break;
-            default
+            default :
                 {
-                    printf("\nZona invalida"):
+                    printf("\nZona invalida");
+                }
+
+        }
+
+
+    }
+
+    return retorno;
+}
+
+
+int informar_calculoClientesZona(Cliente arrayUno[],
+                                 Venta arrayDos[],
+                                int sizeUno,
+                                int sizeDos,
+                                int opcion)//OK
+{
+    int retorno = -1;
+    int idCliente;
+    int contadorClientes = 0;
+    int i;
+    int j;
+
+    if(arrayUno != NULL &&
+       arrayDos != NULL &&
+       sizeUno > 0 &&
+       sizeDos > 0)
+    {
+        switch(opcion)
+        {
+            case 1 :
+                contadorClientes = 0;
+
+                for(i=0;i<sizeUno;i++)//Recorro array clientes
+                {
+                    if(!arrayUno[i].isEmpty)
+                    {
+                        for(j=0;j<sizeDos;j++)//Recorro array ventas
+                        {
+                            if(arrayDos[j].idCliente == arrayUno[i].id &&
+                               !strcasecmp(arrayDos[j].zona,"CABA"))//Si encuentra ventas del cliente a cobrar o cobradas entra
+                            {
+                                cliente_mostrar(arrayUno+i,&idCliente);
+                                contadorClientes++;
+                            }
+
+                        }
+                        printf("\nTotal de clientes de CABA: %d",contadorClientes);
+
+                    }
+
+                }
+
+                printf("\nTotal de ventas realizadas en CABA: %d",contadorClientes);
+                retorno = 0;
+                break;
+            case 2 :
+
+                contadorClientes = 0;
+
+                for(i=0;i<sizeUno;i++)//Recorro array clientes
+                {
+                    if(!arrayUno[i].isEmpty)
+                    {
+                        for(j=0;j<sizeDos;j++)//Recorro array ventas
+                        {
+                            if(arrayDos[j].idCliente == arrayUno[i].id &&
+                               !strcasecmp(arrayDos[j].zona,"GBA SUR"))//Si encuentra ventas del cliente a cobrar o cobradas entra
+                            {
+                                cliente_mostrar(arrayUno+i,&idCliente);
+                                contadorClientes++;
+                            }
+
+                        }
+                        printf("\nTotal de clientes de GBA SUR: %d",contadorClientes);
+
+                    }
+
+                }
+                break;
+            case 3 :
+
+                contadorClientes = 0;
+
+                for(i=0;i<sizeUno;i++)//Recorro array clientes
+                {
+                    if(!arrayUno[i].isEmpty)
+                    {
+                        for(j=0;j<sizeDos;j++)//Recorro array ventas
+                        {
+                            if(arrayDos[j].idCliente == arrayUno[i].id &&
+                               !strcasecmp(arrayDos[j].zona,"GBA OESTE"))//Si encuentra ventas del cliente a cobrar o cobradas entra
+                            {
+                                cliente_mostrar(arrayUno+i,&idCliente);
+                                contadorClientes++;
+                            }
+
+                        }
+                        printf("\nTotal de clientes de GBA OESTE: %d",contadorClientes);
+
+                    }
+
+                }
+                break;
+            default :
+                {
+                    printf("\nZona invalida");
                 }
 
         }
@@ -292,42 +397,48 @@ int informar_calculoVentasZona(Venta array[],
 
 
 
-int informar_diasVenta(Venta arrayUno[],Cliente arrayDos[],
+
+int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos)//OK
 {
     int retorno = -1;
     int i;
-    float importeTotal = 0;
-    float importe;
-    int contadorCont = 0;
+    int j;
     int idCliente;
-    Cliente* pantallaSeleccionada;
+    int flag = 1;
+    int contadorVentas;
+    int mayorCantidad;
+    int arrayVentas[sizeUno];
+    Venta* ventaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
     {
 
-        for(i=0;i<sizeUno;i++)
+        for(i=0;i<sizeUno;i++)//Recorro array clientes
         {
-            if(!arrayUno[i].isEmpty && arrayUno[i].dias <= 10)
+            contadorVentas = 0;
+
+            if(!arrayUno[i].isEmpty)
             {
-                printf("\nENTRO IF");
-                importe = 0;
+                for(j=0;j<sizeDos;j++)//Recorro array ventas
+                {
+                    if(arrayUno[i].id == arrayDos[j].idCliente)//Busca las ventas relacionadas al cliente
+                    {
+                        ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
 
-                idCliente = arrayUno[i].idCliente;
-                pantallaSeleccionada = pantalla_getByID(arrayDos,sizeDos,idCliente);
-                contadorCont++;
+                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_1))
+                        {
+                            contadorVentas++;//Sumo la venta a cobrar
+                        }
 
-                importe = arrayUno[i].dias * pantallaSeleccionada->precio;
-                importeTotal = importeTotal + importe;
+                    }
 
-                printf("\n\n PANTALLA -- %s",pantallaSeleccionada->nombre);
-                printf("\n PRECIO -- $%.2f",pantallaSeleccionada->precio);
-                printf("\n DIAS -- %d",arrayUno[i].dias);
-                printf("\n IMPORTE -- $%.2f",importe);
+                }
+
+                arrayVentas[i] = contadorVentas;
             }
         }
-            printf("\nCantidad de ventas %d",contadorCont);
-            printf("\nImporte total $%.2f",importeTotal);
+
 
             retorno = 0;
     }
@@ -336,45 +447,171 @@ int informar_diasVenta(Venta arrayUno[],Cliente arrayDos[],
 }
 
 
-int informar_importePorCuit(Cliente arrayUno[],
-                            int sizeUno,
-                            Venta arrayDos[],
-                            int sizeDos,
-                            char cuit[])
+int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos)//OK
 {
     int retorno = -1;
     int i;
-    int contadorCont = 0;
+    int j;
     int idCliente;
-    float importe = 0;
-    float importeTotal = 0;
-    Cliente* pantallaSeleccionada;
+    int flag = 1;
+    int contadorVentas;
+    int totalVentas;
+    Cliente* clienteMasVentas;
+    Venta* ventaSeleccionada;
 
-    if(arrayUno != NULL && arrayDos != NULL && cuit != NULL && sizeDos > 0 && sizeUno > 0)
+    if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
     {
-        for(i=0;i<sizeDos;i++)
+
+        for(i=0;i<sizeUno;i++)//Recorro array clientes
         {
-            if(!arrayDos[i].isEmpty && arrayDos[i].cuit == cuit)
+            contadorVentas = 0;
+
+            if(!arrayUno[i].isEmpty)
             {
-                idCliente = arrayDos[i].idCliente;
-                pantallaSeleccionada = pantalla_getByID(arrayUno,sizeUno,idCliente);
-                informar_valorVenta(pantallaSeleccionada,arrayDos+i,&importe);
-                importeTotal = importeTotal + importe;
-                contadorCont++;
-                printf("\nVenta %d",arrayDos[i].id);
-                printf("\nCliente %d",arrayDos[i].idCliente);
-                printf("\nImporte $%.2f",importeTotal);
+                for(j=0;j<sizeDos;j++)//Recorro array ventas
+                {
+                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    {
+                        ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
+
+                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_2))
+                        {
+                            contadorVentas++;//Sumo la venta a cobradas
+                        }
+
+                    }
+
+                }
+
+
+                if(flag == 1 || contadorVentas > totalVentas)//Determino el cliente con mas ventas
+                {
+                    totalVentas = contadorVentas;
+                    clienteMasVentas = arrayUno+1;
+                    flag = 0;
+                }
+
             }
-
-
         }
 
-
-
-        retorno = 0;
+            retorno = 0;
     }
+
     return retorno;
 }
+
+
+int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos)//OK
+{
+    int retorno = -1;
+    int i;
+    int j;
+    int idCliente;
+    int flag = 1;
+    int contadorVentas;
+    int totalVentas;
+    Cliente* clienteMenosVentas;
+    Venta* ventaSeleccionada;
+
+    if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
+    {
+
+        for(i=0;i<sizeUno;i++)//Recorro array clientes
+        {
+            contadorVentas = 0;
+
+            if(!arrayUno[i].isEmpty)
+            {
+                for(j=0;j<sizeDos;j++)//Recorro array ventas
+                {
+                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    {
+                        ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
+
+                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_1))
+                        {
+                            contadorVentas++;//Sumo la venta a cobrar
+                        }
+
+                    }
+
+                }
+
+
+                if(flag == 1 || contadorVentas < totalVentas)//Determino el cliente con mas ventas
+                {
+                    totalVentas = contadorVentas;
+                    clienteMenosVentas = arrayUno+1;
+                    flag = 0;
+                }
+
+            }
+        }
+
+            retorno = 0;
+    }
+
+    return retorno;
+}
+
+
+int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos)//OK
+{
+    int retorno = -1;
+    int i;
+    int j;
+    int idCliente;
+    int flag = 1;
+    int contadorVentas;
+    int totalVentas;
+    Cliente* clienteMenosVentas;
+    Venta* ventaSeleccionada;
+
+    if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
+    {
+
+        for(i=0;i<sizeUno;i++)//Recorro array clientes
+        {
+            contadorVentas = 0;
+
+            if(!arrayUno[i].isEmpty)
+            {
+                for(j=0;j<sizeDos;j++)//Recorro array ventas
+                {
+                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    {
+                        ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
+
+                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_2))
+                        {
+                            contadorVentas++;//Sumo la venta a cobrar
+                        }
+
+                    }
+
+                }
+
+
+                if(flag == 1 || contadorVentas < totalVentas)//Determino el cliente con mas ventas
+                {
+                    totalVentas = contadorVentas;
+                    clienteMenosVentas = arrayUno+1;
+                    flag = 0;
+                }
+
+            }
+        }
+
+            retorno = 0;
+    }
+
+    return retorno;
+}
+
+
 
 int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
 {
@@ -396,8 +633,9 @@ int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
 
     return retorno;
 }
-/*
-int informar_initListadoCuit(char listadoCuit[],int qty_clientes)
+
+
+int informar_initListadoCuit(Cliente array[],char listadoCuit[],int qty_clientes)
 {
     int i;
     int retorno = -1;
@@ -413,7 +651,7 @@ int informar_initListadoCuit(char listadoCuit[],int qty_clientes)
 
     return retorno;
 }
-*/
+
 
 
 int informar_listadoCuit(Cliente array[],int size,int length,char listadoCuit[])
@@ -434,11 +672,10 @@ int informar_listadoCuit(Cliente array[],int size,int length,char listadoCuit[])
             strncpy(auxCuit,array[i].cuit,length);
             if(!informar_validarCuit(auxCuit,array, size, length))
             {
-                strncpy(*listadoCuit[i],auxCuit,length);
+                strncpy(listadoCuit[i],auxCuit,length);
             }
 
         }
-
 
         for(i=0;i<size;j++)
         {
@@ -449,58 +686,3 @@ int informar_listadoCuit(Cliente array[],int size,int length,char listadoCuit[])
 
     return retorno;
 }
-/*
-
-int informar_valorVenta(Cliente* pantalla,Venta* contratacion,float* valor)
-{
-    int retorno = -1;
-    float importe;
-
-    if(pantalla != NULL && contratacion != NULL )
-    {
-        importe = pantalla->precio * contratacion->dias;
-        *valor = importe;
-        retorno = 0;
-    }
-
-    return retorno;
-}
-
-int informar_ordenar(Venta array[],int size)
-{
-    int retorno = -1;
-    int i;
-    int j;
-    int flag = 1;
-
-    if(array != NULL && size > 0)
-    {
-
-        while(flag)
-        {
-            flag = 0;
-
-            for(i=0;i<size;i++)
-            {
-                j=i+1;
-
-                 if(array[i].cuit < array[i+1].cuit)
-                {
-                     swap(array+i,array+j);
-                     flag = 1;
-                }
-                else if(array[i].cuit == array[i+1].cuit &&
-                strcmp(array[i].cuit,array[i+1].cuit) > 0)
-                {
-                    swap(array+i,array+j);
-                    flag = 1;
-                }
-
-            }
-        }
-        retorno = 0;
-
-    }
-    return retorno;
-}
-*/
