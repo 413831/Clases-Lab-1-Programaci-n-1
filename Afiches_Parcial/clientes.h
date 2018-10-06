@@ -14,7 +14,7 @@ typedef struct
 int cliente_buscarIndiceLibre(Cliente array[],int size);
 int cliente_init(Cliente array[],int size,int valor);
 Cliente* cliente_getByID(Cliente* array,int size,int id);
-int cliente_alta(Cliente* array,int size,Cliente* cliente);
+int cliente_alta(Cliente* array,int size,int* index);
 int cliente_modificar(Cliente* array);
 int cliente_eliminar(Cliente* array);
 int cliente_ordenar(Cliente array[],int size);

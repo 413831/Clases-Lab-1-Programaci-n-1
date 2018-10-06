@@ -112,7 +112,7 @@ Venta* venta_getByID(Venta* array,int size,int id)
     {
         for(i=0;i<size;i++)
         {
-           if(!strcmp(array[i].status,"A cobrar") && array[i].idCliente == id)
+           if(!strcmp(array[i].status,"A cobrar") && array[i].id == id)
             {
                 retorno = array+i;
                 break;
@@ -141,10 +141,12 @@ int venta_alta(Venta* array,int size,int idIngresado)
 
     indice = venta_buscarIndiceLibre(array,size);
 
-    if( !input_getLetras(auxNombreAfiche,50,"\nIngrese nombreArchivo: ","\nError,dato invalido.",2)&&
-        !input_getLetras(auxZona,50,"\nIngrese direccion: ","\nError,dato invalido.",2)&&
+    if( !input_getAlfanumerico(auxNombreAfiche,50,"\nIngrese nombre de archivo: ","\nError,dato invalido.",2)&&
+        !input_getLetras(auxZona,50,"\nIngrese ZONA (CABA - GBA SUR - GBA OESTE): ","\nError,dato invalido.",2)&&
+        !venta_validarZona(auxZona) &&
         !input_getNumeros(&auxCantidad,7,"\nIngrese el cantidad: ","\nError,dato invalido.",0,10000,2))
     {
+        printf("\nALTA");
         strncpy(array[indice].nombreAfiche,auxNombreAfiche,50);
         strncpy(array[indice].zona,auxZona,50);
         array[indice].cantidad = auxCantidad;
@@ -175,8 +177,9 @@ int venta_modificar(Venta* array)
     if(array != NULL && !strcmp(array->status,"Disponible"))
     {
 
-        if( !input_getLetras(auxNombreAfiche,50,"\nIngrese nombreArchivo: ","\nError,dato invalido.",2)&&
-            !input_getLetras(auxZona,50,"\nIngrese direccion: ","\nError,dato invalido.",2)&&
+        if( !input_getAlfanumerico(auxNombreAfiche,50,"\nIngrese nombre de archivo: ","\nError,dato invalido.",2)&&
+            !input_getLetras(auxZona,50,"\nIngrese ZONA (CABA - GBA SUR - GBA OESTE): ","\nError,dato invalido.",2)&&
+            !venta_validarZona(auxZona) &&
             !input_getNumeros(&auxCantidad,7,"\nIngrese el cantidad: ","\nError,dato invalido.",0,10000,2))
         {
             strncpy(array->zona,auxZona,50);
@@ -375,3 +378,19 @@ int venta_ingresoForzado(Venta array[],
 }
 
 
+int venta_validarZona(char zona[])
+{
+    int retorno = -1;
+
+        if(!strcasecmp(zona,"CABA") &&
+           !strcasecmp(zona,"GBA SUR") &&
+           !strcasecmp(zona,"GBA OESTE"))
+        {
+            retorno = 0;
+        }
+        else
+        {
+            printf("\nZONA INCORRECTA!!!");
+        }
+    return retorno;
+}

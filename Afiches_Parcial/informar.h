@@ -32,4 +32,6 @@ int informar_importePorCuit(Pantalla arrayUno[],
                             Contratacion arrayDos[],
                             int sizeDos,
                             char cuit[]);
+int informar_initListadoCuit(char listadoCuit[],int qty_clientes);
 
+int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length);

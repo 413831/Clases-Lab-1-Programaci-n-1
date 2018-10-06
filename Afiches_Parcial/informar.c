@@ -3,21 +3,30 @@
 #include <time.h>
 #include <string.h>
 #include "utn.h"
-#include "pantalla.h"
-#include "informar.h"
+#include "clientes.h"
+#include "ventas.h"
 
-
-static void swap(Contratacion* valorA,Contratacion* valorB)
+/*
+static void swapVentas(Venta* valorA,Venta* valorB)
 {
-    Contratacion auxiliar;//TIPO pantalla
+    Venta auxiliar;//TIPO pantalla
+    auxiliar = *valorA;
+    *valorA = *valorB;
+    *valorB = auxiliar;
+}
+
+static void swapClientes(Venta* valorA,Venta* valorB)
+{
+    Venta auxiliar;//TIPO pantalla
     auxiliar = *valorA;
     *valorA = *valorB;
     *valorB = auxiliar;
 }
 
 
-int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
-              Pantalla* pantallas, int lenPantallas, char* cuit)
+
+int informar_ConsultaFacturacion(Venta* arrayC,int limite,
+              Cliente* clientes, int lenClientes, char* cuit)
 {
     int retorno = -1;
 
@@ -27,8 +36,8 @@ int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
 
 
 
-int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
-              Contratacion contrataciones[], int sizeDos,int lenght)
+int informar_ListarVentas(Cliente clientes[],int sizeUno,
+              Venta ventas[], int sizeDos,int lenght)
 {
     int retorno = -1;
     int i;
@@ -36,15 +45,15 @@ int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
 
 
 
-    if(pantallas != NULL &&
-       contrataciones != NULL &&
+    if(clientes != NULL &&
+       ventas != NULL &&
        sizeUno > 0 &&
        sizeDos > 0)
     {
         for(i=0;i<sizeDos;i++)
         {
             printf("\nCLIENTE %s",listadoCuit+i);
-            informar_importePorCuit(pantallas,sizeUno,contrataciones,sizeDos,listadoCuit+i);
+            informar_importePorCuit(clientes,sizeUno,ventas,sizeDos,listadoCuit+i);
         }
         retorno = 0;
     }
@@ -54,7 +63,7 @@ int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
 
 
 
-int informar_valorPantallas(Pantalla array[],
+int informar_valorClientes(Cliente array[],
                                 int size,
                                 int calculo)//OK
 {
@@ -105,7 +114,7 @@ int informar_valorPantallas(Pantalla array[],
     return retorno;
 }
 
-int informar_promedioPantallas(Pantalla array[],
+int informar_promedioClientes(Cliente array[],
                                 int size,
                                 int calculo)//OK
 {
@@ -158,7 +167,7 @@ int informar_promedioPantallas(Pantalla array[],
 
 
 
-int informar_calculoPromedio(Pantalla array[],
+int informar_calculoPromedio(Cliente array[],
                                 int size,
                                 float* promedio)//OK
 {
@@ -189,7 +198,7 @@ int informar_calculoPromedio(Pantalla array[],
 
 
 
-int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
+int informar_diasVenta(Venta arrayUno[],Cliente arrayDos[],
                                 int sizeUno,int sizeDos)//OK
 {
     int retorno = -1;
@@ -197,8 +206,8 @@ int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
     float importeTotal = 0;
     float importe;
     int contadorCont = 0;
-    int idPantalla;
-    Pantalla* pantallaSeleccionada;
+    int idCliente;
+    Cliente* pantallaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
     {
@@ -210,8 +219,8 @@ int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
                 printf("\nENTRO IF");
                 importe = 0;
 
-                idPantalla = arrayUno[i].idPantalla;
-                pantallaSeleccionada = pantalla_getByID(arrayDos,sizeDos,idPantalla);
+                idCliente = arrayUno[i].idCliente;
+                pantallaSeleccionada = pantalla_getByID(arrayDos,sizeDos,idCliente);
                 contadorCont++;
 
                 importe = arrayUno[i].dias * pantallaSeleccionada->precio;
@@ -223,7 +232,7 @@ int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
                 printf("\n IMPORTE -- $%.2f",importe);
             }
         }
-            printf("\nCantidad de contrataciones %d",contadorCont);
+            printf("\nCantidad de ventas %d",contadorCont);
             printf("\nImporte total $%.2f",importeTotal);
 
             retorno = 0;
@@ -233,19 +242,19 @@ int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
 }
 
 
-int informar_importePorCuit(Pantalla arrayUno[],
+int informar_importePorCuit(Cliente arrayUno[],
                             int sizeUno,
-                            Contratacion arrayDos[],
+                            Venta arrayDos[],
                             int sizeDos,
                             char cuit[])
 {
     int retorno = -1;
     int i;
     int contadorCont = 0;
-    int idPantalla;
+    int idCliente;
     float importe = 0;
     float importeTotal = 0;
-    Pantalla* pantallaSeleccionada;
+    Cliente* pantallaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && cuit != NULL && sizeDos > 0 && sizeUno > 0)
     {
@@ -253,13 +262,13 @@ int informar_importePorCuit(Pantalla arrayUno[],
         {
             if(!arrayDos[i].isEmpty && arrayDos[i].cuit == cuit)
             {
-                idPantalla = arrayDos[i].idPantalla;
-                pantallaSeleccionada = pantalla_getByID(arrayUno,sizeUno,idPantalla);
-                informar_valorContratacion(pantallaSeleccionada,arrayDos+i,&importe);
+                idCliente = arrayDos[i].idCliente;
+                pantallaSeleccionada = pantalla_getByID(arrayUno,sizeUno,idCliente);
+                informar_valorVenta(pantallaSeleccionada,arrayDos+i,&importe);
                 importeTotal = importeTotal + importe;
                 contadorCont++;
-                printf("\nContratacion %d",arrayDos[i].id);
-                printf("\nPantalla %d",arrayDos[i].idPantalla);
+                printf("\nVenta %d",arrayDos[i].id);
+                printf("\nCliente %d",arrayDos[i].idCliente);
                 printf("\nImporte $%.2f",importeTotal);
             }
 
@@ -272,41 +281,83 @@ int informar_importePorCuit(Pantalla arrayUno[],
     }
     return retorno;
 }
+*/
+int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
+{
+    int retorno = -1;
+    int j;
+
+    for(j=0;j<size;j++)
+    {
+
+        if(!strcmp(array[j].cuit,auxCuit))
+        {
+            strncpy(auxCuit,array[j].cuit,14);
+        }
+
+        retorno = 0;
+    }
 
 
-int informar_listadoCuit(Contratacion array[],int size,int length,char cuit[])
+
+    return retorno;
+}
+/*
+int informar_initListadoCuit(char listadoCuit[],int qty_clientes)
+{
+    int i;
+    int retorno = -1;
+
+    for(i=0;i<qty_clientes;i++)
+    {
+
+        strncpy(listadoCuit[i],"0",13);
+        retorno = 0;
+    }
+
+
+
+    return retorno;
+}
+*/
+
+
+int informar_listadoCuit(Cliente array[],int size,int length,char listadoCuit[])
 {
     int retorno = -1;
     int i;
     int j;
     int flag=1;
+    char auxCuit[length];
+
+    //informar_initListadoCuit(listadoCuit,size);
 
    // while(flag == 1)
 
             printf("\nENTRO WHILE");
         for(i=0;i<size;j++)
         {
-            j=i+1;
-            flag = 0;
-
-            if(!array[i].isEmpty && strcmp(array[i].cuit,array[j].cuit) != 0 )
+            strncpy(auxCuit,array[i].cuit,length);
+            if(!informar_validarCuit(auxCuit,array, size, length))
             {
-                printf("\nENTRO IF");
-                strncpy(cuit,array[j].cuit,length);
-                flag = 1;
-                i++;
+                strncpy(*listadoCuit[i],auxCuit,length);
             }
+
         }
 
 
+        for(i=0;i<size;j++)
+        {
+            printf("\nCLIENTE CUIT Nº -- %s",listadoCuit[i]);
+        }
 
     retorno = 0;
 
     return retorno;
 }
+/*
 
-
-int informar_valorContratacion(Pantalla* pantalla,Contratacion* contratacion,float* valor)
+int informar_valorVenta(Cliente* pantalla,Venta* contratacion,float* valor)
 {
     int retorno = -1;
     float importe;
@@ -321,7 +372,7 @@ int informar_valorContratacion(Pantalla* pantalla,Contratacion* contratacion,flo
     return retorno;
 }
 
-int informar_ordenar(Contratacion array[],int size)
+int informar_ordenar(Venta array[],int size)
 {
     int retorno = -1;
     int i;
@@ -358,4 +409,4 @@ int informar_ordenar(Contratacion array[],int size)
     }
     return retorno;
 }
-
+*/

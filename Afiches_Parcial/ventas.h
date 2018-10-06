@@ -15,6 +15,7 @@ typedef struct
 int venta_buscarIndiceLibre(Venta array[],int size);
 int venta_init(Venta array[],int size,char status[]);
 Venta* venta_getByID(Venta* array,int size,int id);
+int venta_validarZona(char zona[]);
 int venta_alta(Venta* array,int size,int idIngresado);
 int venta_modificar(Venta* array);
 int venta_eliminar(Venta* array);

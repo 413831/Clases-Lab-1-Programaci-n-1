@@ -15,9 +15,11 @@ int main()
     Venta arrayVentas[QTY_VENTAS];
     int i;
     int opcion;
+    int indice;
     int contadorClientes = 5;//CAMBIAR PARA HARDCODE
     int contadorVentas = 5;//CAMBIAR PARA HARDCODE
     char respuesta[5];
+ //   char listadoCuit[13];
     int idIngresado;
     Cliente* clienteSeleccionado;
     Venta* ventaSeleccionada;
@@ -43,7 +45,7 @@ int main()
 
    do
    {
-      // limpiarPantalla();
+        limpiarPantalla();
        printf("\n<<<MENU>>>\n\n1) ALTA CLIENTE\n2) MODIFICAR DATOS CLIENTES\n3) BAJA CLIENTE");
        printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES\n8) SALIR\n");
        input_ScanInt("\nIngrese opcion: ",&opcion);
@@ -54,11 +56,16 @@ int main()
                 printf("\n--ALTA CLIENTE--\n");
                 if(cliente_buscarIndiceLibre(arrayClientes,QTY_CLIENTES) >= 0)
                 {
-                    if(!cliente_alta(arrayClientes,QTY_CLIENTES,clienteSeleccionado))
+                    if(!cliente_alta(arrayClientes,QTY_CLIENTES,&indice))
                     {
-                        printf("\nID CLIENTE %d",clienteSeleccionado->id);
+                        printf("\nID CLIENTE %d",arrayClientes[indice].id);
                         contadorClientes++;
+                        printf("\nALTA REALIZADA.");
+
                     }
+                    printf("\nIngrese cualquier tecla para continuar...");
+                    limpiarMemoria();
+                    getchar();
 
                 }
                 else
@@ -75,9 +82,28 @@ int main()
                 {
                     printf("\n--MODIFICAR DATOS CLIENTE--\n");
                     cliente_listar(arrayClientes,QTY_CLIENTES);
-                    input_ScanInt("\nIngrese ID: ",&idIngresado);
+                    input_getNumeros(&idIngresado,5,"\nIngrese ID: ","Error",1,200,2);
                     clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado);
-                    cliente_modificar(clienteSeleccionado);
+
+                    if(clienteSeleccionado != NULL)
+                    {
+                        if(!cliente_modificar(clienteSeleccionado))
+                        {
+                            printf("\nMODIFICACION REALIZADA.");
+                        }
+
+                        printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+                    else
+                    {
+                        printf("\nCliente inexistente");
+                         printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+
                 }
                 else
                 {
@@ -93,30 +119,44 @@ int main()
                 if(contadorClientes > 0)
                 {
                     cliente_listar(arrayClientes,QTY_CLIENTES);
-                    input_ScanInt("\nIngrese ID: ",&idIngresado);
+                    input_getNumeros(&idIngresado,5,"\nIngrese ID: ","Error",1,200,2);
                     input_getLetras(respuesta,3,"\nEsta seguro de realizar la baja?","Error.Dato invalido",2);
 
                     if(!strcmp(respuesta,"si"))
                     {
                         printf("\n--BAJA DE CLIENTE--\n");
 
-
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado);
-                        cliente_eliminar(clienteSeleccionado);
+                        if(clienteSeleccionado != NULL)
+                        {
+                            cliente_eliminar(clienteSeleccionado);
 
-                            do
-                            {
-                                ventaSeleccionada = venta_getByID(arrayVentas,QTY_VENTAS,idIngresado);
+                                do
+                                {
+                                    ventaSeleccionada = venta_getByID(arrayVentas,QTY_VENTAS,idIngresado);
 
-                               if(ventaSeleccionada != NULL)
-                               {
-                                    venta_eliminar(ventaSeleccionada);
-                               }
+                                   if(ventaSeleccionada != NULL)
+                                   {
+                                        venta_eliminar(ventaSeleccionada);
+                                   }
 
-                            } while(ventaSeleccionada != NULL);
+                                } while(ventaSeleccionada != NULL);
 
-                        contadorClientes--;
+                            contadorClientes--;
+                            printf("\nBAJA REALIZADA.");
+                            printf("\nIngrese cualquier tecla para continuar...");
+                            limpiarMemoria();
+                            getchar();
                         }
+                        else
+                        {
+                            printf("\nCliente inexistente");
+                            printf("\nIngrese cualquier tecla para continuar...");
+                            limpiarMemoria();
+                            getchar();
+                        }
+
+                    }
                     else if(!strcmp(respuesta,"no"))
                     {
                         break;
@@ -124,10 +164,12 @@ int main()
                     else
                     {
                         printf("Error.Opcion incorrecta");
+                        printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
                     }
 
                 }
-
                 else
                 {
                     printf("\nNo hay datos cargados.");
@@ -140,15 +182,29 @@ int main()
 
             case 4 :
                  printf("\n--ALTA VENTA--\n");
-                if(venta_buscarIndiceLibre(arrayVentas,QTY_VENTAS) >= 0)
+                if(venta_buscarIndiceLibre(arrayVentas,QTY_VENTAS) >= 0 )
                 {
-                    input_ScanInt("\nIngrese ID: ",&idIngresado);
+                    cliente_listar(arrayClientes,QTY_CLIENTES);
+                    input_getNumeros(&idIngresado,5,"\nIngrese ID de cliente: ","Error",1,200,2);
                     if(cliente_getByID(arrayClientes,QTY_CLIENTES,idIngresado) != NULL)
                     {
-                        venta_alta(arrayVentas,QTY_VENTAS,idIngresado);
-
+                        if(!venta_alta(arrayVentas,QTY_VENTAS,idIngresado))
+                        {
+                            contadorVentas++;
+                            printf("\nALTA REALIZADA.");
+                        }
+                        printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
                     }
-                        contadorVentas++;
+                    else
+                    {
+                        printf("\nEl ID no existe.");
+                        printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+
                 }
                 else
                 {
@@ -159,13 +215,30 @@ int main()
                 }
                 break;
             case 5 :
-                  if(contadorVentas > 0)
+                if(contadorVentas > 0)
                 {
                     printf("\n--EDITAR VENTA--\n");
                     venta_listar(arrayVentas,QTY_VENTAS);
-                    input_ScanInt("\nIngrese ID: ",&idIngresado);
-                    ventaSeleccionada = venta_getByID(arrayVentas,QTY_CLIENTES,idIngresado);
-                    venta_modificar(ventaSeleccionada);
+                    input_getNumeros(&idIngresado,5,"\nIngrese ID de venta: ","Error",1,2000,2);
+                    ventaSeleccionada = venta_getByID(arrayVentas,QTY_VENTAS,idIngresado);
+                    if(ventaSeleccionada != NULL)
+                    {
+                        if(!venta_modificar(ventaSeleccionada))
+                        {
+                            printf("\nMODIFICACION REALIZADA.");
+                        }
+                        printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+                    else
+                    {
+                        printf("\nEl ID no existe.");
+                         printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+
                 }
                 else
                 {
@@ -181,10 +254,44 @@ int main()
                     printf("\n--COBRAR VENTA--\n");
 
                     venta_listar(arrayVentas,QTY_VENTAS);
-                    input_ScanInt("\nIngrese ID: ",&idIngresado);
+                    input_getNumeros(&idIngresado,5,"\nIngrese ID de venta: ","Error",1,200,2);
                     ventaSeleccionada = venta_getByID(arrayVentas,QTY_VENTAS,idIngresado);
-                    venta_eliminar(ventaSeleccionada);
-                    contadorVentas--;
+                    if(ventaSeleccionada != NULL)
+                    {
+                        clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,ventaSeleccionada->idCliente);
+                        cliente_mostrar(clienteSeleccionado,&idIngresado);
+
+                        input_getLetras(respuesta,3,"\nDesea cambiar el estado a cobrar?","Error.Dato invalido",2);
+                        if(!strcmp(respuesta,"si"))
+                        {
+                            venta_eliminar(ventaSeleccionada);
+                            contadorVentas--;
+                            printf("\nBAJA REALIZADA.");
+                            printf("\nIngrese cualquier tecla para continuar...");
+                            limpiarMemoria();
+                            getchar();
+                        }
+                        else if(!strcmp(respuesta,"no"))
+                        {
+                            break;
+                        }
+                        else
+                        {
+                            printf("Error.Opcion incorrecta");
+                             printf("\nIngrese cualquier tecla para continuar...");
+                            limpiarMemoria();
+                            getchar();
+                        }
+
+                    }
+                    else
+                    {
+                        printf("\nVenta inexistente.");
+                         printf("\nIngrese cualquier tecla para continuar...");
+                        limpiarMemoria();
+                        getchar();
+                    }
+
                 }
                 else
                 {
@@ -203,7 +310,7 @@ int main()
                     {
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,arrayClientes[i].id);
 
-                        if(venta_getByID(arrayVentas,QTY_VENTAS,arrayClientes[i].id) != NULL)
+                        if(clienteSeleccionado != NULL)
                         {
                             cliente_mostrar(clienteSeleccionado,&idIngresado);
                             printf("\n\n>>VENTAS A COBRAR<<\nID CLIENTE: %d",idIngresado);
@@ -226,7 +333,19 @@ int main()
 
                   break;
             case 8 :
+          /*       if(contadorClientes > 0)
+                {
+                    printf("\n--LISTADO DE CUIT--\n");
+                 informar_listadoCuit(arrayClientes,QTY_CLIENTES,13,listadoCuit);
 
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados.");
+                    printf("\nIngrese cualquier tecla para continuar...");
+                    limpiarMemoria();
+                    getchar();
+                }                       */
                 break;
             default :
                 printf("\nOpcion invalida.:P");
