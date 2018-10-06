@@ -1,5 +1,10 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
+
+#define STATUS_0 "Disponible"
+#define STATUS_1 "A cobrar"
+#define STATUS_2 "Cobrado"
+
 typedef struct
 {
     char nombreAfiche[50];
@@ -15,11 +20,13 @@ typedef struct
 int venta_buscarIndiceLibre(Venta array[],int size);
 int venta_init(Venta array[],int size,char status[]);
 Venta* venta_getByID(Venta* array,int size,int id);
+int venta_validarZona(char zona[]);
 int venta_alta(Venta* array,int size,int idIngresado);
 int venta_modificar(Venta* array);
 int venta_eliminar(Venta* array);
 int venta_ordenar(Venta array[],int size);
 int venta_mostrar(Venta array[],int size,int idIngresado);
+int venta_cobradas(Venta array[],int size,int idIngresado);
 int venta_listar(Venta array[],int size);
 int venta_ingresoForzado(Venta array[],
                         int size,

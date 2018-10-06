@@ -62,7 +62,7 @@ int venta_buscarIndiceLibre(Venta array[],int size)
 
     for(i=0;i < size; i++)
     {
-        if(!strcmp(array[i].status,"Disponible"))
+        if(!strcmp(array[i].status,STATUS_0))
         {
             retorno = i;
             break;
@@ -112,7 +112,7 @@ Venta* venta_getByID(Venta* array,int size,int id)
     {
         for(i=0;i<size;i++)
         {
-           if(!strcmp(array[i].status,"A cobrar") && array[i].idCliente == id)
+           if(!strcmp(array[i].status,STATUS_1) && array[i].id == id)
             {
                 retorno = array+i;
                 break;
@@ -141,14 +141,15 @@ int venta_alta(Venta* array,int size,int idIngresado)
 
     indice = venta_buscarIndiceLibre(array,size);
 
-    if( !input_getLetras(auxNombreAfiche,50,"\nIngrese nombreArchivo: ","\nError,dato invalido.",2)&&
-        !input_getLetras(auxZona,50,"\nIngrese direccion: ","\nError,dato invalido.",2)&&
+    if( !input_getAlfanumerico(auxNombreAfiche,50,"\nIngrese nombre de archivo: ","\nError,dato invalido.",2)&&
+        !input_getLetras(auxZona,50,"\nIngrese ZONA (CABA - GBA SUR - GBA OESTE): ","\nError,dato invalido.",2)&&
+        !venta_validarZona(auxZona) &&
         !input_getNumeros(&auxCantidad,7,"\nIngrese el cantidad: ","\nError,dato invalido.",0,10000,2))
     {
         strncpy(array[indice].nombreAfiche,auxNombreAfiche,50);
         strncpy(array[indice].zona,auxZona,50);
         array[indice].cantidad = auxCantidad;
-        strncpy(array[indice].status,"A cobrar",LENGHT_STAT);
+        strncpy(array[indice].status,STATUS_1,LENGHT_STAT);
         array[indice].idCliente = idIngresado;
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
 
@@ -172,11 +173,11 @@ int venta_modificar(Venta* array)
 
     int retorno = -1;
 
-    if(array != NULL && !strcmp(array->status,"Disponible"))
+    if(array != NULL && !strcmp(array->status,STATUS_1))
     {
 
-        if( !input_getLetras(auxNombreAfiche,50,"\nIngrese nombreArchivo: ","\nError,dato invalido.",2)&&
-            !input_getLetras(auxZona,50,"\nIngrese direccion: ","\nError,dato invalido.",2)&&
+        if( !input_getLetras(auxZona,50,"\nIngrese ZONA (CABA - GBA SUR - GBA OESTE): ","\nError,dato invalido.",2)&&
+            !venta_validarZona(auxZona) &&
             !input_getNumeros(&auxCantidad,7,"\nIngrese el cantidad: ","\nError,dato invalido.",0,10000,2))
         {
             strncpy(array->zona,auxZona,50);
@@ -205,7 +206,7 @@ int venta_eliminar(Venta* array)
 
     if(array != NULL)
     {
-            strncpy(array->status,"Cobrada",LENGHT_STAT);
+            strncpy(array->status,STATUS_2,LENGHT_STAT);
             retorno = 0;
     }
     else
@@ -281,7 +282,7 @@ int venta_listar(Venta array[],int size)
     {
         for(i=0;i<size;i++)
         {
-            if(!strcmp(array[i].status,"A cobrar"))
+            if(!strcmp(array[i].status,STATUS_1))
             {
                 printf("\n\nNOMBRE -- %s ",array[i].nombreAfiche);
                 printf("\nZONA-- %s",array[i].zona);
@@ -297,7 +298,7 @@ int venta_listar(Venta array[],int size)
 }
 
 /**
-*\brief Muestra los datos de una venta del array
+*\brief Muestra los datos de una venta a cobrar del array
 *\param array Es el array que recibe para recorrer
 *\param idIngresado Es el ID de cliente para buscar en el array
 *\return Retorna 0 si no retorna -1
@@ -314,7 +315,7 @@ int venta_mostrar(Venta array[],int size,int idIngresado)
         for(i=0;i<size;i++)
         {
 
-            if(!strcmp(array[i].status,"A cobrar") && array[i].idCliente == idIngresado)
+            if(!strcmp(array[i].status,STATUS_1) && array[i].idCliente == idIngresado)
             {
                 printf("\n\nNOMBRE ARCHIVO -- %s ",array[i].nombreAfiche);
                 printf("\nZONA PUBLICACION-- %s",array[i].zona);
@@ -326,7 +327,43 @@ int venta_mostrar(Venta array[],int size,int idIngresado)
 
         }
 
-        printf("\n\nCANTIDAD DE VENTAS %d",contadorVentas);
+        printf("\n\nCANTIDAD DE VENTAS A COBRAR%d",contadorVentas);
+    }
+    return retorno;
+}
+
+/**
+*\brief Muestra los datos de una venta cobrada del array
+*\param array Es el array que recibe para recorrer
+*\param idIngresado Es el ID de cliente para buscar en el array
+*\return Retorna 0 si no retorna -1
+*/
+
+
+int venta_cobradas(Venta array[],int size,int idIngresado)
+{
+    int retorno = -1;
+    int i;
+    int contadorVentas = 0;
+
+    if(array != NULL && size > 0)
+    {
+        for(i=0;i<size;i++)
+        {
+
+            if(!strcmp(array[i].status,STATUS_2) && array[i].idCliente == idIngresado)
+            {
+                printf("\n\nNOMBRE ARCHIVO -- %s ",array[i].nombreAfiche);
+                printf("\nZONA PUBLICACION-- %s",array[i].zona);
+                printf("\nCANTIDAD DE DIAS DE PUBLICACION-- %d",array[i].cantidad);
+                contadorVentas++;
+
+                retorno = 0;
+            }
+
+        }
+
+        printf("\n\nCANTIDAD DE VENTAS A COBRAR%d",contadorVentas);
     }
     return retorno;
 }
@@ -365,7 +402,7 @@ int venta_ingresoForzado(Venta array[],
         strncpy(array[indice].zona,auxZona,50);
         array[indice].cantidad = auxCantidad;
         array[indice].idCliente = idCliente;
-        strncpy(array[indice].status,"A cobrar",LENGHT_STAT);
+        strncpy(array[indice].status,STATUS_1,LENGHT_STAT);
 
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
 
@@ -375,3 +412,19 @@ int venta_ingresoForzado(Venta array[],
 }
 
 
+int venta_validarZona(char zona[])
+{
+    int retorno = -1;
+
+        if(!strcasecmp(zona,"CABA") ||
+           !strcasecmp(zona,"GBA SUR") ||
+           !strcasecmp(zona,"GBA OESTE"))
+        {
+            retorno = 0;
+        }
+        else
+        {
+            printf("\nError.Dato invalido)");
+        }
+    return retorno;
+}

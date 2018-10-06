@@ -130,7 +130,7 @@ Cliente* cliente_getByID(Cliente* array,int size,int id)
 *\return Retorna 0 si no retorna -1
 */
 
-int cliente_alta(Cliente* array,int size,Cliente* cliente)
+int cliente_alta(Cliente* array,int size,int* index)
 {
     char auxNombre[50];
     char auxApellido[50];
@@ -143,15 +143,15 @@ int cliente_alta(Cliente* array,int size,Cliente* cliente)
 
     if( !input_getLetras(auxNombre,50,"\nIngrese nombre: ","\nError,dato invalido.",2)&&
         !input_getLetras(auxApellido,50,"\nIngrese apellido: ","\nError,dato invalido.",2)&&
-        !input_getCuit(auxCuit,14,"\nIngrese el CUIT: ","\nError,dato invalido.",2))
+        !input_getCuit(auxCuit,15,"\nIngrese el CUIT: ","\nError,dato invalido.",2))
     {
         strncpy(array[indice].nombre,auxNombre,50);
         strncpy(array[indice].apellido,auxApellido,50);
         strncpy(array[indice].cuit,auxCuit,15);
         array[indice].isEmpty = 0;
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
-        cliente = &array[indice];
-
+        *index = indice;
+        printf("\nALTA ESITOSA");
         retorno = 0;
     }
 
