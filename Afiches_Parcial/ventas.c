@@ -386,7 +386,7 @@ int venta_cobradas(Venta array[],int size,int idIngresado)
 
         }
 
-        printf("\n\nCANTIDAD DE VENTAS A COBRAR%d",contadorVentas);
+        printf("\n\nCANTIDAD DE VENTAS COBRADAS%d",contadorVentas);
     }
     return retorno;
 }

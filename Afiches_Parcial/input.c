@@ -52,7 +52,7 @@ int input_ScanInt(char* mensaje,int* numero)
  * \return Retorna 0 si se realiza si no retorna -1
  */
 
-float input_ScanFloat(char mensaje[],float* numero)
+float input_ScanFloat(char* mensaje,float* numero)
 {
     int retorno = -1;
     float auxiliarFloat;

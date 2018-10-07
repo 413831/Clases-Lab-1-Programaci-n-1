@@ -264,7 +264,7 @@ int main()
                     if(ventaSeleccionada != NULL)
                     {
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,ventaSeleccionada->idCliente);
-                        cliente_mostrar(clienteSeleccionado,&idIngresado);
+                        cliente_mostrar(clienteSeleccionado);
 
                         input_getLetras(respuesta,3,"\nDesea cambiar el estado a cobrar?","Error.Dato invalido",2);
                         if(!strcmp(respuesta,"si"))
@@ -317,9 +317,9 @@ int main()
 
                         if(clienteSeleccionado != NULL)
                         {
-                            cliente_mostrar(clienteSeleccionado,&idIngresado);
-                            printf("\n\n>>VENTAS A COBRAR<<\nID CLIENTE: %d",idIngresado);
-                            venta_mostrar(arrayVentas,QTY_VENTAS,idIngresado);
+                            cliente_mostrar(clienteSeleccionado);
+                            printf("\n\n>>VENTAS A COBRAR<<\nID CLIENTE: %d",arrayClientes[i].id);
+                            venta_mostrar(arrayVentas,QTY_VENTAS,arrayClientes[i].id);
                         }
 
                     }
@@ -338,18 +338,9 @@ int main()
 
                   break;
             case 8 :
-                printf("\nINFORMAR ESTADO DE VENTAS");
-                limpiarMemoria();
-                input_getNumeros(&opcion,3,"\n1) PENDIENTE\n2) COBRADA.","Opcion invalida",0,2,2);
-                informar_statusVentas(arrayVentas,QTY_VENTAS,opcion);
+                printf("\n--INFORMES--\n");
+                informar_menu(arrayClientes,QTY_CLIENTES,arrayVentas,QTY_VENTAS);
 
-                printf("\nIngrese cualquier tecla para continuar...");
-                limpiarMemoria();
-                getchar();
-                informar_clienteMasVentasPendientes(arrayClientes,arrayVentas,QTY_CLIENTES,QTY_VENTAS);
-                printf("\nIngrese cualquier tecla para continuar...");
-                limpiarMemoria();
-                getchar();
                 break;
             default :
                 printf("\nOpcion invalida.:P");
