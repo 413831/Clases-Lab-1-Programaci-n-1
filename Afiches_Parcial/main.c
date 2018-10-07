@@ -4,6 +4,7 @@
 #include "clientes.h"
 #include "ventas.h"
 #include "utn.h"
+#include "informar.h"
 
 #define QTY_CLIENTES 10
 #define QTY_VENTAS 10
@@ -41,6 +42,7 @@ int main()
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo3.mpg","GBA SUR",15,1);
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo4.mpg","GBA OESTE",20,2);
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo5.mpg","CABA",25,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo6.mpg","CABA",25,2);
 
 
 
@@ -48,7 +50,8 @@ int main()
    {
         limpiarPantalla();
        printf("\n<<<MENU>>>\n\n1) ALTA CLIENTE\n2) MODIFICAR DATOS CLIENTES\n3) BAJA CLIENTE");
-       printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES\n8) SALIR\n");
+       printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES");
+       printf("\n8) INFORMES\n9) SALIR\n");
        input_ScanInt("\nIngrese opcion: ",&opcion);
 
        switch(opcion)
@@ -335,19 +338,18 @@ int main()
 
                   break;
             case 8 :
-          /*       if(contadorClientes > 0)
-                {
-                    printf("\n--LISTADO DE CUIT--\n");
-                 informar_listadoCuit(arrayClientes,QTY_CLIENTES,13,listadoCuit);
+                printf("\nINFORMAR ESTADO DE VENTAS");
+                limpiarMemoria();
+                input_getNumeros(&opcion,3,"\n1) PENDIENTE\n2) COBRADA.","Opcion invalida",0,2,2);
+                informar_statusVentas(arrayVentas,QTY_VENTAS,opcion);
 
-                }
-                else
-                {
-                    printf("\nNo hay datos cargados.");
-                    printf("\nIngrese cualquier tecla para continuar...");
-                    limpiarMemoria();
-                    getchar();
-                }                       */
+                printf("\nIngrese cualquier tecla para continuar...");
+                limpiarMemoria();
+                getchar();
+                informar_clienteMasVentasPendientes(arrayClientes,arrayVentas,QTY_CLIENTES,QTY_VENTAS);
+                printf("\nIngrese cualquier tecla para continuar...");
+                limpiarMemoria();
+                getchar();
                 break;
             default :
                 printf("\nOpcion invalida.:P");
@@ -358,7 +360,7 @@ int main()
 
         }
 
-   }while(opcion != 8);
+   }while(opcion != 9);
 
         return 0;
 

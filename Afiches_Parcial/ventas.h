@@ -1,6 +1,7 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
 
+
 #define STATUS_0 "Disponible"
 #define STATUS_1 "A cobrar"
 #define STATUS_2 "Cobrado"

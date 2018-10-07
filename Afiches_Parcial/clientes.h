@@ -1,5 +1,7 @@
 #ifndef CLIENTES_H_INCLUDED
 #define CLIENTES_H_INCLUDED
+
+
 typedef struct
 {
     char nombre[50];

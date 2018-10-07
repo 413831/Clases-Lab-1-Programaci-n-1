@@ -1,13 +1,9 @@
-#include "clientes.h"
+#ifndef INFORMAR_H_INCLUDED
+#define INFORMAR_H_INCLUDED
+
+
 #include "ventas.h"
-
-
-int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
-              Pantalla* pantallas, int lenPantallas, char* cuit);
-
-
-int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
-              Contratacion contrataciones[], int sizeDos,int lenght);
+#include "clientes.h"
 
 int informar_statusVentas(Venta array[],
                                 int size,
@@ -25,17 +21,21 @@ int informar_calculoVentasZona(Venta array[],
                                 int size,
                                 int opcion);
 
-int informar_diasVenta(Venta arrayUno[],Cliente arrayDos[],
-                                int sizeUno,int sizeDos);
-
-int informar_importePorCuit(Cliente arrayUno[],
-                            int sizeUno,
-                            Venta arrayDos[],
-                            int sizeDos,
-                            char cuit[]);
 
 int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
 
 int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
+
+int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+int informar_listarClientes(Cliente array[],int size);
+
+#endif

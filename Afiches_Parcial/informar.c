@@ -7,7 +7,7 @@
 #include "ventas.h"
 #include "informar.h"
 
-
+/*
 static void swapVentas(Venta* valorA,Venta* valorB)
 {
     Venta auxiliar;//TIPO pantalla
@@ -23,7 +23,7 @@ static void swapClientes(Venta* valorA,Venta* valorB)
     *valorA = *valorB;
     *valorB = auxiliar;
 }
-
+*/
 
 int informar_ConsultaFacturacion(Venta* arrayC,int limite,
               Cliente* clientes, int lenClientes, char* cuit)
@@ -74,7 +74,7 @@ int informar_statusVentas(Venta array[],
 
         switch(status)
         {
-            case 1 :
+            case 0 :
              for(i=0;i<size;i++)
             {
                 if(!strcmp(array[i].status,STATUS_1))
@@ -90,11 +90,11 @@ int informar_statusVentas(Venta array[],
 
             break;
 
-            case 0 :
+            case 1 :
             for(i=0;i<size;i++)
             {
 
-                if(!strcmp(array[i].status,STATUS_1))
+                if(!strcmp(array[i].status,STATUS_2))
                 {
                     printf("\nID CLIENTE -- %d",array[i].idCliente);
                     printf("\nID NOMBRE DE ARCHIVO-- %s",array[i].nombreAfiche);
@@ -404,11 +404,12 @@ int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
     int retorno = -1;
     int i;
     int j;
-    int idCliente;
     int flag = 1;
-    int contadorVentas;
+    int idCliente;
+    int contadorVentas = 0;
+    int contadorClientes = 0;
     int mayorCantidad;
-    int arrayVentas[sizeUno];
+    Cliente arrayClientesVenta[sizeUno];
     Venta* ventaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
@@ -428,18 +429,33 @@ int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
 
                         if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_1))
                         {
-                            contadorVentas++;//Sumo la venta a cobrar
+                            contadorVentas++;//Sumo la venta a cobrar del cliente
                         }
-
                     }
-
                 }
+            }
 
-                arrayVentas[i] = contadorVentas;
+            if(flag == 1 ||
+               contadorVentas > mayorCantidad ||
+               contadorVentas == mayorCantidad)//Guardo el dato de mayor cantidad de ventas
+            {
+                mayorCantidad = contadorVentas;
+                arrayClientesVenta[i] = arrayUno[i];
+                contadorClientes++;
+                flag = 0;
             }
         }
 
+        printf("\nCLIENTES CON MAYOR VENTA %d",contadorClientes);
+        printf("\nMAYOR CANTIDAD DE VENTAS %d",mayorCantidad);
 
+        for(i=0;i<contadorClientes;i++)
+        {
+            if(arrayClientesVenta != NULL)
+            {
+                cliente_mostrar(arrayClientesVenta+i,&idCliente);
+            }
+        }
             retorno = 0;
     }
 
@@ -453,11 +469,12 @@ int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
     int retorno = -1;
     int i;
     int j;
-    int idCliente;
     int flag = 1;
-    int contadorVentas;
-    int totalVentas;
-    Cliente* clienteMasVentas;
+    int idCliente;
+    int contadorVentas = 0;
+    int contadorClientes = 0;
+    int mayorCantidad;
+    Cliente arrayClientesVenta[sizeUno];
     Venta* ventaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
@@ -471,35 +488,44 @@ int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
             {
                 for(j=0;j<sizeDos;j++)//Recorro array ventas
                 {
-                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    if(arrayUno[i].id == arrayDos[j].idCliente)//Busca las ventas relacionadas al cliente
                     {
                         ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
 
                         if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_2))
                         {
-                            contadorVentas++;//Sumo la venta a cobradas
+                            contadorVentas++;//Sumo la venta cobrada del cliente
                         }
-
                     }
-
                 }
+            }
 
+            if(flag == 1 ||
+               contadorVentas > mayorCantidad ||
+               contadorVentas == mayorCantidad)//Guardo el dato de mayor cantidad de ventas
+            {
+                mayorCantidad = contadorVentas;
+                arrayClientesVenta[i] = arrayUno[i];
+                contadorClientes++;
+                flag = 0;
+            }
+        }
 
-                if(flag == 1 || contadorVentas > totalVentas)//Determino el cliente con mas ventas
-                {
-                    totalVentas = contadorVentas;
-                    clienteMasVentas = arrayUno+1;
-                    flag = 0;
-                }
-
+        printf("\nCLIENTES CON MAYOR VENTA %d",contadorClientes);
+        printf("\nMAYOR CANTIDAD DE VENTAS %d",mayorCantidad);
+        for(i=0;i<contadorClientes;i++)
+        {
+            if(arrayClientesVenta != NULL)
+            {
+                cliente_mostrar(arrayClientesVenta+i,&idCliente);
             }
         }
 
             retorno = 0;
     }
-
     return retorno;
 }
+
 
 
 int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
@@ -508,11 +534,12 @@ int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
     int retorno = -1;
     int i;
     int j;
-    int idCliente;
     int flag = 1;
-    int contadorVentas;
-    int totalVentas;
-    Cliente* clienteMenosVentas;
+    int idCliente;
+    int contadorVentas = 0;
+    int contadorClientes = 0;
+    int menorCantidad;
+    Cliente arrayClientesVenta[sizeUno];
     Venta* ventaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
@@ -526,27 +553,36 @@ int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
             {
                 for(j=0;j<sizeDos;j++)//Recorro array ventas
                 {
-                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    if(arrayUno[i].id == arrayDos[j].idCliente)//Busca las ventas relacionadas al cliente
                     {
                         ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
 
                         if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_1))
                         {
-                            contadorVentas++;//Sumo la venta a cobrar
+                            contadorVentas++;//Sumo la venta cobrada del cliente
                         }
-
                     }
-
                 }
+            }
 
+            if(flag == 1 ||
+               contadorVentas >  menorCantidad ||
+               contadorVentas == menorCantidad)//Guardo el dato de mayor cantidad de ventas
+            {
+                menorCantidad = contadorVentas;
+                arrayClientesVenta[i] = arrayUno[i];
+                contadorClientes++;
+                flag = 0;
+            }
+        }
 
-                if(flag == 1 || contadorVentas < totalVentas)//Determino el cliente con mas ventas
-                {
-                    totalVentas = contadorVentas;
-                    clienteMenosVentas = arrayUno+1;
-                    flag = 0;
-                }
-
+        printf("\nCLIENTES CON MENOS VENTA %d",contadorClientes);
+        printf("\nMENOR CANTIDAD DE VENTAS %d",mayorCantidad);
+        for(i=0;i<contadorClientes;i++)
+        {
+            if(arrayClientesVenta != NULL)
+            {
+                cliente_mostrar(arrayClientesVenta+i,&idCliente);
             }
         }
 
@@ -563,11 +599,12 @@ int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
     int retorno = -1;
     int i;
     int j;
-    int idCliente;
     int flag = 1;
-    int contadorVentas;
-    int totalVentas;
-    Cliente* clienteMenosVentas;
+    int idCliente;
+    int contadorVentas = 0;
+    int contadorClientes = 0;
+    int menorCantidad;
+    Cliente arrayClientesVenta[sizeUno];
     Venta* ventaSeleccionada;
 
     if(arrayUno != NULL && arrayDos != NULL && sizeUno > 0 && sizeDos > 0)//menor a 10
@@ -581,27 +618,36 @@ int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
             {
                 for(j=0;j<sizeDos;j++)//Recorro array ventas
                 {
-                    if(!strcmp(arrayUno[i].id,arrayDos[j].idCliente))//Busca las ventas relacionadas al cliente
+                    if(arrayUno[i].id == arrayDos[j].idCliente)//Busca las ventas relacionadas al cliente
                     {
                         ventaSeleccionada = venta_getByID(arrayDos,sizeDos,arrayDos[j].id);
 
-                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_2))
+                        if(ventaSeleccionada != NULL && !strcmp(ventaSeleccionada->status,STATUS_1))
                         {
-                            contadorVentas++;//Sumo la venta a cobrar
+                            contadorVentas++;//Sumo la venta cobrada del cliente
                         }
-
                     }
-
                 }
+            }
 
+            if(flag == 1 ||
+               contadorVentas >  menorCantidad ||
+               contadorVentas == menorCantidad)//Guardo el dato de mayor cantidad de ventas
+            {
+                menorCantidad = contadorVentas;
+                arrayClientesVenta[i] = arrayUno[i];
+                contadorClientes++;
+                flag = 0;
+            }
+        }
 
-                if(flag == 1 || contadorVentas < totalVentas)//Determino el cliente con mas ventas
-                {
-                    totalVentas = contadorVentas;
-                    clienteMenosVentas = arrayUno+1;
-                    flag = 0;
-                }
-
+        printf("\nCLIENTES CON MENOS VENTA %d",contadorClientes);
+        printf("\nMENOR CANTIDAD DE VENTAS %d",mayorCantidad);
+        for(i=0;i<contadorClientes;i++)
+        {
+            if(arrayClientesVenta != NULL)
+            {
+                cliente_mostrar(arrayClientesVenta+i,&idCliente);
             }
         }
 
@@ -611,8 +657,7 @@ int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
     return retorno;
 }
 
-
-
+/*
 int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
 {
     int retorno = -1;
@@ -630,10 +675,33 @@ int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length)
     }
 
 
-
     return retorno;
 }
 
+
+int informar_listarClientes(Cliente array[],int size)
+{
+    int retorno = -1;
+    int i;
+
+    if(array != NULL && size > 0)
+    {
+        for(i=0;i<size;i++)
+        {
+                printf("\n\nNOMBRE -- %s ",array[i].nombre);
+                printf("\nAPELLIDO -- %s",array[i].apellido);
+                printf("\nCUIT -- %s",array[i].cuit);
+                printf("\nID -- %d",array[i].id);
+                retorno = 0;
+
+        }
+    }
+    return retorno;
+}
+
+
+
+/*
 
 int informar_initListadoCuit(Cliente array[],char listadoCuit[],int qty_clientes)
 {
@@ -643,7 +711,7 @@ int informar_initListadoCuit(Cliente array[],char listadoCuit[],int qty_clientes
     for(i=0;i<qty_clientes;i++)
     {
 
-        strncpy(listadoCuit[i],"0",13);
+        strncpy(&listadoCuit[i],"0",13);
         retorno = 0;
     }
 
@@ -686,3 +754,4 @@ int informar_listadoCuit(Cliente array[],int size,int length,char listadoCuit[])
 
     return retorno;
 }
+*/
