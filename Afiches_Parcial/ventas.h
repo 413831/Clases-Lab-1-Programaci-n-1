@@ -1,6 +1,7 @@
 #ifndef VENTAS_H_INCLUDED
 #define VENTAS_H_INCLUDED
 
+
 #define STATUS_0 "Disponible"
 #define STATUS_1 "A cobrar"
 #define STATUS_2 "Cobrado"
@@ -23,6 +24,7 @@ Venta* venta_getByID(Venta* array,int size,int id);
 int venta_validarZona(char zona[]);
 int venta_alta(Venta* array,int size,int idIngresado);
 int venta_modificar(Venta* array);
+int venta_baja(Venta* array);
 int venta_eliminar(Venta* array);
 int venta_ordenar(Venta array[],int size);
 int venta_mostrar(Venta array[],int size,int idIngresado);

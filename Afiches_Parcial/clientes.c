@@ -41,11 +41,6 @@ static int generateID()
 }
 
 
-
-//__________________
-
-
-
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /**
@@ -151,7 +146,6 @@ int cliente_alta(Cliente* array,int size,int* index)
         array[indice].isEmpty = 0;
         array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
         *index = indice;
-        printf("\nALTA ESITOSA");
         retorno = 0;
     }
 
@@ -271,15 +265,14 @@ int cliente_ordenar(Cliente array[],int size)
 *\return Retorna 0 si no retorna -1
 */
 
-int cliente_mostrar(Cliente* array,int* idCliente)
+int cliente_mostrar(Cliente* array)
 {
     int retorno = -1;
 
-    if(array != NULL && idCliente > 0)
+    if(array != NULL)
     {
         printf("\n\nCLIENTE -- %s %s ",array->nombre,array->apellido);
         printf("\nCUIT -- %s",array->cuit);
-        *idCliente = array->id;
 
         retorno = 0;
     }

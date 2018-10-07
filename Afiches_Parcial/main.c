@@ -4,6 +4,7 @@
 #include "clientes.h"
 #include "ventas.h"
 #include "utn.h"
+#include "informar.h"
 
 #define QTY_CLIENTES 10
 #define QTY_VENTAS 10
@@ -41,6 +42,7 @@ int main()
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo3.mpg","GBA SUR",15,1);
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo4.mpg","GBA OESTE",20,2);
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo5.mpg","CABA",25,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo6.mpg","CABA",25,2);
 
 
 
@@ -48,7 +50,8 @@ int main()
    {
         limpiarPantalla();
        printf("\n<<<MENU>>>\n\n1) ALTA CLIENTE\n2) MODIFICAR DATOS CLIENTES\n3) BAJA CLIENTE");
-       printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES\n8) SALIR\n");
+       printf("\n4) VENTA AFICHE\n5) EDITAR AFICHE\n6) COBRAR VENTA\n7) IMPRIMIR LISTA DE CLIENTES");
+       printf("\n8) INFORMES\n9) SALIR\n");
        input_ScanInt("\nIngrese opcion: ",&opcion);
 
        switch(opcion)
@@ -261,12 +264,12 @@ int main()
                     if(ventaSeleccionada != NULL)
                     {
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,ventaSeleccionada->idCliente);
-                        cliente_mostrar(clienteSeleccionado,&idIngresado);
+                        cliente_mostrar(clienteSeleccionado);
 
                         input_getLetras(respuesta,3,"\nDesea cambiar el estado a cobrar?","Error.Dato invalido",2);
                         if(!strcmp(respuesta,"si"))
                         {
-                            venta_eliminar(ventaSeleccionada);
+                            venta_baja(ventaSeleccionada);
                             contadorVentas--;
                             printf("\nBAJA REALIZADA.");
                             printf("\nIngrese cualquier tecla para continuar...");
@@ -314,9 +317,9 @@ int main()
 
                         if(clienteSeleccionado != NULL)
                         {
-                            cliente_mostrar(clienteSeleccionado,&idIngresado);
-                            printf("\n\n>>VENTAS A COBRAR<<\nID CLIENTE: %d",idIngresado);
-                            venta_mostrar(arrayVentas,QTY_VENTAS,idIngresado);
+                            cliente_mostrar(clienteSeleccionado);
+                            printf("\n\n>>VENTAS A COBRAR<<\nID CLIENTE: %d",arrayClientes[i].id);
+                            venta_mostrar(arrayVentas,QTY_VENTAS,arrayClientes[i].id);
                         }
 
                     }
@@ -335,19 +338,9 @@ int main()
 
                   break;
             case 8 :
-          /*       if(contadorClientes > 0)
-                {
-                    printf("\n--LISTADO DE CUIT--\n");
-                 informar_listadoCuit(arrayClientes,QTY_CLIENTES,13,listadoCuit);
+                printf("\n--INFORMES--\n");
+                informar_menu(arrayClientes,QTY_CLIENTES,arrayVentas,QTY_VENTAS);
 
-                }
-                else
-                {
-                    printf("\nNo hay datos cargados.");
-                    printf("\nIngrese cualquier tecla para continuar...");
-                    limpiarMemoria();
-                    getchar();
-                }                       */
                 break;
             default :
                 printf("\nOpcion invalida.:P");
@@ -358,7 +351,7 @@ int main()
 
         }
 
-   }while(opcion != 8);
+   }while(opcion != 9);
 
         return 0;
 

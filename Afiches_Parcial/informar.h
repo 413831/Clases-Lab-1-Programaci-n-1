@@ -1,37 +1,68 @@
-int informar_ConsultaFacturacion(Contratacion* arrayC,int limite,
-              Pantalla* pantallas, int lenPantallas, char* cuit);
+#ifndef INFORMAR_H_INCLUDED
+#define INFORMAR_H_INCLUDED
 
 
-int informar_ListarContrataciones(Pantalla pantallas[],int sizeUno,
-              Contratacion contrataciones[], int sizeDos,int lenght);
+#include "ventas.h"
+#include "clientes.h"
 
+int informar_statusVentas(Venta array[],
+                                int size);
 
-int informar_listadoCuit(Contratacion array[],int size,int length,char cuit[]);
-
-
-int informar_promedioPantallas(Pantalla array[],
+int informar_ventasPromedioAfiches(Venta array[],
                                 int size,
                                 int calculo);
 
-int informar_valorPantallas(Pantalla array[],
-                                int size,
-                                int calculo);
-
-int informar_calculoPromedio(Pantalla array[],
+int informar_calculoPromedioCantidad(Venta array[],
                                 int size,
                                 float* promedio);
 
-int informar_diasContratacion(Contratacion arrayUno[],Pantalla arrayDos[],
+int informar_calculoVentasZona(Venta array[],
+                                int size,
+                                int opcion);
+
+int informar_calculoClientesZona(Cliente arrayUno[],
+                                 Venta arrayDos[],
+                                int sizeUno,
+                                int sizeDos,
+                                int opcion);
+
+
+int informar_ventasPorCuit(Cliente arrayUno[],
+                                 Venta arrayDos[],
+                                int sizeUno,
+                                int sizeDos);
+
+int informar_ventasPorCuitZona(Cliente arrayUno[],
+                                 Venta arrayDos[],
+                                int sizeUno,
+                                int sizeDos,
+                                int opcion);
+
+int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
-int informar_valorContratacion(Pantalla* pantalla,
-                               Contratacion* contratacion,
-                               float* valor);
 
-int informar_importePorCuit(Pantalla arrayUno[],
-                            int sizeUno,
-                            Contratacion arrayDos[],
-                            int sizeDos,
-                            char cuit[]);
-int informar_initListadoCuit(char listadoCuit[],int qty_clientes);
+int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
 
-int informar_validarCuit(char auxCuit[],Cliente array[],int size,int length);
+int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+
+int informar_clienteMasAfiches(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMenosAfiches(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+Cliente* informar_buscarClienteCuit(Cliente array[],int size,char cuit[]);
+
+
+int informar_menu(Cliente arrayClientes[],int sizeUno,Venta arrayVentas[],int sizeDos);
+
+#endif
