@@ -65,4 +65,6 @@ Cliente* informar_buscarClienteCuit(Cliente array[],int size,char cuit[]);
 
 int informar_menu(Cliente arrayClientes[],int sizeUno,Venta arrayVentas[],int sizeDos);
 
+int informar_initListadoCuit(Cliente array[],int qty_clientes);
+
 #endif

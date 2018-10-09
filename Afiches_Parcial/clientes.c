@@ -5,7 +5,6 @@
 #include "utn.h"
 #include "clientes.h"
 
-#define DEFINE_DEL_ARCHIVO  "hola"
 
 //Funciones privadas
 
@@ -236,13 +235,13 @@ int cliente_ordenar(Cliente array[],int size)
             {
                 j=i+1;
 
-                 if(array[i].nombre < array[i+1].nombre)
+                 if(array[i].apellido < array[i+1].apellido)//Ordena por apellido
                 {
                      swap(array+i,array+j);
                      flag = 1;
                 }
-                else if(array[i].nombre == array[i+1].nombre &&
-                strcmp(array[i].nombre,array[i+1].nombre) > 0)
+                else if(array[i].apellido == array[i+1].apellido &&
+                strcmp(array[i].nombre,array[i+1].nombre) > 0)//Ordena por nombre
                 {
                     swap(array+i,array+j);
                     flag = 1;

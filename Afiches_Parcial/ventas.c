@@ -167,7 +167,6 @@ int venta_alta(Venta* array,int size,int idIngresado)
 
 int venta_modificar(Venta* array)
 {
-    char auxNombreAfiche[50];
     char auxZona[50];
     int auxCantidad;
 
@@ -264,13 +263,13 @@ int venta_ordenar(Venta array[],int size)
             {
                 j=i+1;
 
-                 if(strcmp(array[i].nombreAfiche,array[j].nombreAfiche) > 0)
+                 if(strcmp(array[i].zona,array[j].zona) > 0)//Ordena por zona
                 {
                      swap(array+i,array+j);
                      flag = 1;
                 }
-                else if(!strcmp(array[i].nombreAfiche,array[j].nombreAfiche) &&
-                strcmp(array[i].zona,array[j].zona) > 0)
+                else if(!strcmp(array[i].zona,array[j].zona) &&
+                array[i].cantidad > array[j].cantidad)//Ordena por cantidad
                 {
                     swap(array+i,array+j);
                     flag = 1;
@@ -350,7 +349,7 @@ int venta_mostrar(Venta array[],int size,int idIngresado)
 
         }
 
-        printf("\n\nCANTIDAD DE VENTAS A COBRAR%d",contadorVentas);
+        printf("\n\nCANTIDAD DE VENTAS A COBRAR: %d",contadorVentas);
     }
     return retorno;
 }
@@ -386,7 +385,7 @@ int venta_cobradas(Venta array[],int size,int idIngresado)
 
         }
 
-        printf("\n\nCANTIDAD DE VENTAS COBRADAS%d",contadorVentas);
+        printf("\n\nCANTIDAD DE VENTAS COBRADAS: %d",contadorVentas);
     }
     return retorno;
 }

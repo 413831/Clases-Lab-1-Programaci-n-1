@@ -38,11 +38,11 @@ int main()
 
 
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo1.mpg","CABA",5,1);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo2.mpg","GBA NORTE",10,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"XXX2.mpg","GBA NORTE",10,1);
     venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo3.mpg","GBA SUR",15,1);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo4.mpg","GBA OESTE",20,2);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo5.mpg","CABA",25,2);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo6.mpg","CABA",25,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO4.avi","GBA OESTE",20,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO5.avi","CABA",25,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"PROMO6.mp4","CABA",25,2);
 
 
 
@@ -311,6 +311,12 @@ int main()
                 {
                     printf("\n--IMPRIMIR CLIENTES--\n");
 
+                    informar_initListadoCuit(arrayClientes,QTY_CLIENTES);
+                    printf("\nIngrese cualquier tecla para continuar...");
+                    limpiarMemoria();
+                    getchar();
+
+
                     for(i=0;i<QTY_CLIENTES;i++)
                     {
                         clienteSeleccionado = cliente_getByID(arrayClientes,QTY_CLIENTES,arrayClientes[i].id);
@@ -342,6 +348,11 @@ int main()
                 informar_menu(arrayClientes,QTY_CLIENTES,arrayVentas,QTY_VENTAS);
 
                 break;
+            case 9 :
+
+
+            break;
+
             default :
                 printf("\nOpcion invalida.:P");
                 printf("\nIngrese cualquier tecla para continuar...");
