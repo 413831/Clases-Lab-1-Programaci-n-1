@@ -102,3 +102,87 @@
 	"ventas.h"
 	"clientes.h"
 
+1539109480 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/clientes.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"clientes.h"
+
+1539109480 /home/alumno/Documentos/Planes/Parcial_01_Afiches/utn.h
+
+1539109480 /home/alumno/Documentos/Planes/Parcial_01_Afiches/clientes.h
+
+1539131958 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/informar.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<time.h>
+	<string.h>
+	"utn.h"
+	"clientes.h"
+	"ventas.h"
+	"informar.h"
+
+1539109480 /home/alumno/Documentos/Planes/Parcial_01_Afiches/ventas.h
+
+1539129117 /home/alumno/Documentos/Planes/Parcial_01_Afiches/informar.h
+	"ventas.h"
+	"clientes.h"
+
+1539109480 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539126710 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"clientes.h"
+	"ventas.h"
+	"utn.h"
+	"informar.h"
+
+1539109480 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1539127673 source:/home/alumno/Documentos/Planes/Parcial_01_Afiches/ventas.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	"utn.h"
+	"ventas.h"
+
+1539135899 source:/home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539135899 /home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/utn.h
+
+1539135899 source:/home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"clientes.h"
+	"ventas.h"
+	"utn.h"
+	"informar.h"
+
+1539135899 /home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/clientes.h
+
+1539135899 /home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/ventas.h
+
+1539135899 /home/alexei/Documents/UTN/tp_laboratorio_1/Parcial_01_Afiches/informar.h
+	"ventas.h"
+	"clientes.h"
+

@@ -19,13 +19,20 @@ int informar_ventasPromedioAfiches(Venta array[],
                                 int size,
                                 int calculo);
 
+int informar_calculoTotalVentas(Venta arrayDos[],int sizeDos,int idIngresado,char status[]);
+
+int informar_calculoTotalAfiches(Venta arrayDos[],int sizeDos,int idIngresado,char status[]);
+
 int informar_calculoPromedioCantidad(Venta array[],
                                 int size,
                                 float* promedio);
 
+int informar_calculoAfichesZona(Venta array[], int size);
+
+int informar_calculoZonaMenosVenta(Venta array[],
+                                int size);
 int informar_calculoVentasZona(Venta array[],
-                                int size,
-                                int opcion);
+                                int size);
 
 int informar_calculoClientesZona(Cliente arrayUno[],
                                  Venta arrayDos[],
@@ -45,13 +52,13 @@ int informar_ventasPorCuitZona(Cliente arrayUno[],
                                 int sizeDos,
                                 int opcion);
 
+int informar_clienteMasVentas(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
 int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
 
 int informar_clienteMasVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
-                                int sizeUno,int sizeDos);
-
-int informar_clienteMasVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
 
 int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
@@ -60,8 +67,13 @@ int informar_clienteMenosVentasPendientes(Cliente arrayUno[],Venta arrayDos[],
 int informar_clienteMenosVentasCobradas(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
 
+int informar_clientesAfichesMenorMil(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
 
 int informar_clienteMasAfiches(Cliente arrayUno[],Venta arrayDos[],
+                                int sizeUno,int sizeDos);
+
+int informar_clienteMasAfichesPagados(Cliente arrayUno[],Venta arrayDos[],
                                 int sizeUno,int sizeDos);
 
 int informar_clienteMenosAfiches(Cliente arrayUno[],Venta arrayDos[],

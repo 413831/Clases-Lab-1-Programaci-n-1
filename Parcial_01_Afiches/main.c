@@ -29,24 +29,29 @@ int main()
     venta_init(arrayVentas,QTY_VENTAS,STATUS_0);
 
 
-    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Pepito","Gomez","23-33444555-1");
-    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Huguito","Perez","23-11444555-3");
-    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Laurita","Moreira","25-66777888-9");
-    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Pedrito","Gomez","22-11111111-2");
-    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"Lupita","Gurruchaga","27-22123123-3");
+    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"AAA","Gomez","23-33444555-1");
+    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"BBB","Perez","23-11444555-3");
+    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"DDD","Moreira","25-66777888-9");
+    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"EEE","Gomez","22-11111111-2");
+    cliente_ingresoForzado(arrayClientes,QTY_CLIENTES,"CCC","Gurruchaga","27-22123123-3");
 
 
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo1.mpg","CABA",5,1);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"XXX2.mpg","GBA NORTE",10,1);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo3.mpg","GBA SUR",15,1);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO4.avi","GBA OESTE",20,2);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO5.avi","CABA",25,2);
-    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"PROMO6.mp4","CABA",25,2);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo1.mpg","CABA",100,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO5.avi","CABA",100,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"PROMO6.mp4","CABA",100,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO2.mpg","GBA OESTE",100,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"VIDEO4.avi","GBA OESTE",2000,1);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"archivo3.mpg","GBA SUR",1500,3);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"promo1.avi","GBA SUR",100,3);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"promo2.mp4","GBA SUR",100,3);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"promo7.avi","GBA SUR",100,3);
+    venta_ingresoForzado(arrayVentas,QTY_VENTAS,"promo8.avi","GBA SUR",100,3);
+
 
    do
    {
     limpiarPantalla();
-       printf("\n<<<MENU>>>\n\n1) ABM CLIENTES\n2) ABM VENTAS\n3) INFORMES\n4) SALIR");
+       printf("\n<<<MENU>>>\n\n1) ABM CLIENTES\n2) ABM VENTAS\n3) LISTADO DE VENTAS\n4) INFORMES\n5) SALIR");
        input_ScanInt("\nIngrese opcion: ",&opcion);
 
        switch(opcion)
@@ -68,8 +73,9 @@ int main()
             case 3 :
                 if(contadorClientes > 0 && contadorVentas > 0)
                 {
-
-                    informar_menu(arrayClientes,QTY_CLIENTES,arrayVentas,QTY_VENTAS);
+                    informar_ClientesPendientes(arrayClientes,QTY_CLIENTES,
+                                                arrayVentas,QTY_VENTAS,
+                                                contadorClientes,contadorVentas);
                 }
                 else
                 {
@@ -81,10 +87,22 @@ int main()
 
                   break;
             case 4 :
+                if(contadorClientes > 0 && contadorVentas > 0)
+                {
 
-
+                    informar_menu(arrayClientes,QTY_CLIENTES,arrayVentas,QTY_VENTAS);
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados.");
+                    printf("\nIngrese cualquier tecla para continuar...");
+                    limpiarMemoria();
+                    getchar();
+                }
+                  break;
+            case 5 :
+                printf("\nCerrando...");
             break;
-
             default :
                 printf("\nOpcion invalida.:P");
                 printf("\nIngrese cualquier tecla para continuar...");
@@ -94,12 +112,11 @@ int main()
 
         }
 
-   }while(opcion != 9);
+   }while(opcion != 5);
 
         return 0;
 
 }
-
 
 
 

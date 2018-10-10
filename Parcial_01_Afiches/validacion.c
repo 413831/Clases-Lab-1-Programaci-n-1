@@ -34,7 +34,6 @@ int validacion_Int(char* array,int size)
 
     if(array != NULL && size > 0)
     {
-
         for(i=0;i < size && array[i] != '\0';i++)
         {
             if((array[i] < '0') && (array[i] > '9'))
@@ -51,7 +50,6 @@ int validacion_Int(char* array,int size)
             }
               retorno = 1;
         }
-
     }
     return retorno;
 }
@@ -73,7 +71,6 @@ int validacion_Float(char* array,int size)
 
    if(array != NULL && size > 0)
    {
-
        for(i=0;i < size && array[i] != '\0';i++)
        {
             if(array[i] < '0' || array[i] > '9')
@@ -91,9 +88,7 @@ int validacion_Float(char* array,int size)
             }
             retorno = 1;
        }
-
    }
-
    return retorno;
 }
 
@@ -114,7 +109,6 @@ int validacion_Letras(char* array,int size)
 
     if(array != NULL)
     {
-
         for(i=0;i < digitosIngresados && array[i] != '\0';i++)
         {
             if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') && array[i]!= ' ')
@@ -124,7 +118,6 @@ int validacion_Letras(char* array,int size)
             }
              retorno = 1;
         }
-
     }
     return retorno;
 }
@@ -142,7 +135,6 @@ int validacion_AlfaNumerico(char array[],int size)
 
    if(array != NULL && size > 0)
    {
-
        for(i=0;i<size && array[i] != '\0';i++)
        {
            if((tolower(array[i]) < 'a' ||
@@ -179,7 +171,6 @@ int validacion_Telefono(char* array,int size)
 
    if(array != NULL && size > 0)
    {
-
        for(i=0;i < size && array[i] != '\0';i++)
        {
             if(array[i] < '0' || array[i] > '9')
@@ -201,9 +192,7 @@ int validacion_Telefono(char* array,int size)
             }
             retorno = 1;
        }
-
    }
-
    return retorno;
 }
 
@@ -224,7 +213,6 @@ int validacion_DNI(char* array,int size)
 
    if(array != NULL && size > 0)
    {
-
        for(i=0;i < size && array[i] != '\0';i++)
        {
             if(array[i] < '0' || array[i] > '9'|| array[i] != '.')
@@ -241,9 +229,7 @@ int validacion_DNI(char* array,int size)
                 contadorSimbolos++;
             }
             retorno = 1;
-
        }
-
    }
    return retorno;
 }
@@ -265,22 +251,17 @@ int validacion_Cuit(char* array,int size)
 
    if(array != NULL && size > 0)
    {
-
        for(i=0;i < size && array[i] != '\0';i++)
        {
             if(array[i] < '0' || array[i] > '9')
             {
-
                 if(array[i] != '-' || contadorSimbolos > 2 || digitosIngresados != 13)
                 {
                     retorno = 0;
                     break;
                 }
-
                 retorno = 0;
-
             }
-
 
             if(array[i] == '-')
             {
@@ -293,7 +274,6 @@ int validacion_Cuit(char* array,int size)
        {
            retorno = 0;
        }
-
    }
    return retorno;
 }
