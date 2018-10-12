@@ -1,0 +1,17 @@
+# depslib dependency file v1.0
+1539294494 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_15/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539294494 /home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_15/utn.h
+
+1539294494 source:/home/alumno/Documentos/Planes/Programacion_1_Clases/Clase_15/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
