@@ -1,74 +1,141 @@
-#include <stdio.h>
+#include <stdio_ext.h>
 #include <stdlib.h>
 #include <string.h>
+#include <ctype.h>
 #include "utn.h"
 
+/**
+ * \brief Solicita un texto al usuario y lo devuelve
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param input Array donde se cargar√° el texto ingresado
+ * \return void
+ */
+int string_getString(char mensaje[],int size,char input[])
+{
+    int retorno = -1;
+    char buffer[size];
+    int length;
+
+    do
+    {
+        limpiarMemoria();
+        fgets(buffer,size,stdin);
+
+        length = strlen(buffer);
+        if(length != size-1 || buffer[size-2] == '\n')
+        {
+            buffer[length-1] = '\0';
+        }
+        strncpy(input,buffer,size);
+
+        retorno = 0;
+    }while(input == NULL && size < 0);
+
+    return retorno;
+}
 
 /**
  * \brief Solicita un texto al usuario y lo devuelve
  * \param mensaje Es el mensaje a ser mostrado
- * \param size Es el limite del string
- * \param input Array donde se cargar· el texto ingresado
- * \return Retorna 1 si es string valido si no retorna 0
+ * \param input Array donde se cargar√° el texto ingresado
+ * \return 1 si el texto contiene solo letras
  */
-int getString(char* mensaje,int size,char* input)
-{   int retorno = 0;
+int string_getStringLetras(char mensaje[],char msjError[],int size,char input[])
+{
+    char buffer[size];
+    int retorno = 1;
 
     printf("%s",mensaje);
-    fgets(input,size,stdin);
-
-    if(strlen(input) != 0)
+    //Se recibe variable a cargar por string
+    if(string_getString(mensaje,size,buffer) == 0 && validacion_Letras(buffer,size) == 1)
     {
-    retorno = 1;
+        strncpy(input,buffer,size);//Se copia string cargado a variable local
+        retorno = 0;
     }
-
-
-    return retorno;
-}
-
-/**
- * \brief Solicita un texto al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
- * \param size Es el limite del string
- * \param input Array donde se cargar· el texto ingresado
- * \return Retorna 1 si el texto contiene solo letras
- */
-int getStringLetras(char* mensaje,int size,char* input)
-{
-    char buffer[256];
-    int retorno = 0;
-    getString(mensaje,size,buffer);
-    if(validacion_Nombre(buffer))
+    else
     {
-        strcpy(input,buffer);
-        retorno = 1;
+        printf("%s",msjError);
     }
     return retorno;
 }
 
 /**
- * \brief Solicita un texto numÈrico al usuario y lo devuelve
+ * \brief Solicita un texto num√©rico al usuario y lo devuelve
  * \param mensaje Es el mensaje a ser mostrado
- * \param size Es el limite del string
- * \param input Array donde se cargar· el texto ingresado
- * \return Retorna 1 si el texto contiene solo n˙meros
+ * \param size Es el tama√±o del string recibido
+ * \param minimo Es el minimo valor permitido para ingresar
+ * \param maximo Es el maximo valor permitido para ingresar
+ * \param input Array donde se cargar√° el texto ingresado
+ * \return 1 si el texto contiene solo n√∫meros
  */
-int getStringNumeros(char* mensaje,int size,char* input)
+int string_getStringNumeros(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo)
 {
-    char buffer[256];
-    int retorno = 0
+    char buffer[size];
+    int retorno = 1;
 
-    getString(mensaje,size,buffer);
-    if(validacion_Int(buffer))
+    printf("%s",mensaje);
+
+    if(string_getString(mensaje,size,buffer) == 0 && validacion_Int(buffer,size))
     {
-    input = buffer;
-    retorno = 1;
+
+        strncpy(input,buffer,size);//Se copia string cargado a variable local
+        retorno = 0;
+
     }
-    else if(validacion_Float(buffer))
+    return retorno;
+}
+
+
+int string_getStringFloat(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo)
+{
+    char buffer[size];
+    int retorno = 1;
+
+    printf("%s",mensaje);
+
+    if(string_getString(mensaje,size,buffer) == 0 && validacion_Float(buffer,size))
     {
-    input = buffer;
-    retorno = 1;
+        strncpy(input,buffer,size);//Se copia string cargado a variable local
+        retorno = 0;
+    }
+    else
+    {
+        printf("%s",msjError);
+    }
+    return retorno;
+}
+
+int string_getStringDNI(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo)
+{
+    char buffer[size];
+    int retorno = 1;
+
+    printf("%s",mensaje);
+
+    if(string_getString(mensaje,size,buffer) == 0 && validacion_DNI(buffer,size) && strlen(buffer) <= maximo)
+    {
+        strncpy(input,buffer,size);//Se copia string cargado a variable local
+        retorno = 0;
+    }
+    else
+    {
+        printf("%s",msjError);
     }
 
     return retorno;
+}
+
+
+void string_inicializar(char array[],int size,char valor)
+{
+    char buffer[size];
+    int i;
+
+    for(i=0;i<size;i++)
+    {
+        buffer[i] = valor;
+    }
+
+    strncpy(array,buffer,size);
+
 }

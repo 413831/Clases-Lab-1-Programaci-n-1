@@ -3,6 +3,11 @@
 
 int main()
 {
-    printf("Hello world!\n");
+    int edad = 5;
+    int* pEdad;
+    pEdad = &edad;
+    *pEdad = 8;
+    printf("\n%d",edad);
+    printf("\n%d",*pEdad);
     return 0;
 }

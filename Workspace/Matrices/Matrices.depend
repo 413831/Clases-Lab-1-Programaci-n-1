@@ -1,0 +1,5 @@
+# depslib dependency file v1.0
+1538929613 source:/home/alexei/Documents/UTN/Workspace/Matrices/main.c
+	<stdio.h>
+	<stdlib.h>
+

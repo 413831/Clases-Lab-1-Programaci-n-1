@@ -3,33 +3,30 @@
 #include <string.h>
 #include "utn.h"
 
-void limpiarMemoria()
+#define BUFFER 4000
+
+static void limpiarMemoria()
 {
     //fflush(stdin);  //WINDOWS
     __fpurge(stdin);  //LINUX
 }
-void limpiarPantalla()
+static void limpiarPantalla()
 {
     //system("cls"); //WINDOWS
     system("clear"); //LINUX
 }
-
-
 
 /**
  * \brief Solicita un número entero y lo retorna
  * \param *mensaje Es el mensaje para mostrar al usuario
  * \return Entero ingresado por el usuario
  */
-int input_ScanInt(char* mensaje,int* numero)
+int input_ScanInt(char* mensaje)
 {
-    int retorno = -1;
     int auxiliarInt;
     printf("%s",mensaje);
     scanf("%d",&auxiliarInt);
-    *numero = auxiliarInt;
-    retorno = 0;
-    return retorno;
+    return auxiliarInt;
 }
 
 /**
@@ -38,15 +35,12 @@ int input_ScanInt(char* mensaje,int* numero)
  * \return Flotante ingresado por el usuario
  */
 
-float input_ScanFloat(char* mensaje,float* numero)
+float input_ScanFloat(char* mensaje)
 {
-    int retorno = -1;
     float auxiliarFloat;
     printf("%s",mensaje);
     scanf("%f",&auxiliarFloat);
-    *numero = auxiliarFloat;
-    retorno = 0;
-    return retorno;
+    return auxiliarFloat;
 }
 
 
@@ -56,25 +50,22 @@ float input_ScanFloat(char* mensaje,float* numero)
  * \return Caracter ingresado por el usuario
  *
  */
-char input_ScanChar(char* mensaje,char* caracter)
+char input_ScanChar(char* mensaje)
 {
-    int retorno = -1;
-    char auxiliarChar;
+    float auxiliarChar;
     printf("%s",mensaje);
-    scanf("%c",&auxiliarChar);
-    *caracter = auxiliarChar;
-    retorno = 0;
-    return retorno;
+    scanf("%f",&auxiliarChar);
+    return auxiliarChar;
 }
 
-
+///////////////////////////////////////////////////STRINGS/////////////////////////////////////////////////////////////////////////
 /**
  * \brief Solicita un texto al usuario y lo devuelve
  * \param mensaje Es el mensaje a ser mostrado
  * \param input Array donde se cargará el texto ingresado
  * \return void
  */
-int input_getString(char mensaje[],int size,char input[])
+int input_getString(char input[],int size)
 {
     int retorno = -1;
     char buffer[size];
@@ -83,7 +74,7 @@ int input_getString(char mensaje[],int size,char input[])
     do
     {
         limpiarMemoria();
-        fgets(buffer,size,stdin);
+        fgets(buffer,size,stdin);//Se pide el dato limitado por el tamaño del array, parametro 'size'
 
         length = strlen(buffer);
         if(length != size-1 || buffer[size-2] == '\n')
@@ -100,132 +91,251 @@ int input_getString(char mensaje[],int size,char input[])
 
 /**
  * \brief Solicita un texto al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
  * \param input Array donde se cargará el texto ingresado
- * \return 1 si el texto contiene solo letras
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param msjError Es el mensaje de error a ser mostrado
+ * \return Retorna 0 si se pudo pedir y validar string si no retorna error
  */
-int input_getLetras(char input[],int size,char mensaje[],char msjError[])
+int input_getLetras(char input[],int size,char mensaje[],char msjError[],int reintentos)
 {
     char buffer[size];
-    int retorno = 1;
+    int retorno = -1;
 
-    printf("%s",mensaje);
-    //Se recibe variable a cargar por string
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_Letras(buffer,size) == 1)
+     if(input != NULL && size > 0 && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
     {
-        strncpy(input,buffer,size);//Se copia string cargado a variable local
-        retorno = 0;
-    }
-    else
-    {
-        printf("%s",msjError);
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            //Se recibe variable a cargar por string
+            if(input_getString(buffer,size) == 0 && validacion_Letras(buffer,size))
+            {
+                strncpy(input,buffer,size);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos >= 0);
     }
     return retorno;
+}
+
+
+/**
+ * \brief Solicita un texto numérico al usuario y lo devuelve
+ * \param input Array donde se cargará el texto ingresado
+ * \param size Es el tamaño del string recibido
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param msjError Es el mensaje de error a ser mostrado
+ * \param minimo Es el minimo valor permitido para ingresar
+ * \param maximo Es el maximo valor permitido para ingresar
+ * \param reintentos Es la cantidad de reintentos posibles para ingresar
+ * \return Retorna 0 si se pudo pedir y validar string si no retorna error
+ */
+int input_getEnteros(int* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos)
+{//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
+    char buffer[BUFFER];
+    int retorno = 1;
+
+    if(input != NULL  && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
+    {
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if( input_getString(buffer,BUFFER) == 0 &&
+                validacion_Int(buffer,BUFFER))
+            {
+                *input = atoi(buffer);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
+
+    }
+            return retorno;
 }
 
 /**
  * \brief Solicita un texto numérico al usuario y lo devuelve
- * \param mensaje Es el mensaje a ser mostrado
+ * \param input Array donde se cargará el texto ingresado
  * \param size Es el tamaño del string recibido
+ * \param mensaje Es el mensaje a ser mostrado
+ * \param msjError Es el mensaje de error a ser mostrado
  * \param minimo Es el minimo valor permitido para ingresar
  * \param maximo Es el maximo valor permitido para ingresar
- * \param input Array donde se cargará el texto ingresado
- * \return 1 si el texto contiene solo números
+ * \param reintentos Es la cantidad de reintentos posibles para ingresar
+ * \return Retorna 0 si se pudo pedir y validar string si no retorna error
  */
-int input_getNumeros(int* input,int size,char mensaje[],char msjError[],int minimo,int maximo)
-{
-    char buffer[size];
-    int auxiliar;
+
+int input_getFloat(float* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos)
+{//NEGATIVOS
+    char buffer[BUFFER];
     int retorno = 1;
 
-    printf("%s",mensaje);
-
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_Int(buffer,size))
+    if(input != NULL && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
     {
-        auxiliar = atoi(buffer);
-        *input = auxiliar;
-        retorno = 0;
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if( input_getString(buffer,BUFFER) == 0 &&
+                validacion_Float(buffer,BUFFER))
+            {
+                *input = atof(buffer);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
+
     }
-    return retorno;
+            return retorno;
 }
 
 
-int input_getFloat(float* input,int size,char mensaje[],char msjError[],int minimo,int maximo)
-{
+int input_getDNI(char input[],int size,char mensaje[],char msjError[],int reintentos)
+{//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
     char buffer[size];
-    float auxiliar;
     int retorno = 1;
 
-    printf("%s",mensaje);
+    if(input != NULL && size > 0 && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
+    {
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if(input_getString(buffer,size) == 0 &&
+                validacion_DNI(buffer,size))
+            {
+                strncpy(input,buffer,size);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
 
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_Float(buffer,size))
-    {
-        auxiliar = atof(buffer);
-        *input = auxiliar;
-        retorno = 0;
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
     }
-    else
-    {
-        printf("%s",msjError);
-    }
-    return retorno;
+
+            return retorno;
 }
 
-int input_getDNI(char input[],int size,char mensaje[],char msjError[])
-{
+
+int input_getTelefono(char input[],int size,char mensaje[],char msjError[],int reintentos)
+{//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
     char buffer[size];
     int retorno = 1;
 
-    printf("%s",mensaje);
-
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_DNI(buffer,size))
+    if(input != NULL && size > 0 && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
     {
-        strncpy(input,buffer,size);//Se copia string cargado a variable local
-        retorno = 0;
-    }
-    else
-    {
-        printf("%s",msjError);
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if( input_getString(buffer,size) == 0 &&
+                validacion_Telefono(buffer,size))
+            {
+                strncpy(input,buffer,size);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
+
     }
 
-    return retorno;
+            return retorno;
 }
 
-int input_getCuit(char input[],int size,char mensaje[],char msjError[])
-{
+
+int input_getCuit(char input[],int size,char mensaje[],char msjError[],int reintentos)
+{//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
     char buffer[size];
     int retorno = 1;
 
-    printf("%s",mensaje);
-
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_Cuit(buffer,size))
+    if(input != NULL && size > 0 && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
     {
-        strncpy(input,buffer,size);//Se copia string cargado a variable local
-        retorno = 0;
-    }
-    else
-    {
-        printf("%s",msjError);
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if( input_getString(buffer,size) == 0 &&
+                validacion_Cuit(buffer,size))
+            {
+                strncpy(input,buffer,size);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
+
     }
 
-    return retorno;
+            return retorno;
 }
 
-int input_getAlfanumerico(char input[],int size,char mensaje[],char msjError[])
-{
+int input_getAlfanumerico(char input[],int size,char mensaje[],char msjError[],int reintentos)
+{//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
     char buffer[size];
-    int retorno = 1;
+    int retorno = -1;
 
-    printf("%s",mensaje);
-    //Se recibe variable a cargar por string
-    if(input_getString(mensaje,size,buffer) == 0 && validacion_AlfaNumerico(buffer,size) == 1)
+    if(input != NULL && size > 0 && mensaje != NULL &&
+       msjError != NULL && reintentos >= 0)
     {
-        strncpy(input,buffer,size);//Se copia string cargado a variable local
-        retorno = 0;
+        do
+        {
+            reintentos--;
+            printf("%s",mensaje);
+            if( input_getString(buffer,size) == 0 &&
+                validacion_AlfaNumerico(buffer,size))
+            {
+
+                strncpy(input,buffer,size);//Se copia string cargado a variable local
+                retorno = 0;
+                break;
+
+            }
+            else
+            {
+                printf("%s",msjError);
+            }
+
+        }while(reintentos>=0);
+
     }
-    else
-    {
-        printf("%s",msjError);
-    }
-    return retorno;
+            return retorno;
 }

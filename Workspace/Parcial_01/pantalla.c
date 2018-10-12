@@ -5,9 +5,16 @@
 #include "pantalla.h"
 
 
-static int generateID();
-static int pantalla_buscarIndiceLibre(Pantalla array[],int size);
 static void swap(Pantalla* valorA,Pantalla* valorB);
+static int generateId();
+static int buscarLugarVacio(Pantalla array[],int size);
+
+/**
+*\brief Se realiza un swap entre dos valores
+*\param pantallaA Es el primer pantalla para ordenar
+*\param pantallaA Es el segundo pantalla para ordenar
+*\return Retorna void
+*/
 
 static void swap(Pantalla* valorA,Pantalla* valorB)
 {
@@ -17,17 +24,29 @@ static void swap(Pantalla* valorA,Pantalla* valorB)
     *valorB = auxiliar;
 }
 
+/**
+*\brief Se genera un ID unico para una estructura de dato
+*\param void
+*\return Retorna el ID
+*/
 
-static int generateID()
+static int generateId()
 {
     static int id = 0;
     id++;
     return id;
 }
 
-static int pantalla_buscarIndiceLibre(Pantalla array[],int size)
+/**
+*\brief Buscar un lugar vacio en un array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna el indice del lugar libre
+*/
+
+static int buscarLugarVacio(Pantalla array[],int size)
 {
-    int retorno = 1;
+    int retorno = -1;
     int i;
 
     for(i=0;i < size; i++)
@@ -37,98 +56,135 @@ static int pantalla_buscarIndiceLibre(Pantalla array[],int size)
             retorno = i;
             break;
         }
+
     }
     return retorno;
 }
 
-///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-int pantalla_init(Pantalla array[],int size,int valor)
+
+/**
+*\brief Inicializa todos los datos de un array en un valor específico
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\param value Es el valor que cargamos en el campo 'isEmpty' de la estructura de datos
+*\return Retorna 0 si se ejecuta correctamente si no retorna error
+*/
+
+int pantalla_init(Pantalla array[],int size,int value)
 {
-    int i;
     int retorno = -1;
-    if(array != NULL && size > 0 && valor >= 0)
+    int i;
+    if(array != NULL && size > 0)
     {
-        retorno = 0;
         for(i=0;i < size; i++)
         {
-        array[i].isEmpty = valor;
+            array[i].isEmpty = value;
         }
-
+    retorno = 0;
     }
     return retorno;
 }
 
-Pantalla* pantalla_getByID(Pantalla array[],int size,int id)
+/**
+*\brief Se busca un pantalla segun el ID recibido por parámetro
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\param id Es el numero de id para realizar la busqueda
+*\return Retorna la dirección de memoria del pantalla buscado sino retorna NULL
+*/
+
+Pantalla* pantalla_getById(Pantalla* array, int size,int id)
 {
     Pantalla* retorno = NULL;
     int i;
-
     if(array != NULL && size > 0)
     {
         for(i=0;i<size;i++)
         {
-           if(array[i].id == id)
+            if(!array[i].isEmpty && array[i].id == id)
             {
-            retorno = array+i;
-            break;
+                retorno = &array[i];
+                break;
             }
         }
     }
     return retorno;
 }
 
-int pantalla_IDproducto(Pantalla array[],int size)
+/**
+*\brief Se busca el indice del ID ingresado
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna el indice del ID ingresado si no retorna error
+*/
+
+int pantalla_buscarById(Pantalla array[],int size)
 {
     int retorno = -1;
     int i;
     int auxID;
 
-    input_ScanInt("\nINGRESE ID: ",&auxID);//SE PIDE ID A BUSCAR
-    printf("\nID ingresado %d", auxID);
+    auxID = fgetc(stdin); //SE PIDE ID A BUSCAR
 
-    for(i=0;i < size; i++)
+    if(array != NULL && size > 0 )
     {
-        if(array[i].id == auxID)//SE COMPARA ID A BUSCAR CONTRA TODO EL ARRAY
+        for(i=0;i < size; i++)
         {
-            retorno = i;//SE PASA EL INDICE DEL ID BUSCADO
-            break;
+            if(!array[i].isEmpty && array[i].id == auxID)//SE COMPARA ID A BUSCAR CONTRA TODO EL ARRAY
+            {
+                retorno = i;//SE PASA EL INDICE DEL ID BUSCADO
+                break;
+            }
         }
-
     }
+
     return retorno;
 }
 
+/**
+*\brief Se realiza el alta de todos los campos de un pantalla del array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se realiza el alta si no retorna error
+*/
 
 int pantalla_alta(Pantalla array[],int size)
 {
-    char auxNombre[50];
+    char auxNombre[100];
     char auxDireccion[100];
-    float auxPrecio;
+    float auxPrecio;//Precio por dia
     int auxTipo;
     int retorno = -1;
     int indice;
 
-    indice = pantalla_buscarIndiceLibre(array,size);
-    printf("\nINDICE VACIO %d",indice);
+    indice = buscarLugarVacio(array,size);
 
-    if( !input_getAlfanumerico(auxNombre,50,"\n Ingrese el nombre de pantalla: ","\n Error,nombre invalido.")&&
-        !input_getAlfanumerico(auxDireccion,100,"\n Ingrese direccion: ","\n Error,direccion invalida.")&&
-        !input_getFloat(&auxPrecio,100,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000) &&
-        !input_getNumeros(&auxTipo,100,"\n Ingrese el tipo: ","\n Error,dato invalido.",0,10000))
+    if( !input_getAlfanumerico(auxNombre,50,"\nIngrese el nombre de la pantalla: ","\nError,nombre invalido.",2)&&
+        !input_getAlfanumerico(auxDireccion,100,"\nIngrese la ubicacion: ","\nError,direccion invalida.",2)&&
+        !input_getFloat(&auxPrecio,"\nIngrese el precio: ","\nError,precio invalido.",0,10000,2) &&
+        !input_getEnteros(&auxTipo,"\nIngrese tipo de Pantalla : LED '0' o LCD '1': ","\nError. Dato invalido.",0,1,2))
     {
-        strncpy(array[indice].nombre,auxNombre,50);
-        strncpy(array[indice].direccion,auxDireccion,100);
-        array[indice].precio = auxPrecio;
-        array[indice].tipo = auxTipo;
+        strncpy(array[indice].nombre,auxNombre,50);//CAMBIAR SEGUN ESTRUCTURA
+        strncpy(array[indice].direccion,auxDireccion,100);//CAMBIAR SEGUN ESTRUCTURA
+        array[indice].precio = auxPrecio;//CAMBIAR SEGUN ESTRUCTURA
+        array[indice].tipo = auxTipo;//CAMBIAR SEGUN ESTRUCTURA
         array[indice].isEmpty = 0;
-        array[indice].id = generateID();//SE PASA ID ASIGNADO A LA ESTRUCTURA
+        array[indice].id = generateId();//SE PASA ID ASIGNADO A LA ESTRUCTURA
         retorno = 0;
     }
+
 
     return retorno;
 }
 
+/**
+*\brief Se realiza la modificación de un pantalla del array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se realiza la modificación si no retorna error
+*/
 
 int pantalla_modificar(Pantalla array[],int size)
 {
@@ -138,19 +194,20 @@ int pantalla_modificar(Pantalla array[],int size)
     int auxTipo;
     int retorno = -1;
 
-    if(array->isEmpty == 0)
+    if(array!=NULL)
     {
-        if( !input_getAlfanumerico(auxNombre,50,"\n Ingrese nombre de pantalla: ","\n Error,nombre invalido.")&&
-            !input_getAlfanumerico(auxDireccion,100,"\n Ingrese direccion: ","\n Error,direccion invalida.")&&
-            !input_getFloat(&auxPrecio,50,"\n Ingrese el precio: ","\n Error,precio invalido.",0,10000) &&
-            !input_getNumeros(&auxTipo,50,"\n Ingrese el tipo: ","\n Error,dato invalido.",0,2))
+        if( !input_getAlfanumerico(auxNombre,50,"\nIngrese el nombre de la pantalla: ","\nError,nombre invalido.",2)&&
+            !input_getAlfanumerico(auxDireccion,100,"\nIngrese la ubicacion: ","\nError,direccion invalida.",2)&&
+            !input_getFloat(&auxPrecio,"\nIngrese el precio: ","\nError,precio invalido.",0,10000,2) &&
+            !input_getEnteros(&auxTipo,"\nIngrese tipo de Pantalla : LED '0' o LCD '1': ","\nError. Dato invalido.",0,1,2))
         {
-            strncpy(array->nombre,auxNombre,50);
-            strncpy(array->direccion,auxDireccion,50);
-            array->precio = auxPrecio;
-            array->tipo = auxTipo;
+            strncpy(array->nombre,auxNombre,50);//CAMBIAR SEGUN ESTRUCTURA
+            strncpy(array->direccion,auxDireccion,100);//CAMBIAR SEGUN ESTRUCTURA
+            array->precio = auxPrecio;//CAMBIAR SEGUN ESTRUCTURA
+            array->tipo = auxTipo;//CAMBIAR SEGUN ESTRUCTURA
             retorno = 0;
         }
+
     }
     else
     {
@@ -159,111 +216,132 @@ int pantalla_modificar(Pantalla array[],int size)
     return retorno;
 }
 
+/**
+*\brief Se realiza la baja de un pantalla del array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se realizo la baja si no retorna error
+*/
 
-int pantalla_eliminar(Pantalla array[],int size)
+int pantalla_baja(Pantalla array[],int size)
 {
     int retorno = -1;
 
-    if(array != NULL)
-    {
+        if(array!=NULL)
+        {
             array->isEmpty = 1;
             retorno = 0;
-    }
-    else
-    {
-        printf("\nCasillero vacio");
-    }
+        }
+        else
+        {
+           printf("\n\nVACIO");
+        }
+
     return retorno;
 }
 
-int pantalla_ordenarId(Pantalla array[],int size)
+/**
+*\brief Se muestran todos los datos cargados en el array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se puede listar si no retorna error
+*/
+
+int pantalla_listar(Pantalla array[],int size)
 {
     int retorno = -1;
     int i;
-    int j;
-    Pantalla auxiliar;
 
-    if(array != NULL && size > 0 && array->isEmpty == 0)
+    if(array != NULL && size > 0)
     {
-        retorno = 0;
-
-        for(i=0;i<size;i++)
+        for(i=0;i < size;i++)
         {
-            j= i++;
-
-            if(array[i].id > array[j].id)
+            if(!array[i].isEmpty)
             {
-                auxiliar = array[i];
-                array[i] = array[j];
-                array[j] = auxiliar;
-            }
-        }
+                printf("\n\nPANTALLA -- %s",array[i].nombre);//CAMBIAR SEGUN ESTRUCTURA
+                printf("\nUBICACION -- %s",array[i].direccion);//CAMBIAR SEGUN ESTRUCTURA
+                printf("\nVALOR -- $%.2f",array[i].precio);//CAMBIAR SEGUN ESTRUCTURA
+                printf("\nID -- %d",array[i].id);//CAMBIAR SEGUN ESTRUCTURA
 
+                if(array[i].tipo == 0)
+                        {
+                            printf("\nTIPO --  LED");//CAMBIAR SEGUN ESTRUCTURA
+
+                        }
+                        else
+                        {
+                             printf("\nTIPO -- LCD");//CAMBIAR SEGUN ESTRUCTURA
+                        }
+
+                                retorno = 0;
+                            }
+                        }
     }
     return retorno;
 }
+
+
+
+
+/**
+*\brief Se muestran todos los datos cargados en el array
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se puede listar si no retorna error
+*/
 
 int pantalla_mostrar(Pantalla array[],int size)
 {
     int retorno = -1;
 
-    if(array != NULL && size > 0 )
+    if(array != NULL && size > 0)
     {
-        printf("\n\nPRODUCTO -- %s",array->nombre);
-        printf("\nDESCRIPCION -- %s",array->direccion);
-        printf("\nPRECIO -- $%.2f",array->precio);
-
+        printf("\n\nPANTALLA -- %s",array->nombre);//CAMBIAR SEGUN ESTRUCTURA
+        printf("\nUBICACION -- %s",array->direccion);//CAMBIAR SEGUN ESTRUCTURA
+        printf("\nPRECIO -- $%.2f",array->precio);//CAMBIAR SEGUN ESTRUCTURA
         if(array->tipo == 0)
         {
-            printf("\nTIPO -- LCD");
+            printf("\nTIPO --  LED");//CAMBIAR SEGUN ESTRUCTURA
+
         }
-        else if(array->tipo == 1)
+        else
         {
-            printf("\nTIPO -- LED");
+             printf("\nTIPO -- LCD");//CAMBIAR SEGUN ESTRUCTURA
         }
-        printf("\nID -- %i",array->id);
 
         retorno = 0;
     }
+
     return retorno;
 }
 
 
-int pantalla_listar(Pantalla array[],int size)
+/**
+*\brief Se ordena todos los pantallas de un array alfabeticamente
+*\param array Es el array que recibe para recorrer
+*\param array Es el tamaño del array
+*\return Retorna 0 si se realizo la baja si no retorna error
+*/
+
+int pantalla_ordenarNombre(Pantalla* array,int size)
 {
     int retorno = -1;
-
-    if(array != NULL && array->isEmpty == 0)
+    int i;
+    int j;
+    if(array != NULL && size > 0)
     {
-        printf("\n\nPRODUCTO -- %s",array->nombre);
-        printf("\nDESCRIPCION -- %s",array->direccion);
-        printf("\nPRECIO -- $%.2f",array->precio);
-
-        if(array->tipo == 0)
+        for(i=0;i<size;i++)//Ordenamiento por metodo burbuja
         {
-            printf("\nTIPO -- LCD");
+            for(j=i+1;j<size;j++)
+            {
+                if(strcmp(array[i].nombre,array[j].nombre) && array[i].isEmpty != 1)
+                {
+                   swap(&array[i],&array[j]);
+                }
+            }
         }
-        else if(array->tipo == 1)
-        {
-            printf("\nTIPO -- LED");
-        }
-        printf("\nID -- %i",array->id);
-
         retorno = 0;
     }
     return retorno;
 }
 
-int pantalla_ingresoForzado(Pantalla* array,int size,char* nombre,char*direccion,int tipo,float precio)
-{
-    int indice;
-    indice = pantalla_buscarIndiceLibre(array,size);
-    strncpy(array[indice].nombre,nombre,100);
-    array[indice].tipo = tipo;
-    strncpy(array[indice].direccion,direccion,100);
-    array[indice].precio=precio;
-    array[indice].id=generateID();
-    array[indice].isEmpty=0;
-
-    return 0;
-}

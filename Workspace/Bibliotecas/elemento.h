@@ -1,35 +1,19 @@
-#ifndef ELEMENTO_H_INCLUDED
-#define ELEMENTO_H_INCLUDED
-typedef struct
+typedef struct sElemento
 {
-    char nombre[50];
-    char direccion[50];
+    char descripcion[100];
+    char nombre[100];
     float precio;
-    int tipo;
-    //------------
-    int id;
     int isEmpty;
+    int id;
 }Elemento;
 
-
-int elemento_buscarIndiceLibre(Elemento array[],int size);
-int elemento_init(Elemento array[],int size,int valor);
-Elemento* elemento_getByID(Elemento* array,int size,int id)
-int elemento_alta(Elemento* array,int size)
-int elemento_modificar(Elemento* array);
-int elemento_eliminar(Elemento* array)
-int elemento_ordenar(Elemento array[],int size);
-int elemento_mostrar(Elemento* array);
+int elemento_init(Elemento array[],int size,int value);
+Elemento* elemento_getById(Elemento* array, int size,int id);
+int elemento_buscarById(Elemento array[],int size);
+int elemento_alta(Elemento array[],int size);
+int elemento_modificar(Elemento array[],int size);
+int elemento_baja(Elemento array[],int size);
 int elemento_listar(Elemento array[],int size);
-int elemento_ingresoForzado(Elemento array[],
-				int size,
-				char nombre[],
-				char direccion[],
-				int precio,
-				int tipo)
+int elemento_mostrar(Elemento array[],int size);
+int sort_BubbleNombre(Elemento* array,int size);//MODIFICAR SEGUN TIPO
 
-
-//int proximoId();
-//int pantalla_buscarPorId(Pantalla* array,int size, int id);
-
-#endif // ELEMENTO_H_INCLUDED

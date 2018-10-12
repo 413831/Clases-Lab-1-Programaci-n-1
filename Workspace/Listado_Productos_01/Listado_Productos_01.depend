@@ -1,0 +1,46 @@
+# depslib dependency file v1.0
+1537739263 source:/home/alexei/Documents/Workspace/Listado_Productos_01/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1537739210 /home/alexei/Documents/Workspace/Listado_Productos_01/utn.h
+
+1537500423 source:/home/alexei/Documents/Workspace/Listado_Productos_01/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"producto.h"
+
+1537500362 /home/alexei/Documents/Workspace/Listado_Productos_01/producto.h
+
+1537502936 source:/home/alexei/Documents/Workspace/Listado_Productos_01/producto.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"producto.h"
+
+1537476831 source:/home/alexei/Documents/Workspace/Listado_Productos_01/sort.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"producto.h"
+
+1537470421 source:/home/alexei/Documents/Workspace/Listado_Productos_01/string.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1537502554 source:/home/alexei/Documents/Workspace/Listado_Productos_01/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+

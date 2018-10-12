@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <time.h>
+#include <ctype.h>
 #include "utn.h"
 
 /**
@@ -19,69 +20,6 @@ char test_RandomInt(int desde , int hasta, int iniciar)
     return desde + (rand() % (hasta + 1 - desde)) ;
 }
 
-/**
- * \brief Verifica si el string recibido es numérico
- * \param array Es el array para validar su tipo
- * \return 1 si es númerico y 0 si no lo es
- */
-
-int validacion_Int(char* array)
-{
-   int i=0;
-   int retorno = 0;
-   while(array[i] != '\0' && array[i] != NULL)
-   {
-       if(array[i] < '0' || array[i] > '9')//Se utiliza el caracter según tabla ASCII
-       {
-       retorno = 0;
-       break;
-       }
-       else
-       {
-       retorno = 1;
-       array[i] = atoi(array);
-       }
-       i++;
-   }
-   return retorno;
-}
-
-/**
- * \brief Verifica si el string recibido es de tipo float
- * \param array Es el array para validar su tipo
- * \return 1 si contiene solo un '.' y numeros y 0 si no cumple
- */
-int validacion_Float(char* array)
-{
-   int i=0;
-   int retorno = 0;
-   int contadorSimbolo = 0;
-   while(array[i] != '\0' && array[i] != NULL)
-   {
-       if((array[i] != '.') && (array[i] < 'a' || array[i] > 'z') && (array[i] < 'A' || array[i] > 'Z'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '.')
-       {
-        contadorSimbolo++;
-       }
-       else
-       {
-        array[i] = atof(array) ;
-       }
-       i++;
-   }
-
-    if(contadorSimbolo == 1)
-    {
-     retorno = 1;
-    }
-
-   return retorno;
-}
-
 
 /**
  * \brief Verifica si el string recibido tiene solo letras
@@ -89,25 +27,95 @@ int validacion_Float(char* array)
  * \return 1 si contiene solo ' ' y letras y 0 si no lo es
  *
  */
-int validacion_Nombre(char* array)
+int validacion_Letras(char* array,int size)
 {
    int i=0;
    int retorno = 0;
-   while(array[i] != '\0'&& array[i] != NULL)
+   if(array != NULL && size > 0)
    {
-       if((array[i] != ' ') && (array[i] < 'a' || array[i] > 'z') && (array[i] < 'A' || array[i] > 'Z'))
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
        {
-        retorno = 0;
-        break;
+            if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') &&(array[i] != ' '))
+            {
+                retorno = 0;
+                break;
+            }
        }
-       else
-       {
-        retorno = 1;
-       }
-       i++;
+
    }
    return retorno;
 }
+
+
+/**
+ * \brief Verifica si el string recibido es numérico
+ * \param array Es el array para validar su tipo
+ * \param minimo Es el minimo valor permitido para ingresar
+ * \param maximo Es el maximo valor permitido para ingresar
+ * \return 1 si es númerico y 0 si no lo es
+ */
+
+int validacion_Int(char* array,int size)
+{
+   int i=0;
+   int retorno = 0;
+
+   if(array != NULL && size > 0)
+   {
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+            if(array[i] < '0' || array[i] > '9')
+            {
+                retorno = 0;
+                break;
+            }
+       }
+   }
+   return retorno;
+}
+// && array[i] < minimo && array[i] > maximo
+/**
+ * \brief Verifica si el string recibido es de tipo float
+ * \param array Es el array para validar su tipo
+ * \return 1 si contiene solo un '.' y numeros y 0 si no cumple
+ */
+int validacion_Float(char* array,int size)
+{
+   int i=0;
+   int retorno = 0;
+   int contadorSimbolos = 0;
+   int digitosIngresados;
+
+   digitosIngresados = strlen(array)-1;
+
+   if(array != NULL && size > 0)
+   {
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+
+            if(array[i] < '0' || array[i] > '9')
+            {
+                if(array[i] != '.' || array[0] == '.' || contadorSimbolos > 1 || array[digitosIngresados] == '.')
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '.')
+            {
+                contadorSimbolos++;
+            }
+       }
+   }
+
+   return retorno;
+}
+
+
 
 /**
  * \brief Verifica si el valor recibido contiene solo letras y números
@@ -115,11 +123,11 @@ int validacion_Nombre(char* array)
  * \return 1 si contiene solo espacio o letras y números, y 0 si no lo es
  *
  */
-int validacion_AlfaNumerico(char* array)
+int validacion_AlfaNumerico(char* array,int size)
 {
    int i=0;
    int retorno = 0;
-   while(array[i] != '\0')
+   while(array != '\0')
    {
        if((array[i] != ' ') && (array[i] < 'a' || array[i] > 'z') && (array[i] < 'A' || array[i] > 'Z') && (array[i] < '0' || array[i] > '9'))
        {
@@ -141,31 +149,37 @@ int validacion_AlfaNumerico(char* array)
  * \return 1 si contiene solo numeros, espacios y un guion.
  *
  */
-int validacion_Telefono(char* array)
+int validacion_Telefono(char* array,int size)
 {
    int i=0;
-   int contadorSimbolo = 0;
    int retorno = 0;
-   while(array[i] != '\0')
-   {
-       if((array[i] != ' ') && (array[i] != '-') && (array[i] != '+') && (array[i] < '0' || array[i] > '9'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '-' || array[i] == '+')
-       {
-        contadorSimbolo++;
-       }
+   int contadorSimbolos = 0;
+   int digitosIngresados;
 
-       i++;
-   }
-   if(contadorSimbolo <= 2) // Se acepta hasta dos simbolos
+   digitosIngresados = strlen(array)-1;
+
+   if(array != NULL && size > 0)
    {
-    retorno = 1;
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+            if(array[i] < '0' || array[i] > '9')
+            {
+                if(array[i] != '-' || array[4] != '-' || array[2] != '-' || contadorSimbolos > 2 || array[digitosIngresados] == '-')
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '-')
+            {
+                contadorSimbolos++;
+            }
+       }
    }
 
-    return retorno;
+   return retorno;
 }
 
 /**
@@ -174,29 +188,34 @@ int validacion_Telefono(char* array)
  * \return 1 si contiene solo numeros, espacios y un guion.
  *
  */
-int validacion_DNI(char* array)
+int validacion_DNI(char* array,int size)
 {
    int i=0;
-   int contadorSimbolo = 0;
    int retorno = 0;
-   while(array[i] != '\0')
-   {
-       if((array[i] != '.') && (array[i] < '0' || array[i] > '9'))
-       {
-        retorno = 0;
-        break;
-       }
-       else if(array[i] == '.')
-       {
-        contadorSimbolo++;
-       }
+   int contadorSimbolos = 0;
+   int digitosIngresados;
 
-       i++;
-   }
-   if(contadorSimbolo == 2 || contadorSimbolo == 0) // Se acepta dos simbolos o ningun simbolo
-   {
-    retorno = 1;
-   }
+   digitosIngresados = strlen(array);
 
-    return retorno;
+   if(array != NULL && size > 0)
+   {
+       retorno = 1;
+       for(i=0;i < size && array[i] != '\0';i++)
+       {
+            if(array[i] < '0' || array[i] > '9'|| array[i] != '.')
+            {
+                if(array[2] != '.' || array[6] != '.' || contadorSimbolos > 2 || digitosIngresados < 10)
+                {
+                retorno = 0;
+                break;
+                }
+            }
+
+            if(array[i] == '.')
+            {
+                contadorSimbolos++;
+            }
+       }
+   }
+   return retorno;
 }

@@ -1,0 +1,35 @@
+# depslib dependency file v1.0
+1536972588 source:/home/alexei/Documents/Workspace/Bibliotecas/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1537303950 /home/alexei/Documents/Workspace/Bibliotecas/utn.h
+
+1537302540 source:/home/alexei/Documents/Workspace/Bibliotecas/sort.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1537304037 source:/home/alexei/Documents/Workspace/Bibliotecas/string.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1537303690 source:/home/alexei/Documents/Workspace/Bibliotecas/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1537303355 source:/home/alexei/Documents/Workspace/Estructuras_01/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"/home/alexei/Documents/Workspace/Bibliotecas/utn.h"
+

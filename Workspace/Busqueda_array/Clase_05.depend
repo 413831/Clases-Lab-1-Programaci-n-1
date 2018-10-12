@@ -103,39 +103,3 @@
 	<string.h>
 	"utn.h"
 
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/array.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"utn.h"
-
-1538586207 /home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/utn.h
-
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/input.c
-	<stdio_ext.h>
-	<stdlib.h>
-	"utn.h"
-
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/list.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"utn.h"
-
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/main.c
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"utn.h"
-
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/sort.c
-	<stdio_ext.h>
-	<stdlib.h>
-	<string.h>
-	"utn.h"
-
-1538586207 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Busqueda_array/utn.c
-	<stdio.h>
-	<stdlib.h>
-	<time.h>
-

@@ -134,12 +134,7 @@ int validacion_AlfaNumerico(char* array,int size)
        retorno = 1;
        for(i=0;i<size && array[i] != '\0';i++)
        {
-           if((tolower(array[i]) < 'a' ||
-               tolower(array[i]) > 'z') &&
-              (array[i] < '0' ||
-               array[i] > '9') &&
-              array[i] != ' ' &&
-              array[i] != '.')
+           if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') && (array[i] < '0' || array[i] > '9') && array[i] != ' ' )
             {
                     printf("\nENTRO AL IF");
                     retorno = 0;

@@ -6,11 +6,14 @@
 
 /**
 >>Punteros
+    -Operador dirección '&'
+    -Operador indirección '*'
+    -Operador flecha '->'
 >>Memoria dinamica
-    -Operadores
-    -Malloc
-    -Realloc
-    -Free
+    -Uso de heap/montón
+    -malloc
+    -realloc
+    -free
 */
 
 
@@ -70,10 +73,10 @@ int main()
 }
 
 /**
-*\brief Crear array dinamico con malloc
+*\brief Crear array dinamico con funcion malloc
 *\param array Es el puntero de la direccion de memoria del array
 *\param size Es el limite del array
-*\return Retorna 0 si el puntero es diferente a NULL sino retorna -1
+*\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
 
 int constructor(int** array,int size)
@@ -93,8 +96,15 @@ int constructor(int** array,int size)
     return retorno;
 }
 
-/**Inicializar array
+
+/**
+*\brief Inicializar array dinamico
+*\param array Es el puntero que recibe para inicializar
+*\param size Es el limite de datos
+*\param value Es el valor para inicializar
+*\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
+
 int initArray(int* array,int size,int value)
 {
     int retorno = -1;
@@ -111,8 +121,14 @@ int initArray(int* array,int size,int value)
     return retorno;
 }
 
-/**Mostrar array
+
+/**
+*\brief Muestra datos del array dinamico
+*\param array Es el puntero que recibe para mostrar
+*\param size Es el limite de datos
+*\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
+
 
 int showArray(int* array,int size)
 {
@@ -129,7 +145,10 @@ int showArray(int* array,int size)
     return retorno;
 }
 
-/**Borrar array
+/**
+*\brief Borrar un array dinamico con funcion free
+*\param array Es el puntero que recibe para liberar
+*\return Retorna 0 si el puntero es diferente a NULL sino retorna -1
 */
 
 int destructor(int* array)
@@ -143,6 +162,14 @@ int destructor(int* array)
     }
     return retorno;
 }
+
+
+/**
+*\brief Relocaliza un array dinamico con funcion realloc
+*\param array Es el puntero de la direccion de memoria del array
+*\param newsize Es el nuevo limite del array
+*\return Retorna 0 si el puntero es diferente a NULL y el newsize valido sino retorna -1
+*/
 
 int resizeArray(int** array,int newsize)
 {

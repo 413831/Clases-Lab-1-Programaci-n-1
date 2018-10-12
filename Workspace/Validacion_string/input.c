@@ -2,26 +2,18 @@
 #include <stdlib.h>
 #include "utn.h"
 
-/**
- * \brief Limpiar el buffer de lo ingresado
- * \return Retorna void
- */
-
 void limpiarMemoria()
 {
-    fflush(stdin);
-    //__fpurge(stdin);
+    //fflush(stdin);  //WINDOWS
+    __fpurge(stdin);  //LINUX
 }
-
-/**
- * \brief Limpiar la pantalla
- * \return Retorna void
- */
-
 void limpiarPantalla()
 {
-    system(clear);
+    system("cls"); //WINDOWS
+    //system(clear); //LINUX
 }
+
+
 
 /**
  * \brief Solicita un número entero y lo retorna
@@ -76,10 +68,10 @@ char input_getChar(char* mensaje)
 
 void input_modificarArray(int* pArray,int* pIndice,int* pSize,char* pMensaje)
 {
-    pIndice = getInt("\nIngrese el indice a modificar: ");
+    *pIndice = input_getInt("\nIngrese el indice a modificar: ");
     if(pIndice >= 0 && pIndice < pSize)
     {
-        arrayDeNumeros[indiceArray] =  input_getInt(pMensaje);
+        pArray[*pIndice] =  input_getInt(pMensaje);
     }
     else
     {

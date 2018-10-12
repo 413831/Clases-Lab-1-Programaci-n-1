@@ -1,0 +1,39 @@
+# depslib dependency file v1.0
+1536952422 source:/home/alexei/Documents/Workspace/Validacion_string/calculo.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1537236623 /home/alexei/Documents/Workspace/Validacion_string/utn.h
+
+1536972588 source:/home/alexei/Documents/Workspace/Validacion_string/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1536952422 source:/home/alexei/Documents/Workspace/Validacion_string/list.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1537296901 source:/home/alexei/Documents/Workspace/Validacion_string/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+
+1537296935 source:/home/alexei/Documents/Workspace/Validacion_string/string.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1537296398 source:/home/alexei/Documents/Workspace/Validacion_string/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
