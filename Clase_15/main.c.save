@@ -16,9 +16,9 @@
 
 int initArray(int* array,int size,int value);
 int showArray(int* array,int size);
-int constructor(int** array,int size);
+int contructor(int** array,int size);
 int destructor(int* array);
-int resizeArray(int** array,int newsize);
+int resizeArray(int** array);
 
 int main()
 {
@@ -54,17 +54,10 @@ int main()
 
     int* arrayEnteros;
 
-    constructor(&arrayEnteros,LIMITE);//Se pasa la direccion de memoria del array
+    newArray(&arrayEnteros,LIMITE);//Se pasa la direccion de memoria del array
     initArray(arrayEnteros,LIMITE,1);
     showArray(arrayEnteros,LIMITE);
-    destructor(arrayEnteros);
-
-    limpiarMemoria();
-    getchar();
-
-    resizeArray(&arrayEnteros,10);
-    initArray(arrayEnteros,10,2);
-    showArray(arrayEnteros,10);
+    deleteArray(arrayEnteros);
 
     return 0;
 }
@@ -140,23 +133,6 @@ int destructor(int* array)
     {
         free(array);
         retorno = 0;
-    }
-    return retorno;
-}
-
-int resizeArray(int** array,int newsize)
-{
-    int retorno = -1;
-    int* auxArray;
-
-    if(array != NULL && newsize > 0)
-    {
-        auxArray = (int*)realloc(*array,sizeof(int)*newsize);//Reserva lugar para n variables tipo int
-        if(auxArray != NULL)
-        {
-            *array = auxArray;
-            retorno = 0;
-        }
     }
     return retorno;
 }
