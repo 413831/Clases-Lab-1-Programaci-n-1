@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1539397283 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/builder.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"person.h"
+
+1539382022 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539382022 /home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/utn.h
+
+1539382022 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1539397062 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+
+1539397299 source:/home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/person.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+
+1539397299 /home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/person.h
+
