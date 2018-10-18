@@ -34,32 +34,3 @@
 
 1539397299 /home/alexei/Documents/UTN/Programacion_1_Clases/Workspace/Memoria_dinamica/person.h
 
-1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/input.c
-	<stdio_ext.h>
-	<stdlib.h>
-	<string.h>
-	"utn.h"
-
-1539898560 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/utn.h
-
-1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/person.c
-	<stdio_ext.h>
-	<stdlib.h>
-	"utn.h"
-	"person.h"
-
-1539898560 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/person.h
-
-1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/validacion.c
-	<stdio_ext.h>
-	<stdlib.h>
-	<string.h>
-	<time.h>
-	<ctype.h>
-	"utn.h"
-
-1539898860 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Workspace/Memoria_dinamica/builder.c
-	<stdio_ext.h>
-	<stdlib.h>
-	"person.h"
-
