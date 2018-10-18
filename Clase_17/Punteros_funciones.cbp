@@ -2,7 +2,7 @@
 <CodeBlocks_project_file>
 	<FileVersion major="1" minor="6" />
 	<Project>
-		<Option title="Memoria_dinamica" />
+		<Option title="Punteros_Funciones" />
 		<Option pch_mode="2" />
 		<Option compiler="gcc" />
 		<Build>
@@ -31,21 +31,21 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="../Workspace/Memoria_dinamica/builder.c">
+		<Unit filename="builder.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Workspace/Memoria_dinamica/input.c">
+		<Unit filename="input.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Workspace/Memoria_dinamica/main.c">
+		<Unit filename="main.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Workspace/Memoria_dinamica/person.c">
+		<Unit filename="person.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="../Workspace/Memoria_dinamica/person.h" />
-		<Unit filename="../Workspace/Memoria_dinamica/utn.h" />
-		<Unit filename="../Workspace/Memoria_dinamica/validacion.c">
+		<Unit filename="person.h" />
+		<Unit filename="utn.h" />
+		<Unit filename="validacion.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>
