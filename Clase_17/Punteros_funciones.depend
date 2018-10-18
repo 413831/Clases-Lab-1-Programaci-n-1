@@ -1,0 +1,36 @@
+# depslib dependency file v1.0
+1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539898560 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/utn.h
+
+1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/person.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+
+1539898560 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/person.h
+
+1539898560 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/validacion.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1539901870 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/builder.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"person.h"
+
+1539902015 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+

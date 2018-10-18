@@ -27,7 +27,6 @@ int person_constructor(Person** person)
     return retorno;
 }
 
-
 /**
 *\brief Inicializar array dinamico
 *\param array Es el puntero que recibe para inicializar
