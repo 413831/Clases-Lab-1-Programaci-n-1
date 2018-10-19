@@ -21,21 +21,36 @@ int generateID()
 int person_create(Person** person)//Recibe puntero a puntero persona o direccion de memoria de puntero
 {
     int retorno = -1;
-    Person* auxPerson = NULL;
+    int age;
+    char* name;
+    Person* auxPerson;
 
-    printf("\n\nDIR PERSONA %p",*person);
-    auxPerson = *person;//copio direccion de memoria de puntero a puntero auxiliar
+    auxPerson = (Person*) malloc(sizeof(Person));
+    if(auxPerson != NULL)
+    {
+        input_getLetras(name,30,"\nIngrese nombre","Error.Dato invalido",2);
+        input_getNumeros(&age,3,"\nIngrese edad","Error.Dato invalido",0,100,2);
+        person_init(auxPerson,name,age);
+        retorno = 0;
+    }
 
-    printf("\n\nDIR PERSONA COPIA %p",auxPerson);
-    person_constructor(&auxPerson);//paso direccion de memoria de puntero auxiliar recibo direccion de memoria disponible
 
-    printf("\n\nDIR PERSONA COPIA %p",auxPerson);
-    person_cargar(auxPerson);
 
-    retorno = 0;
-
-    *person = auxPerson;//retorno nueva memoria asignada a lo apuntado por puntero a puntero persona
-    printf("\n\nDIR PERSONA %p",*person);
     return retorno;
 }
 
+
+
+int person_init(Person* person,char* name,int age)
+{
+    int retorno = -1;
+
+    if(person != NULL)
+    {
+        strcpy(person->name,name);
+        person->age = age;
+        retorno = 0;
+    }
+
+    return retorno;
+}

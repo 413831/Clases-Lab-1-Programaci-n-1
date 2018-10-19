@@ -23,3 +23,4 @@ int person_cargar(Person* person);
 int person_setAge(Person* person);
 int person_getName(Person* person);
 int person_setName(Person* person);
+int person_init(Person* person,char* name,int age);

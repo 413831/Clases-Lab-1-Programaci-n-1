@@ -27,15 +27,11 @@ int main()
 {
     Person* arrayPerson[QTY_PERSON];//Array de punteros de la estructura
 
-    Person* personita;
+    Person* personita = NULL;
   //  printf("%p\n",funcion);
   //  funcionRecibeF(funcion);
 
-    person_constructor(&personita);//Para reservar memoria de una estructura
-
-    person_initArray(personita,1);
-  //  person_setAge(personita,45);
-    person_showArray(personita);
+    person_create(&personita);
 
     return 0;
 }
