@@ -1,6 +1,43 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
+#include <string.h>
 #include "person.h"
+#include "utn.h"
+
+
+int person_getName(Person* person)
+{
+    char* auxName;
+
+    if(person != NULL)
+    {
+   //     input_getLetras(auxName,sizeof(person->name),"\nIngrese nombre","Error.Dato invalido",2);
+        auxName = fgets("\nIngrese nombre",20,stdin);
+
+        strncpy(person->name,auxName,sizeof(person->name));
+        return 0;
+    }
+    return 1;
+}
+
+
+
+int person_setName(Person* person)
+{
+    int retorno = -1;
+    Person* auxPerson;
+
+    if(person != NULL)
+    {
+        person_getName(auxPerson);
+
+        printf("\nSETEO NAME");
+        strncpy(person->name,auxPerson->name,sizeof(person->name));
+        retorno = 0;
+    }
+    return retorno;
+
+}
 
 
 
@@ -30,7 +67,6 @@ int person_constructor(Person** person)
 /**
 *\brief Inicializar array dinamico
 *\param array Es el puntero que recibe para inicializar
-*\param size Es el limite de datos
 *\param value Es el valor para inicializar
 *\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
@@ -38,17 +74,30 @@ int person_constructor(Person** person)
 int person_initArray(Person* person,int value)
 {
     int retorno = -1;
-    Person auxPerson;
+    Person* auxPerson;
 
     if(person != NULL)
     {
-        auxPerson.isEmpty = value;//Primero el puntero se desplaza i veces, luego accede y guarda
-        auxPerson.id = generateID();
+        auxPerson->isEmpty = value;//Primero el puntero se desplaza i veces, luego accede y guarda
+        auxPerson->id = generateID();
+        auxPerson->age = 16;
+
+      //  person_setName(auxPerson);
+
         printf("\nINICIALIZO");
-        *person = auxPerson;
+        person = auxPerson;
         retorno = 0;
     }
     return retorno;
+}
+
+
+
+int person_setAge(Person* person)
+{
+
+
+    return 0;
 }
 
 
@@ -66,6 +115,8 @@ int person_showArray(Person* person)
 
     if(person != NULL)
     {
+        printf("\nNAME %s",person->name);
+        printf("\nAGE %d",person->age);
         printf("\nESTADO %d -- DIR MEMORIA %p",person->isEmpty,person);
         printf("\nID %d",person->id);
     }
@@ -111,6 +162,37 @@ int person_resizeArray(Person** array,int newsize)
             *array = auxArray;
             retorno = 0;
         }
+    }
+    return retorno;
+}
+
+
+/**
+*\brief Cargar array dinamico
+*\param array Es el puntero que recibe para inicializar
+*\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
+*/
+
+int person_cargar(Person* person)
+{
+    int retorno = -1;
+    Person* auxPerson;
+
+    person_constructor(&auxPerson);
+
+    if(person != NULL)
+    {
+        input_getLetras(auxPerson->name,20,"\nIngrese nombre: ","\nError dato invalido",2);
+        input_getLetras(auxPerson->lastName,20,"\nIngrese apellido: ","\nError dato invalido",2);
+        input_getNumeros(&auxPerson->age,3,"\nIngrese edad: ","\nError dato invalido",0,100,2);
+        input_getAlfanumerico(auxPerson->adress,20,"\nIngrese direccion: ","\nError dato invalido",2);
+        auxPerson->id = generateID();
+        printf("\nINICIALIZO");
+
+        person = auxPerson;
+        person_destructor(auxPerson);
+
+        retorno = 0;
     }
     return retorno;
 }

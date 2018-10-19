@@ -32,9 +32,10 @@ int main()
   //  funcionRecibeF(funcion);
 
     person_constructor(&personita);//Para reservar memoria de una estructura
-    person_initArray(personita,1);//Para inicializar un elemento de la estructura
-    person_constructor(arrayPerson);
 
+    person_initArray(personita,1);
+  //  person_setAge(personita,45);
+    person_showArray(personita);
 
     return 0;
 }

@@ -3,6 +3,12 @@
 #include "utn.h"
 #include "person.h"
 
+static int isValidName(char* name)
+{
+
+    return 1;
+}
+
 
 int generateID()
 {
@@ -24,7 +30,7 @@ int person_create(Person** person)//Recibe puntero a puntero persona o direccion
     person_constructor(&auxPerson);//paso direccion de memoria de puntero auxiliar recibo direccion de memoria disponible
 
     printf("\n\nDIR PERSONA COPIA %p",auxPerson);
-    person_initArray(auxPerson,200);
+    person_cargar(auxPerson);
 
     retorno = 0;
 
