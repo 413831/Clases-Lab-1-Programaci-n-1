@@ -36,3 +36,34 @@
 	"utn.h"
 	"person.h"
 
+1539966873 source:c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1539897598 c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\utn.h
+
+1539966858 source:c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1539971300 source:c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+
+1539968855 c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\person.h
+
+1539971318 source:c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_17\person.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"person.h"
+

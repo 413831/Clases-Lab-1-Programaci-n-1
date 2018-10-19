@@ -1,4 +1,4 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
@@ -11,8 +11,8 @@
 
 void limpiarMemoria()
 {
-   // fflush(stdin);  //WINDOWS
-    __fpurge(stdin);  //LINUX
+    fflush(stdin);  //WINDOWS
+   // __fpurge(stdin);  //LINUX
 }
 
 /**
@@ -23,8 +23,8 @@ void limpiarMemoria()
 
 void limpiarPantalla()
 {
-    //system("cls"); //WINDOWS
-    system("clear"); //LINUX
+    system("cls"); //WINDOWS
+    //system("clear"); //LINUX
 }
 
 /**
