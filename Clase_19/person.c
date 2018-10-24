@@ -1,8 +1,22 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "utn.h"
 #include "person.h"
+
+
+
+static int isValidStatus(char* status)
+{
+    int retorno = 0;
+
+    if(strcmp("true",status) == 0 ||
+        strcmp("false",status))
+    {
+        retorno = 1;
+    }
+    return retorno;
+}
+
 
 static int isValidName(char* name)
 {
@@ -100,6 +114,36 @@ int person_searchEmpty(Person* array[], int size)
 }
 
 /**
+*\brief Crea con parametros
+*/
+
+
+Person* person_newParametros(char* name, char* lastName,char* id,char* status)
+{
+    Person* retorno = NULL;
+    Person* this = NULL;
+
+    printf("\n%p",this);
+    person_constructor(&this);
+    printf("\n%p",this);
+
+    if(this!=NULL)
+    {
+        if(!person_setName(this,name) ||
+           !person_setLastName(this,lastName) ||
+           !person_setId(this,id) ||
+           !person_setStatus(this,status))
+        {
+            retorno = this;
+            person_destructor(this);
+        }
+    }
+    return retorno;
+}
+
+
+
+/**
 *\brief Reserva un espacio en memoria para un elemento
 *\param array Es el puntero que recibe para reservar espacio
 *\return Retorna 0 si el puntero es diferente a NULL sino retorna -1
@@ -113,19 +157,87 @@ int person_constructor(Person** this)
     aux=(Person*)malloc(sizeof(Person));//Reserva lugar para 1 elemento tipo person
     if(aux!=NULL)
     {
-        aux->id = generateID();
-        aux->status = 1;
         *this=aux;
         printf("\nCONSTRUYO");
         printf("\nPUNTERO AUX %p",aux);
-        printf("\nPUNTERO THIS %p",this);
+        printf("\nPUNTERO THIS %p",*this);
         retorno = 0;
     }
     return retorno;
 }
 
+
 /**
-* Seteo campo name
+* Seteo campo ID
+*/
+
+int person_setId(Person* this,char* id)
+{
+    int retorno = -1;
+
+    if(this!=NULL)
+    {
+        strncpy(this->id,id,3);
+        retorno = 0; // todo bien
+    }
+    return retorno;
+}
+
+/**
+* Get campo ID
+*/
+
+int person_getId(Person* this,char* id)
+{
+    int retorno = -1;
+
+    if(this!=NULL)
+    {
+        strncpy(id,this->id,2);
+        retorno = 0; // todo bien
+    }
+    return retorno;
+}
+
+
+
+
+/**
+* Seteo campo status
+*/
+
+int person_setStatus(Person* this,char* status)
+{
+    int retorno = -1;
+
+    if(this!=NULL && isValidStatus(status))
+    {
+        strncpy(this->status,status,10);
+        retorno = 0; // todo bien
+    }
+    return retorno;
+}
+
+/**
+* Get campo status
+*/
+
+int person_getStatus(Person* this,char* status)
+{
+    int retorno = -1;
+
+    if(this!=NULL)
+    {
+        strncpy(status,this->status,10);
+        retorno = 0; // todo bien
+    }
+    return retorno;
+}
+
+
+
+/**
+* Seteo campo status
 */
 
 int person_setName(Person* this,char* name)
@@ -150,7 +262,7 @@ int person_getName(Person* this,char* name)
 
     if(this!=NULL && name != NULL)
     {
-        strncpy(name,this->name,20);
+        strncpy(name,this->name,30);
         retorno = 0; // todo bien
     }
     return retorno;
@@ -214,7 +326,7 @@ int person_destructor(Person* this)
 *\param id Es el ID del elemento a buscar
 *\return Retorna el puntero del elemento sino retorna NULL
 */
-
+/*
 Person* person_getById(Person* array[],int size,int id)
 {
     int i;
@@ -232,7 +344,7 @@ Person* person_getById(Person* array[],int size,int id)
         }
     }
     return retorno;
-}
+}*/
 
 
 /**
@@ -241,7 +353,7 @@ Person* person_getById(Person* array[],int size,int id)
 *\param size Es el limite de datos
 *\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
-
+/*
 int person_showArray(Person* this)
 {
     int retorno = -1;
@@ -249,9 +361,9 @@ int person_showArray(Person* this)
     if(this != NULL)
     {
         printf("\nNAME %s",this->name);
-        printf("\nAGE %d",this->age);
         printf("\nESTADO %d -- DIR MEMORIA %p",this->status,this);
         printf("\nID %d",this->id);
     }
     return retorno;
 }
+*/
