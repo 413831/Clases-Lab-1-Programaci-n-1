@@ -3,11 +3,11 @@
 
 typedef struct
 {
-    char* name;
-    char* lastName;
+    char name[50];
+    char lastName[50];
     ////////////
-    char* id;
-    char* status;
+    char id[50];
+    char status[50];
 
 }Person;
 
