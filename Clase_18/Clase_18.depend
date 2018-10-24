@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1539902930 source:/home/profesor/Ernesto/LABO1/Clase18/Clase_18/Cliente.c
+	"Cliente.h"
+	<stdlib.h>
+	<stdio.h>
+
+1539903082 /home/profesor/Ernesto/LABO1/Clase18/Clase_18/Cliente.h
+
+1539903781 source:/home/profesor/Ernesto/LABO1/Clase18/Clase_18/main.c
+	"Cliente.h"
+	<stdlib.h>
+	<stdio.h>
+
