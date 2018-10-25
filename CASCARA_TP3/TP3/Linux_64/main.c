@@ -18,12 +18,12 @@
     10. Salir
 *****************************************************/
 
-
 int main()
 {
     int option = 0;
     LinkedList* listaEmpleados = ll_newLinkedList();
-    do{
+    do
+    {
         switch(option)
         {
             case 1:

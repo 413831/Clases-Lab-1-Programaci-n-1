@@ -13,7 +13,11 @@
  */
 int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+    FILE* pArchivo = fopen(path,"r");
+    int retorno = -1;
+    retorno = parser_EmployeeFromText(pArchivo,pArrayListEmployee)
+    fclose(pArchivo);
+    return retorno;
 }
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo binario).
@@ -25,7 +29,12 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
-    return 1;
+    FILE* pArchivo = fopen(path,"r");
+    int retorno = -1;
+    if(!parser_EmployeeFromText(pArchivo,pArrayListEmployee))
+
+    fclose(pArchivo);
+    return retorno;
 }
 
 /** \brief Alta de empleados

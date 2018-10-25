@@ -53,3 +53,34 @@
 	"LinkedList.h"
 	"Employee.h"
 
+1533133026 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Controller.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
+1533133022 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/LinkedList.h
+
+1540505139 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.h
+
+1540505629 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.c
+	"Employee.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1540506591 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+	"Employee.h"
+
+1533133022 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Controller.h
+
+1533133022 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+
