@@ -40,27 +40,6 @@ static int isValidLastName(char* lastName)
     return retorno;
 }
 
-static int isValidAge(int age)
-{
-    int retorno = 0;
-
-    if(age > 0 && age < 100)
-    {
-        retorno = 1;
-    }
-    return retorno;
-}
-
-static int isValidAdress(char* adress)
-{
-    int retorno = 0;
-
-    if(adress != NULL && strlen(adress) > 2)
-    {
-        retorno = 1;
-    }
-    return retorno;
-}
 
 int generateID()
 {
@@ -129,12 +108,16 @@ Person* person_newParametros(char* name, char* lastName,char* id,char* status)
 
     if(this!=NULL)
     {
-        if(!person_setName(this,name) ||
-           !person_setLastName(this,lastName) ||
-           !person_setId(this,id) ||
+        if(!person_setName(this,name) &&
+           !person_setLastName(this,lastName) &&
+           !person_setId(this,id) &&
            !person_setStatus(this,status))
         {
             retorno = this;
+
+        }
+        else
+        {
             person_destructor(this);
         }
     }
@@ -177,7 +160,7 @@ int person_setId(Person* this,char* id)
 
     if(this!=NULL)
     {
-        strncpy(this->id,id,3);
+        strncpy(this->id,id,10);
         retorno = 0; // todo bien
     }
     return retorno;
@@ -193,7 +176,7 @@ int person_getId(Person* this,char* id)
 
     if(this!=NULL)
     {
-        strncpy(id,this->id,2);
+        strncpy(id,this->id,10);
         retorno = 0; // todo bien
     }
     return retorno;

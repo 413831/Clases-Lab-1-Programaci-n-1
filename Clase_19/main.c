@@ -1,10 +1,13 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "person.h"
 
 /** ARCHIVOS
 - fopen, fseek (opcional), fclose, fwrite, fread
 - fscanf, fprintf
+- Carga de array de punteros desde archivo
+- Creacion de mascaras
+- Parser
 */
 
 int main()
@@ -13,8 +16,8 @@ int main()
     ﻿id,first_name,last_name,is_empty
     1,Eric,Knight,false
     */
-    FILE* pArchivo = fopen("data.csv","r");//Se escribe path completo si no esta en carpeta, ./ o ../ para rutas relativas
-
+    FILE* pArchivo = fopen("data.xls","r");//Se escribe path completo si no esta en carpeta,
+                                            //Se escribe ./ o ../ para rutas relativas
     char bufferId[1024];
     char bufferName[1024];
     char bufferLastName[1024];
@@ -22,10 +25,12 @@ int main()
 
     Person* personita = NULL;
 
- //   char buffer[4096]; //Limite ficticio
-
+ // char buffer[4096]; //Limite ficticio
     if(pArchivo != NULL && personita == NULL)
     {
+        //Se leen datos separados hasta el caracter , (COMA)
+        //Se copia el caracter separados luego de la mascara
+        //El formato [] recorre hasta el simbolo indicado
         fscanf(pArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferLastName,bufferIsEmpty);
 
         personita = person_newParametros(bufferName,bufferLastName,bufferId,bufferIsEmpty);
@@ -35,19 +40,11 @@ int main()
         printf("\nID - %s",personita->id);
         printf("\nIS EMPTY - %s",personita->status);
 
-
-
-
-    /*  while(!feof(pArchivo))
+        while(!feof(pArchivo))//Mientras NO sea el final del archivo
         {
-            //  fscanf(pArchivo,"%s\n",buffer);
-            //  printf("\n%s",buffer);
-            //Se leen datos separados hasta el caracter , (COMA)
-            //Se copia el caracter separados luego de la mascara
-            //El formato [] recorre hasta el simbolo indicado
             fscanf(pArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferLastName,bufferIsEmpty);
             printf("\n%s - %s - %s - %s ",bufferId,bufferName,bufferLastName,bufferIsEmpty);
-        }*/
+        }
         fclose(pArchivo);//Se cierra el archivo SIEMPRE al finalizar
     }
     else
