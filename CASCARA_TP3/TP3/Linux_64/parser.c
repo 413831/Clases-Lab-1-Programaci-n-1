@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 #include "Employee.h"
+#include "parser.h"
 
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -13,15 +14,13 @@
 int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
 {
     int retorno = -1;
-    int index;
     char bufferId[1000];
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
-    int auxHorasTrabajadas;
-    int auxSueldo;
-    int auxId;
+
     int flagOnce = 1;
+    Employee* pEmployee;
 
     if(pFile != NULL)
     {
@@ -33,8 +32,14 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
                 flagOnce = 0;
             }
             fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-            index = parser_searchEmpty(pArrayListEmployee,4000);
-            pArrayListEmployee[index] = Employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+           // printf("%s - %s - %s - %s \n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+            //index++;//Es el indice para cargar cada elemento
+            pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+            if(pEmployee != NULL)
+            {
+                ll_add(pArrayListEmployee,pEmployee);//Se agrega ELEMENTO a LINKED LIST
+                retorno = 0;
+            }
         }
     }
     return retorno;

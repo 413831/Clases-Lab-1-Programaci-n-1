@@ -12,3 +12,16 @@
 
 1540342036 /home/profesor/Descargas/clase_Archivos/cliente.h
 
+1540503470 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19_Archivos/cliente.c
+	"cliente.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1540503470 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19_Archivos/cliente.h
+
+1540503470 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19_Archivos/main.c
+	<stdio.h>
+	<stdlib.h>
+	"cliente.h"
+

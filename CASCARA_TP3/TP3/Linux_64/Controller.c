@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "LinkedList.h"
 #include "Employee.h"
-
+#include "parser.h"
 
 /** \brief Carga los datos de los empleados desde el archivo data.csv (modo texto).
  *
@@ -15,7 +15,7 @@ int controller_loadFromText(char* path , LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path,"r");
     int retorno = -1;
-    retorno = parser_EmployeeFromText(pArchivo,pArrayListEmployee)
+    retorno = parser_EmployeeFromText(pArchivo,pArrayListEmployee);
     fclose(pArchivo);
     return retorno;
 }

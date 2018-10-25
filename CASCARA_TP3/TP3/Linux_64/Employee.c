@@ -39,35 +39,42 @@ static int isValidLastName(char* lastName)
 
 //////////////////////////////////////////////////////////////
 
-Employee* Employee_new()
+Employee* employee_new()
 {
     Employee* this;
     this=malloc(sizeof(Employee));
     return this;
 }
 
-void Employee_delete(Employee* this)
+void employee_delete(Employee* this)
 {
     free(this);
 }
 
-Employee* Employee_newConParametros(int id,char* nombre,int horasTrabajadas,int sueldo)
+Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo)
 {
     Employee* this;
-    this=Employee_new();
+    this=employee_new();
+    int auxHorasTrabajadas;
+    int auxSueldo;
+    int auxId;
+    /////VALIDAR////////////////////////!!!!!
+    auxHorasTrabajadas = atoi(horasTrabajadas);
+    auxSueldo = atoi(sueldo);
+    auxId = atoi(id);
 
     if(
-    !Employee_setId(this,id)&&
-    !Employee_setNombre(this,nombre)&&
-    !Employee_setHorasTrabajadas(this,horasTrabajadas)&&
-    !Employee_setSueldo(this,sueldo))
+    !employee_setId(this,auxId)&&
+    !employee_setNombre(this,nombre)&&
+    !employee_setHorasTrabajadas(this,auxHorasTrabajadas)&&
+    !employee_setSueldo(this,auxSueldo))
         return this;
 
-    Employee_delete(this);
+    employee_delete(this);
     return NULL;
 }
 
-int Employee_setId(Employee* this,int id)
+int employee_setId(Employee* this,int id)////////VALIDAR ID INICIAL CONTRA ARCHIVO
 {
     int retorno=-1;
     static int proximoId=-1;
@@ -87,7 +94,7 @@ int Employee_setId(Employee* this,int id)
     return retorno;
 }
 
-int Employee_getId(Employee* this,int* id)
+int employee_getId(Employee* this,int* id)
 {
     int retorno=-1;
     if(this!=NULL)
@@ -98,7 +105,7 @@ int Employee_getId(Employee* this,int* id)
     return retorno;
 }
 
-int Employee_setNombre(Employee* this,char* nombre)
+int employee_setNombre(Employee* this,char* nombre)
 {
     int retorno=-1;
     if(this!=NULL && nombre!=NULL)
@@ -109,7 +116,7 @@ int Employee_setNombre(Employee* this,char* nombre)
     return retorno;
 }
 
-int Employee_getNombre(Employee* this,char* nombre)
+int employee_getNombre(Employee* this,char* nombre)
 {
     int retorno=-1;
     if(this!=NULL && nombre!=NULL)
@@ -120,7 +127,7 @@ int Employee_getNombre(Employee* this,char* nombre)
     return retorno;
 }
 
-int Employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
+int employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
 {
     int retorno=-1;
     if(this!=NULL)
@@ -131,7 +138,7 @@ int Employee_setHorasTrabajadas(Employee* this,int horasTrabajadas)
     return retorno;
 }
 
-int Employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
+int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 {
     int retorno=-1;
     if(this!=NULL)
@@ -142,7 +149,7 @@ int Employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
     return retorno;
 }
 
-int Employee_setSueldo(Employee* this,int sueldo)
+int employee_setSueldo(Employee* this,int sueldo)
 {
     int retorno=-1;
     if(this!=NULL)
@@ -153,13 +160,32 @@ int Employee_setSueldo(Employee* this,int sueldo)
     return retorno;
 }
 
-int Employee_getSueldo(Employee* this,int* sueldo)
+int employee_getSueldo(Employee* this,int* sueldo)
 {
     int retorno=-1;
     if(this!=NULL)
     {
         *sueldo=this->sueldo;
         retorno=0;
+    }
+    return retorno;
+}
+
+
+int employee_searchEmpty(Employee* array[], int size)
+{
+    int i;
+    int retorno =-1;
+    if(array!=NULL && size > 0)
+    {
+        for(i=0;i<size;i++)
+        {
+            if(array[i]==NULL)
+            {
+                retorno=i;
+                break;
+            }
+        }
     }
     return retorno;
 }
