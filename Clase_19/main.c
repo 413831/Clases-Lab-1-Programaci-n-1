@@ -16,34 +16,29 @@ int main()
     ﻿id,first_name,last_name,is_empty
     1,Eric,Knight,false
     */
-    FILE* pArchivo = fopen("data.xls","r");//Se escribe path completo si no esta en carpeta,
+    FILE* pArchivo = fopen("data.csv","r");//Se escribe path completo si no esta en carpeta,
                                             //Se escribe ./ o ../ para rutas relativas
     char bufferId[1024];
     char bufferName[1024];
     char bufferLastName[1024];
     char bufferIsEmpty[1024];
 
-    Person* personita = NULL;
+    Person* personita[4000];
+    int index;
+    int contador = 0;
 
  // char buffer[4096]; //Limite ficticio
-    if(pArchivo != NULL && personita == NULL)
+    if(pArchivo != NULL)
     {
         //Se leen datos separados hasta el caracter , (COMA)
         //Se copia el caracter separados luego de la mascara
         //El formato [] recorre hasta el simbolo indicado
-        fscanf(pArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferLastName,bufferIsEmpty);
-
-        personita = person_newParametros(bufferName,bufferLastName,bufferId,bufferIsEmpty);
-
-        printf("\nNOMBRE - %s",personita->name);
-        printf("\nAPELLIDO - %s",personita->lastName);
-        printf("\nID - %s",personita->id);
-        printf("\nIS EMPTY - %s",personita->status);
-
         while(!feof(pArchivo))//Mientras NO sea el final del archivo
         {
             fscanf(pArchivo,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferLastName,bufferIsEmpty);
-            printf("\n%s - %s - %s - %s ",bufferId,bufferName,bufferLastName,bufferIsEmpty);
+            index = person_searchEmpty(personita,4000);
+            personita[index] = person_newParametros(bufferName,bufferLastName,bufferId,bufferIsEmpty);
+            contador++;
         }
         fclose(pArchivo);//Se cierra el archivo SIEMPRE al finalizar
     }
@@ -51,6 +46,14 @@ int main()
     {
         printf("\nNo existe!");
 
+    }
+
+    index = 0;
+    while(contador != 0)
+    {
+        person_showArray(personita[index]);
+        index++;
+        contador--;
     }
 
     return 0;

@@ -4,6 +4,8 @@
 	<stdlib.h>
 	"person.h"
 
+1540465103 
+
 1540343395 /home/alumno/Documentos/ejercicios_programacion_1/Clase_19/person.h
 
 1540343088 source:/home/alumno/Documentos/ejercicios_programacion_1/Clase_19/person.c
@@ -23,5 +25,18 @@
 1540465103 source:c:\documents and settings\usuario\mis documentos\2018c2-master\ejercicios_programacion_1-master\clase_19\main.c
 	<stdio.h>
 	<stdlib.h>
+	"person.h"
+
+1540504570 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19/main.c
+	<stdio.h>
+	<stdlib.h>
+	"person.h"
+
+1540503470 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19/person.h
+
+1540504608 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_19/person.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
 	"person.h"
 

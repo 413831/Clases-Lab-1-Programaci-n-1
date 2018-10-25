@@ -102,9 +102,7 @@ Person* person_newParametros(char* name, char* lastName,char* id,char* status)
     Person* retorno = NULL;
     Person* this = NULL;
 
-    printf("\n%p",this);
     person_constructor(&this);
-    printf("\n%p",this);
 
     if(this!=NULL)
     {
@@ -141,9 +139,6 @@ int person_constructor(Person** this)
     if(aux!=NULL)
     {
         *this=aux;
-        printf("\nCONSTRUYO");
-        printf("\nPUNTERO AUX %p",aux);
-        printf("\nPUNTERO THIS %p",*this);
         retorno = 0;
     }
     return retorno;
@@ -336,17 +331,16 @@ Person* person_getById(Person* array[],int size,int id)
 *\param size Es el limite de datos
 *\return Retorna 0 si el puntero es diferente a NULL y el size valido sino retorna -1
 */
-/*
 int person_showArray(Person* this)
 {
     int retorno = -1;
 
     if(this != NULL)
     {
-        printf("\nNAME %s",this->name);
-        printf("\nESTADO %d -- DIR MEMORIA %p",this->status,this);
-        printf("\nID %d",this->id);
+        printf("\nNAME %s %s",this->name,this->lastName);
+        printf("\nESTADO %s -- DIR MEMORIA %p",this->status,this);
+        printf("\nID %s",this->id);
     }
     return retorno;
 }
-*/
+
