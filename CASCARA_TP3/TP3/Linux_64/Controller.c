@@ -45,8 +45,13 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
-
-    return 1;
+    int retorno = -1;
+    if(pArrayListEmployee != NULL)
+    {
+        employee_EmployeeFromUser(pArrayListEmployee);
+        retorno = 0;
+    }
+    return retorno;
 }
 
 /** \brief Modificar datos de empleado

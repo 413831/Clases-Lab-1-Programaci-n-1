@@ -20,17 +20,28 @@
 
 int main()
 {
-    int option = 0;
+    int option;
     LinkedList* listaEmpleados = ll_newLinkedList();
     do
     {
-        option = 1; //BORRAR
+        option = 3; //BORRAR
         switch(option)
         {
             case 1:
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
                 controller_loadFromText("data.csv",listaEmpleados);
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                option = 10; //BORRAR
+                break;
+            case 2:
+
+                break;
+            case 3:
+                controller_addEmployee(listaEmpleados);
+                option = 10; //BORRAR
+                break;
+           case 4:
+                ll_sort(listaEmpleados,employee_sort,1);
                 option = 10; //BORRAR
                 break;
         }
