@@ -53,7 +53,7 @@
 	"LinkedList.h"
 	"Employee.h"
 
-1540508751 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Controller.c
+1540512507 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Controller.c
 	<stdio.h>
 	<stdlib.h>
 	"LinkedList.h"
@@ -62,9 +62,9 @@
 
 1533133022 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/LinkedList.h
 
-1540509901 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.h
+1540512667 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.h
 
-1540510055 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.c
+1540512733 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/Employee.c
 	"Employee.h"
 	<stdio.h>
 	<stdlib.h>
@@ -87,4 +87,12 @@
 	"parser.h"
 
 1533133022 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/parser.h
+
+1540503471 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1540503471 /home/alumno/Documentos/Planes/ejercicios_programacion_1/CASCARA_TP3/TP3/Linux_64/utn.h
 

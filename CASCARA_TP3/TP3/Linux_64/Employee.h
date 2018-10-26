@@ -10,6 +10,8 @@ typedef struct
 
 Employee* employee_new();
 Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
+int employee_input(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
+int employee_EmployeeFromUser(LinkedList* pArrayListEmployee);
 void employee_delete();
 
 int employee_setId(Employee* this,int id);

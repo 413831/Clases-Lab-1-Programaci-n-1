@@ -3,17 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static int isValidStatus(char* status)
-{
-    int retorno = 0;
 
-    if(strcmp("true",status) == 0 ||
-        strcmp("false",status))
-    {
-        retorno = 1;
-    }
-    return retorno;
-}
 
 static int isValidName(char* name)
 {
@@ -26,18 +16,7 @@ static int isValidName(char* name)
     return retorno;
 }
 
-static int isValidLastName(char* lastName)
-{
-    int retorno = 0;
-
-    if(lastName != NULL && strlen(lastName) < 30 && strlen(lastName) > 1)
-    {
-        retorno = 1;
-    }
-    return retorno;
-}
-
-//////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////
 
 Employee* employee_new()
 {
@@ -49,6 +28,43 @@ Employee* employee_new()
 void employee_delete(Employee* this)
 {
     free(this);
+}
+
+int employee_input(char* campo)
+{
+    int retorno = -1;
+    if(campo != NULL)
+    {
+        input_getString(campo);
+        retorno = 0;
+    }
+    return retorno;
+}
+
+int employee_EmployeeFromUser(LinkedList* pArrayListEmployee);
+{
+    Employee* pEmployee;
+    int retorno = -1;
+    char bufferId[1000];
+    char bufferName[1000];
+    char bufferHorasTrabajadas[1000];
+    char bufferSueldo[1000];
+
+    input_getString(bufferId);
+    input_getString(bufferName);
+    input_getString(bufferHorasTrabajadas);
+    input_getString(bufferSueldo);
+
+    if(bufferId != NULL && bufferName!= NULL && bufferHorasTrabajadas != NULL && bufferSueldo != NULL)
+    {
+        pEmployee = employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
+        if(pEmployee != NULL)
+        {
+            ll_add(pArrayListEmployee,pEmployee);//Se agrega ELEMENTO a LINKED LIST
+            retorno = 0;
+        }
+    }
+    return retorno;
 }
 
 Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo)
@@ -63,15 +79,18 @@ Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,
     auxSueldo = atoi(sueldo);
     auxId = atoi(id);
 
-    if(
-    !employee_setId(this,auxId)&&
-    !employee_setNombre(this,nombre)&&
-    !employee_setHorasTrabajadas(this,auxHorasTrabajadas)&&
-    !employee_setSueldo(this,auxSueldo))
+    if(!employee_setId(this,auxId)&&
+        !employee_setNombre(this,nombre)&&
+        !employee_setHorasTrabajadas(this,auxHorasTrabajadas)&&
+        !employee_setSueldo(this,auxSueldo))
+    {
         return this;
-
-    employee_delete(this);
-    return NULL;
+    }
+    else
+    {
+        employee_delete(this);
+        return NULL;
+    }
 }
 
 int employee_setId(Employee* this,int id)////////VALIDAR ID INICIAL CONTRA ARCHIVO

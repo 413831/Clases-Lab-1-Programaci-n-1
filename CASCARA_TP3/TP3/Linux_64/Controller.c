@@ -31,8 +31,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path,"r");
     int retorno = -1;
-    if(!parser_EmployeeFromText(pArchivo,pArrayListEmployee))
-
+    retorno = parser_EmployeeFromBinary(pArchivo,pArrayListEmployee);
     fclose(pArchivo);
     return retorno;
 }
@@ -46,6 +45,7 @@ int controller_loadFromBinary(char* path , LinkedList* pArrayListEmployee)
  */
 int controller_addEmployee(LinkedList* pArrayListEmployee)
 {
+
     return 1;
 }
 
