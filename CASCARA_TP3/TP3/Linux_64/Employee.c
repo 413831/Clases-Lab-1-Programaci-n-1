@@ -33,7 +33,7 @@ static int isValidSueldo(char* sueldo)//CORREGIR
     int retorno = 0;
     int digitosIngresados = strlen(sueldo);
 
-    if(sueldo != NULL && strlen(sueldo) > 4  && validacion_Float(sueldo,digitosIngresados))
+    if(sueldo != NULL && digitosIngresados > 4 && validacion_Int(sueldo,digitosIngresados))
     {
         retorno = 1;
     }
@@ -56,11 +56,21 @@ static int getNextId(LinkedList* pArrayListEmployee)////////VALIDAR ID INICIAL C
 {
     int retorno=-1;
     int index;
+    Employee* aux;
+    int auxID;
+    int indexEmployee;
 
     if(pArrayListEmployee != NULL)
     {
-        index = ll_len(pArrayListEmployee);
-        retorno = index;
+        indexEmployee = ll_len(pArrayListEmployee);
+        aux = ll_pop(pArrayListEmployee,indexEmployee);
+
+        printf("\n//Size List %d",indexEmployee);
+        printf("\n//Employee pointer %p",aux);
+        if(employee_getId(aux,&auxID))
+        {
+            retorno = auxID;
+        }
     }
     return retorno;
 }
@@ -85,14 +95,14 @@ int employee_delete(Employee* this)
     return retorno;
 }
 
-int employee_input(char* campo,int size, int (*pFunc)(char*))
+int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
 {
     int retorno = -1;
     if(campo != NULL)
     {
-        printf("\nIngrese campo: ");
+        printf("\nIngrese %s: ",mensaje);
         input_getString(campo,size);
-        if(!pFunc(campo))
+        if((*pFunc)(campo))
         {
             retorno = 0;
         }
@@ -109,21 +119,19 @@ int employee_EmployeeFromUser(void* pArrayListEmployee)
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
-    int auxID = getNextId(pArrayListEmployee)+1;
+    int auxID = getNextId(pArrayListEmployee);
 
-    printf("\n PROXIMO ID %d",auxID);
+    printf("\nPROXIMO ID %d",auxID);
+    sprintf(bufferId,"%d",auxID);
+    printf("\nPROXIMO ID CHAR %s",bufferId);
 
-    employee_input(bufferName,1000,isValidName);
-    employee_input(bufferHorasTrabajadas,1000,isValidHoras);
-    employee_input(bufferSueldo,1000,isValidSueldo);
-    printf("\nNOMBRE: %s",bufferName);
-    printf("\nHORAS: %s",bufferHorasTrabajadas);
-    printf("\nSUELDO: %s",bufferSueldo);
-
-    if(bufferId != NULL && bufferName!= NULL && bufferHorasTrabajadas != NULL && bufferSueldo != NULL)
+    if( !employee_input("nombre",bufferName,1000,isValidName) &&
+        !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+        !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
     {
+        printf("\nENTRO");
         this = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-        printf("\nID: %s",bufferId);
+
         if(this != NULL)
         {
             ll_add(pArrayListEmployee,this);
@@ -139,7 +147,7 @@ Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,
     Employee* this;
     this=employee_new();
     /////VALIDAR////////////////////////!!!!!
-    if(isValidName(nombre) == 0)
+    if(isValidName(nombre) == 0)//BORRAR
     {
         printf("\nSE ROMPE TODO");
         printf("\nNOMBRE %s",nombre);

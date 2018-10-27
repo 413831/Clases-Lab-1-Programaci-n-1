@@ -34,8 +34,8 @@ int main()
 
             case 2:
                 controller_addEmployee(listaEmpleados);
-                controller_ListEmployee(listaEmpleados);
-                printf("\nSize Linked List %d",ll_len(listaEmpleados));
+          //      controller_ListEmployee(listaEmpleados);
+            //    printf("\nSize Linked List %d",ll_len(listaEmpleados));
 
            case 3:
                // ll_sort(listaEmpleados,employee_sort,1);
