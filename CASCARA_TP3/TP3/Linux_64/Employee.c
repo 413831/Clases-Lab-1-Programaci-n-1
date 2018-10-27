@@ -5,42 +5,65 @@
 #include <string.h>
 #include "utn.h"
 
-
 static int isValidName(char* name)
 {
     int retorno = 0;
 
-    if(name != NULL && strlen(name) < 30  && strlen(name) > 1)
+    if(name != NULL && validacion_Letras(name,strlen(name)))
     {
         retorno = 1;
     }
     return retorno;
 }
-
 
 static int isValidHoras(char* horas)//CORREGIR
 {
     int retorno = 0;
+    int digitosIngresados = strlen(horas);
 
-    if(horas != NULL && strlen(horas) < 30  && strlen(horas) > 1)
+    if(horas != NULL && validacion_Int(horas,digitosIngresados))
     {
         retorno = 1;
     }
     return retorno;
 }
-
 
 static int isValidSueldo(char* sueldo)//CORREGIR
 {
     int retorno = 0;
+    int digitosIngresados = strlen(sueldo);
 
-    if(sueldo != NULL && strlen(sueldo) < 30  && strlen(sueldo) > 1)
+    if(sueldo != NULL && strlen(sueldo) > 4  && validacion_Float(sueldo,digitosIngresados))
     {
         retorno = 1;
     }
     return retorno;
 }
 
+static int isValidId(char* id)//CORREGIR
+{
+    int retorno = 0;
+    int digitosIngresados = strlen(id);
+
+    if(id != NULL && validacion_Int(id,digitosIngresados))
+    {
+        retorno = 1;
+    }
+    return retorno;
+}
+
+static int getNextId(LinkedList* pArrayListEmployee)////////VALIDAR ID INICIAL CONTRA ARCHIVO
+{
+    int retorno=-1;
+    int index;
+    Employee* auxiliar;
+
+    index = ll_len(pArrayListEmployee);
+    ll_get(pArrayListEmployee,index);
+    printf("\n PROXIMO ID: %d",proximoId);
+
+    return retorno;
+}
 
 //////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,47 +74,59 @@ Employee* employee_new()
     return this;
 }
 
-void employee_delete(Employee* this)
+int employee_delete(Employee* this)
 {
-    free(this);
+    int retorno = -1;
+    if(this != NULL)
+    {
+        free(this);
+        retorno = 0;
+    }
+    return retorno;
 }
 
-int employee_input(char* campo,int size)
+int employee_input(char* campo,int size, int (*pFunc)(char*))
 {
     int retorno = -1;
     if(campo != NULL)
     {
+        printf("\nIngrese campo: ");
         input_getString(campo,size);
-        retorno = 0;
+        if(!pFunc(campo))
+        {
+            retorno = 0;
+        }
     }
     return retorno;
 }
 
 int employee_EmployeeFromUser(void* pArrayListEmployee)
 {
-    Employee* pEmployee;
+    Employee* this = NULL;
     int retorno = -1;
-    char bufferId[1000];
+
+    char bufferId[1000] = {'9','9','9'};
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
 
-    printf("\n ID");
-    employee_input(bufferId,1000);
-    printf("\n NOMBRE");
-    employee_input(bufferName,1000);
-    printf("\n HORAS");
-    employee_input(bufferHorasTrabajadas,1000);
-    printf("\n SUELDO");
-    employee_input(bufferSueldo,1000);
+    getNextId();
+    employee_input(bufferName,1000,isValidName);
+    employee_input(bufferHorasTrabajadas,1000,isValidHoras);
+    employee_input(bufferSueldo,1000,isValidSueldo);
+    printf("\nNOMBRE: %s",bufferName);
+    printf("\nHORAS: %s",bufferHorasTrabajadas);
+    printf("\nSUELDO: %s",bufferSueldo);
 
     if(bufferId != NULL && bufferName!= NULL && bufferHorasTrabajadas != NULL && bufferSueldo != NULL)
     {
-        pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-        if(pEmployee != NULL)
+        this = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+        printf("\nID: %s",bufferId);
+        if(this != NULL)
         {
-            ll_add(pArrayListEmployee,pEmployee);//Se agrega ELEMENTO a LINKED LIST
-            retorno = 0;
+            ll_add(pArrayListEmployee,this);
+            employee_show(this);
+            retorno = 0;;
         }
     }
     return retorno;
@@ -101,8 +136,13 @@ Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,
 {
     Employee* this;
     this=employee_new();
-
     /////VALIDAR////////////////////////!!!!!
+    if(isValidName(nombre) == 0)
+    {
+        printf("\nSE ROMPE TODO");
+        printf("\nNOMBRE %s",nombre);
+        printf("\nID %s",id);
+    }
 
     if( !employee_setId(this,id)&&
         !employee_setNombre(this,nombre)&&
@@ -121,7 +161,7 @@ Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,
 int employee_setId(Employee* this,char* id)////////VALIDAR ID INICIAL CONTRA ARCHIVO
 {
     int retorno=-1;
-    static int proximoId=-1;
+    static int proximoId=0;
     int auxId = atoi(id);
 
     if(this!=NULL && auxId==-1)
@@ -200,18 +240,18 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas)
 int employee_setSueldo(Employee* this,char* sueldo)
 {
     int retorno=-1;
-    int auxSueldo;
+    float auxSueldo;
 
     if(this!=NULL && isValidSueldo(sueldo))
     {
-        auxSueldo = atoi(sueldo);
+        auxSueldo = atof(sueldo);
         this->sueldo=auxSueldo;
         retorno=0;
     }
     return retorno;
 }
 
-int employee_getSueldo(Employee* this,int* sueldo)
+int employee_getSueldo(Employee* this,float* sueldo)
 {
     int retorno=-1;
     if(this!=NULL)
@@ -260,3 +300,27 @@ int employee_sort(void* thisA,void* thisB)
     return retorno;
 }
 
+int employee_show(Employee* this)
+{
+    int retorno = -1;
+    int auxId;
+    char auxNombre[128];
+    int auxHorasTrabajadas;
+    float auxSueldo;
+
+    if(this != NULL)
+    {
+        employee_getNombre(this,auxNombre);
+        employee_getSueldo(this,&auxSueldo);
+        employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
+        employee_getId(this,&auxId);
+
+        printf("\nNOMBRE -- %s",auxNombre);
+        printf("\nSUELDO -- %f",auxSueldo);
+        printf("\nHORAS -- %d",auxHorasTrabajadas);
+        printf("\nID -- %d",auxId);
+
+        retorno = 0;
+    }
+    return retorno;
+}

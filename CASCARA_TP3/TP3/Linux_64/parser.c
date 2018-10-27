@@ -32,8 +32,7 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
                 flagOnce = 0;
             }
             fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-           // printf("%s - %s - %s - %s \n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-            //index++;//Es el indice para cargar cada elemento
+
             pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
             if(pEmployee != NULL)
             {

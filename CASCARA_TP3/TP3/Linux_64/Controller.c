@@ -48,8 +48,11 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
-        employee_EmployeeFromUser(pArrayListEmployee);
-        retorno = 0;
+        if(!employee_EmployeeFromUser(pArrayListEmployee))
+        {
+            printf("\nEmpleado Aniadidou");
+            retorno = 0;
+        }
     }
     return retorno;
 }
@@ -87,7 +90,20 @@ int controller_removeEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_ListEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno = -1;
+    int i;
+    Employee* employee;
+
+    for(i=0;i<ll_len(pArrayListEmployee);i++)
+    {
+        employee = ll_get(pArrayListEmployee,i);
+        if(employee != NULL)
+        {
+            employee_show(employee);
+        }
+        retorno = 0;
+    }
+    return retorno;
 }
 
 /** \brief Ordenar empleados

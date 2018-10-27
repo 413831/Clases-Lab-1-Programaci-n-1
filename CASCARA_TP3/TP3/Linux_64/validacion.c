@@ -108,7 +108,7 @@ int validacion_Letras(char* array,int size)
         retorno = 1;
         for(i=0;i < digitosIngresados && array[i] != '\0';i++)
         {
-            if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') && array[i]!= ' ')
+            if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') && array[i]!= ' ' && array[i]!= '-')
             {
                 retorno = 0;
                 break;

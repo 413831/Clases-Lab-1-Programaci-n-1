@@ -5,6 +5,8 @@
 	<string.h>
 	"utn.h"
 
+1539971318 
+
 1539898560 /home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/utn.h
 
 1539911344 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/person.c
@@ -22,6 +24,8 @@
 	<time.h>
 	<ctype.h>
 	"utn.h"
+
+1539966858 
 
 1539909290 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/Clase_17/builder.c
 	<stdio_ext.h>
@@ -66,4 +70,35 @@
 	<string.h>
 	"utn.h"
 	"person.h"
+
+1540590832 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/input.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1540590832 /home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/utn.h
+
+1540590832 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/main.c
+	<stdio.h>
+	<stdlib.h>
+	"utn.h"
+	"person.h"
+
+1540590832 /home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/person.h
+
+1540590832 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/person.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+	"person.h"
+
+1540590832 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Clase_17/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
 
