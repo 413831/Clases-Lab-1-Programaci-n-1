@@ -94,17 +94,34 @@ int employee_delete(Employee* this)
 int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
 {
     int retorno = -1;
+    int reintentos = 2;
     if(campo != NULL)
     {
-        printf("\nIngrese %s: ",mensaje);
-        input_getString(campo,size);
-        if((*pFunc)(campo))//Validar segun tipo
+        do
         {
-            retorno = 0;
-        }
+            printf("\nIngrese %s: ",mensaje);
+            input_getString(campo,size);
+            if((*pFunc)(campo))//Validar segun tipo
+            {
+                retorno = 0;
+            }
+            else
+            {
+
+            }
+            reintentos--;
+        }while(reintentos > 0);
     }
     return retorno;
 }
+
+int employee_mod(void* pArrayListEmployee)
+
+
+
+
+
+
 
 int employee_EmployeeFromUser(void* pArrayListEmployee)
 {
