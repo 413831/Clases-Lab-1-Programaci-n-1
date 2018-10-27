@@ -56,12 +56,12 @@ static int getNextId(LinkedList* pArrayListEmployee)////////VALIDAR ID INICIAL C
 {
     int retorno=-1;
     int index;
-    Employee* auxiliar;
 
-    index = ll_len(pArrayListEmployee);
-    ll_get(pArrayListEmployee,index);
-    printf("\n PROXIMO ID: %d",proximoId);
-
+    if(pArrayListEmployee != NULL)
+    {
+        index = ll_len(pArrayListEmployee);
+        retorno = index;
+    }
     return retorno;
 }
 
@@ -105,12 +105,14 @@ int employee_EmployeeFromUser(void* pArrayListEmployee)
     Employee* this = NULL;
     int retorno = -1;
 
-    char bufferId[1000] = {'9','9','9'};
+    char bufferId[1000];
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
+    int auxID = getNextId(pArrayListEmployee)+1;
 
-    getNextId();
+    printf("\n PROXIMO ID %d",auxID);
+
     employee_input(bufferName,1000,isValidName);
     employee_input(bufferHorasTrabajadas,1000,isValidHoras);
     employee_input(bufferSueldo,1000,isValidSueldo);
