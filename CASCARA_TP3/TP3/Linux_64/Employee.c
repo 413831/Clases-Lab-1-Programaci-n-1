@@ -104,10 +104,11 @@ int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
             if((*pFunc)(campo))//Validar segun tipo
             {
                 retorno = 0;
+                break;
             }
             else
             {
-
+                printf("\nIntente nuevamente");
             }
             reintentos--;
         }while(reintentos > 0);
@@ -115,12 +116,44 @@ int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
     return retorno;
 }
 
-int employee_mod(void* pArrayListEmployee)
+int employee_setAll(Employee* this,char* name,char* hours,char* salary)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        employee_setNombre(this,name);
+        employee_setHorasTrabajadas(this,hours);
+        employee_setSueldo(this,salary);
+        retorno = 0;
+    }
+    return retorno;
+}
 
 
+int employee_modificar(void* pArrayListEmployee)
+{
+    Employee* this = NULL;
+    int retorno = -1;
+    char bufferId[1000];
+    char bufferName[1000];
+    char bufferHorasTrabajadas[1000];
+    char bufferSueldo[1000];
 
+    int auxID = getNextId(pArrayListEmployee);
 
+    sprintf(bufferId,"%d",auxID);//Int Parse to Str
 
+    if( !employee_input("nombre",bufferName,1000,isValidName) &&
+        !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+        !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+    {
+        employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
+        retorno = 0;
+    }
+    employee_show(this);
+    return retorno;
+}
 
 
 int employee_EmployeeFromUser(void* pArrayListEmployee)
@@ -336,3 +369,4 @@ int employee_show(Employee* this)
     }
     return retorno;
 }
+

@@ -45,7 +45,7 @@ static int isValidId(char* id)//CORREGIR
     int retorno = 0;
     int digitosIngresados = strlen(id);
 
-    if(id != NULL && validacion_Int(id,digitosIngresados))
+    if(id != NULL && validacion_Int(id,digitosIngresados) && id > '0')
     {
         retorno = 1;
     }
@@ -91,18 +91,120 @@ int employee_delete(Employee* this)
     return retorno;
 }
 
+
+Employee* employee_getById(LinkedList* pArrayListEmployee,int idIngresado)
+{
+    Employee* retorno = NULL;
+    int index;
+    Employee* auxEmployee;
+    int auxID;
+
+    if(pArrayListEmployee != NULL)
+    {
+        for(index=0;index<ll_len(pArrayListEmployee);index++)//Recorro todo el array hasta el LEN
+        {
+            auxEmployee = ll_get(pArrayListEmployee,index);//Obtengo el elemento del array en posicion index
+            employee_getId(auxEmployee,&auxID);//Obtengo el ID del elemento
+            if(auxID == idIngresado);
+            {
+                retorno = auxEmployee;
+                break;
+            }
+        }
+    }
+    return retorno;
+}
+
 int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
 {
     int retorno = -1;
+    int reintentos = 2;
     if(campo != NULL)
     {
-        printf("\nIngrese %s: ",mensaje);
-        input_getString(campo,size);
-        if((*pFunc)(campo))//Validar segun tipo
+        do
         {
+            printf("\nIngrese %s: ",mensaje);
+            input_getString(campo,size);
+            if((*pFunc)(campo))//Validar segun tipo
+            {
+                retorno = 0;
+                break;
+            }
+            else
+            {
+                printf("\nIntente nuevamente");
+            }
+            reintentos--;
+        }while(reintentos > 0);
+    }
+    return retorno;
+}
+
+int employee_setAll(Employee* this,char* name,char* hours,char* salary)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        employee_setNombre(this,name);
+        employee_setHorasTrabajadas(this,hours);
+        employee_setSueldo(this,salary);
+        retorno = 0;
+    }
+    return retorno;
+}
+
+int employee_remove(void* pArrayListEmployee)
+{
+    Employee* this = NULL;
+    int retorno = -1;
+    char* bufferId[1000];
+
+    if(!employee_input("ID",bufferId,1000,isValidId))
+    {
+        this = employee_getById(pArrayListEmployee,idIngresado)
+        if(this != NULL)
+        {
+            employee_delete(this);
             retorno = 0;
         }
+        else
+        {
+            printf("\nEl ID ingresado no existe");
+        }
     }
+    employee_show(this);
+    return retorno;
+}
+
+int employee_modify(void* pArrayListEmployee)
+{
+    Employee* this = NULL;
+    int retorno = -1;
+    int idIngresado;
+
+    char bufferId[1000];
+    char bufferName[1000];
+    char bufferHorasTrabajadas[1000];
+    char bufferSueldo[1000];
+
+    if(!employee_input("ID",bufferId,1000,isValidId))
+    {
+        this = employee_getById(pArrayListEmployee,idIngresado)
+        if(this != NULL &&
+           !employee_input("nombre",bufferName,1000,isValidName) &&
+           !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+            !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+        {
+            employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
+            retorno = 0;
+        }
+        else
+        {
+            printf("\nEl ID ingresado no existe");
+        }
+    }
+    employee_show(this);
     return retorno;
 }
 
@@ -319,3 +421,4 @@ int employee_show(Employee* this)
     }
     return retorno;
 }
+

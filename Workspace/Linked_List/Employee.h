@@ -11,6 +11,8 @@ typedef struct
 Employee* employee_new();
 Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
 int employee_EmployeeFromUser(void* pArrayListEmployee);
+int employee_modify(void* pArrayListEmployee);
+int employee_remove(void* pArrayListEmployee);
 
 int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*));
 int employee_sort(void* thisA,void* thisB);
@@ -28,6 +30,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
 int employee_setSueldo(Employee* this,char* sueldo);
 int employee_getSueldo(Employee* this,float* sueldo);
 
+int employee_setAll(Employee* this,char* name,char* hours,char* salary);
 int employee_searchEmpty(Employee* array[], int size);
 int employee_show(Employee* this);
 

@@ -50,7 +50,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     {
         if(!employee_EmployeeFromUser(pArrayListEmployee))
         {
-            printf("\nEmpleado Aniadidou");
+            printf("\nEmployee added :)");
             retorno = 0;
         }
     }
@@ -66,7 +66,16 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno = -1;
+    if(pArrayListEmployee != NULL)
+    {
+        if(!employee_modify(pArrayListEmployee))
+        {
+            printf("\nEmployee modified :)");
+            retorno = 0;
+        }
+    }
+    return retorno;
 }
 
 /** \brief Baja de empleado
@@ -78,6 +87,16 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_removeEmployee(LinkedList* pArrayListEmployee)
 {
+    int retorno = -1;
+    if(pArrayListEmployee != NULL)
+    {
+        if(!employee_remove(pArrayListEmployee))
+        {
+            printf("\nEmployee removed :(");
+            retorno = 0;
+        }
+    }
+    return retorno;
     return 1;
 }
 
@@ -115,7 +134,18 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
  */
 int controller_sortEmployee(LinkedList* pArrayListEmployee)
 {
-    return 1;
+    int retorno = -1;
+    int i;
+    Employee* employee;
+
+    if(pArrayListEmployee != NULL)
+    {
+        if(!ll_sort(pArrayListEmployee,employee_sort,1))
+        {
+           retorno = 0;
+        }
+    }
+    return retorno;
 }
 
 /** \brief Guarda los datos de los empleados en el archivo data.csv (modo texto).
