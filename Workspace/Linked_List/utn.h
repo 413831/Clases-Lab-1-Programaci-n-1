@@ -2,13 +2,15 @@
 /**
 *Funciones de ENTRADA
 */
+void limpiarPantalla();
+void pause();
 int input_ScanInt(char* mensaje);
 float input_ScanFloat(char* mensaje);
 char input_ScanChar(char* mensaje);
 int input_getString(char input[],int size);
 int input_getLetras(char input[],int size,char mensaje[],char msjError[],int reintentos);
-int input_getEnteros(int* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos);
-int input_getFloat(float* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos);
+int input_getEnteros(int* input,char mensaje[],char msjError[],int reintentos);
+int input_getFloat(float* input,char mensaje[],char msjError[],int reintentos);
 int input_getDNI(char input[],int size,char mensaje[],char msjError[],int reintentos);
 int input_getTelefono(char input[],int size,char mensaje[],char msjError[],int reintentos);
 int input_getCuit(char input[],int size,char mensaje[],char msjError[],int reintentos);

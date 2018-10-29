@@ -3,6 +3,7 @@
 #include "LinkedList.h"
 #include "Controller.h"
 #include "Employee.h"
+#include "utn.h"
 
 /****************************************************
     Menu:
@@ -21,28 +22,128 @@
 int main()
 {
     int option;
+    int counter;
     LinkedList* listaEmpleados = ll_newLinkedList();
+
     do
     {
-        option = 1; //BORRAR
+
+        printf("\n>>MENU<<\n1) Carga de archivo (modo texto)\n2) Carga de archivo (modo binario)");
+        printf("\n3) Alta\n4) Editar\n5) Baja\n6) Listar\n7) Ordenar");
+        printf("\n8) Guardar (modo texto)\n9) Guardar (modo binario)\n10) Salir");
+        input_getEnteros(&option,"\nIngrese opcion: ","\nDato invalido",2);
+
         switch(option)
         {
             case 1:
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                controller_loadFromText("data.csv",listaEmpleados);
+                if(!controller_loadFromText("data.csv",listaEmpleados))
+                {
+                    printf("\nDatos cargados");
+                }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                counter = ll_len(listaEmpleados);
+                break;
             case 2:
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                controller_loadFromBinary("data.csv",listaEmpleados);
+                if(!controller_loadFromBinary("data.csv",listaEmpleados))
+                {
+                    printf("\nDatos cargados");
+                }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-            case 3:
-                controller_addEmployee(listaEmpleados);
-                controller_ListEmployee(listaEmpleados);
-                printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                option = 10; //BORRAR
+                counter = ll_len(listaEmpleados);
                 break;
-
+            case 3: //ALTA
+                if(counter > 0)
+                {
+                    controller_addEmployee(listaEmpleados);
+                    printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                    counter = ll_len(listaEmpleados);
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 4: //MODIFICACION
+                if(counter > 0)
+                {
+                    controller_editEmployee(listaEmpleados);
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 5: //BAJA
+                if(counter > 0)
+                {
+                    controller_removeEmployee(listaEmpleados);
+                    printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                    counter = ll_len(listaEmpleados);
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 6: //LISTAR
+                if(counter > 0)
+                {
+                    controller_ListEmployee(listaEmpleados);
+                    printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 7: //ORDENAR
+                if(counter > 0)
+                {
+                    controller_sortEmployee(listaEmpleados);
+                    printf("\nSize Linked List %d",ll_len(listaEmpleados));
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 8: //GUARDAR TEXTO
+                if(counter > 0)
+                {
+                    if(!controller_saveAsText("data.csv",listaEmpleados))
+                    {
+                        printf("\nArchivo guardado.");
+                    }
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 9: //GUARDAR BINARIO
+                if(counter > 0)
+                {
+                    if(!controller_saveAsBinary("data.csv",listaEmpleados))
+                    {
+                        printf("\nArchivo guardado.");
+                    }
+                }
+                else
+                {
+                    printf("\nNo hay datos cargados");
+                }
+                break;
+            case 10: //SALIR
+                //fcloseall
+                printf("\nSALIR");
+                break;
+            default :
+                printf("\nOpcion incorrecta");
         }
+        pause();
+        limpiarPantalla();
     }while(option != 10);
     return 0;
 }

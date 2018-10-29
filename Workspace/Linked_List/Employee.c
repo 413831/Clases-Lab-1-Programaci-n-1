@@ -45,7 +45,7 @@ static int isValidId(char* id)//CORREGIR
     int retorno = 0;
     int digitosIngresados = strlen(id);
 
-    if(id != NULL && validacion_Int(id,digitosIngresados) && id > '0')
+    if(id != NULL && validacion_Int(id,digitosIngresados) && *id > '0')
     {
         retorno = 1;
     }
@@ -105,7 +105,7 @@ Employee* employee_getById(LinkedList* pArrayListEmployee,int idIngresado)
         {
             auxEmployee = ll_get(pArrayListEmployee,index);//Obtengo el elemento del array en posicion index
             employee_getId(auxEmployee,&auxID);//Obtengo el ID del elemento
-            if(auxID == idIngresado);
+            if(auxID == idIngresado)
             {
                 retorno = auxEmployee;
                 break;
@@ -154,26 +154,53 @@ int employee_setAll(Employee* this,char* name,char* hours,char* salary)
     return retorno;
 }
 
+int employee_getAll(Employee* this,char* name,int* hours,float* salary,int* id)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        employee_getNombre(this,name);
+        employee_getHorasTrabajadas(this,hours);
+        employee_getSueldo(this,salary);
+        employee_getId(this,id);
+        retorno = 0;
+    }
+    return retorno;
+}
+
 int employee_remove(void* pArrayListEmployee)
 {
     Employee* this = NULL;
     int retorno = -1;
-    char* bufferId[1000];
+    char bufferId[1000];
+    int idIngresado;
+    char option[2];
+    int index;
 
-    if(!employee_input("ID",bufferId,1000,isValidId))
+   if(!employee_input("ID",bufferId,1000,isValidId))
     {
-        this = employee_getById(pArrayListEmployee,idIngresado)
+        idIngresado = atoi(bufferId);
+        this = employee_getById(pArrayListEmployee,idIngresado);
         if(this != NULL)
         {
-            employee_delete(this);
-            retorno = 0;
+            employee_show(this);
+            index = ll_indexOf(pArrayListEmployee,this);
+            input_getLetras(option,2,"\nDesea eliminar? S/N","\nError.Dato invalido",2);
+            if(!strcasecmp("s",option))
+            {
+                employee_delete(this);
+                ll_remove(pArrayListEmployee,index);
+
+                retorno = 0;
+            }
         }
         else
         {
             printf("\nEl ID ingresado no existe");
         }
     }
-    employee_show(this);
+    return retorno;
     return retorno;
 }
 
@@ -182,6 +209,7 @@ int employee_modify(void* pArrayListEmployee)
     Employee* this = NULL;
     int retorno = -1;
     int idIngresado;
+    char option[2];
 
     char bufferId[1000];
     char bufferName[1000];
@@ -190,21 +218,27 @@ int employee_modify(void* pArrayListEmployee)
 
     if(!employee_input("ID",bufferId,1000,isValidId))
     {
-        this = employee_getById(pArrayListEmployee,idIngresado)
-        if(this != NULL &&
-           !employee_input("nombre",bufferName,1000,isValidName) &&
-           !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
-            !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+        idIngresado = atoi(bufferId);
+        this = employee_getById(pArrayListEmployee,idIngresado);
+        if(this != NULL)
         {
-            employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
-            retorno = 0;
+            employee_show(this);
+            input_getLetras(option,2,"\nDesea modificar datos? S/N","\nError.Dato invalido",2);
+            if( !strcasecmp("s",option)&&
+                !employee_input("nombre",bufferName,1000,isValidName) &&
+                !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+                !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+            {
+                employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
+                employee_show(this);
+                retorno = 0;
+            }
         }
         else
         {
             printf("\nEl ID ingresado no existe");
         }
     }
-    employee_show(this);
     return retorno;
 }
 
@@ -416,7 +450,7 @@ int employee_show(Employee* this)
         printf("\nID -- %d",auxId);
         printf(" / Nombre -- %s",auxNombre);
         printf(" / Sueldo -- $%.2f",auxSueldo);
-        printf(" / Horas trabajadas -- %d",auxHorasTrabajadas);
+        printf(" / Horas trabajadas -- %dhs",auxHorasTrabajadas);
         retorno = 0;
     }
     return retorno;

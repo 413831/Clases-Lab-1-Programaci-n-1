@@ -10,12 +10,17 @@ static void limpiarMemoria()
     //fflush(stdin);  //WINDOWS
     __fpurge(stdin);  //LINUX
 }
-static void limpiarPantalla()
+void limpiarPantalla()
 {
     //system("cls"); //WINDOWS
     system("clear"); //LINUX
 }
-
+void pause()
+{
+    printf("\nIngrese cualquier tecla para continuar...");
+    limpiarMemoria();
+    getchar();
+}
 /**
  * \brief Solicita un número entero y lo retorna
  * \param *mensaje Es el mensaje para mostrar al usuario
@@ -119,7 +124,6 @@ int input_getLetras(char input[],int size,char mensaje[],char msjError[],int rei
             {
                 printf("%s",msjError);
             }
-
         }while(reintentos >= 0);
     }
     return retorno;
@@ -137,7 +141,7 @@ int input_getLetras(char input[],int size,char mensaje[],char msjError[],int rei
  * \param reintentos Es la cantidad de reintentos posibles para ingresar
  * \return Retorna 0 si se pudo pedir y validar string si no retorna error
  */
-int input_getEnteros(int* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos)
+int input_getEnteros(int* input,char mensaje[],char msjError[],int reintentos)
 {//AGREGAR VALIDACION MINIMO, MAXIMO Y NEGATIVOS
     char buffer[BUFFER];
     int retorno = 1;
@@ -155,15 +159,12 @@ int input_getEnteros(int* input,char mensaje[],char msjError[],int minimo,int ma
                 *input = atoi(buffer);//Se copia string cargado a variable local
                 retorno = 0;
                 break;
-
             }
             else
             {
                 printf("%s",msjError);
             }
-
         }while(reintentos>=0);
-
     }
             return retorno;
 }
@@ -180,7 +181,7 @@ int input_getEnteros(int* input,char mensaje[],char msjError[],int minimo,int ma
  * \return Retorna 0 si se pudo pedir y validar string si no retorna error
  */
 
-int input_getFloat(float* input,char mensaje[],char msjError[],int minimo,int maximo,int reintentos)
+int input_getFloat(float* input,char mensaje[],char msjError[],int reintentos)
 {//NEGATIVOS
     char buffer[BUFFER];
     int retorno = 1;
@@ -203,9 +204,7 @@ int input_getFloat(float* input,char mensaje[],char msjError[],int minimo,int ma
             {
                 printf("%s",msjError);
             }
-
         }while(reintentos>=0);
-
     }
             return retorno;
 }
