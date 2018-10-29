@@ -46,7 +46,7 @@ int main()
                 break;
             case 2:
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                if(!controller_loadFromBinary("data.csv",listaEmpleados))
+                if(!controller_loadFromBinary("data.dat",listaEmpleados))
                 {
                     printf("\nDatos cargados");
                 }
@@ -125,7 +125,7 @@ int main()
             case 9: //GUARDAR BINARIO
                 if(counter > 0)
                 {
-                    if(!controller_saveAsBinary("data.csv",listaEmpleados))
+                    if(!controller_saveAsBinary("data.dat",listaEmpleados))
                     {
                         printf("\nArchivo guardado.");
                     }

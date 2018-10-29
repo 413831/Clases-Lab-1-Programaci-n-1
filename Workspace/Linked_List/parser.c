@@ -139,7 +139,7 @@ int parser_SaveToBinary(FILE* pFile , LinkedList* pArrayListEmployee)
         while(i != len)
         {
             auxEmployee = ll_get(pArrayListEmployee,i);
-            fwrite(auxEmployee,sizeof(Employee),1,pFile);
+            fwrite(auxEmployee,sizeof(Employee*),1,pFile);
             retorno = 0;
             i++;
         }
