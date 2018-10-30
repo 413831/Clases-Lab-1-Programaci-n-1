@@ -24,14 +24,12 @@ struct Node
     struct Node* pNextNode;
 }typedef Node;
 
-struct LinkedList
+struct LinkedList//El nodo es la guia de cada elemento y estan ubicados en lugar no contiguo
 {
     Node* pFirstNode;
     int size;
 }typedef LinkedList;
 #endif
-
-
 
 //Publicas
 LinkedList* ll_newLinkedList(void);

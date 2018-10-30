@@ -247,13 +247,12 @@ int employee_EmployeeFromUser(void* pArrayListEmployee)
     Employee* this = NULL;
     int retorno = -1;
 
-    char bufferId[1000];
+    char bufferId[1000] = {"-1"};
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
-    int auxID = getNextId(pArrayListEmployee);
 
-    sprintf(bufferId,"%d",auxID);//Int Parse to Str
+   // sprintf(bufferId,"%d",auxID);//Int Parse to Str
 
     if( !employee_input("nombre",bufferName,1000,isValidName) &&
         !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
