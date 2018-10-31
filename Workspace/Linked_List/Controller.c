@@ -74,14 +74,12 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
  *
  */
 int controller_editEmployee(LinkedList* pArrayListEmployee)
-{
+{//Agregar SWITCH para opciones
     int retorno = -1;
+
     if(pArrayListEmployee != NULL)
     {
-        employee_modifyAny(pArrayListEmployee,"Modificar nombre",isValidName,employee_setNombre);
-
-
-        if(!employee_modify(pArrayListEmployee))
+        if(!employee_edit(pArrayListEmployee))
         {
             printf("\nEmployee modified :)");
             retorno = 0;

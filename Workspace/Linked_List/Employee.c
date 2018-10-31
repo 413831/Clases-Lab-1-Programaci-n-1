@@ -7,7 +7,7 @@
 
 //El elemento.c es el manager de datos que trabaja directamente con los mismos es el "CÓMO"
 
-int isValidName(char* name)
+static int isValidName(char* name)
 {
     int retorno = 0;
 
@@ -185,7 +185,7 @@ int employee_remove(void* pArrayListEmployee)
 *\param
 *
 */
-int employee_modifyAny(void* pArrayListEmployee,
+int employee_modify(void* pArrayListEmployee,
                         char* mensaje,
                         int (*validacion)(char*),
                         int (*set)(Employee*,char*))//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
@@ -221,41 +221,29 @@ int employee_modifyAny(void* pArrayListEmployee,
     return retorno;
 }
 
-
-
-int employee_modify(void* pArrayListEmployee)//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
+int employee_edit(void* pArrayListEmployee)//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
 {
-    Employee* this = NULL;
     int retorno = -1;
-    int idIngresado;
-    char option[2];
+    int option;
 
-    char bufferId[1000];
-    char bufferName[1000];
-    char bufferHorasTrabajadas[1000];
-    char bufferSueldo[1000];
-
-    if(!input("ID",bufferId,1000,isValidId))
+    if(pArrayListEmployee != NULL)
     {
-        idIngresado = atoi(bufferId);
-        this = employee_getById(pArrayListEmployee,idIngresado);
-        if(this != NULL)
+         printf("\n1) Nombre\n2) Sueldo\3) Horas trabajadas");
+        input_getEnteros(&option,"\nIngrese opcion: ","\nError.Dato invalido",2);
+        switch(option)
         {
-            employee_show(this);
-            input_getLetras(option,2,"\nDesea modificar datos? S/N","\nError.Dato invalido",2);
-            if( !strcasecmp("s",option)&&
-                !input("nombre",bufferName,1000,isValidName) &&
-                !input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
-                !input("sueldo",bufferSueldo,1000,isValidSueldo))
-            {
-                employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
-                employee_show(this);
-                retorno = 0;
-            }
-        }
-        else
-        {
-            printf("\nEl ID ingresado no existe");
+            retorno = 0;
+            case 1 :
+                employee_modify(pArrayListEmployee,"Modificar nombre",isValidName,employee_setNombre);
+                break;
+            case 2 :
+                employee_modify(pArrayListEmployee,"Modificar sueldo",isValidSueldo,employee_setSueldo);
+                break;
+            case 3 :
+                employee_modify(pArrayListEmployee,"Modificar horas trabajadas",isValidHoras,employee_setHorasTrabajadas);
+                break;
+            default :
+                printf("\nOpcion invalida");
         }
     }
     return retorno;

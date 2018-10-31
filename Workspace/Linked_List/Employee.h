@@ -8,14 +8,11 @@ typedef struct
     float sueldo;
 }Employee;
 
-
-int isValidName(char* name);
-
 Employee* employee_new();
 Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
 int employee_EmployeeFromUser(void* pArrayListEmployee);
-int employee_modify(void* pArrayListEmployee);
-int employee_modifyAny(void* pArrayListEmployee,
+int employee_edit(void* pArrayListEmployee);
+int employee_modify(void* pArrayListEmployee,
                         char* mensaje,
                         int (*validacion)(char*),
                         int (*set)(Employee*,char*));

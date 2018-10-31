@@ -18,20 +18,13 @@ int parser_EmployeeFromText(FILE* pFile , LinkedList* pArrayListEmployee)
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
-    int flagOnce = 1;
     Employee* pEmployee;
 
     if(pFile != NULL)
     {
         while(!feof(pFile))
         {
-            if(flagOnce == 1)
-            {
-                fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-                flagOnce = 0;
-            }
             fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-
             pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
             if(pEmployee != NULL)
             {
@@ -58,20 +51,14 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
-    int flagOnce = 1;
     Employee* pEmployee;
 
     if(pFile != NULL)
     {
         while(!feof(pFile))
         {
-            if(flagOnce == 1)
-            {
-                fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-                flagOnce = 0;
-            }
-            fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-
+            pEmployee = employee_new();
+            fread(pEmployee,sizeof(Employee),1,pFile);
             pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
             if(pEmployee != NULL)
             {
@@ -81,7 +68,6 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
         }
     }
     return retorno;
-    return 1;
 }
 
 /** \brief Parsea los datos del linked list al archivo data.csv (modo texto).
@@ -116,8 +102,6 @@ int parser_SaveToText(FILE* pFile , LinkedList* pArrayListEmployee)
     }
     return retorno;
 }
-
-
 
 /** \brief Parsea los datos del linked list al archivo data.csv (modo binario).
  *
