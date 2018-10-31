@@ -12,6 +12,7 @@ Employee* employee_new();
 Employee* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
 int employee_EmployeeFromUser(void* pArrayListEmployee);
 int employee_modify(void* pArrayListEmployee);
+int employee_modifyAny(void* pArrayListEmployee,char* mensaje,int (*validacion)(char*),int (*set)(void*,char*));
 int employee_remove(void* pArrayListEmployee);
 
 int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*));

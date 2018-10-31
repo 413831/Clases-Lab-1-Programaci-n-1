@@ -27,7 +27,6 @@ int main()
 
     do
     {
-
         printf("\n>>MENU<<\n1) Carga de archivo (modo texto)\n2) Carga de archivo (modo binario)");
         printf("\n3) Alta\n4) Editar\n5) Baja\n6) Listar\n7) Ordenar");
         printf("\n8) Guardar (modo texto)\n9) Guardar (modo binario)\n10) Salir");
@@ -136,7 +135,6 @@ int main()
                 }
                 break;
             case 10: //SALIR
-                //fcloseall
                 printf("\nSALIR");
                 break;
             default :
@@ -147,3 +145,8 @@ int main()
     }while(option != 10);
     return 0;
 }
+//Crear funcion mapping (recibe puntero a funcion para modificar X caracteristica del elemento , retorna elemento)
+//Crear un iterador (variable estatica como guía mas variable movible como next)
+//Crear funciones criterio
+//Crear funcion de sublistas
+//Crear controller_init (El start del switch)

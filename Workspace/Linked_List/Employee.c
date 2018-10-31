@@ -5,6 +5,8 @@
 #include <string.h>
 #include "utn.h"
 
+//El elemento.c es el manager de datos que trabaja directamente con los mismos es el "CÓMO"
+
 static int isValidName(char* name)
 {
     int retorno = 0;
@@ -115,30 +117,6 @@ Employee* employee_getById(LinkedList* pArrayListEmployee,int idIngresado)
     return retorno;
 }
 
-int employee_input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
-{
-    int retorno = -1;
-    int reintentos = 2;
-    if(campo != NULL)
-    {
-        do
-        {
-            printf("\nIngrese %s: ",mensaje);
-            input_getString(campo,size);
-            if((*pFunc)(campo))//Validar segun tipo
-            {
-                retorno = 0;
-                break;
-            }
-            else
-            {
-                printf("\nIntente nuevamente");
-            }
-            reintentos--;
-        }while(reintentos > 0);
-    }
-    return retorno;
-}
 
 int employee_setAll(Employee* this,char* name,char* hours,char* salary)
 {
@@ -176,22 +154,18 @@ int employee_remove(void* pArrayListEmployee)
     char bufferId[1000];
     int idIngresado;
     char option[2];
-    int index;
 
-   if(!employee_input("ID",bufferId,1000,isValidId))
+   if(!input("ID",bufferId,1000,isValidId))
     {
         idIngresado = atoi(bufferId);
         this = employee_getById(pArrayListEmployee,idIngresado);
         if(this != NULL)
         {
             employee_show(this);
-            index = ll_indexOf(pArrayListEmployee,this);
-            input_getLetras(option,2,"\nDesea eliminar? S/N","\nError.Dato invalido",2);
+            input_getLetras(option,2,"\nDesea dar de baja? S/N","\nError.Dato invalido",2);
             if(!strcasecmp("s",option))
             {
-                employee_delete(this);
-                ll_remove(pArrayListEmployee,index);
-
+                employee_setId(this,"-1");
                 retorno = 0;
             }
         }
@@ -201,10 +175,55 @@ int employee_remove(void* pArrayListEmployee)
         }
     }
     return retorno;
+}
+
+/**
+*\brief
+*\param
+*\param
+*\param
+*\param
+*
+*/
+int employee_modifyAny(void* pArrayListEmployee,
+                        char* mensaje,
+                        int (*validacion)(char*),
+                        int (*set)(void*,char*))//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
+{
+    Employee* this = NULL;
+    int retorno = -1;
+    int idIngresado;
+    char option[2];
+    char bufferId[1000];
+    char buffer[1000];
+
+    if(!input("ID",bufferId,1000,isValidId))
+    {
+        idIngresado = atoi(bufferId);
+        this = employee_getById(pArrayListEmployee,idIngresado);
+        if(this != NULL)
+        {
+            employee_show(this);
+            input_getLetras(option,2,"\nDesea modificar dato? S/N","\nError.Dato invalido",2);
+            if( !strcasecmp("s",option)&&
+                !input(mensaje,buffer,1000,(*validacion)))
+            {
+                (*set)(this,buffer);
+                employee_show(this);
+                retorno = 0;
+            }
+        }
+        else
+        {
+            printf("\nEl ID ingresado no existe");
+        }
+    }
     return retorno;
 }
 
-int employee_modify(void* pArrayListEmployee)
+
+
+int employee_modify(void* pArrayListEmployee)//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
 {
     Employee* this = NULL;
     int retorno = -1;
@@ -216,7 +235,7 @@ int employee_modify(void* pArrayListEmployee)
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
 
-    if(!employee_input("ID",bufferId,1000,isValidId))
+    if(!input("ID",bufferId,1000,isValidId))
     {
         idIngresado = atoi(bufferId);
         this = employee_getById(pArrayListEmployee,idIngresado);
@@ -225,9 +244,9 @@ int employee_modify(void* pArrayListEmployee)
             employee_show(this);
             input_getLetras(option,2,"\nDesea modificar datos? S/N","\nError.Dato invalido",2);
             if( !strcasecmp("s",option)&&
-                !employee_input("nombre",bufferName,1000,isValidName) &&
-                !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
-                !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+                !input("nombre",bufferName,1000,isValidName) &&
+                !input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+                !input("sueldo",bufferSueldo,1000,isValidSueldo))
             {
                 employee_setAll(this,bufferName,bufferHorasTrabajadas,bufferSueldo);
                 employee_show(this);
@@ -247,18 +266,15 @@ int employee_EmployeeFromUser(void* pArrayListEmployee)
     Employee* this = NULL;
     int retorno = -1;
 
-    char bufferId[1000] = {"-1"};
     char bufferName[1000];
     char bufferHorasTrabajadas[1000];
     char bufferSueldo[1000];
 
-   // sprintf(bufferId,"%d",auxID);//Int Parse to Str
-
-    if( !employee_input("nombre",bufferName,1000,isValidName) &&
-        !employee_input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
-        !employee_input("sueldo",bufferSueldo,1000,isValidSueldo))
+    if( !input("nombre",bufferName,1000,isValidName) &&
+        !input("horas trabajadas",bufferHorasTrabajadas,1000,isValidHoras) &&
+        !input("sueldo",bufferSueldo,1000,isValidSueldo))
     {
-        this = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+        this = employee_newConParametros("0",bufferName,bufferHorasTrabajadas,bufferSueldo);
 
         if(this != NULL)
         {
@@ -295,17 +311,21 @@ int employee_setId(Employee* this,char* id)////////VALIDAR ID INICIAL CONTRA ARC
     static int proximoId=0;
     int auxId = atoi(id);
 
-    if(this!=NULL && auxId==-1)
+    if(this!=NULL && auxId==0)//Se carga primer ID y en el ALTA
     {
         proximoId++;
         this->id=proximoId;
         retorno=0;
     }
-    else if(auxId>proximoId)
+    else if(this!=NULL && auxId>proximoId)//Se comparan los ID al cargar del archivo
     {
         proximoId=auxId;
         this->id=proximoId;
         retorno=0;
+    }
+    else if(this!=NULL && auxId==-1)//Se inhabilita el elemento seteando en -1
+    {
+        this->id=auxId;
     }
     return retorno;
 }

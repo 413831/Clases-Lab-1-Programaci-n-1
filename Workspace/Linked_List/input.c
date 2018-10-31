@@ -64,6 +64,36 @@ char input_ScanChar(char* mensaje)
 }
 
 ///////////////////////////////////////////////////STRINGS/////////////////////////////////////////////////////////////////////////
+
+
+int input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
+{
+    int retorno = -1;
+    int reintentos = 2;
+    if(campo != NULL)
+    {
+        do
+        {
+            printf("\nIngrese %s: ",mensaje);
+            input_getString(campo,size);
+            if((*pFunc)(campo))//Validar segun tipo
+            {
+                retorno = 0;
+                break;
+            }
+            else
+            {
+                printf("\nIntente nuevamente");
+            }
+            reintentos--;
+        }while(reintentos > 0);
+    }
+    return retorno;
+}
+
+
+
+
 /**
  * \brief Solicita un texto al usuario y lo devuelve
  * \param mensaje Es el mensaje a ser mostrado
