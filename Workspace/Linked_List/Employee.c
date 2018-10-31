@@ -7,7 +7,7 @@
 
 //El elemento.c es el manager de datos que trabaja directamente con los mismos es el "CÓMO"
 
-static int isValidName(char* name)
+int isValidName(char* name)
 {
     int retorno = 0;
 
@@ -188,7 +188,7 @@ int employee_remove(void* pArrayListEmployee)
 int employee_modifyAny(void* pArrayListEmployee,
                         char* mensaje,
                         int (*validacion)(char*),
-                        int (*set)(void*,char*))//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
+                        int (*set)(Employee*,char*))//HACER MAS GENERICA MODIFICAR CUALQUIER CAMPO
 {
     Employee* this = NULL;
     int retorno = -1;

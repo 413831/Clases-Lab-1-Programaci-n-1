@@ -78,6 +78,9 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
+        employee_modifyAny(pArrayListEmployee,"Modificar nombre",isValidName,employee_setNombre);
+
+
         if(!employee_modify(pArrayListEmployee))
         {
             printf("\nEmployee modified :)");
@@ -165,7 +168,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path,"w");
     int retorno = -1;
-    if(!parser_SaveToText(pArchivo,pArrayListEmployee))
+    if(pArchivo != NULL && !parser_SaveToText(pArchivo,pArrayListEmployee))
     {
         retorno = 0;
     }
@@ -184,7 +187,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
 {
     FILE* pArchivo = fopen(path,"wb");
     int retorno = -1;
-    if(!parser_SaveToBinary(pArchivo,pArrayListEmployee))
+    if(pArchivo != NULL && !parser_SaveToBinary(pArchivo,pArrayListEmployee))
     {
         retorno = 0;
     }

@@ -90,6 +90,9 @@ int main()
                 if(counter > 0)
                 {
                     controller_ListEmployee(listaEmpleados);
+                    controller_saveAsBinary("data.bin",listaEmpleados);
+
+
                     printf("\nSize Linked List %d",ll_len(listaEmpleados));
                 }
                 else
@@ -145,6 +148,7 @@ int main()
     }while(option != 10);
     return 0;
 }
+//Fabricarse el arhivo binario para cargarlo
 //Crear funcion mapping (recibe puntero a funcion para modificar X caracteristica del elemento , retorna elemento)
 //Crear un iterador (variable estatica como guía mas variable movible como next)
 //Crear funciones criterio
