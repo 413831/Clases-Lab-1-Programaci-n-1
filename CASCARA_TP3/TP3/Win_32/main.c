@@ -24,6 +24,7 @@ int main()
     int option;
     int counter;
     LinkedList* listaEmpleados = ll_newLinkedList();
+    Employee* arrayDismissed[2000];//HARDCODE
 
     do
     {
@@ -77,7 +78,7 @@ int main()
             case 5: //BAJA
                 if(counter > 0)
                 {
-                    controller_removeEmployee(listaEmpleados);
+                    controller_removeEmployee(listaEmpleados,arrayDismissed);
                     printf("\nSize Linked List %d",ll_len(listaEmpleados));
                     counter = ll_len(listaEmpleados);
                 }

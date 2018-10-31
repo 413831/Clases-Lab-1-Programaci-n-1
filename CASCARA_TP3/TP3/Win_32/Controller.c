@@ -97,13 +97,13 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  * \return int
  *
  */
-int controller_removeEmployee(LinkedList* pArrayListEmployee)
+int controller_removeEmployee(LinkedList* pArrayListEmployee,Employee* arrayDismissed[])
 {
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
         printf("\n<BAJA>");
-        if(!employee_remove(pArrayListEmployee))
+        if(!employee_remove(pArrayListEmployee,arrayDismissed))
         {
             printf("\nEmployee removed :(");
             retorno = 0;

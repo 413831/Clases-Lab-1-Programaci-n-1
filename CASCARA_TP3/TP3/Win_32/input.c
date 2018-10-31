@@ -79,7 +79,7 @@ int input(char* mensaje,char* campo,int size, int (*validacion)(char*))
             input_getString(campo,size);
             if((*validacion)(campo))//Validar segun tipo
             {
-                campo = (char*)malloc(strlen(campo));//Ver realloc
+                campo = (char*)realloc(campo,sizeof(char)*strlen(campo));//Ver realloc
                 retorno = 0;
                 break;
             }

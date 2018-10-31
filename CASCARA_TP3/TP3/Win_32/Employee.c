@@ -190,13 +190,14 @@ int employee_getAll(Employee* this,char* name,int* hours,float* salary,int* id)
 *\param pArray Es el array para recorrer
 *\return Retorna 0 si existe el ID sino retorna -1
 */
-int employee_remove(void* pArrayListEmployee)
+int employee_remove(void* pArrayListEmployee,Employee* arrayDismissed[])
 {
     Employee* this = NULL;
     int retorno = -1;
     char bufferId[BUFFER];
     int idIngresado;
     char option[2];
+    int index;
 
    if(!input("ID",bufferId,BUFFER,isValidId))
     {
@@ -208,7 +209,11 @@ int employee_remove(void* pArrayListEmployee)
             input_getLetras(option,2,"\nDesea dar de baja? S/N","\nError.Dato invalido",2);
             if(!strcasecmp("s",option))
             {
-                employee_setId(this,"-1");
+                index = employee_searchEmpty(arrayDismissed);
+                arrayDismissed[index] = this;//Se copia empleado de baja en listado
+                index = ll_indexOf(pArrayListEmployee,this);
+                ll_pop(pArrayListEmployee,index);
+
                 retorno = 0;
             }
         }
@@ -267,30 +272,35 @@ int employee_edit(void* pArrayListEmployee)
     int idIngresado;;
     Employee* this = NULL;
 
-    if(pArrayListEmployee != NULL && !input("ID: ",bufferId,BUFFER,isValidId))
+    if(pArrayListEmployee != NULL && !input("ID",bufferId,BUFFER,isValidId))
     {
         idIngresado = atoi(bufferId);
         this = employee_getById(pArrayListEmployee,idIngresado);
         if(this != NULL)
         {
-            employee_show(this);
-            printf("\n1) Nombre\n2) Sueldo\n3) Horas trabajadas");
-            input_getEnteros(&option,"\nIngrese opcion: ","\nError.Dato invalido",2);
-            switch(option)
+            do
             {
-                retorno = 0;
-                case 1 :
-                    employee_modify(this,"nombre: ",isValidName,employee_setNombre);
-                    break;
-                case 2 :
-                    employee_modify(this,"sueldo: ",isValidSueldo,employee_setSueldo);
-                    break;
-                case 3 :
-                    employee_modify(this,"horas trabajadas: ",isValidHoras,employee_setHorasTrabajadas);
-                    break;
-                default :
-                    printf("\nOpcion invalida");
-            }
+                employee_show(this);
+                printf("\n1) Nombre\n2) Sueldo\n3) Horas trabajadas\n4) Volver");
+                input_getEnteros(&option,"\nIngrese opcion: ","\nError.Dato invalido",2);
+                switch(option)
+                {
+                    retorno = 0;
+                    case 1 :
+                        employee_modify(this,"nombre",isValidName,employee_setNombre);
+                        break;
+                    case 2 :
+                        employee_modify(this,"sueldo",isValidSueldo,employee_setSueldo);
+                        break;
+                    case 3 :
+                        employee_modify(this,"horas trabajadas",isValidHoras,employee_setHorasTrabajadas);
+                        break;
+                    case 4 :
+                        break;
+                    default :
+                        printf("\nOpcion invalida");
+                }
+            }while(option != 4);
         }
         else
         {
@@ -377,10 +387,6 @@ int employee_setId(Employee* this,char* id)////////VALIDAR ID INICIAL CONTRA ARC
         proximoId=auxId;
         this->id=proximoId;
         retorno=0;
-    }
-    else if(this!=NULL && auxId==-1)//Se inhabilita el elemento seteando en -1
-    {
-        this->id=auxId;
     }
     return retorno;
 }
@@ -516,20 +522,21 @@ int employee_getSueldo(Employee* this,float* sueldo)
 *\param size Es el tamaño del array
 *\return Retorna el indice del elemento sino retorna -1
 */
-int employee_searchEmpty(Employee* array[], int size)
+int employee_searchEmpty(Employee* array[])
 {
-    int i;
+    int i=0;
     int retorno =-1;
-    if(array!=NULL && size > 0)
+    if(array!=NULL)
     {
-        for(i=0;i<size;i++)
+        do
         {
-            if(array[i]==NULL)
+           if(array[i]==NULL)
             {
                 retorno=i;
                 break;
             }
-        }
+            i++;
+        }while(array[i]!=NULL);
     }
     return retorno;
 }
@@ -577,16 +584,20 @@ int employee_show(Employee* this)
 
     if(this != NULL)
     {
-        employee_getNombre(this,auxNombre);
-        employee_getSueldo(this,&auxSueldo);
-        employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
         employee_getId(this,&auxId);
+        if(auxId != -1)
+        {
+            employee_getNombre(this,auxNombre);
+            employee_getSueldo(this,&auxSueldo);
+            employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
+            employee_getId(this,&auxId);
 
-        printf("\nID -- %d",auxId);
-        printf(" / Nombre -- %s",auxNombre);
-        printf(" / Sueldo -- $%.2f",auxSueldo);
-        printf(" / Horas trabajadas -- %dhs",auxHorasTrabajadas);
-        retorno = 0;
+            printf("\nID -- %d",auxId);
+            printf(" / Nombre -- %s",auxNombre);
+            printf(" / Sueldo -- $%.2f",auxSueldo);
+            printf(" / Horas trabajadas -- %dhs",auxHorasTrabajadas);
+            retorno = 0;
+        }
     }
     return retorno;
 }
