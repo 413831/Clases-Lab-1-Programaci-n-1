@@ -1,19 +1,19 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "utn.h"
 
-#define BUFFER 4000
+#define BUFFER 1000
 
 static void limpiarMemoria()
 {
-    //fflush(stdin);  //WINDOWS
-    __fpurge(stdin);  //LINUX
+    fflush(stdin);  //WINDOWS
+    //__fpurge(stdin);  //LINUX
 }
 void limpiarPantalla()
 {
-    //system("cls"); //WINDOWS
-    system("clear"); //LINUX
+    system("cls"); //WINDOWS
+    //system("clear"); //LINUX
 }
 void pause()
 {
@@ -66,18 +66,20 @@ char input_ScanChar(char* mensaje)
 ///////////////////////////////////////////////////STRINGS/////////////////////////////////////////////////////////////////////////
 
 
-int input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
+int input(char* mensaje,char* campo,int size, int (*validacion)(char*))
 {
     int retorno = -1;
     int reintentos = 2;
+
     if(campo != NULL)
     {
         do
         {
             printf("\nIngrese %s: ",mensaje);
             input_getString(campo,size);
-            if((*pFunc)(campo))//Validar segun tipo
+            if((*validacion)(campo))//Validar segun tipo
             {
+                campo = (char*)realloc(campo,sizeof(char)*strlen(campo));//Ver realloc
                 retorno = 0;
                 break;
             }
@@ -90,8 +92,6 @@ int input(char* mensaje,char* campo,int size, int (*pFunc)(char*))
     }
     return retorno;
 }
-
-
 
 
 /**

@@ -4,7 +4,7 @@
 */
 void limpiarPantalla();
 void pause();
-int input(char* mensaje,char* campo,int size, int (*pFunc)(char*));
+int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
 int input_ScanInt(char* mensaje);
 float input_ScanFloat(char* mensaje);
 char input_ScanChar(char* mensaje);

@@ -57,6 +57,7 @@ int controller_addEmployee(LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
+        printf("\n<ALTA>");
         if(!employee_EmployeeFromUser(pArrayListEmployee))
         {
             printf("\nEmployee added :)");
@@ -79,6 +80,7 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
 
     if(pArrayListEmployee != NULL)
     {
+        printf("\n<MODIFICAR DATOS>");
         if(!employee_edit(pArrayListEmployee))
         {
             printf("\nEmployee modified :)");
@@ -95,12 +97,13 @@ int controller_editEmployee(LinkedList* pArrayListEmployee)
  * \return int
  *
  */
-int controller_removeEmployee(LinkedList* pArrayListEmployee)
+int controller_removeEmployee(LinkedList* pArrayListEmployee,Employee* arrayDismissed[])
 {
     int retorno = -1;
     if(pArrayListEmployee != NULL)
     {
-        if(!employee_remove(pArrayListEmployee))
+        printf("\n<BAJA>");
+        if(!employee_remove(pArrayListEmployee,arrayDismissed))
         {
             printf("\nEmployee removed :(");
             retorno = 0;
@@ -123,14 +126,18 @@ int controller_ListEmployee(LinkedList* pArrayListEmployee)
     int i;
     Employee* employee;
 
-    for(i=0;i<ll_len(pArrayListEmployee);i++)
+    if(pArrayListEmployee != NULL)
     {
-        employee = ll_get(pArrayListEmployee,i);
-        if(employee != NULL)
+        printf("\n<LISTAR>");
+        for(i=0;i<ll_len(pArrayListEmployee);i++)
         {
-            employee_show(employee);
+            employee = ll_get(pArrayListEmployee,i);
+            if(employee != NULL)
+            {
+                employee_show(employee);
+            }
+            retorno = 0;
         }
-        retorno = 0;
     }
     return retorno;
 }
@@ -168,6 +175,7 @@ int controller_saveAsText(char* path , LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArchivo != NULL && !parser_SaveToText(pArchivo,pArrayListEmployee))
     {
+        printf("\n<GUARDAR TEXTO>");
         retorno = 0;
     }
     fclose(pArchivo);
@@ -187,6 +195,7 @@ int controller_saveAsBinary(char* path , LinkedList* pArrayListEmployee)
     int retorno = -1;
     if(pArchivo != NULL && !parser_SaveToBinary(pArchivo,pArrayListEmployee))
     {
+        printf("\n<GUARDAR BINARIO>");
         retorno = 0;
     }
     fclose(pArchivo);

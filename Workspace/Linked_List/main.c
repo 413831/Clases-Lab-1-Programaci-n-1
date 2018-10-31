@@ -1,4 +1,4 @@
-#include <stdio_ext.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include "LinkedList.h"
 #include "Controller.h"
@@ -24,6 +24,7 @@ int main()
     int option;
     int counter;
     LinkedList* listaEmpleados = ll_newLinkedList();
+    Employee* arrayDismissed[2000];//HARDCODE
 
     do
     {
@@ -77,7 +78,7 @@ int main()
             case 5: //BAJA
                 if(counter > 0)
                 {
-                    controller_removeEmployee(listaEmpleados);
+                    controller_removeEmployee(listaEmpleados,arrayDismissed);
                     printf("\nSize Linked List %d",ll_len(listaEmpleados));
                     counter = ll_len(listaEmpleados);
                 }
@@ -90,9 +91,6 @@ int main()
                 if(counter > 0)
                 {
                     controller_ListEmployee(listaEmpleados);
-                    controller_saveAsBinary("data.bin",listaEmpleados);
-
-
                     printf("\nSize Linked List %d",ll_len(listaEmpleados));
                 }
                 else
