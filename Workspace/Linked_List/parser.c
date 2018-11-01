@@ -4,6 +4,8 @@
 #include "Employee.h"
 #include "parser.h"
 
+#define BUFFER 1000
+
 /** \brief Parsea los datos los datos de los empleados desde el archivo data.csv (modo texto).
  *
  * \param path char*
@@ -48,6 +50,7 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
     int retorno = -1;
     int cantidadLeida;
     Employee* pEmployee;
+    Employee* aux = employee_new();
 
     if(pFile != NULL)
     {
@@ -57,11 +60,12 @@ int parser_EmployeeFromBinary(FILE* pFile , LinkedList* pArrayListEmployee)
             cantidadLeida = fread(pEmployee,sizeof(Employee),1,pFile);
             if(pEmployee != NULL && cantidadLeida == 1)
             {
+                employee_setId(aux,0);
                 ll_add(pArrayListEmployee,pEmployee);//Se agrega ELEMENTO a LINKED LIST
                 retorno = 0;
             }
         }
-
+        employee_delete(aux);
     }
     return retorno;
 }
