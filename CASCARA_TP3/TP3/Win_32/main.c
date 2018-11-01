@@ -22,7 +22,8 @@
 int main()
 {
     int option;
-    int counter;
+    int counter = 0;
+    int flag = 0;
     LinkedList* listaEmpleados = ll_newLinkedList();
     Employee* arrayDismissed[2000];//HARDCODE
 
@@ -35,23 +36,46 @@ int main()
 
         switch(option)
         {
-            case 1:
+            case 1: //CARGA TEXTO
+                //BUSCAR FUNCION PARA BORRAR
+                if(flag == 1)
+                {
+                    printf("\nCarga realizada previamente modo texto");
+                    break;
+                }
+                else if(flag == 2)
+                {
+                    printf("\nCarga realizada previamente modo binario");
+                    break;
+                }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
                 if(!controller_loadFromText("data.csv",listaEmpleados))
                 {
                     printf("\nDatos cargados");
+                    counter = ll_len(listaEmpleados);
+                    flag = 1;
                 }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                counter = ll_len(listaEmpleados);
                 break;
-            case 2:
+            case 2: // CARGA BINARIO
+                if(flag == 1)
+                {
+                    printf("\nCarga realizada previamente modo texto");
+                    break;
+                }
+                else if(flag == 2)
+                {
+                    printf("\nCarga realizada previamente modo binario");
+                    break;
+                }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
                 if(!controller_loadFromBinary("data.bin",listaEmpleados))
                 {
                     printf("\nDatos cargados");
+                    counter = ll_len(listaEmpleados);
+                    flag = 2;
                 }
                 printf("\nSize Linked List %d",ll_len(listaEmpleados));
-                counter = ll_len(listaEmpleados);
                 break;
             case 3: //ALTA
                 if(counter > 0)
