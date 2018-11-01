@@ -33,7 +33,7 @@ int employee_getHorasTrabajadas(Employee* this,int* horasTrabajadas);
 int employee_setSueldo(Employee* this,char* sueldo);
 int employee_getSueldo(Employee* this,float* sueldo);
 
-int employee_setAll(Employee* this,char* name,char* hours,char* salary);
+int employee_setAll(Employee* this,char* name,int* hours,float* salary,int* id);
 int employee_getAll(Employee* this,char* name,int* hours,float* salary,int* id);
 
 int employee_searchEmpty(Employee* array[]);

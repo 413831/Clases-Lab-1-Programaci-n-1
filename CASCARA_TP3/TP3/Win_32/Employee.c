@@ -148,7 +148,7 @@ Employee* employee_getById(LinkedList* pArrayListEmployee,int idIngresado)
 *\param salary Es el dato para setear el campo salario
 *\return Retorna 0 si existe el elemento sino retorna -1
 */
-int employee_setAll(Employee* this,char* name,char* hours,char* salary)
+int employee_setAll(Employee* this,char* name,int* hours,float* salary,int* id)
 {
     int retorno = -1;
 
@@ -278,9 +278,10 @@ int employee_edit(void* pArrayListEmployee)
         this = employee_getById(pArrayListEmployee,idIngresado);
         if(this != NULL)
         {
+             employee_show(this);
             do
             {
-                employee_show(this);
+
                 printf("\n1) Nombre\n2) Sueldo\n3) Horas trabajadas\n4) Volver");
                 input_getEnteros(&option,"\nIngrese opcion: ","\nError.Dato invalido",2);
                 switch(option)
