@@ -56,14 +56,21 @@ static Node* getNode(LinkedList* this, int nodeIndex)
     Node* pNode = NULL;//variable auxiliar
     int i;
 
-    if(this != NULL && nodeIndex >= 0 && nodeIndex < ll_len(this))
+    printf("\n\n NODE INDEX %d",nodeIndex);
+    printf("\n PASO 1");
+    if(this != NULL  &&
+       nodeIndex >= 0 &&
+       nodeIndex < this->size)
     {
+        printf("\n PASO 2");
         pNode = this->pFirstNode;//primer nodo
         for(i=0;i!=nodeIndex;i++)
         {   //posicion i
             pNode = pNode->pNextNode;
+            printf("\n PASO 3");
         }
     }
+    printf("\n NODE %p - INDEX %d",pNode,nodeIndex);
     return pNode;
 }
 
@@ -96,37 +103,51 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     Node* newNode = (Node*)malloc(sizeof(Node)*1);//variable auxiliar
     newNode->pElement = pElement;
     newNode->pNextNode = NULL;
-    Node* pNode = NULL;
+    Node* pNode = (Node*)malloc(sizeof(Node)*1);;
+    static int contador = 0;
 
-    if(this != NULL && newNode != NULL && nodeIndex >= 0 && nodeIndex < ll_len(this))
+    if(this != NULL && newNode != NULL)
     {
-        pNode = getNode(this,nodeIndex);//Obtengo nodo del indice
+        this->size=+1;
+        contador++;
+        printf("\n----------------------\n TEST %d\n",contador);
+        printf("\n\n DIR LINKEDLIST %p",this);
+        printf("\n SIZE LINKEDLIST: %d",ll_len(this));
+        printf("\n INDEX %d",nodeIndex);
+        printf("\n NEW NODE %p",newNode);
+        printf("\n ELEMENT %p",pElement);
+        pNode = getNode(this,nodeIndex);
+        printf("\n NODE to move %p",pNode);
 
-        if(pNode != NULL && nodeIndex == 0 && pNode->pNextNode != NULL)//Primer nodo
+        //Obtengo nodo del indice
+
+        if( pNode == NULL &&
+           nodeIndex == 0 )//Primer nodo
         {
-            this->size=+1;
-            newNode->pNextNode = pNode->pNextNode;
-            pNode->pNextNode = newNode;
+            newNode->pNextNode = NULL;
+            this->pFirstNode = newNode;
+            printf("\n NODE ADDED %p",this->pFirstNode);
+            printf("\n NODE MOVED %p",newNode->pNextNode);
         }
 
-   /*     if(pNode != NULL && pNode->pNextNode != NULL && nodeIndex > 0 && nodeIndex < ll_len(this))//En el medio
+        if(pNode != NULL &&
+                nodeIndex == 0)//En el medio
         {
-            newNode->pNextNode = pNode->pNextNode;
-            pNode->pNextNode = newNode;
+            newNode->pNextNode = pNode;
+            this->pFirstNode = newNode;
+            printf("\n NODE ADDED %p",this->pFirstNode);
+            printf("\n NODE MOVED %p",newNode->pNextNode);
         }
 
-        if(pNode != NULL && pNode->pNextNode == NULL && nodeIndex == ll_len(this))//Ultimo nodo
+    /*     if(pNode != NULL && pNode->pNextNode == NULL && nodeIndex == this->size)//Ultimo nodo
         {
             newNode->pNextNode = NULL;
             pNode->pNextNode = newNode;
-        }
+            printf("\n NODE ADDED %p",pNode->pNextNode);
+            printf("\n NODE MOVED %p",newNode->pNextNode);
+        }*/
 
-        if(pNode == NULL && nodeIndex == 0)//No hay nodos
-        {
-
-        }
-*/
-       returnAux = 0;
+        returnAux = 0;
     }
     return returnAux;
 }
