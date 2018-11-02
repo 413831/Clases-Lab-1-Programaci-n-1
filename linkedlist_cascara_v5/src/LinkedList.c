@@ -120,32 +120,30 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         printf("\n NODE to move %p",pNode);
 
         //Obtengo nodo del indice
-
         if( pNode == NULL &&
            nodeIndex == 0 )//Primer nodo
         {
             newNode->pNextNode = NULL;
             this->pFirstNode = newNode;
-            printf("\n NODE ADDED %p",this->pFirstNode);
+            printf("\n NODE ADDED (1) %p",newNode);
             printf("\n NODE MOVED %p",newNode->pNextNode);
         }
 
-        if(pNode != NULL &&
-                nodeIndex == 0)//En el medio
+         if(pNode != NULL && pNode->pNextNode == NULL)//Ultimo nodo
         {
             newNode->pNextNode = pNode;
-            this->pFirstNode = newNode;
-            printf("\n NODE ADDED %p",this->pFirstNode);
-            printf("\n NODE MOVED %p",newNode->pNextNode);
+            printf("\n NODE ADDED (2) %p",newNode);
+            printf("\n NODE MOVED %p",pNode);
         }
 
-    /*     if(pNode != NULL && pNode->pNextNode == NULL && nodeIndex == this->size)//Ultimo nodo
+
+        if(pNode != NULL && pNode->pNextNode != NULL)//En el medio
         {
-            newNode->pNextNode = NULL;
-            pNode->pNextNode = newNode;
-            printf("\n NODE ADDED %p",pNode->pNextNode);
-            printf("\n NODE MOVED %p",newNode->pNextNode);
-        }*/
+            newNode->pNextNode = pNode->pNextNode;
+            printf("\n NODE ADDED (3) %p",newNode);
+            printf("\n NODE MOVED %p",pNode);
+        }
+
 
         returnAux = 0;
     }
