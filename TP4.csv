@@ -1,0 +1,13 @@
+>>TP4
+>>Desarrollo guiado por casos de prueba
+
+-Se programa codigo para probar funcionalidad con casos de prueba(Se prueban los "limites", se cargan NULL, valores invalidos, etc)
+-Respetar el orden de cada caso e informar
+-Atencion con punteros a NULL por Segmentation Fault
+
+
+>>Linkedlist
+
+add_Agregar nodo en cualquier lugar-> comienzo, mitdad, final.Siempre comparando contra el size del Linkedlist.
+
+get_Recorre cada uno de los nodos uno por uno
