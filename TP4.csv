@@ -6,8 +6,53 @@
 -Atencion con punteros a NULL por Segmentation Fault
 
 
->>Linkedlist
+>>Linkedlist (Simplemente Enlazada)
 
-add_Agregar nodo en cualquier lugar-> comienzo, mitdad, final.Siempre comparando contra el size del Linkedlist.
+add_Agregar nodo en cualquier lugar-> comienzo, mitad, final.Siempre comparando contra el size del Linkedlist.
 
 get_Recorre cada uno de los nodos uno por uno
+
+
+-El LinkedList consiste de DOS estructuras
+1) Linked List
+2) Node
+
+---------------------------------------------------------------------
+Linked List
+-pFirstNode (Es el primer nodo de la lista, el cual apunta a NULL)
+-size (Es la cantidad de nodos contenidos en la lista)
+
+Al crear la lista se asigna NULL al pFirstNode y 0 al size.
+0 Nodos = 0 size.
+La posicion 0 del array es la que apunta al pFirstNode al cual se accede desde la estructura Linked List.
+--------------------------------------------------------------------
+Node
+-Element
+-NextNode
+
+Al crear la Linked List esta estructura NO EXISTE, por lo tanto recien se creará al cargar el primer nodo.
+Este Node pasará a ocupar la funcion y lugar del pFirstNode, apuntando a NULL.
+Entonces:
+              index0   index1
+LinkedList->pFirstNode->NULL == LinkedList->Node->NULL
+
+El campo Element recibe un puntero a un elemento que es contenido por la estructura Node.
+-Element => Puntero a elemento.
+-NextNode => Puntero al siguiente nodo.
+--------------------------------------------------------------------
+La LinkedList como tal se conforma por una indexación por medio de punteros los cuales apuntan a espacios de memoria que pueden ser o no contiguos.
+
+LinkedList->Nodo->Nodo->-Nodo->NULL
+					index 0				index 1
+LinkedList->(Element | NextNode)->(Element | NextNode)->NULL
+
+Existen 2 nodos por lo que el size del LinkedList debe ser 2.
+
+
+
+
+
+
+
+
+
