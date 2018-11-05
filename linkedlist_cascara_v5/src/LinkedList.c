@@ -60,7 +60,7 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 
     printf("\n\n NODE INDEX %d",nodeIndex);
     printf("\n PASO 1");
-    if(this != NULL  && nodeIndex == 0 || nodeIndex > 0 && nodeIndex < ll_len(this) )
+    if((this != NULL && nodeIndex == 0) || (nodeIndex > 0 && nodeIndex < ll_len(this)))
     {
         printf("\n PASO 2");
         pNode = this->pFirstNode;//primer nodo
@@ -120,32 +120,38 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         this->size = ll_len(this);
 
         //Obtengo nodo del indice
-        if( pNode == NULL &&
-           nodeIndex == 0 )//Primer nodo
+        if( pNode == NULL && nodeIndex == 0 )//Primer nodo
         {
-            newNode->pNextNode = NULL;//Enlazo el nuevo nodo con el nodo del indice NULL(el primero)
-            this->pFirstNode = newNode;//Enlazo el nuevo nodo como primer nodo del linked list
+            printf("\n>>>>%sENTRO IF 1",KCYN);
             this->size=+1;
+            this->pFirstNode = newNode;
+            newNode->pNextNode = NULL;//Enlazo el nuevo nodo con el nodo del indice NULL(el primero)
+            //Enlazo el nuevo nodo como primer nodo del linked list
             printf("\n%s NODE ADDED (1) %p",KCYN,newNode);
             printf("\n%s NODE MOVED %p%s",KCYN,newNode->pNextNode,KNRM);
+            returnAux = 0;
         }
         else if(pNode != NULL && pNode->pNextNode != NULL)//Medio
         {
-            this->size=+3;
-            newNode->pNextNode = pNode;//Enlazo el nuevo nodo en lugar del nodo del indice
+            printf("\n>>>>%sENTRO IF 2",KCYN);
+            this->size=+1;
+            newNode->pNextNode = pNode->pNextNode;//Enlazo el nuevo nodo en lugar del nodo del indice
+            pNode->pNextNode = newNode;
             printf("\n%s NODE ADDED (2) %p",KCYN,newNode);
             printf("\n%s NODE MOVED %p%s",KCYN,pNode,KNRM);
+            returnAux = 0;
         }
         else if(pNode != NULL && pNode->pNextNode == NULL)//Ultimo nodo
         {
-            this->size=+2;
+            printf("\n>>>>%sENTRO IF 3",KCYN);
+            this->size=+1;
             pNode->pNextNode = newNode;
             newNode->pNextNode = NULL;//Enlazo el nuevo nodo en lugar del ultimo nodo
             printf("\n%s NODE ADDED (3) %p",KCYN,newNode);
             printf("\n%s NODE MOVED %p%s",KCYN,pNode,KNRM);
+            returnAux = 0;
         }
         printf("\n Size of LinkedList After-> %d",ll_len(this));
-        returnAux = 0;
     }
     return returnAux;
 }

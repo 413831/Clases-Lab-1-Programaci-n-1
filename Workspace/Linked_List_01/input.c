@@ -65,14 +65,6 @@ char input_ScanChar(char* mensaje)
 
 ///////////////////////////////////////////////////STRINGS/////////////////////////////////////////////////////////////////////////
 
-
-funcion///Direccion la funcion
-
-funcion()///Se activa la funcion
-
-(*funcion)///Puntero a la funcion
-
-
 int input(char* mensaje,char* campo,int size, int (*validacion)(char*))
 {
     int retorno = -1;

@@ -48,6 +48,9 @@
 		<Unit filename="../Workspace/Memoria_dinamica/validacion.c">
 			<Option compilerVar="CC" />
 		</Unit>
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
 		<Extensions>
 			<envvars />
 			<code_completion />
