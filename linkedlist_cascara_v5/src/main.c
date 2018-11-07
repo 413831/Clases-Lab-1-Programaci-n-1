@@ -30,7 +30,11 @@ int main(void)
         startTesting(2);  // ll_len
         startTesting(3);  // getNode - test_getNode
         startTesting(4);  // addNode - test_addNode
+<<<<<<< HEAD
         startTesting(5);  // ll_add
+=======
+/*      startTesting(5);  // ll_add
+>>>>>>> 59bb2ec2a2b47a0b7cdadadeec1372f31303f038
         startTesting(6);  // ll_get
         startTesting(7);  // ll_set
         startTesting(8);  // ll_remove
