@@ -3,8 +3,6 @@
 #include <string.h>
 #include "../inc/LinkedList.h"
 
-#define KNRM  "\x1B[0m"
-#define KCYN  "\x1B[36m"
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
@@ -57,26 +55,15 @@ static Node* getNode(LinkedList* this, int nodeIndex)
 {
     Node* pNode = NULL;//variable auxiliar
     int i;
-<<<<<<< HEAD
 
     if(this != NULL && ll_len(this) > 0 && nodeIndex < ll_len(this) && nodeIndex >= 0)
     {
-=======
-
-    printf("\n\n NODE INDEX %d",nodeIndex);
-    printf("\n PASO 1");
-    if((this != NULL && nodeIndex == 0) || (nodeIndex > 0 && nodeIndex < ll_len(this)))
-    {
-        printf("\n PASO 2");
->>>>>>> 59bb2ec2a2b47a0b7cdadadeec1372f31303f038
         pNode = this->pFirstNode;//primer nodo
         for(i=0;i!=nodeIndex;i++)
         {   //posicion i
             pNode = pNode->pNextNode;
-            printf("\n PASO 3");
         }
     }
-    printf("\n NODE %p - INDEX %d",pNode,nodeIndex);
     return pNode;
 }
 
@@ -107,7 +94,6 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
     int returnAux = -1;
     Node* newNode = (Node*)malloc(sizeof(Node)*1);//variable auxiliar
-<<<<<<< HEAD
     Node* currentNode;
     Node* previousNode;
     static int contador = 0;
@@ -177,59 +163,6 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
             returnAux = 0;
         }
 
-=======
-    newNode->pElement = pElement;
-    newNode->pNextNode = NULL;
-    Node* pNode = (Node*)malloc(sizeof(Node)*1);;
-    static int contador = 0;
-
-    if(this != NULL && newNode != NULL)
-    {
-        contador++;
-        printf("\n----------------------\n TEST %d\n",contador);
-        printf("\n\n Memory address LINKEDLIST-> %p",this);
-        printf("\n Size of LINKEDLIST Before-> %d",ll_len(this));
-        printf("\n Index to add element-> %d",nodeIndex);
-        printf("\n Memory address NEW NODE-> %p",newNode);
-        printf("\n Memory Element-> %p",pElement);
-        pNode = getNode(this,nodeIndex);
-        printf("\n NODE to move-> %p",pNode);
-        this->size = ll_len(this);
-
-        //Obtengo nodo del indice
-        if( pNode == NULL && nodeIndex == 0 )//Primer nodo
-        {
-            printf("\n>>>>%sENTRO IF 1",KCYN);
-            this->size=+1;
-            this->pFirstNode = newNode;
-            newNode->pNextNode = NULL;//Enlazo el nuevo nodo con el nodo del indice NULL(el primero)
-            //Enlazo el nuevo nodo como primer nodo del linked list
-            printf("\n%s NODE ADDED (1) %p",KCYN,newNode);
-            printf("\n%s NODE MOVED %p%s",KCYN,newNode->pNextNode,KNRM);
-            returnAux = 0;
-        }
-        else if(pNode != NULL && pNode->pNextNode != NULL)//Medio
-        {
-            printf("\n>>>>%sENTRO IF 2",KCYN);
-            this->size=+1;
-            newNode->pNextNode = pNode->pNextNode;//Enlazo el nuevo nodo en lugar del nodo del indice
-            pNode->pNextNode = newNode;
-            printf("\n%s NODE ADDED (2) %p",KCYN,newNode);
-            printf("\n%s NODE MOVED %p%s",KCYN,pNode,KNRM);
-            returnAux = 0;
-        }
-        else if(pNode != NULL && pNode->pNextNode == NULL)//Ultimo nodo
-        {
-            printf("\n>>>>%sENTRO IF 3",KCYN);
-            this->size=+1;
-            pNode->pNextNode = newNode;
-            newNode->pNextNode = NULL;//Enlazo el nuevo nodo en lugar del ultimo nodo
-            printf("\n%s NODE ADDED (3) %p",KCYN,newNode);
-            printf("\n%s NODE MOVED %p%s",KCYN,pNode,KNRM);
-            returnAux = 0;
-        }
-        printf("\n Size of LinkedList After-> %d",ll_len(this));
->>>>>>> 59bb2ec2a2b47a0b7cdadadeec1372f31303f038
     }
     return returnAux;
 }
@@ -430,12 +363,18 @@ int ll_indexOf(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
     int index;
+    Node* auxNode;
 
-    if(this != NULL && pElement != NULL)
+    if(this != NULL)
     {
-        for()
-
-
+        for(index=0;index<ll_len(this);index++)
+        {
+            auxNode = getNode(this,index);
+            if(auxNode->pElement == pElement)
+            {
+                returnAux = index;
+            }
+        }
     }
 
     return returnAux;
@@ -453,6 +392,15 @@ int ll_isEmpty(LinkedList* this)
 {
     int returnAux = -1;
 
+    if(this != NULL && this->pFirstNode != NULL)
+    {
+        returnAux = 0;
+    }
+    else if(this != NULL && this->pFirstNode == NULL)
+    {
+        returnAux = 1;
+    }
+
     return returnAux;
 }
 
@@ -469,6 +417,13 @@ int ll_push(LinkedList* this, int index, void* pElement)
 {
     int returnAux = -1;
 
+    if(this != NULL && index >= 0 && index <= ll_len(this))
+    {
+        if(!addNode(this,index,pElement))
+        {
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
@@ -484,6 +439,12 @@ int ll_push(LinkedList* this, int index, void* pElement)
 void* ll_pop(LinkedList* this,int index)
 {
     void* returnAux = NULL;
+
+    if(this != NULL && index >= 0 && index <= ll_len(this))
+    {
+        returnAux = ll_get(this,index);
+        ll_remove(this,index);
+    }
 
     return returnAux;
 }
@@ -501,6 +462,17 @@ int ll_contains(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
 
+    if(this != NULL)
+    {
+        if(ll_indexOf(this,pElement) == -1)
+        {
+            returnAux = 0;
+        }
+        else if(ll_indexOf(this,pElement) >= 0)
+        {
+            returnAux = 1;
+        }
+    }
     return returnAux;
 }
 
@@ -516,6 +488,22 @@ int ll_contains(LinkedList* this, void* pElement)
 int ll_containsAll(LinkedList* this,LinkedList* this2)
 {
     int returnAux = -1;
+    int index;
+    void* auxElement;
+
+    if(this != NULL && this2 != NULL)
+    {
+        returnAux = 1;
+        for(index=0;index<ll_len(this2);index++)
+        {
+            auxElement=ll_get(this2,index);
+
+            if(!ll_contains(this,auxElement))
+            {
+                returnAux = 0;
+            }
+        }
+    }
 
     return returnAux;
 }
@@ -533,6 +521,15 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 LinkedList* ll_subList(LinkedList* this,int from,int to)
 {
     LinkedList* cloneArray = NULL;
+
+
+    for(from;from<to;from++)
+    {
+        ll_get(this,from);
+
+    }
+
+
 
     return cloneArray;
 }
