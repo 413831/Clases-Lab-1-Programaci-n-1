@@ -56,7 +56,7 @@ static Node* getNode(LinkedList* this, int nodeIndex)
     Node* pNode = NULL;//variable auxiliar
     int i;
 
-    if(this != NULL && nodeIndex >= 0 && nodeIndex < ll_len(this))
+    if(this != NULL && ll_len(this) > 0 && nodeIndex < ll_len(this) && nodeIndex >= 0)
     {
         pNode = this->pFirstNode;//primer nodo
         for(i=0;i!=nodeIndex;i++)
@@ -94,39 +94,75 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
     int returnAux = -1;
     Node* newNode = (Node*)malloc(sizeof(Node)*1);//variable auxiliar
-    newNode->pElement = pElement;
-    newNode->pNextNode = NULL;
-    Node* pNode = NULL;
+    Node* currentNode;
+    Node* previousNode;
+    static int contador = 0;
 
-    if(this != NULL && newNode != NULL && nodeIndex >= 0 && nodeIndex < ll_len(this))
+    if(this!= NULL && nodeIndex >= 0 && nodeIndex <= ll_len(this) )
     {
-        pNode = getNode(this,nodeIndex);//Obtengo nodo del indice
+        contador++;
+        printf("\n----------------------\n TEST %d\n",contador);
+        printf("\n\n DIR LINKEDLIST %p",this);
+        printf("\n SIZE LINKEDLIST: %d",ll_len(this));
+        printf("\n INDEX %d",nodeIndex);
+        printf("\n NEW NODE %p",newNode);
+        printf("\n ELEMENT %p",pElement);
 
-        if(pNode != NULL && nodeIndex == 0 && pNode->pNextNode != NULL)//Primer nodo
+        if(this->pFirstNode == NULL && nodeIndex == 0 )//Primer nodo
         {
-            this->size=+1;
-            newNode->pNextNode = pNode->pNextNode;
-            pNode->pNextNode = newNode;
+            //El Tempranero
+            this->pFirstNode = newNode;//Se reemplaza NULL por el NUEVO NODO
+            newNode->pElement = pElement;//Se carga el elemento
+
+            this->size = ll_len(this) + 1;//Se incrementa en 1 el size
+            printf("\n NODE ADDED (1) %p",newNode);
+            printf("\n NODE MOVED %p",newNode->pNextNode);
+            returnAux = 0;
+        }
+        else if(this->pFirstNode != NULL && nodeIndex == 0)//Nodo al comienzo
+        {
+            //El Correcto
+            previousNode = this->pFirstNode;//Se el primer nodo en variable auxiliar
+            this->pFirstNode = newNode;//Se enlaza NUEVO NODO al comienzo de la LinkedList
+
+            newNode->pNextNode = previousNode;//Se MUEVE primer nodo al siguiente del NUEVO NODO
+            newNode->pElement = pElement;
+
+            this->size = ll_len(this) + 1;
+            printf("\n NODE ADDED (1) %p",newNode);
+            printf("\n NODE MOVED %p",newNode->pNextNode);
+            returnAux = 0;
+        }
+        else if(this->pFirstNode != NULL && nodeIndex > 0 && nodeIndex < ll_len(this))//Medio
+        {
+            //El Sanguchito
+            currentNode = getNode(this,nodeIndex);//Get del NODO a reemplazar
+            previousNode = getNode(this,nodeIndex-1);//Get del NODO anterior al que reemplazo
+
+            newNode->pNextNode = currentNode;//Muevo el NODO del INDICE al siguiente del NUEVO NODO
+            newNode->pElement = pElement;//Asigno elemento
+            previousNode->pNextNode = newNode;//Asigno al NODO ANTERIOR el NUEVO NODO como siguiente
+
+            this->size = ll_len(this) + 1;
+            printf("\n NODE ADDED (2) %p",newNode);
+            printf("\n NODE MOVED %p",currentNode);
+            returnAux = 0;
+        }
+        else if(this->pFirstNode != NULL && nodeIndex==ll_len(this))//Nodo al final
+        {
+            //El Colado
+            currentNode = getNode(this,nodeIndex -1 );
+            currentNode->pNextNode = newNode;
+
+            newNode->pElement = pElement;
+       //     newNode->pNextNode = NULL;
+
+            this->size = ll_len(this) + 1;
+            printf("\n NODE ADDED (3) %p",newNode);
+            printf("\n NODE MOVED %p",currentNode);
+            returnAux = 0;
         }
 
-   /*     if(pNode != NULL && pNode->pNextNode != NULL && nodeIndex > 0 && nodeIndex < ll_len(this))//En el medio
-        {
-            newNode->pNextNode = pNode->pNextNode;
-            pNode->pNextNode = newNode;
-        }
-
-        if(pNode != NULL && pNode->pNextNode == NULL && nodeIndex == ll_len(this))//Ultimo nodo
-        {
-            newNode->pNextNode = NULL;
-            pNode->pNextNode = newNode;
-        }
-
-        if(pNode == NULL && nodeIndex == 0)//No hay nodos
-        {
-
-        }
-*/
-       returnAux = 0;
     }
     return returnAux;
 }
@@ -159,20 +195,13 @@ int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 int ll_add(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
-    int i;
-    Node* pNode = NULL;//variable auxiliar
+    int len = ll_len(this);
 
-    if(this != NULL && pElement != NULL)
+    if(this != NULL)
     {
-        pNode = this->pFirstNode;
-        for(i=0;i<this->size;i++)
-        {   //posicion i
-            if(pNode->pNextNode == NULL)
-            {
-                pNode = pNode->pNextNode;
-                pNode->pElement = pElement;
-                pNode->pNextNode = NULL;
-            }
+        if(!addNode(this,len,pElement))
+        {
+            returnAux = 0;
         }
     }
     return returnAux;
@@ -189,7 +218,13 @@ int ll_add(LinkedList* this, void* pElement)
 void* ll_get(LinkedList* this, int index)
 {
     void* returnAux = NULL;
+    Node* auxNode = (Node*)malloc(sizeof(Node)*1);
 
+    if(this != NULL && index >= 0 && index < ll_len(this) && ll_len(this) > 0 )
+    {
+        auxNode = getNode(this,index);
+        returnAux = auxNode->pElement;
+    }
     return returnAux;
 }
 
@@ -206,7 +241,14 @@ void* ll_get(LinkedList* this, int index)
 int ll_set(LinkedList* this, int index,void* pElement)
 {
     int returnAux = -1;
+    Node* auxNode = (Node*)malloc(sizeof(Node)*1);
 
+    if(this != NULL && index >= 0 && index < ll_len(this) && ll_len(this) > 0 )
+    {
+        auxNode = getNode(this,index);
+        auxNode->pElement = pElement;
+        returnAux = 0;
+    }
     return returnAux;
 }
 
@@ -222,7 +264,45 @@ int ll_set(LinkedList* this, int index,void* pElement)
 int ll_remove(LinkedList* this,int index)
 {
     int returnAux = -1;
+    Node* auxNode;
+    Node* currentNode;
+    Node* previousNode;
 
+    if(this!= NULL && index >= 0 && index < ll_len(this) )
+    {
+
+        if(this->pFirstNode != NULL && index == 0)//Nodo al comienzo
+        {
+            //El Correcto
+            auxNode = this->pFirstNode ;//Se el primer nodo en variable auxiliar
+            this->pFirstNode = auxNode->pNextNode;
+            free(auxNode);
+
+            this->size = ll_len(this) - 1;
+            returnAux = 0;
+        }
+        else if(this->pFirstNode != NULL && index > 0 && index < ll_len(this))//Medio
+        {
+            //El Sanguchito
+            currentNode = getNode(this,index);//Get del NODO a reemplazar
+            previousNode = getNode(this,index-1);//Get del NODO anterior al que reemplazo
+            previousNode->pNextNode = currentNode->pNextNode;
+
+            free(currentNode);
+
+            this->size = ll_len(this) - 1;
+            returnAux = 0;
+        }
+        else if(this->pFirstNode != NULL && index ==ll_len(this))//Nodo al final
+        {
+            //El Colado
+            currentNode = getNode(this,index - 1 );
+            free(currentNode);
+
+            this->size = ll_len(this) - 1;
+            returnAux = 0;
+        }
+    }
     return returnAux;
 }
 
@@ -237,7 +317,17 @@ int ll_remove(LinkedList* this,int index)
 int ll_clear(LinkedList* this)
 {
     int returnAux = -1;
+    int i;
 
+    if(this != NULL)
+    {
+        for(i=0;i<ll_len(this);i++)
+        {
+            ll_remove(this,i);
+
+        }
+        returnAux = 0;
+    }
     return returnAux;
 }
 
@@ -253,6 +343,11 @@ int ll_deleteLinkedList(LinkedList* this)
 {
     int returnAux = -1;
 
+    if(this != NULL)
+    {
+        free(this);
+        returnAux = 0;
+    }
     return returnAux;
 }
 
@@ -267,6 +362,14 @@ int ll_deleteLinkedList(LinkedList* this)
 int ll_indexOf(LinkedList* this, void* pElement)
 {
     int returnAux = -1;
+    int index;
+
+    if(this != NULL && pElement != NULL)
+    {
+        for()
+
+
+    }
 
     return returnAux;
 }
