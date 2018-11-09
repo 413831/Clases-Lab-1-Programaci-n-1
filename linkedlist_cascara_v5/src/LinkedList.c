@@ -3,26 +3,9 @@
 #include <string.h>
 #include "../inc/LinkedList.h"
 
-
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
-static int swap(void* thisA,void* thisB);
-
-static int swap(void* thisA,void* thisB)
-{
-    int retorno = -1;
-    void* auxiliar;
-
-    if(thisA != NULL && thisB != NULL )
-    {
-        auxiliar = thisA;
-        thisA = thisB;
-        thisB = auxiliar;
-        retorno = 0;
-    }
-    return retorno;
-}
-
+Node* auxNode = NULL;
 
 /** \brief Crea un nuevo LinkedList en memoria de manera dinamica
  *
@@ -495,7 +478,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 
         for(i=from;i < to;i++)
         {
-            auxElement = ll_get(this,i);
+            auxElement = ll_getNext(this);
             ll_add(subList,auxElement);
         }
     }
@@ -587,9 +570,9 @@ Segun criterio se filtran los elementos y se retorna nuevo linkedlist
 con los elementos que cumplen con la funcion pasada como criterio
 */
 
-LinkedList* ll_filter(LinkedList* this,(*pFunc)(void*))
+LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 {
-    LinkedList subList = NULL;
+    LinkedList* subList = NULL;
     int i;
     void* pElement;
 
@@ -614,21 +597,43 @@ LinkedList* ll_filter(LinkedList* this,(*pFunc)(void*))
 Establece un indice como referencia para iterar y facilitar la busqueda.
 Esta funcion establece el PRIMERO en una variable estatica
 */
-int ll_startIterator(LinkedList* this)
-{
-    int retorno;
-    static int cursor;
 
-    if(this != NULL)
+
+Node* ll_startIterator(LinkedList* this)
+{
+    Node* retorno = NULL;
+    auxNode = this->pFirstNode;
+    static int cursor = 0;
+
+    if(cursor == 0)
     {
-        cursor = this->
+        retorno = auxNode;
+        cursor++;
+    }
+    else if(cursor > 0 && cursor <= ll_len(this))
+    {
+        retorno = auxNode->pNextNode;
+        cursor++;
     }
     return retorno;
 }
-
-
 
 /**
  ll_nextIterator();
 Esta funcion modifica el indice estatico para facilitar la busqueda
 */
+void* ll_getNext(LinkedList* this)
+{
+    void* retorno = NULL;
+    Node* auxNode;
+
+    if(this != NULL)
+    {
+        auxNode = ll_startIterator(this);
+        while(auxNode != NULL)
+        {
+            retorno = auxNode->pElement;
+        }
+    }
+    return retorno;
+}

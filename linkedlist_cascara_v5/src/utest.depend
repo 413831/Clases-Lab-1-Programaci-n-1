@@ -4650,7 +4650,7 @@
 
 1541196383 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/testing/utest.h
 
-1541196383 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
+1541802733 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
 
 1541196383 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/Employee.h
 
@@ -4880,7 +4880,11 @@
 	"../testing/inc/main_test.h"
 	"../inc/LinkedList.h"
 
-1541376704 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/src/LinkedList.c
+1541801677 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/src/LinkedList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/LinkedList.h"
 
 1541376716 b2ec2a2b47a0b7cdadadeec1372f31303f038
 	<stdio.h>
@@ -4901,7 +4905,12 @@
 	<string.h>
 	"../inc/LinkedList.h"
 
-1541376716 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/src/main.c
+1541801847 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../testing/inc/main_test.h"
+	"../inc/LinkedList.h"
 
 1541196383 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/main_test.h
 
