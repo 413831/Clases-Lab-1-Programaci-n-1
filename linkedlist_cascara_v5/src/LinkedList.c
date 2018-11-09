@@ -590,9 +590,30 @@ con los elementos que cumplen con la funcion pasada como criterio
 LinkedList* ll_filter(LinkedList* this,(*pFunc)(void*))
 {
     LinkedList subList = NULL;
-    if(this != NULL)
+    int i;
+    void* pElement;
 
-
-
+    if(this != NULL && pFunc != NULL)
+    {
+        subList = ll_newLinkedList();
+        for(i=0;ll_len(this)-1;i++)
+        {
+            pElement = ll_get(this,i);
+            if(!pFunc(pElement))
+            {
+                ll_add(subList,pElement);
+            }
+        }
+    }
     return subList;
 }
+
+
+/***
+ ll_startIterator(LinkedList* this)
+Establece un indice como referencia para iterar y facilitar la busqueda.
+Esta funcion establece el PRIMERO en una variable estatica
+
+ ll_nextIterator();
+Esta funcion modifica el indice estatico para facilitar la busqueda
+*/
