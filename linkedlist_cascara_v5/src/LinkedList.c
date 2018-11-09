@@ -613,7 +613,22 @@ LinkedList* ll_filter(LinkedList* this,(*pFunc)(void*))
  ll_startIterator(LinkedList* this)
 Establece un indice como referencia para iterar y facilitar la busqueda.
 Esta funcion establece el PRIMERO en una variable estatica
+*/
+int ll_startIterator(LinkedList* this)
+{
+    int retorno;
+    static int cursor;
 
+    if(this != NULL)
+    {
+        cursor = this->
+    }
+    return retorno;
+}
+
+
+
+/**
  ll_nextIterator();
 Esta funcion modifica el indice estatico para facilitar la busqueda
 */
