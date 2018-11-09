@@ -6,6 +6,23 @@
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
+static int swap(void* thisA,void* thisB);
+
+static int swap(void* thisA,void* thisB)
+{
+    int retorno = -1;
+    void* auxiliar;
+
+    if(thisA != NULL && thisB != NULL )
+    {
+        auxiliar = thisA;
+        thisA = thisB;
+        thisB = auxiliar;
+        retorno = 0;
+    }
+    return retorno;
+}
+
 
 /** \brief Crea un nuevo LinkedList en memoria de manera dinamica
  *
@@ -493,7 +510,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
  * \param pList LinkedList* Puntero a la lista
  * \return LinkedList* Retorna  (NULL) Error: si el puntero a la listas es NULL
                                 (puntero a la nueva lista) Si ok
-*/
+*/l_contains(t
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
@@ -514,40 +531,66 @@ LinkedList* ll_clone(LinkedList* this)
 
 
 /** \brief Ordena los elementos de la lista utilizando la funcion criterio recibida como parametro
- *         En base al retorno de la funcion criterio y el orden se realiza el swap
+ *         En base al retorno de la funcion l_contains(tcriterio y el orden se realiza el swap
  * \param pList LinkedList* Puntero a la lista
  * \param pFunc (*pFunc) Puntero a la funcion criterio
  * \param order int  [1] Indica orden ascendente - [0] Indica orden descendente
  * \return int Retorna  (-1) Error: si el puntero a la listas es NULL
                                 ( 0) Si ok
  */
-int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order)
+int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 {
     int returnAux =-1;
     int i;
-    Node* auxNode;
-    void* auxElement;
+    void* elementA;
+    void* elementB;
+    void* pivot;
+    int i;
+    int j;
+    int auxiliar;
+    int len = ll_len(this);
 
-    if(this != NULL && (*pFunc) != NULL && (order == 1 || order == 0))
+    if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
-        for(i=0;i<ll_len(this);i++)
-        {
-            auxNode = getNode(this,i);
-            if(order == 1 && (*pFunc)(auxNode->pElement,auxNode->pNextNode->pElement) == 1)
-            {   //Orden ascendente
-                auxElement = auxNode->pElement;////SWAP
-                auxNode->pElement =auxNode->pNextNode->pElement;
-                auxNode->pNextNode->pElement = auxElement;
-            }
-            else if(order == 0 && (*pFunc)(auxNode->pElement,auxNode->pNextNode->pElement) == -1)
-            {   //Orden descendente
-                auxElement = auxNode->pNextNode->pElement;////SWAP
-                auxNode->pNextNode->pElement = auxNode->pElement;
-                auxNode->pNextNode->pElement = auxElement;
-            }
-        }
-        returnAux = 0;
-    }
+          if (len < 2) return;
+
+          pivot = ll_get(this,len/2);
+
+          for (i = 0, j = len - 1; ; i++, j--)
+          {
+            elementA = ll_get(this,i);
+            elementB = ll_get(this,j);
+
+            while (elementA < pivot) i++;
+            while (elementB > pivot) j--;
+
+            if (i >= j) break;
+
+            swap(elementA,elementB);
+          }
+
+            if (len < 2) return;
+
+              pivot = ll_get(this,len/2);
+
+              for (i = 0, j = len - 1; ; i++, j--)
+              {
+                elementA = ll_get(this,i);
+                elementB = ll_get(this,j);
+
+                while (elementA < pivot) i++;
+                while (elementB > pivot) j--;
+
+                if (i >= j) break;
+
+                swap(elementA,elementB);
+              }
+
     return returnAux;
 }
 
+/***
+LinkedList* ll_filter(linkedlist* this, (*funcionCriterio))
+Segun criterio se filtran los elementos y se retorna nuevo linkedlist
+con los elementos que cumplen con la funcion pasada como criterio
+*/
