@@ -503,14 +503,13 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
 }
 
 
-
 /** \brief Crea y retorna una nueva lista con los elementos de la lista pasada como parametro
  *          Realiza el get de todos los elementos de la primer lista
  *           y los agrega uno por uno a la lista clonada
  * \param pList LinkedList* Puntero a la lista
  * \return LinkedList* Retorna  (NULL) Error: si el puntero a la listas es NULL
                                 (puntero a la nueva lista) Si ok
-*/l_contains(t
+*/
 LinkedList* ll_clone(LinkedList* this)
 {
     LinkedList* cloneArray = NULL;
@@ -542,50 +541,43 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 {
     int returnAux =-1;
     int i;
+    Node* auxNode;
     void* elementA;
     void* elementB;
-    void* pivot;
-    int i;
-    int j;
-    int auxiliar;
-    int len = ll_len(this);
+    int flagSwap;
+    int criterio;
 
     if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
-          if (len < 2) return;
+        do
+        {
+            flagSwap = 0;
 
-          pivot = ll_get(this,len/2);
+            for(i=0;i<ll_len(this)-1;i++)
+            {
+                auxNode = getNode(this,i);
 
-          for (i = 0, j = len - 1; ; i++, j--)
-          {
-            elementA = ll_get(this,i);
-            elementB = ll_get(this,j);
+                elementA = auxNode->pElement;
+                auxNode = auxNode->pNextNode;
+                elementB = auxNode->pElement;
 
-            while (elementA < pivot) i++;
-            while (elementB > pivot) j--;
+                if(elementA != NULL && elementB != NULL)
+                {
+                    criterio = pFunc(elementA,elementB);
 
-            if (i >= j) break;
-
-            swap(elementA,elementB);
-          }
-
-            if (len < 2) return;
-
-              pivot = ll_get(this,len/2);
-
-              for (i = 0, j = len - 1; ; i++, j--)
-              {
-                elementA = ll_get(this,i);
-                elementB = ll_get(this,j);
-
-                while (elementA < pivot) i++;
-                while (elementB > pivot) j--;
-
-                if (i >= j) break;
-
-                swap(elementA,elementB);
-              }
-
+                    if((order == 0 && criterio == -1) ||
+                        (order == 1 && criterio == 1))
+                    {
+                        flagSwap = 1;
+                        ll_set(this,i,elementB);
+                        ll_set(this,i+1,elementA);
+                     //   swap(elementA,elementB);
+                    }
+                }
+            }
+        }while(flagSwap == 1);
+        returnAux = 0;
+    }
     return returnAux;
 }
 
@@ -594,3 +586,13 @@ LinkedList* ll_filter(linkedlist* this, (*funcionCriterio))
 Segun criterio se filtran los elementos y se retorna nuevo linkedlist
 con los elementos que cumplen con la funcion pasada como criterio
 */
+
+LinkedList* ll_filter(LinkedList* this,(*pFunc)(void*))
+{
+    LinkedList subList = NULL;
+    if(this != NULL)
+
+
+
+    return subList;
+}
