@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <errno.h>
 #include "../inc/LinkedList.h"
 
 static Node* getNode(LinkedList* this, int nodeIndex);
@@ -216,7 +217,7 @@ int ll_set(LinkedList* this, int index,void* pElement)
 
 
 /** \brief Elimina un elemento de la lista
- *          Se realiza un free del nodo en el indice indicado (baja f�sica)
+ *          Se realiza un free del nodo en el indice indicado (baja física)
  * \param this LinkedList* Puntero a la lista
  * \param nodeIndex int Ubicacion del elemento a eliminar
  * \return int Retorna  (-1) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
@@ -474,10 +475,12 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     if(this != NULL && from >= 0 && to <= ll_len(this) && to > from)
     {
         subList = ll_newLinkedList();
-        itNode = this->pFirstNode;
         for(i=from;i < to;i++)
         {
+            auxElement = ll_getNext(this);/////////////////////////////TEST ITERADOR
+            printf("\nElement prueba %p",auxElement);
             auxElement = ll_get(this,i);
+            printf("\nElement real %p",auxElement);
             ll_add(subList,auxElement);
         }
     }
@@ -531,7 +534,6 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 
     if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
-        itNode = this->pFirstNode;
         do
         {
             flagSwap = 0;
@@ -554,13 +556,66 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
                         ll_set(this,i+1,elementA);
                     }
                 }
-
             }
         }while(flagSwap == 1);
         returnAux = 0;
     }
     return returnAux;
 }
+///////////////Quick Sort
+void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order)
+{
+    /**Consiste en ordenar eligiendo un pivot y luego comparando cada elemento
+    *Los elementos del indice i deben ser los menores al pivot
+    *Los elementos del indice j deben ser mayores al pivot
+    *Una vez ordenados se realiza la misma operacion con los sub array formados
+    */
+    void* pivot;
+    void* elementA;
+    void* elementB;
+    int i;
+    int j;
+    LinkedList* auxListA;
+    LinkedList* auxListB;
+    int criterioMenor;
+    int criterioMayor;
+
+    if(size < 2) return;
+
+    pivot = ll_get(this,size/2);//Elijo como pivot el elemento en la mitad de la lista
+
+    for (i = 0,j = size - 1; ; i++, j--)
+    {
+        elementA = ll_get(this,i);//i incrementa desde el comienzo
+        elementB = ll_get(this,j);//j decrementa desde el final
+
+        criterioMenor = pFunc(elementA,pivot);
+        criterioMayor = pFunc(elementB,pivot);
+        while (criterioMenor == -1 && order == 0 ||
+               criterioMenor == 1 && order == 1)
+        {
+            i++;//Determina si el elemento menor al pivot cumple con la condicion de menor
+        }
+        while (criterioMayor == -1 && order == 0 ||
+               criterioMayor == 1 && order == 1)
+        {
+            j--;//Determina si el elemento mayor al pivot cumple con la condicion de mayor
+        }
+        //Si ambos cumplen modifica ambos iteradores
+        if (i >= j) break;//Si no cumple rompe el for
+        {
+            ll_set(this,i,elementB);///SWAP
+            ll_set(this,j,elementA);
+        }
+      }
+      auxListA = ll_subList(this,0,i);///Se crea subarray de menores al pivot
+      auxListB = ll_subList(this,i+1,size - 1);///Se crea subarray de mayores al pivot
+      quickSort(auxListA,i,pFunc,order);//Se ordena el array hasta i
+      quickSort(auxListB,size - i,pFunc,order);//Se ordena el array luego de i
+}
+
+
+
 
 /***
 LinkedList* ll_filter(linkedlist* this, (*funcionCriterio))
@@ -600,11 +655,32 @@ Esta funcion establece el PRIMERO en una variable estatica
 Node* ll_startIterator(LinkedList* this)
 {
     Node* retorno = NULL;
+    static int counter = 0;
+    Node* head = this->pFirstNode;
+    printf("\ntest 1");
 
-    if(this != NULL)
+
+    if(this != NULL && counter == 0)
     {
-        retorno = itNode->pNextNode;//Retorno el siguiente nodo de la variable estatica itNode
+        printf("\ntest 2");
+        itNode = head;//Guardo el nodo HEAD a la variable global
+        retorno = itNode;
+        itNode = itNode->pNextNode;//Se mueve al siguiente nodo la variable itNode
+        counter++;//Posición del cursor en el array
     }
+    else if(this != NULL && counter > 0 && counter < ll_len(this))
+    {
+        printf("\ntest 3");
+        retorno = itNode;//Se retorna el nodo ya incrementado en la anterior iteracion
+        itNode = itNode->pNextNode;//Se mueve al siguiente nodo la variable itNode
+        counter++;
+    }
+    else if(this == NULL || counter >= ll_len(this))
+    {
+        printf("\ntest 4");
+        counter = 0;//Se reinicia contador indicando que se llegó al final
+    }
+        perror("Result: ");
     return retorno;
 }
 
@@ -616,16 +692,16 @@ Retorna el elemento de un nodo y setea el cursor en el siguiente
 void* ll_getNext(LinkedList* this)
 {
     void* retorno = NULL;
-    Node* nextNode;
+    Node* auxNode;
+    perror("Result: ");
 
     if(this != NULL)
     {
-        nextNode = ll_startIterator(this);//Obtengo el next nodo del actual
-        retorno = itNode->pElement;//Retorno el elemento del nodo del nodo de variable estatica
-        if(nextNode != NULL)
-        {
-            itNode = nextNode;//Setea el nodo de la variable estatica con el next node para siguiente get
-        }
+        printf("\ntest 0");
+
+        auxNode = ll_startIterator(this);//Obtengo el next nodo del actual
+        retorno = auxNode->pElement;
     }
+        perror("Result: ");
     return retorno;
 }
