@@ -6,11 +6,9 @@
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
-static int startIterator(Node* first);
-static int resetIterator();
+static int startIterator(LinkedList* this,Node* first);
+static int resetIterator(LinkedList* this);
 
-
-static Node* itNode = NULL;
 
 /** \brief Crea un nuevo LinkedList en memoria de manera dinamica
  *
@@ -447,16 +445,16 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     if(this != NULL && this2 != NULL)
     {
         returnAux = 1;
-        startIterator(this2->pFirstNode);
+        startIterator(this2,this2->pFirstNode);
         for(i=0;i<ll_len(this2);i++)
         {
-            auxElement=ll_getNext();
+            auxElement=ll_getNext(this);
             if(!ll_contains(this,auxElement))
             {
                 returnAux = 0;
             }
         }
-        resetIterator();
+        resetIterator(this);
     }
     return returnAux;
 }
@@ -481,13 +479,13 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     if(this != NULL && from >= 0 && to <= ll_len(this) && to > from)
     {
         subList = ll_newLinkedList();
-        startIterator(getNode(this,from));
+        startIterator(this,getNode(this,from));
         for(i=from;i < to;i++)
         {
             auxElement = ll_getNext(this);/////////////////////////////TEST ITERADOR
             ll_add(subList,auxElement);
         }
-        resetIterator();
+        resetIterator(this);
     }
     return subList;
 }
@@ -509,13 +507,13 @@ LinkedList* ll_clone(LinkedList* this)
     if(this != NULL)
     {
         cloneArray = ll_newLinkedList();
-        startIterator(this->pFirstNode);
+        startIterator(this,this->pFirstNode);
         for(i=0;i<ll_len(this);i++)
         {
-            auxElement = ll_getNext();
+            auxElement = ll_getNext(this);
             ll_add(cloneArray,auxElement);
         }
-        resetIterator();
+        resetIterator(this);
     }
     return cloneArray;
 }
@@ -543,14 +541,14 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
     {
         do
         {
-            startIterator(this->pFirstNode);
-            auxElement = ll_getNext();
+            startIterator(this,this->pFirstNode);
+            auxElement = ll_getNext(this);
             flagSwap = 0;
 
             for(i=0;i<ll_len(this)-1;i++)
             {
                 elementA = auxElement;
-                elementB = ll_getNext();
+                elementB = ll_getNext(this);
 
                 if(elementA != NULL && elementB != NULL)
                 {
@@ -572,7 +570,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
                 }
             }
         }while(flagSwap == 1);
-        resetIterator();
+        resetIterator(this);
         returnAux = 0;
     }
     return returnAux;
@@ -613,13 +611,13 @@ Esta funcion establece el PRIMERO en una variable estatica
 */
 
 
-static int startIterator(Node* first)
+static int startIterator(LinkedList* this,Node* first)
 {
     int retorno = -1;
 
-    if(first != NULL)
+    if(this != NULL && first != NULL)
     {
-        itNode = first;
+        this->itNode = first;
         retorno = 0;
     }
     return retorno;
@@ -631,13 +629,15 @@ static int startIterator(Node* first)
 Se resetear el iterador
 */
 
-static int resetIterator()
+static int resetIterator(LinkedList* this)
 {
     int retorno = -1;
 
-    itNode = NULL;
-    retorno = 0;
-
+    if(this != NULL)
+    {
+        this->itNode = NULL;
+        retorno = 0;
+    }
     return retorno;
 }
 
@@ -646,14 +646,14 @@ static int resetIterator()
 Esta funcion modifica el indice estatico para facilitar la busqueda
 Retorna el elemento de un nodo y setea el cursor en el siguiente
 */
-void* ll_getNext()
+void* ll_getNext(LinkedList* this)
 {
     void* retorno = NULL;
 
-    if(itNode != NULL)
+    if(this->itNode != NULL)
     {
-        retorno = itNode->pElement;
-        itNode = itNode->pNextNode;
+        retorno = this->itNode->pElement;
+        this->itNode = this->itNode->pNextNode;
     }
     return retorno;
 }
@@ -671,17 +671,23 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
 
     if(this != NULL && pFunc != NULL)
     {
-        retorno = 0;
-        startIterator(this->pFirstNode);
+        startIterator(this,this->pFirstNode);
         for(i=0;i<ll_len(this)-1;i++)
         {
-            pElement = ll_getNext();
+            pElement = ll_getNext(this);
             if(pElement != NULL)
             {
-                pFunc(pElement);
+                if(pFunc(pElement))
+                {
+                    retorno = 0;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
-        resetIterator();
+        resetIterator(this);
     }
     return retorno;
 }
