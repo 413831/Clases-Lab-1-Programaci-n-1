@@ -22,6 +22,7 @@ struct Node
 {
     void* pElement;
     struct Node* pNextNode;//Enganche al siguiente nodo
+    //Agregar itNode
 }typedef Node;
 
 struct LinkedList
@@ -55,6 +56,5 @@ LinkedList* ll_clone(LinkedList* this);
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
-Node* ll_startIterator(LinkedList* this);
-void* ll_getNext(LinkedList* this);
-
+void* ll_getNext();
+int ll_map(LinkedList* this, int (*pFunc)(void*));
