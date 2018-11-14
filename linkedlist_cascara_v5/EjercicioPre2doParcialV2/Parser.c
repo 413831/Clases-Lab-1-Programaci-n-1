@@ -9,9 +9,9 @@
 int parser_parseEmpleados(char* fileName, LinkedList* listaEmpleados)
 {
     int retorno = -1;
-    char bufferId[BUFFER];
-    char bufferName[BUFFER];
-    char bufferHorasTrabajadas[BUFFER];
+    char* bufferId;
+    char* bufferName;
+    char* bufferHorasTrabajadas;
     char bufferFile[BUFFER];
     Empleado* pEmployee;
     FILE* auxFile = fopen(fileName,"r");
@@ -26,9 +26,9 @@ int parser_parseEmpleados(char* fileName, LinkedList* listaEmpleados)
             strtok(bufferFile,"\n");//Seteo el el strtok
             while(!feof(auxFile))//Mientras no sea el end of file
             {
-                bufferId[BUFFER] = strtok(NULL,",");//Cargo las variables con los datos hasta el token ","
-                bufferName[BUFFER] = strtok(NULL,",");
-                bufferHorasTrabajadas[BUFFER] = strtok(NULL,"\n");
+                bufferId = strtok(bufferFile,",");//Cargo las variables con los datos hasta el token ","
+                bufferName = strtok(NULL,",");
+                bufferHorasTrabajadas = strtok(NULL,"\n");
 
                 if(pEmployee != NULL && atoi(bufferId) >= 0)
                 {
@@ -38,9 +38,6 @@ int parser_parseEmpleados(char* fileName, LinkedList* listaEmpleados)
                 }
             }
         }
-        bufferId[BUFFER] = strtok(bufferFile,",");
-        bufferName[BUFFER] = strtok(bufferFile,",");
-        bufferHorasTrabajadas[BUFFER] = strtok(bufferFile,"\n");
     }
     return retorno;
 }
