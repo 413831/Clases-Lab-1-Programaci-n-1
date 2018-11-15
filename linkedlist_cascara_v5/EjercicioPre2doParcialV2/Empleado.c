@@ -90,7 +90,6 @@ int employee_calcularSueldo(void* pEmpleado)
     if(pEmpleado != NULL)
     {
         employee_getHorasTrabajadas(pEmpleado,&cantidadHoras);
-
     ///   Los valores de horas varian entre 80 y 240.
     ///   Las primeras 120 horas la hora vale $180
     ///   De 120 a 160 horas, la hora vale $240
@@ -181,6 +180,39 @@ int employee_delete(Empleado* this)
     {
         free(this);
         retorno = 0;
+    }
+    return retorno;
+}
+
+/**
+*\brief Se muestran los datos de todos los campos del elemento
+*\param this Es el puntero al elemento
+*\return Retorna 0 si el elemento es diferente a NULL sino retorna -1
+*/
+int employee_show(void* this)
+{
+    int retorno = -1;
+    int auxId;
+    char auxNombre[128];
+    int auxHorasTrabajadas;
+    float auxSueldo;
+
+    if(this != NULL)
+    {
+        employee_getId(this,&auxId);
+        if(auxId != -1)
+        {
+            employee_getNombre(this,auxNombre);
+            employee_getSueldo(this,&auxSueldo);
+            employee_getHorasTrabajadas(this,&auxHorasTrabajadas);
+            employee_getId(this,&auxId);
+
+            printf("\nID -- %d",auxId);
+            printf(" / Nombre -- %s",auxNombre);
+            printf(" / Sueldo -- $%.2f",auxSueldo);
+            printf(" / Horas trabajadas -- %dhs",auxHorasTrabajadas);
+            retorno = 0;
+        }
     }
     return retorno;
 }
@@ -359,6 +391,29 @@ int employee_setAll(Empleado* this,char* id,char* name,char* hours,char* salary)
         {
             retorno = 0;
         }
+    }
+    return retorno;
+}
+
+/**
+*\brief Obtiene todos los campos del elemento
+*\param this Es el elemento
+*\param name Es el dato para obtener el campo nombre
+*\param hours Es el dato para obtener el campo horas trabajadas
+*\param salary Es el dato para obtener el campo salario
+*\return Retorna 0 si existe el elemento sino retorna -1
+*/
+int employee_getAll(Empleado* this,char* name,int* hours,float* salary,int* id)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        employee_getNombre(this,name);
+        employee_getHorasTrabajadas(this,hours);
+        employee_getSueldo(this,salary);
+        employee_getId(this,id);
+        retorno = 0;
     }
     return retorno;
 }

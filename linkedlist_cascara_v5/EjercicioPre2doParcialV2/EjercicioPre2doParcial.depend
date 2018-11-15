@@ -1,21 +1,21 @@
 # depslib dependency file v1.0
-1542156651 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Empleado.c
+1542317942 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Empleado.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"Empleado.h"
 	"utn.h"
 
-1542156670 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Empleado.h
+1542317942 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Empleado.h
 
-1542150161 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/LinkedList.c
+1542317942 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/LinkedList.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	<errno.h>
 	"../inc/LinkedList.h"
 
-1542148208 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
 
 1542152211 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/main.c
 	<stdio.h>
@@ -24,18 +24,19 @@
 	"LinkedList.h"
 	"Parser.h"
 
-1542148208 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/LinkedList.h
+1542317942 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/LinkedList.h
 
 1542152029 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Parser.h
 	"LinkedList.h"
 
-1542156222 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Parser.c
+1542317942 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/Parser.c
 	<stdio.h>
 	<stdlib.h>
+	<string.h>
 	"LinkedList.h"
 	"Empleado.h"
 
-1541358704 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/validacion.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/validacion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -43,5 +44,5 @@
 	<ctype.h>
 	"utn.h"
 
-1541358704 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/utn.h
+1542317942 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/EjercicioPre2doParcialV2/utn.h
 

@@ -9,9 +9,10 @@ typedef struct S_Empleado
   float sueldo;
 }Empleado;
 
-void employee_calcularSueldo(void* pEmpleado);
+int employee_calcularSueldo(void* pEmpleado);
 Empleado* employee_newConParametros(char* id,char* nombre,char* horasTrabajadas,char* sueldo);
 int employee_delete(Empleado* this);
+int employee_show(void* this);
 
 int employee_setId(Empleado* this,char* id);
 int employee_getId(Empleado* this,int* id);
