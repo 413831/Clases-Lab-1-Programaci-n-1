@@ -90,30 +90,27 @@ int employee_calcularSueldo(void* pEmpleado)
     if(pEmpleado != NULL)
     {
         employee_getHorasTrabajadas(pEmpleado,&cantidadHoras);
-    ///   Los valores de horas varian entre 80 y 240.
-    ///   Las primeras 120 horas la hora vale $180
-    ///   De 120 a 160 horas, la hora vale $240
-    ///   De 160 a 240 horas, la hora vale $350
+
         if(cantidadHoras < 120)
         {
             auxSueldo = cantidadHoras * 180;
-            sprintf(sueldo,"%f",auxSueldo);
+            sprintf(sueldo,"%.2f",auxSueldo);
             employee_setSueldo(pEmpleado,sueldo);
         }
         else if(cantidadHoras > 120 && cantidadHoras < 160)
         {
             auxSueldo = cantidadHoras * 240;
-            sprintf(sueldo,"%f",auxSueldo);
+            sprintf(sueldo,"%.2f",auxSueldo);
             employee_setSueldo(pEmpleado,sueldo);
         }
         else if(cantidadHoras > 160 && cantidadHoras < 240)
         {
             auxSueldo = cantidadHoras * 350;
-            sprintf(sueldo,"%f",auxSueldo);
+            sprintf(sueldo,"%.2f",auxSueldo);
             employee_setSueldo(pEmpleado,sueldo);
         }
+        retorno = 0;
     }
-    retorno = 0;
 
     return retorno;
 }

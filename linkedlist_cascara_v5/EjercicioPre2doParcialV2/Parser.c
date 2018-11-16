@@ -15,26 +15,28 @@ int parser_parseEmpleados(char* fileName, LinkedList* listaEmpleados)
     char bufferText[BUFFER];
     FILE* auxFile = fopen(fileName,"r");
     Empleado* pEmployee;
-    static int counter = 0;
 
     if(auxFile != NULL)
     {
         while(!feof(auxFile))
         {
             fgets(bufferText,sizeof(bufferText),auxFile);
-            counter++;
-
-            bufferId = strtok(bufferText,",");
-            bufferName = strtok(NULL,",");
-            bufferHorasTrabajadas = strtok(NULL,"\n");
-           // fscanf(pFile,"%[^,],%[^,],%[^,],%[^\n]\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
-            pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,"1");
-            if(pEmployee != NULL && atoi(bufferId) >= 0)
+            if(bufferText != NULL || strlen(bufferText) > 8)
             {
-                ll_add(listaEmpleados,pEmployee);//Se agrega ELEMENTO a LINKED LIST
-                retorno = 0;
+
+                bufferId = strtok(bufferText,",");
+                bufferName = strtok(NULL,",");
+                bufferHorasTrabajadas = strtok(NULL,"\n");
+
+                pEmployee = employee_newConParametros(bufferId,bufferName,bufferHorasTrabajadas,"1");
+                if(pEmployee != NULL)
+                {
+                    ll_add(listaEmpleados,pEmployee);//Se agrega ELEMENTO a LINKED LIST
+                    retorno = 0;
+                }
             }
         }
+        fclose(auxFile);
     }
     return retorno;
 }
@@ -59,7 +61,7 @@ int parser_SaveToText(FILE* pFile , LinkedList* pArrayListEmployee)
         {
             auxEmployee = ll_get(pArrayListEmployee,index);//Obtengo el elemento del array en posicion index
             employee_getAll(auxEmployee,bufferName,&bufferHorasTrabajadas,&bufferSueldo,&bufferId);
-            fprintf(pFile,"%d,%s,%d,%f\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
+            fprintf(pFile,"%d,%s,%d,%.2f\n",bufferId,bufferName,bufferHorasTrabajadas,bufferSueldo);
             retorno = 0;
         }
     }

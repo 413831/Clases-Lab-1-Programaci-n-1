@@ -33,25 +33,25 @@ int main()
     // Leer empleados de archivo data.csv
     if(!parser_parseEmpleados("data.csv",listaEmpleados))
     {
-        ll_map(listaEmpleados,employee_show);
         // Calcular sueldos
-        printf("Calculando sueldos de empleados\n");
+        printf("\nCalculando sueldos de empleados");
         ll_map(listaEmpleados,employee_calcularSueldo);
 
         // Generar archivo de salida
         if(!generarArchivoSueldos("sueldos.csv",listaEmpleados))
         {
-            printf("Archivo generado correctamente\n");
             ll_map(listaEmpleados,employee_show);
+            printf("\nArchivo generado correctamente");
+
         }
         else
         {
-            printf("Error generando archivo\n");
+            printf("\nError generando archivo\n");
         }
     }
     else
     {
-        printf("Error leyendo empleados\n");
+        printf("\nError leyendo empleados\n");
     }
     return 0;
 }

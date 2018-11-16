@@ -8,7 +8,60 @@ static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
 static int startIterator(LinkedList* this,Node* first);
 static int resetIterator(LinkedList* this);
+static void* getNext(LinkedList* this);
 
+/***
+ * \brief Inicializa la variable itNode (iterador) del LinkedList
+ * \param this Es el Linkedlist del cual se realiza el set del itNode
+ * \param first Es el Nodo con el cual se inicializa la variable itNode
+ * \return Retorna 0 si this y first no son NULL sino retorna -1
+*/
+static int startIterator(LinkedList* this,Node* first)
+{
+    int retorno = -1;
+
+    if(this != NULL && first != NULL)
+    {
+        this->itNode = first;
+        retorno = 0;
+    }
+    return retorno;
+}
+
+/***
+ * \brief Resetea la variable itNode (iterador) setandola en NULL
+ * \param this Es el Linkedlist del cual se realiza el set del itNode
+ * \return Retorna 0 si this es diferente a NULL sino retorna -1
+*/
+static int resetIterator(LinkedList* this)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        this->itNode = NULL;
+        retorno = 0;
+    }
+    return retorno;
+}
+
+/**
+ * \brief Retorna el elemento del itNode (iterador) y mueve un lugar el itNode
+ * \param this Es el Linkedlist que recibe para recorrer
+ * \return Retorna el elemento si el itNode es diferente a NULL sino retorna NULL
+*/
+static void* getNext(LinkedList* this)
+{
+    void* retorno = NULL;
+
+    if(this->itNode != NULL)
+    {
+        retorno = this->itNode->pElement;
+        this->itNode = this->itNode->pNextNode;
+    }
+    return retorno;
+}
+//////////////////////////////////////////////////////////////////////////////////////
 
 /** \brief Crea un nuevo LinkedList en memoria de manera dinamica
  *
@@ -103,7 +156,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     {
         if((this->pFirstNode == NULL || this->pFirstNode != NULL) &&
            (nodeIndex == 0 ))//Se realiza el add en el primer lugar, estando vacio o no
-        {   //El Tempranero y El Correcto
+        {
             previousNode = this->pFirstNode;//Se copia el primer nodo en variable auxiliar
             this->pFirstNode = newNode;//Se enlaza NUEVO NODO al comienzo de la LinkedList
 
@@ -116,7 +169,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         }
         else if((this->pFirstNode != NULL || this->pFirstNode == NULL)
                  && (nodeIndex > 0 && nodeIndex <= ll_len(this)))//Se realiza el add en el index
-        {   //El Sanguchito y El Colado
+        {
             currentNode = getNode(this,nodeIndex);//Get del NODO a reemplazar
             previousNode = getNode(this,nodeIndex-1);//Get del NODO anterior al que reemplazo
 
@@ -144,8 +197,6 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
  */
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
-
-
     return addNode(this,nodeIndex,pElement);
 }
 
@@ -236,7 +287,7 @@ int ll_remove(LinkedList* this,int index)
     if(this!= NULL && index >= 0 && index < ll_len(this) )
     {
         if(this->pFirstNode != NULL && index == 0)//Nodo al comienzo
-        {   //El Correcto o el Tempranero
+        {
             auxNode = this->pFirstNode;//Se copia el primer nodo
             this->pFirstNode = auxNode->pNextNode;//Se enlaza al next del primer nodo
 
@@ -246,7 +297,7 @@ int ll_remove(LinkedList* this,int index)
             returnAux = 0;
         }
         else if(this->pFirstNode != NULL && index > 0 && index <= ll_len(this))//Medio
-        {   //El Sanguchito y El Colado
+        {
             currentNode = getNode(this,index);//Se copia el nodo del index
             previousNode = getNode(this,index-1);//Se copia el nodo previo al index
             previousNode->pNextNode = currentNode->pNextNode;//Se enlaza el anterior con el next del index
@@ -444,14 +495,21 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 
     if(this != NULL && this2 != NULL)
     {
-        returnAux = 1;
+        returnAux = 0;
+        printf("\nRETORNO = 0");
         startIterator(this2,this2->pFirstNode);
         for(i=0;i<ll_len(this2);i++)
         {
-            auxElement=ll_getNext(this);
+            auxElement=getNext(this);
             if(!ll_contains(this,auxElement))
             {
+                printf("\nRETORNO = 1");
+                returnAux = 1;
+            }
+            else
+            {
                 returnAux = 0;
+                break;
             }
         }
         resetIterator(this);
@@ -482,7 +540,7 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
         startIterator(this,getNode(this,from));
         for(i=from;i < to;i++)
         {
-            auxElement = ll_getNext(this);/////////////////////////////TEST ITERADOR
+            auxElement = getNext(this);/////////////////////////////TEST ITERADOR
             ll_add(subList,auxElement);
         }
         resetIterator(this);
@@ -510,7 +568,7 @@ LinkedList* ll_clone(LinkedList* this)
         startIterator(this,this->pFirstNode);
         for(i=0;i<ll_len(this);i++)
         {
-            auxElement = ll_getNext(this);
+            auxElement = getNext(this);
             ll_add(cloneArray,auxElement);
         }
         resetIterator(this);
@@ -541,14 +599,14 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
     {
         do
         {
-            startIterator(this,this->pFirstNode);
-            auxElement = ll_getNext(this);
+            startIterator(this,this->pFirstNode);//Seteo el iterador en el head del Linkedlist
+            auxElement = getNext(this);
             flagSwap = 0;
 
             for(i=0;i<ll_len(this)-1;i++)
             {
-                elementA = auxElement;
-                elementB = ll_getNext(this);
+                elementA = auxElement;//Se setea el elemento auxiliar como el primer para comparar
+                elementB = getNext(this);//Se hace el get del siguiente elemento al auxiliar
 
                 if(elementA != NULL && elementB != NULL)
                 {
@@ -565,7 +623,7 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
                     }
                     else
                     {
-                        auxElement = elementB;
+                        auxElement = elementB;//Si no realiza el Swap carga el auxiliar con el segundo elemento
                     }
                 }
             }
@@ -576,12 +634,13 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
     return returnAux;
 }
 
-/***
-LinkedList* ll_filter(linkedlist* this, (*funcionCriterio))
-Segun criterio se filtran los elementos y se retorna nuevo linkedlist
-con los elementos que cumplen con la funcion pasada como criterio
+/**
+* \brief Se filtran los elementos de una lista que cumplan con un criterio
+* \param this Es el puntero a la LinkedList para filtrar
+* \param pFunc Es el puntero a la función para realizar el filtrado
+* \return Retorna un nuevo Linkedlist con los elementos filtrados o NULL si la lista y la función son NULL
+*
 */
-
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 {
     LinkedList* subList = NULL;
@@ -603,65 +662,11 @@ LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
     return subList;
 }
 
-
-/***
- ll_startIterator(LinkedList* this)
-Establece un indice como referencia para iterar y facilitar la busqueda.
-Esta funcion establece el PRIMERO en una variable estatica
-*/
-
-
-static int startIterator(LinkedList* this,Node* first)
-{
-    int retorno = -1;
-
-    if(this != NULL && first != NULL)
-    {
-        this->itNode = first;
-        retorno = 0;
-    }
-    return retorno;
-}
-
-
-/***
- ll_resetIterator()
-Se resetear el iterador
-*/
-
-static int resetIterator(LinkedList* this)
-{
-    int retorno = -1;
-
-    if(this != NULL)
-    {
-        this->itNode = NULL;
-        retorno = 0;
-    }
-    return retorno;
-}
-
 /**
- ll_nextIterator();
-Esta funcion modifica el indice estatico para facilitar la busqueda
-Retorna el elemento de un nodo y setea el cursor en el siguiente
-*/
-void* ll_getNext(LinkedList* this)
-{
-    void* retorno = NULL;
-
-    if(this->itNode != NULL)
-    {
-        retorno = this->itNode->pElement;
-        this->itNode = this->itNode->pNextNode;
-    }
-    return retorno;
-}
-
-/**
-void* ll_map(Linkedlist* this, (*pFunc)(void*);
-Recibe el array y una función para modificar cada uno de los elementos del array
-Ejemplo del map + funcion mostrar
+ * \brief Recibe el LinkedList y ejecuta la funcion recibida con todos los elementos
+ * \param this Es el LinkedList que recibe para recorrer
+ * \param pFunc Es el puntero a la función para ejecutar dentro del mapping
+ * \return Retorna 0 si logra ejecutar la función con todos los elementos sino retorna -1
 */
 int ll_map(LinkedList* this, int (*pFunc)(void*))
 {
@@ -672,17 +677,19 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
     if(this != NULL && pFunc != NULL)
     {
         startIterator(this,this->pFirstNode);
-        for(i=0;i<ll_len(this)-1;i++)
+        for(i=0;i<ll_len(this);i++)
         {
-            pElement = ll_getNext(this);
+            pElement = getNext(this);
             if(pElement != NULL)
             {
                 if(!pFunc(pElement))
                 {
+                    printf("\nElement %p",pElement);
                     retorno = 0;
                 }
                 else
                 {
+                    printf("\nElement %p",pElement);
                     break;
                 }
             }

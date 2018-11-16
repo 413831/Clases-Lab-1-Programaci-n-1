@@ -4873,7 +4873,7 @@
 
 1541376704 D
 
-1542147481 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/src/main.c
+1542320210 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/src/main.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -4897,9 +4897,9 @@
 	"../testing/inc/main_test.h"
 	"../inc/LinkedList.h"
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/main_test.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/main_test.h
 
-1542146916 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/src/LinkedList.c
+1542321013 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/src/LinkedList.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -4915,7 +4915,7 @@
 
 1541196383 /home/alexei/Documents/UTN/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/main_test.h
 
-1541034030 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/addNodeTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/addNodeTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4923,13 +4923,13 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345152 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/utest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/utest.h
 
-1542148208 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
+1542320226 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/inc/LinkedList.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/Employee.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/Employee.h
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/addTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/addTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4937,7 +4937,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345170 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/clearTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/clearTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4945,7 +4945,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345170 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/cloneTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/cloneTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4953,7 +4953,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345174 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/containsAllTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/containsAllTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4961,7 +4961,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345176 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/containsTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/containsTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4969,7 +4969,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/deleteLinkedListTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/deleteLinkedListTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4977,13 +4977,13 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/Employee.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/Employee.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/getNodeTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/getNodeTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4991,7 +4991,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/getTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/getTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -4999,7 +4999,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345174 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/indexOfTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/indexOfTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5007,7 +5007,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345170 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/isEmptyTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/isEmptyTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5015,7 +5015,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/lenTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/lenTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5023,7 +5023,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1541034030 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/main_test.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/main_test.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5047,60 +5047,52 @@
 	"../inc/containsAllTest.h"
 	"../inc/sortTest.h"
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/newTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/newTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/addTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/addTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/getNodeTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/getNodeTest.h
 
-1541034030 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/addNodeTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/addNodeTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/deleteLinkedListTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/deleteLinkedListTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/lenTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/lenTest.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/getTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/getTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/containsTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/containsTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/setTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/setTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/removeTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/removeTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/clearTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/clearTest.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/cloneTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/cloneTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/pushTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/pushTest.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/indexOfTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/indexOfTest.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/isEmptyTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/isEmptyTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/popTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/popTest.h
 
-1532345168 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/subListTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/subListTest.h
 
-1532345166 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/containsAllTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/containsAllTest.h
 
-1532345170 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/sortTest.h
+1542318009 /home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/inc/sortTest.h
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/newTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/newTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
 	"../../inc/LinkedList.h"
 
-1532345174 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/popTest.c
-	"../../testing/utest.h"
-	<stdio.h>
-	<stdlib.h>
-	<string.h>
-	"../../inc/LinkedList.h"
-	"../../testing/inc/Employee.h"
-
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/pushTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/popTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5108,7 +5100,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/removeTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/pushTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5116,7 +5108,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345176 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/setTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/removeTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5124,7 +5116,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345172 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/sortTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/setTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5132,7 +5124,7 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345174 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/subListTest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/sortTest.c
 	"../../testing/utest.h"
 	<stdio.h>
 	<stdlib.h>
@@ -5140,7 +5132,15 @@
 	"../../inc/LinkedList.h"
 	"../../testing/inc/Employee.h"
 
-1532345152 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/utest.c
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/src/subListTest.c
+	"../../testing/utest.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../../inc/LinkedList.h"
+	"../../testing/inc/Employee.h"
+
+1542318009 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/linkedlist_cascara_v5/testing/utest.c
 	"utest.h"
 	<stdio.h>
 	<stdlib.h>
