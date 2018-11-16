@@ -104,7 +104,6 @@ int ll_len(LinkedList* this)
  * \param index int Indice del nodo a obtener
  * \return Node* Retorna  (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         (pElement) Si funciono correctamente
- *
  */
 static Node* getNode(LinkedList* this, int nodeIndex)
 {
@@ -128,7 +127,6 @@ static Node* getNode(LinkedList* this, int nodeIndex)
  * \param index int Indice del nodo a obtener
  * \return Node* Retorna  (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         (pElement) Si funciono correctamente
- *
  */
 Node* test_getNode(LinkedList* this, int nodeIndex)
 {
@@ -143,7 +141,6 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
  * \param pElement void* Puntero al elemento a ser contenido por el nuevo nodo
  * \return int Retorna  (-1) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         ( 0) Si funciono correctamente
- *
  */
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
@@ -495,24 +492,18 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
 
     if(this != NULL && this2 != NULL)
     {
-        returnAux = 0;
-        printf("\nRETORNO = 0");
+        returnAux = 1;
+
         startIterator(this2,this2->pFirstNode);
         for(i=0;i<ll_len(this2);i++)
         {
-            auxElement=getNext(this);
-            if(!ll_contains(this,auxElement))
-            {
-                printf("\nRETORNO = 1");
-                returnAux = 1;
-            }
-            else
+            auxElement=getNext(this2);
+            if(!ll_contains(this,auxElement))//
             {
                 returnAux = 0;
-                break;
             }
         }
-        resetIterator(this);
+        resetIterator(this2);
     }
     return returnAux;
 }
