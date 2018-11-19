@@ -6,7 +6,62 @@
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
-Node* itNode;
+static int startIterator(LinkedList* this,Node* first);
+static int resetIterator(LinkedList* this);
+static void* getNext(LinkedList* this);
+
+/***
+ * \brief Inicializa la variable itNode (iterador) del LinkedList
+ * \param this Es el Linkedlist del cual se realiza el set del itNode
+ * \param first Es el Nodo con el cual se inicializa la variable itNode
+ * \return Retorna 0 si this y first no son NULL sino retorna -1
+*/
+static int startIterator(LinkedList* this,Node* first)
+{
+    int retorno = -1;
+
+    if(this != NULL && first != NULL)
+    {
+        this->itNode = first;
+        retorno = 0;
+    }
+    return retorno;
+}
+
+/***
+ * \brief Resetea la variable itNode (iterador) setandola en NULL
+ * \param this Es el Linkedlist del cual se realiza el set del itNode
+ * \return Retorna 0 si this es diferente a NULL sino retorna -1
+*/
+static int resetIterator(LinkedList* this)
+{
+    int retorno = -1;
+
+    if(this != NULL)
+    {
+        this->itNode = NULL;
+        retorno = 0;
+    }
+    return retorno;
+}
+
+/**
+ * \brief Retorna el elemento del itNode (iterador) y mueve un lugar el itNode
+ * \param this Es el Linkedlist que recibe para recorrer
+ * \return Retorna el elemento si el itNode es diferente a NULL sino retorna NULL
+*/
+static void* getNext(LinkedList* this)
+{
+    void* retorno = NULL;
+
+    if(this->itNode != NULL)
+    {
+        retorno = this->itNode->pElement;
+        this->itNode = this->itNode->pNextNode;
+    }
+    return retorno;
+}
+//////////////////////////////////////////////////////////////////////////////////////
 
 /** \brief Crea un nuevo LinkedList en memoria de manera dinamica
  *
@@ -49,7 +104,6 @@ int ll_len(LinkedList* this)
  * \param index int Indice del nodo a obtener
  * \return Node* Retorna  (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         (pElement) Si funciono correctamente
- *
  */
 static Node* getNode(LinkedList* this, int nodeIndex)
 {
@@ -73,7 +127,6 @@ static Node* getNode(LinkedList* this, int nodeIndex)
  * \param index int Indice del nodo a obtener
  * \return Node* Retorna  (NULL) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         (pElement) Si funciono correctamente
- *
  */
 Node* test_getNode(LinkedList* this, int nodeIndex)
 {
@@ -88,7 +141,6 @@ Node* test_getNode(LinkedList* this, int nodeIndex)
  * \param pElement void* Puntero al elemento a ser contenido por el nuevo nodo
  * \return int Retorna  (-1) Error: si el puntero a la lista es NULL o (si el indice es menor a 0 o mayor al len de la lista)
                         ( 0) Si funciono correctamente
- *
  */
 static int addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
@@ -101,7 +153,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
     {
         if((this->pFirstNode == NULL || this->pFirstNode != NULL) &&
            (nodeIndex == 0 ))//Se realiza el add en el primer lugar, estando vacio o no
-        {   //El Tempranero y El Correcto
+        {
             previousNode = this->pFirstNode;//Se copia el primer nodo en variable auxiliar
             this->pFirstNode = newNode;//Se enlaza NUEVO NODO al comienzo de la LinkedList
 
@@ -114,7 +166,7 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         }
         else if((this->pFirstNode != NULL || this->pFirstNode == NULL)
                  && (nodeIndex > 0 && nodeIndex <= ll_len(this)))//Se realiza el add en el index
-        {   //El Sanguchito y El Colado
+        {
             currentNode = getNode(this,nodeIndex);//Get del NODO a reemplazar
             previousNode = getNode(this,nodeIndex-1);//Get del NODO anterior al que reemplazo
 
@@ -142,8 +194,6 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
  */
 int test_addNode(LinkedList* this, int nodeIndex,void* pElement)
 {
-
-
     return addNode(this,nodeIndex,pElement);
 }
 
@@ -234,7 +284,7 @@ int ll_remove(LinkedList* this,int index)
     if(this!= NULL && index >= 0 && index < ll_len(this) )
     {
         if(this->pFirstNode != NULL && index == 0)//Nodo al comienzo
-        {   //El Correcto o el Tempranero
+        {
             auxNode = this->pFirstNode;//Se copia el primer nodo
             this->pFirstNode = auxNode->pNextNode;//Se enlaza al next del primer nodo
 
@@ -244,7 +294,7 @@ int ll_remove(LinkedList* this,int index)
             returnAux = 0;
         }
         else if(this->pFirstNode != NULL && index > 0 && index <= ll_len(this))//Medio
-        {   //El Sanguchito y El Colado
+        {
             currentNode = getNode(this,index);//Se copia el nodo del index
             previousNode = getNode(this,index-1);//Se copia el nodo previo al index
             previousNode->pNextNode = currentNode->pNextNode;//Se enlaza el anterior con el next del index
@@ -443,14 +493,17 @@ int ll_containsAll(LinkedList* this,LinkedList* this2)
     if(this != NULL && this2 != NULL)
     {
         returnAux = 1;
+
+        startIterator(this2,this2->pFirstNode);
         for(i=0;i<ll_len(this2);i++)
         {
-            auxElement=ll_get(this,i);
-            if(!ll_contains(this,auxElement))
+            auxElement=getNext(this2);
+            if(!ll_contains(this,auxElement))//
             {
                 returnAux = 0;
             }
         }
+        resetIterator(this2);
     }
     return returnAux;
 }
@@ -475,14 +528,13 @@ LinkedList* ll_subList(LinkedList* this,int from,int to)
     if(this != NULL && from >= 0 && to <= ll_len(this) && to > from)
     {
         subList = ll_newLinkedList();
+        startIterator(this,getNode(this,from));
         for(i=from;i < to;i++)
         {
-            auxElement = ll_getNext(this);/////////////////////////////TEST ITERADOR
-            printf("\nElement prueba %p",auxElement);
-            auxElement = ll_get(this,i);
-            printf("\nElement real %p",auxElement);
+            auxElement = getNext(this);/////////////////////////////TEST ITERADOR
             ll_add(subList,auxElement);
         }
+        resetIterator(this);
     }
     return subList;
 }
@@ -504,11 +556,13 @@ LinkedList* ll_clone(LinkedList* this)
     if(this != NULL)
     {
         cloneArray = ll_newLinkedList();
+        startIterator(this,this->pFirstNode);
         for(i=0;i<ll_len(this);i++)
         {
-            auxElement = ll_get(this,i);
+            auxElement = getNext(this);
             ll_add(cloneArray,auxElement);
         }
+        resetIterator(this);
     }
     return cloneArray;
 }
@@ -528,20 +582,56 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
     int i;
     void* elementA;
     void* elementB;
-    Node* auxNode;
+    void* auxElement;
     int flagSwap;
     int criterio;
 
     if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
+<<<<<<< HEAD
 
         quickSort(this,ll_len(this),pFunc,order);
 
 
+=======
+        do
+        {
+            startIterator(this,this->pFirstNode);//Seteo el iterador en el head del Linkedlist
+            auxElement = getNext(this);
+            flagSwap = 0;
+
+            for(i=0;i<ll_len(this)-1;i++)
+            {
+                elementA = auxElement;//Se setea el elemento auxiliar como el primer para comparar
+                elementB = getNext(this);//Se hace el get del siguiente elemento al auxiliar
+
+                if(elementA != NULL && elementB != NULL)
+                {
+                    criterio = pFunc(elementA,elementB);
+
+                    auxElement = elementB;
+                    if((order == 0 && criterio == -1) ||
+                        (order == 1 && criterio == 1))
+                    {
+                        flagSwap = 1;
+                        ll_set(this,i,elementB);//SWAP
+                        ll_set(this,i+1,elementA);
+                        auxElement = elementA;
+                    }
+                    else
+                    {
+                        auxElement = elementB;//Si no realiza el Swap carga el auxiliar con el segundo elemento
+                    }
+                }
+            }
+        }while(flagSwap == 1);
+        resetIterator(this);
+>>>>>>> 5e4497056831b60e71329a8cdb3c88481b37a352
         returnAux = 0;
     }
     return returnAux;
 }
+<<<<<<< HEAD
 ///////////////Quick Sort
 void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order)
 {
@@ -599,13 +689,16 @@ void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order)
 
 
 
+=======
+>>>>>>> 5e4497056831b60e71329a8cdb3c88481b37a352
 
-/***
-LinkedList* ll_filter(linkedlist* this, (*funcionCriterio))
-Segun criterio se filtran los elementos y se retorna nuevo linkedlist
-con los elementos que cumplen con la funcion pasada como criterio
+/**
+* \brief Se filtran los elementos de una lista que cumplan con un criterio
+* \param this Es el puntero a la LinkedList para filtrar
+* \param pFunc Es el puntero a la función para realizar el filtrado
+* \return Retorna un nuevo Linkedlist con los elementos filtrados o NULL si la lista y la función son NULL
+*
 */
-
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 {
     LinkedList* subList = NULL;
@@ -627,64 +720,39 @@ LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
     return subList;
 }
 
-
-/***
- ll_startIterator(LinkedList* this)
-Establece un indice como referencia para iterar y facilitar la busqueda.
-Esta funcion establece el PRIMERO en una variable estatica
-*/
-
-
-Node* ll_startIterator(LinkedList* this)
-{
-    Node* retorno = NULL;
-    static int counter = 0;
-    Node* head = this->pFirstNode;
-    printf("\ntest 1");
-
-
-    if(this != NULL && counter == 0)
-    {
-        printf("\ntest 2");
-        itNode = head;//Guardo el nodo HEAD a la variable global
-        retorno = itNode;
-        itNode = itNode->pNextNode;//Se mueve al siguiente nodo la variable itNode
-        counter++;//Posición del cursor en el array
-    }
-    else if(this != NULL && counter > 0 && counter < ll_len(this))
-    {
-        printf("\ntest 3");
-        retorno = itNode;//Se retorna el nodo ya incrementado en la anterior iteracion
-        itNode = itNode->pNextNode;//Se mueve al siguiente nodo la variable itNode
-        counter++;
-    }
-    else if(this == NULL || counter >= ll_len(this))
-    {
-        printf("\ntest 4");
-        counter = 0;//Se reinicia contador indicando que se llegó al final
-    }
-        perror("Result: ");
-    return retorno;
-}
-
 /**
- ll_nextIterator();
-Esta funcion modifica el indice estatico para facilitar la busqueda
-Retorna el elemento de un nodo y setea el cursor en el siguiente
+ * \brief Recibe el LinkedList y ejecuta la funcion recibida con todos los elementos
+ * \param this Es el LinkedList que recibe para recorrer
+ * \param pFunc Es el puntero a la función para ejecutar dentro del mapping
+ * \return Retorna 0 si logra ejecutar la función con todos los elementos sino retorna -1
 */
-void* ll_getNext(LinkedList* this)
+int ll_map(LinkedList* this, int (*pFunc)(void*))
 {
-    void* retorno = NULL;
-    Node* auxNode;
-    perror("Result: ");
+    int retorno = -1;
+    int i;
+    void* pElement;
 
-    if(this != NULL)
+    if(this != NULL && pFunc != NULL)
     {
-        printf("\ntest 0");
-
-        auxNode = ll_startIterator(this);//Obtengo el next nodo del actual
-        retorno = auxNode->pElement;
+        startIterator(this,this->pFirstNode);
+        for(i=0;i<ll_len(this);i++)
+        {
+            pElement = getNext(this);
+            if(pElement != NULL)
+            {
+                if(!pFunc(pElement))
+                {
+                    printf("\nElement %p",pElement);
+                    retorno = 0;
+                }
+                else
+                {
+                    printf("\nElement %p",pElement);
+                    break;
+                }
+            }
+        }
+        resetIterator(this);
     }
-        perror("Result: ");
     return retorno;
 }

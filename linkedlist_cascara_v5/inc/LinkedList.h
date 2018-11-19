@@ -22,11 +22,13 @@ struct Node
 {
     void* pElement;
     struct Node* pNextNode;//Enganche al siguiente nodo
+    //Agregar itNode
 }typedef Node;
 
 struct LinkedList
 {
     Node* pFirstNode;//Dirección de memoria a nodo
+    Node* itNode;
     int size;//Cuantos nodos tiene adentro
 }typedef LinkedList;
 #endif
@@ -54,7 +56,11 @@ LinkedList* ll_subList(LinkedList* this,int from,int to);
 LinkedList* ll_clone(LinkedList* this);
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
+<<<<<<< HEAD
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
 Node* ll_startIterator(LinkedList* this);
 void* ll_getNext(LinkedList* this);
 void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order);
+=======
+int ll_map(LinkedList* this, int (*pFunc)(void*));
+>>>>>>> 5e4497056831b60e71329a8cdb3c88481b37a352

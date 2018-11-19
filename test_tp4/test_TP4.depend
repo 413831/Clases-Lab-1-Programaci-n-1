@@ -1,0 +1,62 @@
+# depslib dependency file v1.0
+1542149594 source:/home/alumno/Documentos/Planes/test_tp4/Controller.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+	"parser.h"
+	"utn.h"
+
+1542148208 /home/alumno/Documentos/Planes/test_tp4/LinkedList.h
+
+1542149583 /home/alumno/Documentos/Planes/test_tp4/Employee.h
+
+1541358704 /home/alumno/Documentos/Planes/test_tp4/parser.h
+
+1541358704 /home/alumno/Documentos/Planes/test_tp4/utn.h
+
+1542149569 source:/home/alumno/Documentos/Planes/test_tp4/Employee.c
+	"Employee.h"
+	"LinkedList.h"
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1541358704 source:/home/alumno/Documentos/Planes/test_tp4/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1542149647 source:/home/alumno/Documentos/Planes/test_tp4/LinkedList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	"LinkedList.h"
+
+1542149382 source:/home/alumno/Documentos/Planes/test_tp4/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Controller.h"
+
+1541358704 source:/home/alumno/Documentos/Planes/test_tp4/parser.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Employee.h"
+	"parser.h"
+
+1541358704 source:/home/alumno/Documentos/Planes/test_tp4/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1541358704 /home/alumno/Documentos/Planes/test_tp4/Controller.h
+	"Employee.h"
+
