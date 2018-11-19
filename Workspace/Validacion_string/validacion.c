@@ -94,6 +94,7 @@ int validacion_Letras(char* array,int size)
     int retorno = 0;
     int i;
     int contadorSimbolos = 0;
+    int digitosIngresados = strlen(array);
 
      if((array != NULL && size > 0 && strlen(array) > 0) &&
         ((array[0] >= 'a' && array[0] <= 'z') ||
@@ -104,7 +105,9 @@ int validacion_Letras(char* array,int size)
         {
             if( !(array[i] >= 'a' && array[i] <= 'z') &&
                 !(array[i] >= 'A' && array[i] <= 'Z') &&
-                array[i] != ' ')
+                array[i] != ' ' && array[i] != '-'||
+                array[digitosIngresados-1] == '-' ||
+                array[digitosIngresados-1] == ' ')
             {
                 retorno = 0;
                 break;
