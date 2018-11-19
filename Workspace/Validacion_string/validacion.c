@@ -93,7 +93,6 @@ int validacion_Letras(char* array,int size)
 {
     int retorno = 0;
     int i;
-    int contadorSimbolos = 0;
     int digitosIngresados = strlen(array);
 
      if((array != NULL && size > 0 && strlen(array) > 0) &&
@@ -103,9 +102,9 @@ int validacion_Letras(char* array,int size)
         retorno = 1;
         for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
         {
-            if( !(array[i] >= 'a' && array[i] <= 'z') &&
+            if( (!(array[i] >= 'a' && array[i] <= 'z') &&
                 !(array[i] >= 'A' && array[i] <= 'Z') &&
-                array[i] != ' ' && array[i] != '-'||
+                array[i] != ' ' && array[i] != '-') ||
                 array[digitosIngresados-1] == '-' ||
                 array[digitosIngresados-1] == ' ')
             {
@@ -241,30 +240,30 @@ int validacion_DNI(char* array,int size)
  */
 int validacion_Cuit(char* array,int size)
 {
-   int i=0;
-   int retorno = 0;
-   int contadorSimbolos = 0;
-   int digitosIngresados;
+    int retorno = 0;
+    int i;
+    int contadorSimbolos = 0;
+    int digitosIngresados = strlen(array);
 
-   digitosIngresados = strlen(array);
-
-   if(array != NULL && size > 0)
+    if( (array != NULL && size > 0 && strlen(array) > 0) &&
+        (array[0] >= '0' && array[0] <= '9'))
    {
-       retorno = 1;
-       for(i=0;i < size && array[i] != '\0';i++)
-       {
-            if(array[i] < '0' || array[i] > '9')
-            {
-                if(array[2] != '-' || array[11] != '-' || contadorSimbolos > 2 || digitosIngresados > 13)
-                {
-                    retorno = 0;
-                    break;
-                }
-            }
-
+        retorno = 1;
+        for(i=0;i < size && array[i] != '\0';i++)
+        {
             if(array[i] == '-')
             {
                 contadorSimbolos++;
+            }
+
+            if ((!(array[i] >= '0' && array[i] <= '9') &&
+                array[i] != '-' &&
+                digitosIngresados < 13) ||
+                digitosIngresados > 13 ||
+                array[digitosIngresados-1] == '-')
+            {
+                retorno = 0;
+                break;
             }
        }
    }
@@ -283,21 +282,20 @@ int validacion_File(char* array,int size)
 {
     int retorno = 0;
     int i;
-    int contadorSimbolos = 0;
     int digitosIngresados = strlen(array);
 
-     if((array != NULL && size > 0 && strlen(array) > 0) &&
-        ((array[0] >= 'a' && array[0] <= 'z') ||
-        (array[0] >= 'A' && array[0] <= 'Z')) ||
+     if((array != NULL && size > 0 && strlen(array) > 0 &&
+        (array[0] >= 'a' && array[0] <= 'z')) ||
+        (array[0] >= 'A' && array[0] <= 'Z') ||
         (array[0] >= '0' && array[0] <= '9')) //Verifico que el primer digito sea valido
     {
         retorno = 1;
         for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
         {
-            if( !(array[i] >= 'a' && array[i] <= 'z') &&
+            if( (!(array[i] >= 'a' && array[i] <= 'z') &&
                 !(array[i] >= 'A' && array[i] <= 'Z') &&
                 !(array[i] >= '0' && array[i] <= '9') &&
-                array[i] != '.' && array[i] != '_' ||
+                array[i] != '.' && array[i] != '_') ||
                 array[digitosIngresados-1] == '.' ||
                 array[digitosIngresados-1] == '_' )
             {
