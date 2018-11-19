@@ -60,7 +60,6 @@ int validacion_Float(char* array,int size)
    int i=0;
    int retorno = 0;
    int contadorSimbolos = 0;
-   int digitosIngresados = strlen(array);
 
     if((array != NULL && size > 0 && strlen(array) > 0) &&
        (array[0] == '-' || array[0] == '+' ||
@@ -94,16 +93,18 @@ int validacion_Letras(char* array,int size)
 {
     int retorno = 0;
     int i;
-    int digitosIngresados;
+    int contadorSimbolos = 0;
 
-    digitosIngresados = strlen(array);
-
-    if(array != NULL)
+     if((array != NULL && size > 0 && strlen(array) > 0) &&
+        ((array[0] >= 'a' && array[0] <= 'z') ||
+        (array[0] >= 'A' && array[0] <= 'Z')) )//Verifico que el primer digito sea valido
     {
         retorno = 1;
-        for(i=0;i < digitosIngresados && array[i] != '\0';i++)
+        for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
         {
-            if((tolower(array[i]) < 'a' || tolower(array[i]) > 'z') && array[i]!= ' ' && array[i]!= '-')
+            if( !(array[i] >= 'a' && array[i] <= 'z') &&
+                !(array[i] >= 'A' && array[i] <= 'Z') &&
+                array[i] != ' ')
             {
                 retorno = 0;
                 break;

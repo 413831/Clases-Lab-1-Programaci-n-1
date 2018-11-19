@@ -18,15 +18,15 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf));
 int main()
 {
     int value;
-    char testString[15][100] = {"12345",".123","aBcDf","....","123abc","abc123","-123","0012","4342&%&$","   ","3.14","03.15","3.abc","ab.3"};
+    char testString[15][100] = {"abc-","acbdf","aB-cD ","123.","ab-abc","abc123","-123","0012","4342&%&$","   ","3.14","03.15","3.abc","ab.3","abc dfe"};
     int i;
   //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
     printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
-    printf("\n-Validacion flotantes-\n");
+    printf("\n-Validacion solo letras-\n");
 
     for(i=0;i<15;i++)
     {
-        value = testValidacion(testString[i],validacion_Float);
+        value = testValidacion(testString[i],validacion_Letras);
         switch(value)
         {
             case 1 :
