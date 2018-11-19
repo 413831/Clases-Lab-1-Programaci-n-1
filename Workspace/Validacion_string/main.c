@@ -18,7 +18,7 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf));
 int main()
 {
     int value;
-    char testString[15][100] = {"22-12123123-9","221212312395435","abcdefghijk","_1231231231","123123123_","    ","\n\n","&%&$·","11-11234234-8 ","cuitcuitcuit","3.14","03.15","----","abc---","123---"};
+    char testString[15][100] = {"22-12123123-9","22-1212-123-9","abcdefghijk","_1231231231","123123123_","    ","\n\n","&%&$·","11-11234234-8 ","cuitcuitcuit","3.14","03.15","----","abc---","123---"};
     int i;
   //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
     printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
