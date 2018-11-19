@@ -5,6 +5,8 @@
 #include <ctype.h>
 #include "utn.h"
 
+
+
 /**
  * \brief Genera un número aleatorio
  * \param desde Número aleatorio mínimo
@@ -33,7 +35,7 @@ int validacion_Int(char* array,int size)
 
     if((array != NULL && size > 0 && strlen(array) > 0) &&
        (array[0] == '-' || array[0] == '+' ||
-       (array[0] >= '0' && array[0] <= '9')))//Verifico que el primer digito sea valido
+       (array[0] > '0' && array[0] <= '9')))//Verifico que el primer digito sea valido
     {
         retorno = 1;
         for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
@@ -58,30 +60,25 @@ int validacion_Float(char* array,int size)
    int i=0;
    int retorno = 0;
    int contadorSimbolos = 0;
-   int digitosIngresados;
+   int digitosIngresados = strlen(array);
 
-   digitosIngresados = strlen(array)-1;
-
-   if(array != NULL && size > 0)
-   {
-       retorno = 1;
-       for(i=0;i < size && array[i] != '\0';i++)
-       {
-
-            if(array[i] < '0' || array[i] > '9')
-            {
-                if(array[i] != '.' || array[0] == '.' || contadorSimbolos > 1 || array[digitosIngresados] == '.')
-                {
-                retorno = 0;
-                break;
-                }
-            }
-
-            if(array[i] == '.')
+    if((array != NULL && size > 0 && strlen(array) > 0) &&
+       (array[0] == '-' || array[0] == '+' ||
+       (array[0] > '0' && array[0] <= '9')))//Verifico que el primer digito sea valido
+    {
+        retorno = 1;
+        for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
+        {
+            if(array[i] == '.' && contadorSimbolos == '0')
             {
                 contadorSimbolos++;
             }
-       }
+            else if(!(array[i] >= '0' && array[i] <= '9'))//Rango valido de numeros
+            {
+                retorno = 0;
+                break;
+            }
+        }
    }
    return retorno;
 }

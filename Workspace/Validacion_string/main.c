@@ -4,6 +4,12 @@
 #include "utn.h"
 
 #define BUFFER 100
+#define RED_BOLD "\033[1;31m"
+#define RED      "\033[0;31m"
+#define GREEN     "\033[0;32m"
+#define GREEN_BLD "\033[1;32m"
+#define CYAN_BLD     "\033[1;36m"
+#define NORMAL   "\033[0;00m"
 
 
 int testValidacion(char* str,int (*validacion)(char* str,int buf));
@@ -12,22 +18,22 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf));
 int main()
 {
     int value;
-    char testString[10][100] = {"12345","----","aBcDf","....","123abc","abc123","-123","%·%·","4342&%&$","   "};
+    char testString[15][100] = {"12345",".123","aBcDf","....","123abc","abc123","-123","0012","4342&%&$","   ","3.14","03.15","3.abc","ab.3"};
     int i;
   //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
     printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
-    printf("\n-Validacion enteros-\n");
+    printf("\n-Validacion flotantes-\n");
 
-    for(i=0;i<10;i++)
+    for(i=0;i<15;i++)
     {
-        value = testValidacion(testString[i],validacion_Int);
+        value = testValidacion(testString[i],validacion_Float);
         switch(value)
         {
             case 1 :
-                printf("\nACEPTO EL DATO.\n");
+                printf("\n---------------%sACEPTO EL DATO.\n%s",GREEN_BLD,NORMAL);
                 break;
             case 2 :
-                printf("\nNO ACEPTO EL DATO.\n");
+                printf("\n---------------%sNO ACEPTO EL DATO.\n%s",RED_BOLD,NORMAL);
                 break;
         }
     }
@@ -52,6 +58,6 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf))
     {
         retorno = 2;
     }
-    printf("\nEl dato ingresado es >> %s",str);
+    printf("\nEl dato ingresado es >> %s%s%s",CYAN_BLD,str,NORMAL);
     return retorno;
 }
