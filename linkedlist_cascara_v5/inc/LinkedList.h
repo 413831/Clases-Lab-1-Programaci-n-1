@@ -57,4 +57,4 @@ LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
 Node* ll_startIterator(LinkedList* this);
 void* ll_getNext(LinkedList* this);
-
+void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order);

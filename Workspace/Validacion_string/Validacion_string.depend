@@ -37,3 +37,25 @@
 	<ctype.h>
 	"utn.h"
 
+1542589006 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1542414788 /home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/utn.h
+
+1542591296 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1542590802 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+

@@ -1,43 +1,57 @@
 #include <stdio_ext.h>
 #include <stdlib.h>
+#include <string.h>
 #include "utn.h"
 
-#define LIMITE 30
-#define SUELDO 8
+#define BUFFER 100
 
 
-
-
-
-
+int testValidacion(char* str,int (*validacion)(char* str,int buf));
 
 
 int main()
 {
-    char edadAux[LIMITE];
-    int edad;
-    int acumEdad = 0;
-    int contador;
-    float promedio;
+    int value;
+    char testString[10][100] = {"12345","----","aBcDf","....","123abc","abc123","-123","%·%·","4342&%&$","   "};
     int i;
+  //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
+    printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
+    printf("\n-Validacion enteros-\n");
 
-    for(i=1;i<4;i++)
+    for(i=0;i<10;i++)
     {
-    contador = i;
-    string_inicializar(edadAux,LIMITE,0);
-    string_getStringNumeros("\nIngrese su edad: ","\nError.Dato incorrecto",LIMITE,edadAux,0,100);
-    edad = atoi(edadAux);
-    acumEdad+=edad;
-
-    printf("\nLA EDAD Nº%d ES: %d",i,edad);
+        value = testValidacion(testString[i],validacion_Int);
+        switch(value)
+        {
+            case 1 :
+                printf("\nACEPTO EL DATO.\n");
+                break;
+            case 2 :
+                printf("\nNO ACEPTO EL DATO.\n");
+                break;
+        }
     }
+    pause();
 
-    promedio = acumEdad / contador;
+    return 0;
+}
 
-    printf("\nEl total es: %d",acumEdad);
-    printf("\nEl promedio es: %f",promedio);
 
-    getchar();
+int testValidacion(char* str,int (*validacion)(char* str,int buf))
+{
+    int retorno = -1;
+    int result;
 
-        return 0;
+    result = validacion(str,BUFFER);
+    printf("\nRETURN >> %d",result);
+    if(result == 1)
+    {
+        retorno = 1;
+    }
+    else if(result == 0)
+    {
+        retorno = 2;
+    }
+    printf("\nEl dato ingresado es >> %s",str);
+    return retorno;
 }

@@ -534,30 +534,10 @@ int ll_sort(LinkedList* this, int (*pFunc)(void*,void*), int order)
 
     if(this != NULL && pFunc != NULL && (order == 1 || order == 0))
     {
-        do
-        {
-            flagSwap = 0;
 
-            for(i=0;i<ll_len(this)-1;i++)
-            {
-                auxNode = getNode(this,i);
-                elementA = auxNode->pElement;
-                elementB = auxNode->pNextNode->pElement;
+        quickSort(this,ll_len(this),pFunc,order);
 
-                if(elementA != NULL && elementB != NULL)
-                {
-                    criterio = pFunc(elementA,elementB);
 
-                    if((order == 0 && criterio == -1) ||
-                        (order == 1 && criterio == 1))
-                    {
-                        flagSwap = 1;
-                        ll_set(this,i,elementB);
-                        ll_set(this,i+1,elementA);
-                    }
-                }
-            }
-        }while(flagSwap == 1);
         returnAux = 0;
     }
     return returnAux;
@@ -586,29 +566,32 @@ void quickSort(LinkedList* this,int size,int (*pFunc)(void*,void*), int order)
 
     for (i = 0,j = size - 1; ; i++, j--)
     {
+        printf("\nOrdenando.");
         elementA = ll_get(this,i);//i incrementa desde el comienzo
         elementB = ll_get(this,j);//j decrementa desde el final
 
-        criterioMenor = pFunc(elementA,pivot);
-        criterioMayor = pFunc(elementB,pivot);
-        while (criterioMenor == -1 && order == 0 ||
-               criterioMenor == 1 && order == 1)
+        criterioMenor = pFunc(elementA,pivot);//Determina si el elemento menor al pivot cumple con la condicion de menor
+        criterioMayor = pFunc(elementB,pivot);//Determina si el elemento mayor al pivot cumple con la condicion de mayor
+
+        while ((criterioMenor == -1 && order == 0) ||
+               (criterioMenor == 1 && order == 1))
         {
-            i++;//Determina si el elemento menor al pivot cumple con la condicion de menor
+            i++;
         }
-        while (criterioMayor == -1 && order == 0 ||
-               criterioMayor == 1 && order == 1)
+        while ((criterioMayor == -1 && order == 0) ||
+               (criterioMayor == 1 && order == 1))
         {
-            j--;//Determina si el elemento mayor al pivot cumple con la condicion de mayor
+            j--;
         }
         //Si ambos cumplen modifica ambos iteradores
         if (i >= j) break;//Si no cumple rompe el for
         {
+            printf("\nOrdenando....");
             ll_set(this,i,elementB);///SWAP
             ll_set(this,j,elementA);
         }
       }
-      auxListA = ll_subList(this,0,i);///Se crea subarray de menores al pivot
+      auxListA = ll_subList(this,1,i);///Se crea subarray de menores al pivot
       auxListB = ll_subList(this,i+1,size - 1);///Se crea subarray de mayores al pivot
       quickSort(auxListA,i,pFunc,order);//Se ordena el array hasta i
       quickSort(auxListB,size - i,pFunc,order);//Se ordena el array luego de i
