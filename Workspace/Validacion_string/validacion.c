@@ -281,36 +281,30 @@ int validacion_Cuit(char* array,int size)
  */
 int validacion_File(char* array,int size)
 {
-    int i=0;
     int retorno = 0;
+    int i;
     int contadorSimbolos = 0;
-    int digitosIngresados;
+    int digitosIngresados = strlen(array);
 
-    digitosIngresados = strlen(array);
-
-    if(array != NULL && size > 0)
+     if((array != NULL && size > 0 && strlen(array) > 0) &&
+        ((array[0] >= 'a' && array[0] <= 'z') ||
+        (array[0] >= 'A' && array[0] <= 'Z')) ||
+        (array[0] >= '0' && array[0] <= '9')) //Verifico que el primer digito sea valido
     {
-       retorno = 1;
-       for(i=0;i < digitosIngresados && array[i] != '\0';i++)
-       {
-            if( array[i] == '\0' ||
-                ((array[i] < '0' || array[i] > '9') &&
-                (array[i] < 'a' || array[i] > 'z') &&
-                (array[i] < 'A' || array[i] > 'Z')))
+        retorno = 1;
+        for(i=1;i < size && array[i] != '\0';i++)//Verifico los digitos restantes
+        {
+            if( !(array[i] >= 'a' && array[i] <= 'z') &&
+                !(array[i] >= 'A' && array[i] <= 'Z') &&
+                !(array[i] >= '0' && array[i] <= '9') &&
+                array[i] != '.' && array[i] != '_' ||
+                array[digitosIngresados-1] == '.' ||
+                array[digitosIngresados-1] == '_' )
             {
-                if(array[i] != '.' || contadorSimbolos > 2 ||
-                   array[0] == '.' || array[digitosIngresados] == '.')
-                {
-                    retorno = 0;
-                    break;
-                }
+                retorno = 0;
+                break;
             }
-
-            if(array[i] == '-')
-            {
-                contadorSimbolos++;
-            }
-       }
+        }
     }
     return retorno;
 }

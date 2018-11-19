@@ -18,7 +18,7 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf));
 int main()
 {
     int value;
-    char testString[15][100] = {"abc-","aCBdf","aB-cD ","-abdf","ab-abc ","abc123","\n\n","0012","ab cd df","   ","3.14","03.15","3.abc","ab.3","abc dfe"};
+    char testString[15][100] = {"pancito.txt","a....","b____","archivo.",".archivo","    ","\n\n","0001","flancito&","&panceeto","3.14","03.15","___","abc__","file_."};
     int i;
   //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
     printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
@@ -26,7 +26,7 @@ int main()
 
     for(i=0;i<15;i++)
     {
-        value = testValidacion(testString[i],validacion_Letras);
+        value = testValidacion(testString[i],validacion_File);
         switch(value)
         {
             case 1 :
