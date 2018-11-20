@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <errno.h>
-#include "../inc/LinkedList.h"
+#include "LinkedList.h"
 
 static Node* getNode(LinkedList* this, int nodeIndex);
 static int addNode(LinkedList* this, int nodeIndex,void* pElement);
@@ -672,7 +672,7 @@ int ll_map(LinkedList* this, int (*pFunc)(void*))
     if(this != NULL && pFunc != NULL)
     {
         startIterator(this,this->pFirstNode);
-        for(i=0;i<ll_len(this)-1;i++)
+        for(i=0;i<ll_len(this);i++)
         {
             pElement = ll_getNext(this);
             if(pElement != NULL)

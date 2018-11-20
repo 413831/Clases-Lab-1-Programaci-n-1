@@ -4,6 +4,6 @@
 #include "LinkedList.h"
 
 int parser_parseEmpleados(char* fileName, LinkedList* listaEmpleados);
-
+int parser_SaveToText(FILE* pFile , LinkedList* pArrayListEmployee);
 
 #endif // PARSER_H_INCLUDED

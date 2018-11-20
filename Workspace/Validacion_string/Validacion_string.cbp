@@ -31,19 +31,10 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="calculo.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="input.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="list.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="main.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="string.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="utn.h" />

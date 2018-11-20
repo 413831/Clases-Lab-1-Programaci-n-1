@@ -1,12 +1,22 @@
+
 /**
 *Funciones de ENTRADA
 */
-int input_getInt(char* mensaje);
-float input_getFloat(char* mensaje);
-char input_getChar(char* mensaje);
-void input_modificarArray(int* pArray,int* pIndice,int* pSize,char* pMensaje);
-void limpiarMemoria();
 void limpiarPantalla();
+void pause();
+int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
+int input_ScanInt(char* mensaje);
+float input_ScanFloat(char* mensaje);
+char input_ScanChar(char* mensaje);
+int input_getString(char input[],int size);
+int input_getLetras(char input[],int size,char mensaje[],char msjError[],int reintentos);
+int input_getEnteros(int* input,char mensaje[],char msjError[],int reintentos);
+int input_getFloat(float* input,char mensaje[],char msjError[],int reintentos);
+int input_getDNI(char input[],int size,char mensaje[],char msjError[],int reintentos);
+int input_getTelefono(char input[],int size,char mensaje[],char msjError[],int reintentos);
+int input_getCuit(char input[],int size,char mensaje[],char msjError[],int reintentos);
+int input_getDireccion(char input[],int size,char mensaje[],char msjError[],int reintentos);
+int input_getPath(char input[],int size,char mensaje[],char msjError[],int reintentos);
 /**
 *Funciones de CÁLCULOS
 */
@@ -21,12 +31,8 @@ int validacion_Letras(char* array,int size);
 int validacion_AlfaNumerico(char* array,int size);
 int validacion_Telefono(char* array,int size);
 int validacion_DNI(char* array,int size);
-
-/**
-*Funciones de LISTADOS
-*/
-void array_mostrarInt(int* pArray,int indice,int size,char* pMensaje);
-
+int validacion_Cuit(char* array,int size);
+int validacion_File(char* array,int size);
 
 /**
 *Funciones de ORDENAMIENTO de Array
@@ -39,8 +45,8 @@ int sort_Insertion(int* pArray, int limite, int orden);
 *Funciones de STRING
 */
 int string_getString(char mensaje[],int size,char input[]);
-int string_getStringLetras(char mensaje[],char msjError[],int size,char input[]);
-int string_getStringNumeros(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo);
-int string_getStringFloat(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo);
-int string_getStringDNI(char mensaje[],char msjError[],int size,char input[],int minimo,int maximo);
+int string_getStringLetras(char input[],int size,char mensaje[],char msjError[]);
+int string_getStringEnteros(int* input,int size,char mensaje[],char msjError[],int minimo,int maximo);
+int string_getStringFloat(float* input,int size,char mensaje[],char msjError[],int minimo,int maximo);
+int string_getStringDNI(char input[],int size,char mensaje[],char msjError[],int minimo,int maximo);
 void string_inicializar(char array[],int size,char valor);
