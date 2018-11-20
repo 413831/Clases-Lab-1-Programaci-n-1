@@ -90,7 +90,6 @@ int employee_calcularSueldo(void* pEmpleado)
     if(pEmpleado != NULL)
     {
         employee_getHorasTrabajadas(pEmpleado,&cantidadHoras);
-
     ///   Los valores de horas varian entre 80 y 240.
     ///   Las primeras 120 horas la hora vale $180
     ///   De 120 a 160 horas, la hora vale $240
