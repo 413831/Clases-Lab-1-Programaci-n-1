@@ -1,5 +1,5 @@
 #include "../inc/LinkedList.h"
-#include "../inc/Employee.h"
+#include "../inc/People.h"
 
 int controller_loadFromText(char* path , LinkedList* pLinkedList);
 int controller_loadFromBinary(char* path , LinkedList* pLinkedList);

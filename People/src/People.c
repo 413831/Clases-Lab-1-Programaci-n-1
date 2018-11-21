@@ -84,9 +84,8 @@ static int isValidId(char* id)
 static int isValidIsEmpty(char* isEmpty)//Revisar parametros
 {
     int retorno = 0;
-    int digitosIngresados = strlen(isEmpty);
 
-    if(isEmpty != NULL && validacion_Int(isEmpty,digitosIngresados))
+    if(isEmpty != NULL && (!strcasecmp("true",isEmpty) || !strcasecmp("false",isEmpty)))
     {
         retorno = 1;
     }
@@ -407,12 +406,24 @@ People* people_newConParametros(char* id,char* nombre,char* apellido,char* isEmp
     People* this;
     this = people_new();
 
+    int idInt = atoi(id);
+    int sueldoInt = atoi(sueldo);
+    int isEmptyInt;
+
+    if(!strcasecmp("true",isEmpty))
+    {
+        isEmptyInt = 1;
+    }
+    else if(!strcasecmp("false",isEmpty))
+    {
+        isEmptyInt = 0;
+    }
+
     if(isValidId(id) &&
        isValidName(nombre) &&
-       isValidHoras(horasTrabajadas) &&
        isValidIsEmpty(isEmpty) &&
        isValidSueldo(sueldo) &&
-       !people_setAll(this,id,nombre,horasTrabajadas,sueldo))
+       !people_setAll(this,idInt,nombre,apellido,sueldoInt,isEmptyInt))
     {
         return this;
     }
@@ -463,13 +474,15 @@ int people_add(void* pLinkedList)
     char bufferName[BUFFER];
     char bufferLastName[BUFFER];
     char bufferSueldo[BUFFER];
+    char bufferIsEmpty[BUFFER];
     People* this = NULL;
 
     if( !input("nombre",bufferName,BUFFER,isValidName) &&
         !input("apellido",bufferLastName,BUFFER,isValidLastName) &&
-        !input("sueldo",bufferSueldo,BUFFER,isValidSueldo))
+        !input("sueldo",bufferSueldo,BUFFER,isValidSueldo) &&
+        !input("estado",bufferIsEmpty,BUFFER,isValidIsEmpty))
     {
-        this = people_newConParametros("0",bufferName,bufferLastName,bufferSueldo);//Revisar
+        this = people_newConParametros("0",bufferName,bufferLastName,bufferIsEmpty,bufferSueldo);//Revisar
         if(this != NULL)
         {
             people_show(this);
@@ -544,25 +557,20 @@ int people_copy(People* thisA,People* thisB)
     int retorno = -1;
     char bufferName[BUFFER];
     char bufferLastName[BUFFER];
-    char bufferSueldo[BUFFER];
     char bufferId[BUFFER];
-    char bufferIsEmpty[BUFFER];
     int auxId;
     int auxIsEmpty;
     int auxSueldo;
 
     if(thisA != NULL && thisB != NULL)
     {
-        people_getAll(thisB,&auxId,bufferName,bufferLastName,bufferSueldo,&auxIsEmpty);
-        sprintf(bufferId,"%d",auxId);
-        sprintf(bufferIsEmpty,"%d",auxIsEmpty);
-        sprintf(bufferSueldo,"%.2f",auxSueldo);
-
+        people_getAll(thisB,&auxId,bufferName,bufferLastName,&auxSueldo,&auxIsEmpty);
+        sprintf(bufferId,"%d",auxId);////CORREGIR
         copyId(thisA,bufferId);
         people_setNombre(thisA,bufferName);
         people_setApellido(thisA,bufferLastName);
-        people_setSueldo(thisA,bufferSueldo);
-        people_setIsEmpty(thisA,bufferIsEmpty);
+        people_setSueldo(thisA,auxSueldo);
+        people_setIsEmpty(thisA,auxIsEmpty);
 
         retorno = 0;
     }
@@ -641,12 +649,12 @@ int people_insert(LinkedList* pListActives,LinkedList* pListInactives)
     return retorno;
 }
 
+/*
 
-/**
 *\brief Se busca elemento por ID a modificar con opciones de campos
 *\param pLinkedList Es el array a recorrer
 *\return Retorna 0 si logra modificar campo sino retorna -1
-*/
+
 int people_edit(void* pLinkedList)
 {
     int retorno = -1;
@@ -692,11 +700,11 @@ int people_edit(void* pLinkedList)
                     people_replace(pLinkedList,auxElement,index);
                     break;
                 case 2 :
-                    people_modify(auxElement,"apellido",isValidLastName,people_setApellido;
+                    people_modify(auxElement,"apellido",isValidLastName,people_setApellido);
                     people_replace(pLinkedList,auxElement,index);
                     break;
                 case 3 :
-                    people_modify(auxElement,"sueldo",isValidSueldo,people_setSueldo;
+                    people_modify(auxElement,"sueldo",isValidSueldo,people_setSueldo);
                     people_replace(pLinkedList,auxElement,index);
                     break;
                 case 4 :
@@ -709,13 +717,12 @@ int people_edit(void* pLinkedList)
     return retorno;
 }
 
-/**
 *\brief Se modifica un campo del elemento
 *\param this Es el elemento a modificar
 *\param validacion Es el puntero a la funcion de validacion
 *\param set Es el puntero a la funcion set del campo
 *\return Retorna 0 si logra modificar campo sino retorna -1
-*/
+
 int people_modify(People* this,
                         char* mensaje,
                         int (*validacion)(char*),
@@ -740,7 +747,7 @@ int people_modify(People* this,
     }
     return retorno;
 }
-
+*/
 /**
 *\brief Se muestran los datos de todos los campos del elemento
 *\param this Es el puntero al elemento
@@ -750,24 +757,23 @@ int people_show(void* this)
 {
     int retorno = -1;
     int auxId;
-    char auxNombre[128];
-    char auxApellido[128];
-    char IsEmpty[128];
     int auxSueldo;
     int auxIsEmpty;
-
+    char auxNombre[128];
+    char auxApellido[128];
+    char IsEmpty[BUFFER];
     if(this != NULL)
     {
         people_getId(this,&auxId);
         if(auxId != -1)
         {
             people_getNombre(this,auxNombre);
-            people_getApellido(this,&auxSueldo);
-            people_getHorasTrabajadas(this,&auxHorasTrabajadas);
+            people_getApellido(this,auxApellido);
             people_getId(this,&auxId);
             people_getIsEmpty(this,&auxIsEmpty);
+            people_getSueldo(this,&auxSueldo);
 
-            sprintf(IsEmpty,BUFFER,auxIsEmpty);
+            sprintf(IsEmpty,"%d",auxIsEmpty);
 
             printf("\nID -- %d",auxId);
             printf(" / Nombre -- %s",auxNombre);
@@ -810,12 +816,33 @@ int people_sort(void* pLinkedList)
     return retorno;
 }
 
+/**
+*\brief Aumentar sueldo
+*\param pPeople Es el elemento para aumentarle el sueldo
+*\param porcentaje Es el porcentaje de aumento
+*\return Retorna puntero a funcion segun criterio seleccionado si no es correcto retorna NULL
+*/
+int people_aumentarSueldo(void* this,int porcentaje)
+{
+    int retorno = -1;
+    int sueldo;
+
+    if(this != NULL && porcentaje > 0 && porcentaje <= 100)
+    {
+        people_getSueldo(this,&sueldo);
+        printf("\nSUELDO SIN AUMENTO %d",sueldo);
+        sueldo += (porcentaje * sueldo) / 100;
+        people_setSueldo(this,sueldo);
+        printf("\nSUELDO SIN AUMENTO %d",sueldo);
+    }
+    return retorno;
+}
 
 /**
 *\brief Funcion selector de criterio para ordenar
 *\return Retorna puntero a funcion segun criterio seleccionado si no es correcto retorna NULL
 */
-void* people_ordenCriterio()
+/*void* people_ordenCriterio()
 {
     int opcion;
 
@@ -851,7 +878,7 @@ void* people_ordenCriterio()
             printf("\nOpcion incorrecta");
     }
     return retorno;
-}
+}*/
 
 /**
 * \brief Generar una lista de empleados segun opciones, sublist, filter, clone.
@@ -866,9 +893,9 @@ int people_generarLista(LinkedList* pLinkedList,LinkedList* listaPrincipal[],int
     int from = 0;
     int to = 0;
     int len;
-    criterio_type criterio;
-    void* auxLinkedList  = ll_newLinkedList();
-    printf("\n1) Dividir lista\n2) Filtrar lista\n3) Copiar lista\n4) Volver\n");
+ //   criterio_type criterio;
+    void* auxLinkedList = ll_newLinkedList();
+    printf("\n1) Aumentar sueldos\n2) Volver\n");
     input_getEnteros(&option,"\nIngrese opcion: ","\nDato invalido",2);
 
     if(pLinkedList != NULL)
@@ -877,8 +904,6 @@ int people_generarLista(LinkedList* pLinkedList,LinkedList* listaPrincipal[],int
         switch(option)
         {
             case 1 :
-                input_getEnteros(&from,"\nSeleccione primer indice: ","\nDato invalido",2);
-                input_getEnteros(&to,"\nSeleccione segundo indice: ","\nDato invalido",2);
                 if(from >= 0 && from < len && to >= 1 && to < len)
                 {
                     auxLinkedList = ll_subList(pLinkedList,from,to);
@@ -894,7 +919,7 @@ int people_generarLista(LinkedList* pLinkedList,LinkedList* listaPrincipal[],int
                     printf("\nIndice invalido.");
                 }
                 break;
-            case 2 :
+        /*    case 2 :
                 printf("\nSeleccione criterio para filtrar");
                 criterio = people_selectorCriterio();
                 auxLinkedList  = ll_filter(pLinkedList,criterio);
@@ -914,8 +939,8 @@ int people_generarLista(LinkedList* pLinkedList,LinkedList* listaPrincipal[],int
                     *index = 5;
                     retorno = 0;
                 }
-                break;
-            case 4 :
+                break;*/
+            case 2 :
                 break;
             default :
                 printf("\nError.Opcion incorrecta");
@@ -935,7 +960,7 @@ void* people_selectorCriterio()
     int opcion;
 
     void* retorno = NULL;
-    input_getEnteros(&opcion,"\n1) Nombre\n2) Sueldo\n3) Horas\n4) ID\n5) Is Empty\n","\nOpcion incorrecta",2);
+    input_getEnteros(&opcion,"\n1) Nombre\n2) Sueldo\n3) ID\n4) Is Empty\n","\nOpcion incorrecta",2);
 
     switch(opcion)
     {
@@ -945,9 +970,9 @@ void* people_selectorCriterio()
             retorno = criterioNombre;
             break;
         case 2 :
-            printf("\nFiltrar por apellido");
-            criterioHoras(NULL);
-            retorno = criterioHoras;
+            printf("\nFiltrar por Is Empty");
+            criterioId(NULL);
+            retorno = criterioId;
             break;
         case 3 :
             printf("\nFiltrar por sueldo");
@@ -959,11 +984,7 @@ void* people_selectorCriterio()
             criterioId(NULL);
             retorno = criterioId;
             break;
-        case 5 :
-            printf("\nFiltrar por Is Empty");
-            criterioId(NULL);
-            retorno = criterioId;
-            break;
+
         default :
             printf("\nOpcion incorrecta");
     }
@@ -1029,12 +1050,12 @@ int people_borrarLista(LinkedList* pLinkedList[])
 *\param bufferSueldo Es el sueldo para cargar en el elemento
 *\return Retorna 0 si el array es diferente a NULL sino retorna -1
 */
-int people_hardcode(void* pLinkedList,char *bufferName,char* bufferLastName,char* bufferSueldo)
+int people_hardcode(void* pLinkedList,char *bufferName,char* bufferLastName,char* bufferIsEmpty,char* bufferSueldo)
 {
     People* this = NULL;
     int retorno = -1;
 
-    this = people_newConParametros("0",bufferName,bufferLastName,bufferSueldo);
+    this = people_newConParametros("0",bufferName,bufferLastName,bufferIsEmpty,bufferSueldo);
 
     if(this != NULL)
     {
@@ -1053,30 +1074,29 @@ int people_hardcode(void* pLinkedList,char *bufferName,char* bufferLastName,char
 *\param id Es el ID para setear
 *\return Retorna 0 si setea sino -1
 */
-int people_setId(People* this,char* id)
+int people_setId(People* this,int id)
 {
     int retorno=-1;
     static int proximoId= 0;
-    int auxId = atoi(id);
 
-    if(this!=NULL && auxId==0)//Se carga primer ID y en el ALTA
+    if(this!=NULL && id==0)//Se carga primer ID y en el ALTA
     {
         proximoId++;
         this->id=proximoId;
         retorno=0;
     }
-    else if(this!=NULL && auxId>proximoId)//Se comparan los ID al cargar del archivo
+    else if(this!=NULL && id>proximoId)//Se comparan los ID al cargar del archivo
     {
-        proximoId=auxId;
+        proximoId=id;
         this->id=proximoId;
         retorno=0;
     }
-    else if(this!=NULL && auxId<proximoId)
+    else if(this!=NULL && id<proximoId)
     {
-        this->id=auxId;
+        this->id=id;
         retorno = 0;
     }
-    else if(this!=NULL && auxId > -1)
+    else if(this!=NULL && id > -1)
     {
         proximoId = 0;//Reset
         retorno = 0;
@@ -1174,14 +1194,14 @@ int people_getApellido(People* this,char* apellido)
 *\param sueldo Es el sueldo para setear
 *\return Retorna 0 si setea elemento sino retorna -1
 */
-int people_setSueldo(People* this,char* sueldo)
+int people_setSueldo(People* this,int sueldo)
 {
     int retorno=-1;
     int auxSueldo;
 
     if(this!=NULL && isValidSueldo(sueldo))
     {
-        auxSueldo = atof(sueldo);
+        auxSueldo = atoi(sueldo);
         this->sueldo=auxSueldo;
         retorno=0;
     }
@@ -1213,7 +1233,7 @@ int people_getSueldo(People* this,int* sueldo)
 *\param salary Es el dato para setear el campo salario
 *\return Retorna 0 si existe el elemento sino retorna -1
 */
-int people_setAll(People* this,char* id,char* name,char* lastName,char* salary)
+int people_setAll(People* this,int id,char name,char lastName,int salary,int isEmpty)
 {
     int retorno = -1;
 
@@ -1239,16 +1259,17 @@ int people_setAll(People* this,char* id,char* name,char* lastName,char* salary)
 *\param salary Es el dato para obtener el campo salario
 *\return Retorna 0 si existe el elemento sino retorna -1
 */
-int people_getAll(People* this,char* name,int* hours,int* salary,int* id)
+int people_getAll(People* this,int id,char name,char lastName,int salary,int isEmpty)
 {
     int retorno = -1;
 
     if(this != NULL)
     {
         people_getNombre(this,name);
-        people_getHorasTrabajadas(this,hours);
+        people_getApellido(this,hours);
         people_getSueldo(this,salary);
         people_getId(this,id);
+        people_getIsEmpty(this,isEmpty);
         retorno = 0;
     }
     return retorno;

@@ -1,0 +1,63 @@
+# depslib dependency file v1.0
+1542725874 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/utn.h"
+
+1542725874 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/utn.h
+
+1542725874 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/LinkedList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	"../inc/LinkedList.h"
+
+1542725874 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/LinkedList.h
+
+1542761173 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/main.c
+	<stdio.h>
+	<stdlib.h>
+	"../inc/People.h"
+	"../inc/LinkedList.h"
+	"../inc/utn.h"
+
+1542762267 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/parser.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../inc/LinkedList.h"
+	"../inc/People.h"
+	"../inc/utn.h"
+	"../inc/parser.h"
+
+1542762299 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/People.h
+	"../inc/LinkedList.h"
+
+1542725874 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/parser.h
+
+1542725874 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"../inc/utn.h"
+
+1542761445 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/Controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<time.h>
+	"../inc/Controller.h"
+	"../inc/LinkedList.h"
+	"../inc/People.h"
+	"../inc/utn.h"
+	"../inc/parser.h"
+
+1542761139 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/Controller.h
+	"../inc/LinkedList.h"
+	"../inc/People.h"
+
