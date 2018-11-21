@@ -23,7 +23,7 @@
 	"../inc/LinkedList.h"
 	"../inc/utn.h"
 
-1542762267 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/parser.c
+1542762450 source:/home/alumno/Documentos/Planes/ejercicios_programacion_1/People/src/parser.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -32,7 +32,7 @@
 	"../inc/utn.h"
 	"../inc/parser.h"
 
-1542762299 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/People.h
+1542762443 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/People.h
 	"../inc/LinkedList.h"
 
 1542725874 /home/alumno/Documentos/Planes/ejercicios_programacion_1/People/inc/parser.h

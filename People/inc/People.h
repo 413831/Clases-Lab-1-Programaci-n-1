@@ -46,10 +46,10 @@ int people_getNombre(People* this,char* nombre);
 int people_setApellido(People* this,char* apellido);
 int people_getApellido(People* this,char* apellido);
 
-int people_setIsEmpty(People* this,char isEmpty);
+int people_setIsEmpty(People* this,int isEmpty);
 int people_getIsEmpty(People* this,int* isEmpty);
 
-int people_setSueldo(People* this,char sueldo);
+int people_setSueldo(People* this,int sueldo);
 int people_getSueldo(People* this,int* sueldo);
 
 int people_setAll(People* this,int id,char* name,char* lastName,int salary,int isEmpty);

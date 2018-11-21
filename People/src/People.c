@@ -47,12 +47,11 @@ static int isValidLastName(char* lastName)
 *\param sueldo Es el string a validar
 *\return Retorna 1 si es correcto sino retorna 0
 */
-static int isValidSueldo(char* sueldo)
+static int isValidSueldo(int sueldo)
 {
     int retorno = 0;
-    int digitosIngresados = strlen(sueldo);
 
-    if(sueldo != NULL && validacion_Int(sueldo,digitosIngresados) && atoi(sueldo) > 0)
+    if(sueldo > 1000)
     {
         retorno = 1;
     }
@@ -64,7 +63,7 @@ static int isValidSueldo(char* sueldo)
 *\param id Es el string a validar
 *\return Retorna 1 si es correcto sino retorna 0
 */
-static int isValidId(char* id)
+static int isValidId(int id)
 {
     int retorno = 0;
     int digitosIngresados = strlen(id);
@@ -81,7 +80,7 @@ static int isValidId(char* id)
 *\param id Es el string a validar
 *\return Retorna 1 si es correcto sino retorna 0
 */
-static int isValidIsEmpty(char* isEmpty)//Revisar parametros
+static int isValidIsEmpty(int isEmpty)//Revisar parametros
 {
     int retorno = 0;
 
@@ -1201,7 +1200,6 @@ int people_setSueldo(People* this,int sueldo)
 
     if(this!=NULL && isValidSueldo(sueldo))
     {
-        auxSueldo = atoi(sueldo);
         this->sueldo=auxSueldo;
         retorno=0;
     }
@@ -1233,7 +1231,7 @@ int people_getSueldo(People* this,int* sueldo)
 *\param salary Es el dato para setear el campo salario
 *\return Retorna 0 si existe el elemento sino retorna -1
 */
-int people_setAll(People* this,int id,char name,char lastName,int salary,int isEmpty)
+int people_setAll(People* this,int id,char* name,char* lastName,int salary,int isEmpty)
 {
     int retorno = -1;
 
@@ -1242,8 +1240,8 @@ int people_setAll(People* this,int id,char name,char lastName,int salary,int isE
         if( !people_setId(this,id) &&
             !people_setNombre(this,name) &&
             !people_setApellido(this,lastName) &&
-            !people_setSueldo(this,salary))
-            !people_setIsEmpty(this,char* isEmpty);
+            !people_setSueldo(this,salary) && )
+            !people_setIsEmpty(this,isEmpty);
         {
             retorno = 0;
         }

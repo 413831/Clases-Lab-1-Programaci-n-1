@@ -98,7 +98,6 @@ int parser_SaveToText(FILE* pFile , LinkedList* pLinkedListPeople)
     int index;
     int bufferId;
     int bufferIsEmpty;
-    int bufferHorasTrabajadas;
     int bufferSueldo;
     char strIsEmpty[BUFFER];
     char bufferName[BUFFER];
