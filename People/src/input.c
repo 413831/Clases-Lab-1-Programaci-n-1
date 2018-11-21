@@ -85,7 +85,7 @@ char input_ScanChar(char* mensaje)
  * \param validacion Es el puntero a la funcion de validacion del dato
  * \return Retorna 0 si logra cargar el dato sino retorna -1;
  */
-int input(char* message,char* value,int size, int (*validation)(char*))
+int input(char* message,char* value,int size, int (*validation)(char*,int))
 {
     int retorno = -1;
     int retry = 2;
@@ -98,7 +98,7 @@ int input(char* message,char* value,int size, int (*validation)(char*))
         {
             printf("\nIngrese %s: ",message);
             input_getString(buffer,size);
-            if((*validation)(buffer))//Validar segun tipo
+            if((*validation)(buffer,size))//Validar segun tipo
             {
                 buffer = (char*)realloc(buffer,(sizeof(char)*strlen(buffer)+1));
                 strcpy(value,buffer);

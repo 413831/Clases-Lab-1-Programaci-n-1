@@ -48,7 +48,7 @@ int controller_loadFromText(char* path , LinkedList* pLinkedList)
     if(pLinkedList != NULL && path != NULL)
     {
         ll_clear(pLinkedList);
-        if(!parser_EmployeeFromText(pFile,pLinkedList))
+        if(!parser_PeopleFromText(pFile,pLinkedList))
         {
             retorno = 0;
             fclose(pFile);
@@ -70,7 +70,7 @@ int controller_loadFromBinary(char* path , LinkedList* pLinkedList)
     int retorno = -1;
     if(pLinkedList != NULL && path != NULL)
     {
-        retorno = parser_EmployeeFromBinary(pArchivo,pLinkedList);
+        retorno = parser_PeopleFromBinary(pArchivo,pLinkedList);
     }
     fclose(pArchivo);
     return retorno;
@@ -82,7 +82,7 @@ int controller_loadFromBinary(char* path , LinkedList* pLinkedList)
  * \return Retorna 0 si se logra hacer el alta sino retorna -1
  *
  */
-int controller_addEmployee(LinkedList* pLinkedList)
+int controller_addPeople(LinkedList* pLinkedList)
 {
     int retorno = -1;
     limpiarPantalla();
@@ -105,7 +105,7 @@ int controller_addEmployee(LinkedList* pLinkedList)
  * \return Retorna 0 si se logra editar sino retorna -1
  *
  */
-int controller_editEmployee(LinkedList* pLinkedList)
+int controller_editPeople(LinkedList* pLinkedList)
 {
     int retorno = -1;
     limpiarPantalla();
@@ -125,7 +125,7 @@ int controller_editEmployee(LinkedList* pLinkedList)
  * \return Retorna 0 si se logra realizar la baja sino retorna -1
  *
  */
-int controller_removeEmployee(LinkedList* listaPrincipal[])
+int controller_removePeople(LinkedList* listaPrincipal[])
 {
     int retorno = -1;
     char path[BUFFER] = {"../files/bajas.csv"};
@@ -150,7 +150,7 @@ int controller_removeEmployee(LinkedList* listaPrincipal[])
  * \return Retorna 0 si se logra realizar la baja sino retorna -1
  *
  */
-int controller_insertEmployee(LinkedList* listaPrincipal[])
+int controller_insertPeople(LinkedList* listaPrincipal[])
 {
     int retorno = -1;
 
@@ -172,7 +172,7 @@ int controller_insertEmployee(LinkedList* listaPrincipal[])
  * \return retorna 0 si la LinkedList es diferente a NULL sino retorna -1
  *
  */
-int controller_ListEmployee(LinkedList* pLinkedList)
+int controller_ListPeople(LinkedList* pLinkedList)
 {
     int retorno = -1;
 
@@ -249,7 +249,7 @@ int controller_deleteList(LinkedList* pLinkedList[])
  * \return retorna 0 si se logra ordenar sino retorna -1
  *
  */
-int controller_sortEmployee(LinkedList* pLinkedList)
+int controller_sortPeople(LinkedList* pLinkedList)
 {
     int retorno = -1;
 
@@ -404,7 +404,7 @@ int controller_init()
                     }
                     else if(option >= 1 && option <= 2 )
                     {
-                        controller_ListEmployee(listaPrincipal[option]);
+                        controller_ListPeople(listaPrincipal[option]);
                     }
                 }
                 else

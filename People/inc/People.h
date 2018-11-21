@@ -24,10 +24,7 @@ int people_copy(People* thisA,People* thisB);
 int people_replace(LinkedList* pLinkedList,void* auxElement,int index);
 int people_insert(LinkedList* pListActives,LinkedList* pListInactives);
 int people_edit(void* pArrayListPeople);
-/*int people_modify(People* this,
-                        char* mensaje,
-                        int (*validacion)(char*),
-                        int (*set)(People*,void));*/
+
 int people_show(void* this);
 int people_sort(void* pArrayListPeople);
 int people_aumentarSueldo(void* this,int porcentaje);

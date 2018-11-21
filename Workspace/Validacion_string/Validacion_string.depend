@@ -45,7 +45,7 @@
 
 1542414788 /home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/utn.h
 
-1542648888 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/validacion.c
+1542649819 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/validacion.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -53,7 +53,7 @@
 	<ctype.h>
 	"utn.h"
 
-1542648920 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/main.c
+1542649772 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Validacion_string/main.c
 	<stdio_ext.h>
 	<stdlib.h>
 	<string.h>

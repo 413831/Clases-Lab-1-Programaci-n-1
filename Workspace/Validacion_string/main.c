@@ -18,15 +18,15 @@ int testValidacion(char* str,int (*validacion)(char* str,int buf));
 int main()
 {
     int value;
-    char testString[15][100] = {"22-12123123-9","22-1212-123-9","abcdefghijk","_1231231231","123123123_","    ","\n\n","&%&$·","11-11234234-8 ","cuitcuitcuit","3.14","03.15","----","abc---","123---"};
+    char testString[15][100] = {"47778169","bananas","4numerotelefonico","66563654635","00000202000","    ","\n\n","&%&$·","51231212 ","54 54334543","3.14","03.15",".....","423...","523.43"};
     int i;
   //  int input(char* mensaje,char* campo,int size, int (*validacion)(char*));
     printf("TEST VALIDACIONES\n\nVALORES DE RETORNO\n (1) Funciona validacion\n (0) No funciona validacion\n");
-    printf("\n-Validacion solo letras-\n");
+    printf("\n-Validacion DNI-\n");
 
     for(i=0;i<15;i++)
     {
-        value = testValidacion(testString[i],validacion_Cuit);
+        value = testValidacion(testString[i],validacion_Telefono);
         switch(value)
         {
             case 1 :

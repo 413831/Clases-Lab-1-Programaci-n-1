@@ -160,36 +160,26 @@ int validacion_AlfaNumerico(char* array,int size)
  */
 int validacion_Telefono(char* array,int size)
 {
-   int i=0;
-   int retorno = 0;
-   int contadorSimbolos = 0;
-   int digitosIngresados;
+    int retorno = 0;
+    int i;
+    int digitosIngresados = strlen(array);
 
-   digitosIngresados = strlen(array)-1;
+    if( (array != NULL && size > 0 && strlen(array) > 0) &&
+        (array[0] >= '0' && array[0] <= '9') &&
+        (array[0] != '4' || (array[0] != '5')))
+    {
+        retorno = 1;
+        for(i=0;i < size && array[i] != '\0';i++)
+        {
 
-   if(array != NULL && size > 0)
-   {
-       retorno = 1;
-       for(i=0;i < size && array[i] != '\0';i++)
-       {
-            if(array[i] < '0' || array[i] > '9')
+            if ((!(array[i] >= '0' && array[i] <= '9') ||
+                digitosIngresados != 9))
             {
-                if(array[i] != '-' ||
-                   array[4] != '-' ||
-                   array[2] != '-' ||
-                   contadorSimbolos > 2 ||
-                   array[digitosIngresados] == '-')
-                {
                 retorno = 0;
                 break;
-                }
-            }
-            if(array[i] == '-')
-            {
-                contadorSimbolos++;
             }
        }
-   }
+    }
    return retorno;
 }
 
@@ -201,30 +191,31 @@ int validacion_Telefono(char* array,int size)
  */
 int validacion_DNI(char* array,int size)
 {
-   int i=0;
-   int retorno = 0;
-   int contadorSimbolos = 0;
-   int digitosIngresados;
 
-   digitosIngresados = strlen(array);
+    int retorno = 0;
+    int i;
+    int contadorSimbolos = 0;
+    int digitosIngresados = strlen(array);
 
-   if(array != NULL && size > 0)
+    if( (array != NULL && size > 0 && strlen(array) > 0) &&
+        (array[0] >= '0' && array[0] <= '9'))
    {
-       retorno = 1;
-       for(i=0;i < size && array[i] != '\0';i++)
-       {
-            if(array[i] < '0' || array[i] > '9'|| array[i] != '.')
-            {
-                if(array[2] != '.' || array[6] != '.' || contadorSimbolos > 2 || digitosIngresados < 10)
-                {
-                retorno = 0;
-                break;
-                }
-            }
-
+        retorno = 1;
+        for(i=0;i < size && array[i] != '\0';i++)
+        {
             if(array[i] == '.')
             {
                 contadorSimbolos++;
+            }
+
+            if ((!(array[i] >= '0' && array[i] <= '9') &&
+                array[i] != '-' &&
+                digitosIngresados != 8) ||
+                array[digitosIngresados-1] == '.' ||
+                contadorSimbolos > 2)
+            {
+                retorno = 0;
+                break;
             }
        }
    }
