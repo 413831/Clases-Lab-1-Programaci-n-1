@@ -1,20 +1,65 @@
 
 
-********************* Employee.c ************************
+********************* Bananas.c ************************
 
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include "LinkedList.h"
 #include "utn.h"
-#include "Employee.h"
+#include "Bananas.h"
 
+static int isValidCantidad(int cantidad);
+static int isValidPrecio(int precio);
+static int isValidOrigen(char* origen);
 static int isValidId(int id);
-static int isValidName(char* name);
-static int isValidLastName(char* lastName);
-static int isValidAge(int age);
-static int isValidType(int type);
+static int isValidIsEmpty(int isEmpty);
  
+/**
+*\brief Valida un dato del campo cantidad
+*\param cantidad Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
+static int isValidCantidad(int cantidad)
+{
+	int retorno = 0;
+	if(cantidad >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+/**
+*\brief Valida un dato del campo precio
+*\param precio Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
+static int isValidPrecio(int precio)
+{
+	int retorno = 0;
+	if(precio >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+/**
+*\brief Valida un dato del campo origen
+*\param origen Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
+static int isValidOrigen(char* origen)
+{
+	int retorno = 0;
+	if(origen != NULL && strlen(origen) > 1)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
 /**
 *\brief Valida un dato del campo id
 *\param id Es el dato recibido para validar
@@ -31,59 +76,14 @@ static int isValidId(int id)
 }
 
 /**
-*\brief Valida un dato del campo name
-*\param name Es el dato recibido para validar
+*\brief Valida un dato del campo isEmpty
+*\param isEmpty Es el dato recibido para validar
 *\return Retorna 1 si el dato es valido sino retorna 0
 */
-static int isValidName(char* name)
+static int isValidIsEmpty(int isEmpty)
 {
 	int retorno = 0;
-	if(name != NULL && strlen(name) > 1)
-	{
-		retorno = 1;
-	}
-	return = retorno;
-}
-
-/**
-*\brief Valida un dato del campo lastName
-*\param lastName Es el dato recibido para validar
-*\return Retorna 1 si el dato es valido sino retorna 0
-*/
-static int isValidLastName(char* lastName)
-{
-	int retorno = 0;
-	if(lastName != NULL && strlen(lastName) > 1)
-	{
-		retorno = 1;
-	}
-	return = retorno;
-}
-
-/**
-*\brief Valida un dato del campo age
-*\param age Es el dato recibido para validar
-*\return Retorna 1 si el dato es valido sino retorna 0
-*/
-static int isValidAge(int age)
-{
-	int retorno = 0;
-	if(age >= 0)
-	{
-		retorno = 1;
-	}
-	return = retorno;
-}
-
-/**
-*\brief Valida un dato del campo type
-*\param type Es el dato recibido para validar
-*\return Retorna 1 si el dato es valido sino retorna 0
-*/
-static int isValidType(int type)
-{
-	int retorno = 0;
-	if(type >= 0)
+	if(isEmpty >= 0)
 	{
 		retorno = 1;
 	}
@@ -98,24 +98,24 @@ static int isValidType(int type)
 *\param COMPLETAR
 *\return Retorna 0 si logra agregar elemento sino retorna -1
 */
-Employee* employee_constructor(int id,char* name,char* lastName,int age,int type)
+Bananas* bananas_constructor(int cantidad,int precio,char* origen,int id,int isEmpty)
 {
-	Employee* this = malloc(sizeof(Employee));
+	Bananas* this = malloc(sizeof(Bananas));
 
 	if(this != NULL)
 	{
-		if(	!employee_setId(this,id) &&
-			!employee_setName(this,name) &&
-			!employee_setLastName(this,lastName) &&
-			!employee_setAge(this,age) &&
-			!employee_setType(this,type) &&
+		if(	!bananas_setCantidad(this,cantidad) &&
+			!bananas_setPrecio(this,precio) &&
+			!bananas_setOrigen(this,origen) &&
+			!bananas_setId(this,id) &&
+			!bananas_setIsEmpty(this,isEmpty) &&
 			)
 		{
 			return this;
 		}
 		else
 		{
-			employee_destructor(this);
+			bananas_destructor(this);
 			return NULL;
 		}
 	}
@@ -126,7 +126,7 @@ Employee* employee_constructor(int id,char* name,char* lastName,int age,int type
 *\param this Es el elemento para eliminar
 *\return Retorna 0 si logra eliminar elemento sino retorna -1
 */
-int employee_destructor(Employee* this)
+int bananas_destructor(Bananas* this)
 {
 	int retorno = -1;
 	if(this != NULL)
@@ -138,12 +138,63 @@ int employee_destructor(Employee* this)
 }
 
 /**
+*\brief Es el setter del campo cantidad del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param cantidad Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
+int bananas_setCantidad(Bananas* this,int cantidad)
+{
+	int retorno = -1;
+	if(this != NULL && isValidCantidad(cantidad))
+	{
+		this->cantidad = cantidad;
+		retorno = 0;
+	}
+	return = retorno;
+}
+
+/**
+*\brief Es el setter del campo precio del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param precio Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
+int bananas_setPrecio(Bananas* this,int precio)
+{
+	int retorno = -1;
+	if(this != NULL && isValidPrecio(precio))
+	{
+		this->precio = precio;
+		retorno = 0;
+	}
+	return = retorno;
+}
+
+/**
+*\brief Es el setter del campo origen del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param origen Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
+int bananas_setOrigen(Bananas* this,char* origen)
+{
+	int retorno = -1;
+	if(this != NULL && origen != NULL && isValidOrigen(origen))
+	{
+		strcpy(this->origen,origen);
+		retorno = 0;
+	}
+	return = retorno;
+}
+
+/**
 *\brief Es el setter del campo id del elemento
 *\param this Es el elemento que se recibe para setear un campo
 *\param id Es el dato recibido para setear el campo
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_setId(Employee* this,int id)
+int bananas_setId(Bananas* this,int id)
 {
 	int retorno = -1;
 	if(this != NULL && isValidId(id))
@@ -155,69 +206,63 @@ int employee_setId(Employee* this,int id)
 }
 
 /**
-*\brief Es el setter del campo name del elemento
+*\brief Es el setter del campo isEmpty del elemento
 *\param this Es el elemento que se recibe para setear un campo
-*\param name Es el dato recibido para setear el campo
+*\param isEmpty Es el dato recibido para setear el campo
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_setName(Employee* this,char* name)
+int bananas_setIsEmpty(Bananas* this,int isEmpty)
 {
 	int retorno = -1;
-	if(this != NULL && name != NULL && isValidName(name))
+	if(this != NULL && isValidIsEmpty(isEmpty))
 	{
-		strcpy(this->name,name);
+		this->isEmpty = isEmpty;
 		retorno = 0;
 	}
 	return = retorno;
 }
 
 /**
-*\brief Es el setter del campo lastName del elemento
-*\param this Es el elemento que se recibe para setear un campo
-*\param lastName Es el dato recibido para setear el campo
+*\brief Es el getter del campo cantidad del elemento
+*\param this Es el elemento del cual se obtiene el dato cantidad
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_setLastName(Employee* this,char* lastName)
+int bananas_getCantidad(Bananas* this)
 {
 	int retorno = -1;
-	if(this != NULL && lastName != NULL && isValidLastName(lastName))
+	if(this != NULL)
 	{
-		strcpy(this->lastName,lastName);
-		retorno = 0;
+		retorno = this->cantidad;
 	}
 	return = retorno;
 }
 
 /**
-*\brief Es el setter del campo age del elemento
-*\param this Es el elemento que se recibe para setear un campo
-*\param age Es el dato recibido para setear el campo
+*\brief Es el getter del campo precio del elemento
+*\param this Es el elemento del cual se obtiene el dato precio
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_setAge(Employee* this,int age)
+int bananas_getPrecio(Bananas* this)
 {
 	int retorno = -1;
-	if(this != NULL && isValidAge(age))
+	if(this != NULL)
 	{
-		this->age = age;
-		retorno = 0;
+		retorno = this->precio;
 	}
 	return = retorno;
 }
 
 /**
-*\brief Es el setter del campo type del elemento
-*\param this Es el elemento que se recibe para setear un campo
-*\param type Es el dato recibido para setear el campo
+*\brief Es el getter del campo origen del elemento
+*\param this Es el elemento del cual se obtiene el dato origen
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_setType(Employee* this,int type)
+char* bananas_getOrigen(Bananas* this)
 {
-	int retorno = -1;
-	if(this != NULL && isValidType(type))
+	char* retorno = NULL;
+	if(this != NULL)
 	{
-		this->type = type;
-		retorno = 0;
+		strcpy(retorno,this->origen);
 	}
 	return = retorno;
 }
@@ -227,7 +272,7 @@ int employee_setType(Employee* this,int type)
 *\param this Es el elemento del cual se obtiene el dato id
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-int employee_getId(Employee* this)
+int bananas_getId(Bananas* this)
 {
 	int retorno = -1;
 	if(this != NULL)
@@ -238,63 +283,99 @@ int employee_getId(Employee* this)
 }
 
 /**
-*\brief Es el getter del campo name del elemento
-*\param this Es el elemento del cual se obtiene el dato name
+*\brief Es el getter del campo isEmpty del elemento
+*\param this Es el elemento del cual se obtiene el dato isEmpty
 *\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
 */
-char* employee_getName(Employee* this)
-{
-	char* retorno = NULL;
-	if(this != NULL)
-	{
-		strcpy(retorno,this->name);
-	}
-	return = retorno;
-}
-
-/**
-*\brief Es el getter del campo lastName del elemento
-*\param this Es el elemento del cual se obtiene el dato lastName
-*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
-*/
-char* employee_getLastName(Employee* this)
-{
-	char* retorno = NULL;
-	if(this != NULL)
-	{
-		strcpy(retorno,this->lastName);
-	}
-	return = retorno;
-}
-
-/**
-*\brief Es el getter del campo age del elemento
-*\param this Es el elemento del cual se obtiene el dato age
-*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
-*/
-int employee_getAge(Employee* this)
+int bananas_getIsEmpty(Bananas* this)
 {
 	int retorno = -1;
 	if(this != NULL)
 	{
-		retorno = this->age;
+		retorno = this->isEmpty;
 	}
 	return = retorno;
 }
 
 /**
-*\brief Es el getter del campo type del elemento
-*\param this Es el elemento del cual se obtiene el dato type
-*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*\brief Retorna un elemento segun el dato cantidad ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param cantidad Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
 */
-int employee_getType(Employee* this)
+Bananas* bananas_getByCantidad(LinkedList* pArray,int cantidad)
 {
-	int retorno = -1;
-	if(this != NULL)
+	int i;
+	Bananas* aux;
+	Bananas* retorno=NULL;
+
+	if(pArray != NULL && isValidCantidad(cantidad))
 	{
-		retorno = this->type;
+		for(i=0;i<ll_len(pArray);i++)
+		{
+			aux = ll_get(pArray,i);
+			if(cantidad == bananas_getCantidad(aux))
+			{
+				retorno = aux;
+				break;
+			}
+		}
 	}
-	return = retorno;
+	return retorno;
+}
+
+/**
+*\brief Retorna un elemento segun el dato precio ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param precio Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
+Bananas* bananas_getByPrecio(LinkedList* pArray,int precio)
+{
+	int i;
+	Bananas* aux;
+	Bananas* retorno=NULL;
+
+	if(pArray != NULL && isValidPrecio(precio))
+	{
+		for(i=0;i<ll_len(pArray);i++)
+		{
+			aux = ll_get(pArray,i);
+			if(precio == bananas_getPrecio(aux))
+			{
+				retorno = aux;
+				break;
+			}
+		}
+	}
+	return retorno;
+}
+
+/**
+*\brief Retorna un elemento segun el dato origen ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param origen Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
+Bananas* bananas_getByOrigen(LinkedList* pArray,char* origen)
+{
+	int i;
+	Bananas* aux;
+	Bananas* retorno=NULL;
+
+	if(pArray != NULL && isValidOrigen(origen))
+	{
+		for(i=0;i<ll_len(pArray);i++)
+		{
+			aux = ll_get(pArray,i);
+			if(strcmp(origen,bananas_getOrigen(aux))==0)
+			{
+				retorno = aux;
+				break;
+			}
+		}
+	}
+	return retorno;
 }
 
 /**
@@ -303,18 +384,18 @@ int employee_getType(Employee* this)
 *\param id Es el dato que se recibe para encontrar el elemento
 *\return Retorna el elemento si lo encuentra sino retorna NULL
 */
-Employee* employee_getById(LinkedList* pArray,int id)
+Bananas* bananas_getById(LinkedList* pArray,int id)
 {
 	int i;
-	Employee* aux;
-	Employee* retorno=NULL;
+	Bananas* aux;
+	Bananas* retorno=NULL;
 
 	if(pArray != NULL && isValidId(id))
 	{
 		for(i=0;i<ll_len(pArray);i++)
 		{
 			aux = ll_get(pArray,i);
-			if(id == employee_getId(aux))
+			if(id == bananas_getId(aux))
 			{
 				retorno = aux;
 				break;
@@ -325,23 +406,23 @@ Employee* employee_getById(LinkedList* pArray,int id)
 }
 
 /**
-*\brief Retorna un elemento segun el dato name ingresado
+*\brief Retorna un elemento segun el dato isEmpty ingresado
 *\param pArray Es el puntero a LinkedList recibido para buscar elemento
-*\param name Es el dato que se recibe para encontrar el elemento
+*\param isEmpty Es el dato que se recibe para encontrar el elemento
 *\return Retorna el elemento si lo encuentra sino retorna NULL
 */
-Employee* employee_getByName(LinkedList* pArray,char* name)
+Bananas* bananas_getByIsEmpty(LinkedList* pArray,int isEmpty)
 {
 	int i;
-	Employee* aux;
-	Employee* retorno=NULL;
+	Bananas* aux;
+	Bananas* retorno=NULL;
 
-	if(pArray != NULL && isValidName(name))
+	if(pArray != NULL && isValidIsEmpty(isEmpty))
 	{
 		for(i=0;i<ll_len(pArray);i++)
 		{
 			aux = ll_get(pArray,i);
-			if(strcmp(name,employee_getName(aux))==0)
+			if(isEmpty == bananas_getIsEmpty(aux))
 			{
 				retorno = aux;
 				break;
@@ -352,82 +433,72 @@ Employee* employee_getByName(LinkedList* pArray,char* name)
 }
 
 /**
-*\brief Retorna un elemento segun el dato lastName ingresado
-*\param pArray Es el puntero a LinkedList recibido para buscar elemento
-*\param lastName Es el dato que se recibe para encontrar el elemento
-*\return Retorna el elemento si lo encuentra sino retorna NULL
+*\brief Compara dos elementos por su campo cantidad
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
 */
-Employee* employee_getByLastName(LinkedList* pArray,char* lastName)
+int bananas_compareByCantidad(void* thisA ,void* thisB)
 {
-	int i;
-	Employee* aux;
-	Employee* retorno=NULL;
+	int retorno = 0;
 
-	if(pArray != NULL && isValidLastName(lastName))
+	if(thisA != NULL && thisB != NULL)
 	{
-		for(i=0;i<ll_len(pArray);i++)
+		if(bananas_getCantidad(thisA) > bananas_getCantidad(thisB))
 		{
-			aux = ll_get(pArray,i);
-			if(strcmp(lastName,employee_getLastName(aux))==0)
-			{
-				retorno = aux;
-				break;
-			}
+				retorno = 1;
+		}
+		else if(bananas_getCantidad(thisA) < bananas_getCantidad(thisB))
+		{
+			retorno = -1;
 		}
 	}
 	return retorno;
 }
 
 /**
-*\brief Retorna un elemento segun el dato age ingresado
-*\param pArray Es el puntero a LinkedList recibido para buscar elemento
-*\param age Es el dato que se recibe para encontrar el elemento
-*\return Retorna el elemento si lo encuentra sino retorna NULL
+*\brief Compara dos elementos por su campo precio
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
 */
-Employee* employee_getByAge(LinkedList* pArray,int age)
+int bananas_compareByPrecio(void* thisA ,void* thisB)
 {
-	int i;
-	Employee* aux;
-	Employee* retorno=NULL;
+	int retorno = 0;
 
-	if(pArray != NULL && isValidAge(age))
+	if(thisA != NULL && thisB != NULL)
 	{
-		for(i=0;i<ll_len(pArray);i++)
+		if(bananas_getPrecio(thisA) > bananas_getPrecio(thisB))
 		{
-			aux = ll_get(pArray,i);
-			if(age == employee_getAge(aux))
-			{
-				retorno = aux;
-				break;
-			}
+				retorno = 1;
+		}
+		else if(bananas_getPrecio(thisA) < bananas_getPrecio(thisB))
+		{
+			retorno = -1;
 		}
 	}
 	return retorno;
 }
 
 /**
-*\brief Retorna un elemento segun el dato type ingresado
-*\param pArray Es el puntero a LinkedList recibido para buscar elemento
-*\param type Es el dato que se recibe para encontrar el elemento
-*\return Retorna el elemento si lo encuentra sino retorna NULL
+*\brief Compara dos elementos por su campo origen
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
 */
-Employee* employee_getByType(LinkedList* pArray,int type)
+int bananas_compareByOrigen(void* thisA ,void* thisB)
 {
-	int i;
-	Employee* aux;
-	Employee* retorno=NULL;
+	int retorno = 0;
 
-	if(pArray != NULL && isValidType(type))
+	if(thisA != NULL && thisB != NULL)
 	{
-		for(i=0;i<ll_len(pArray);i++)
-		{
-			aux = ll_get(pArray,i);
-			if(type == employee_getType(aux))
-			{
-				retorno = aux;
-				break;
-			}
-		}
+		retorno = strcmp(bananas_getOrigen(thisA),bananas_getOrigen(thisB));
 	}
 	return retorno;
 }
@@ -440,17 +511,17 @@ Employee* employee_getByType(LinkedList* pArray,int type)
 		Retorna 1 si el campo del primer elemento es mayor al segundo
 		Retorna -1 si el campo del segundo elemento es mayor al primero
 */
-int employee_compareById(void* thisA ,void* thisB)
+int bananas_compareById(void* thisA ,void* thisB)
 {
 	int retorno = 0;
 
 	if(thisA != NULL && thisB != NULL)
 	{
-		if(employee_getId(thisA) > employee_getId(thisB))
+		if(bananas_getId(thisA) > bananas_getId(thisB))
 		{
 				retorno = 1;
 		}
-		else if(employee_getId(thisA) < employee_getId(thisB))
+		else if(bananas_getId(thisA) < bananas_getId(thisB))
 		{
 			retorno = -1;
 		}
@@ -459,88 +530,24 @@ int employee_compareById(void* thisA ,void* thisB)
 }
 
 /**
-*\brief Compara dos elementos por su campo name
+*\brief Compara dos elementos por su campo isEmpty
 *\param thisA Es el puntero al primer elemento a comparar
 *\param thisB Es el puntero al segundo elemento a comparar
 *\return Retorna 0 si ambos campos son iguales
 		Retorna 1 si el campo del primer elemento es mayor al segundo
 		Retorna -1 si el campo del segundo elemento es mayor al primero
 */
-int employee_compareByName(void* thisA ,void* thisB)
+int bananas_compareByIsEmpty(void* thisA ,void* thisB)
 {
 	int retorno = 0;
 
 	if(thisA != NULL && thisB != NULL)
 	{
-		retorno = strcmp(employee_getName(thisA),employee_getName(thisB));
-	}
-	return retorno;
-}
-
-/**
-*\brief Compara dos elementos por su campo lastName
-*\param thisA Es el puntero al primer elemento a comparar
-*\param thisB Es el puntero al segundo elemento a comparar
-*\return Retorna 0 si ambos campos son iguales
-		Retorna 1 si el campo del primer elemento es mayor al segundo
-		Retorna -1 si el campo del segundo elemento es mayor al primero
-*/
-int employee_compareByLastName(void* thisA ,void* thisB)
-{
-	int retorno = 0;
-
-	if(thisA != NULL && thisB != NULL)
-	{
-		retorno = strcmp(employee_getLastName(thisA),employee_getLastName(thisB));
-	}
-	return retorno;
-}
-
-/**
-*\brief Compara dos elementos por su campo age
-*\param thisA Es el puntero al primer elemento a comparar
-*\param thisB Es el puntero al segundo elemento a comparar
-*\return Retorna 0 si ambos campos son iguales
-		Retorna 1 si el campo del primer elemento es mayor al segundo
-		Retorna -1 si el campo del segundo elemento es mayor al primero
-*/
-int employee_compareByAge(void* thisA ,void* thisB)
-{
-	int retorno = 0;
-
-	if(thisA != NULL && thisB != NULL)
-	{
-		if(employee_getAge(thisA) > employee_getAge(thisB))
+		if(bananas_getIsEmpty(thisA) > bananas_getIsEmpty(thisB))
 		{
 				retorno = 1;
 		}
-		else if(employee_getAge(thisA) < employee_getAge(thisB))
-		{
-			retorno = -1;
-		}
-	}
-	return retorno;
-}
-
-/**
-*\brief Compara dos elementos por su campo type
-*\param thisA Es el puntero al primer elemento a comparar
-*\param thisB Es el puntero al segundo elemento a comparar
-*\return Retorna 0 si ambos campos son iguales
-		Retorna 1 si el campo del primer elemento es mayor al segundo
-		Retorna -1 si el campo del segundo elemento es mayor al primero
-*/
-int employee_compareByType(void* thisA ,void* thisB)
-{
-	int retorno = 0;
-
-	if(thisA != NULL && thisB != NULL)
-	{
-		if(employee_getType(thisA) > employee_getType(thisB))
-		{
-				retorno = 1;
-		}
-		else if(employee_getType(thisA) < employee_getType(thisB))
+		else if(bananas_getIsEmpty(thisA) < bananas_getIsEmpty(thisB))
 		{
 			retorno = -1;
 		}
@@ -553,15 +560,15 @@ int employee_compareByType(void* thisA ,void* thisB)
 *\param this Es el elemento que recibe para mostrar
 *\return Retorna 0 si el elemento existe sino retorna -1
 */
-int employee_show(Employee* this)
+int bananas_show(Bananas* this)
 {
 	if(this != NULL)
 	{
-		printf("\nId -- %d",employee_getId(this));
-		printf("\nName -- %s",employee_getName(this));
-		printf("\nLastName -- %s",employee_getLastName(this));
-		printf("\nAge -- %d",employee_getAge(this));
-		printf("\nType -- %d",employee_getType(this));
+		printf("\nCantidad -- %d",bananas_getCantidad(this));
+		printf("\nPrecio -- %d",bananas_getPrecio(this));
+		printf("\nOrigen -- %s",bananas_getOrigen(this));
+		printf("\nId -- %d",bananas_getId(this));
+		printf("\nIsEmpty -- %d",bananas_getIsEmpty(this));
 		retorno = 0;
 	}
 	return retorno;
@@ -569,5 +576,5 @@ int employee_show(Employee* this)
 
 
 
-********************* Employee.c ************************
+********************* Bananas.c ************************
 

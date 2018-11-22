@@ -507,12 +507,12 @@ int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, c
 
         if(flagArray)
         {
-            sprintf(auxString,"\tprintf(\"\\n%s -- %s\",%sget%s(this));/////CAMBIAR /n;\n\t",auxDefinitionUp,"%s",auxPrefix,auxDefinitionUp);
+            sprintf(auxString,"\tprintf(\"\\n%s -- %s\",%sget%s(this));\n\t",auxDefinitionUp,"%s",auxPrefix,auxDefinitionUp);
                         strcat(result,auxString);
         }
         else
         {
-             sprintf(auxString,"\tprintf(\"\\n%s -- %s\",%sget%s(this));/////CAMBIAR /n;\n\t",auxDefinitionUp,"%d",auxPrefix,auxDefinitionUp);
+             sprintf(auxString,"\tprintf(\"\\n%s -- %s\",%sget%s(this));\n\t",auxDefinitionUp,"%d",auxPrefix,auxDefinitionUp);
                         strcat(result,auxString);
         }
 

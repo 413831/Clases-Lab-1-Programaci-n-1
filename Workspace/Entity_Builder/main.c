@@ -61,7 +61,7 @@ int main(int argc, char **argv)
     fprintf(header,"#include \"LinkedList.h\"\n\n#ifndef _%s_H\n#define _%s_H\n",entityNameUp,entityNameUp);  // _EMPLOYEE_H
     entity_buildStruct(entityName, members, qtyMembers, result);
     fprintf(header,"%s",result);
-    fprintf(header,"#endif// _%s_H\n\n\n#define BUFFER 4000\n#define LEN_LL 6",entityNameUp);
+    fprintf(header,"#endif// _%s_H\n\n\n#define BUFFER 4000\n#define LEN_LL 6\n",entityNameUp);
     entity_buildConstructorPrototype(entityName, members, qtyMembers, result);
     fprintf(header,"%s",result);
     entity_buildDestructorPrototype(entityName,result);
@@ -79,7 +79,7 @@ int main(int argc, char **argv)
     fprintf(header,"\n\n********************* %s.h ************************\n\n",entityName);
 
     fprintf(cFile,"\n\n********************* %s.c ************************\n\n",entityName);
-    fprintf(cFile,"#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"LinkedList.h\"\n#include \"utn.h\"\n#include \"%s.h\"\n#include \"parser.h\"\n#include \"controller.h\"\n\n",entityName);  // _EMPLOYEE_H
+    fprintf(cFile,"#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"LinkedList.h\"\n#include \"utn.h\"\n#include \"%s.h\"\n\n",entityName);  // _EMPLOYEE_H
     entity_buildIsValidPrototypes(entityName, members, qtyMembers, result);//STATIC
     fprintf(cFile,"%s \n",result);
     entity_buildIsValid(entityName, members, qtyMembers, result);

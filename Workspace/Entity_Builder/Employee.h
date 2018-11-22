@@ -18,7 +18,8 @@ typedef struct
 
 
 #define BUFFER 4000
-#define LEN_LL 6Employee* employee_constructor(int id,char* name,char* lastName,int age,int type);
+#define LEN_LL 6
+Employee* employee_constructor(int id,char* name,char* lastName,int age,int type);
 int employee_destructor(Employee* this);
 int employee_setId(Employee* this,int id);
 int employee_setName(Employee* this,char* name);
