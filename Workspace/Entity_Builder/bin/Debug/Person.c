@@ -369,11 +369,11 @@ Person* person_show(char* name,char* lastName,int age,char* address,int id)
 
 	if(this != NULL)
 	{
-		printf("/nname -- %s",person_getName(this))/////CAMBIAR /n;
-		printf("/nlastName -- %s",person_getLastName(this))/////CAMBIAR /n;
-		printf("/nage -- %d",person_getAge(this))/////CAMBIAR /n;
-		printf("/naddress -- %s",person_getAddress(this))/////CAMBIAR /n;
-		printf("/nid -- %d",person_getId(this))/////CAMBIAR /n;
+		printf("\nName -- %s",person_getName(this));/////CAMBIAR /n;
+		printf("\nLastName -- %s",person_getLastName(this));/////CAMBIAR /n;
+		printf("\nAge -- %d",person_getAge(this));/////CAMBIAR /n;
+		printf("\nAddress -- %s",person_getAddress(this));/////CAMBIAR /n;
+		printf("\nId -- %d",person_getId(this));/////CAMBIAR /n;
 		retorno = 0;
 	}
 	return retorno;

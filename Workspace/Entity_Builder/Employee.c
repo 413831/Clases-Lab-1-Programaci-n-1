@@ -376,11 +376,11 @@ Employee* employee_show(int id,char* name,char* lastName,int age,int type)
 
 	if(this != NULL)
 	{
-		printf("/nid -- %d",employee_getId(this))/////CAMBIAR /n;
-		printf("/nname -- %s",employee_getName(this))/////CAMBIAR /n;
-		printf("/nlastName -- %s",employee_getLastName(this))/////CAMBIAR /n;
-		printf("/nage -- %d",employee_getAge(this))/////CAMBIAR /n;
-		printf("/ntype -- %d",employee_getType(this))/////CAMBIAR /n;
+		printf("\nId -- %d",employee_getId(this));/////CAMBIAR /n;
+		printf("\nName -- %s",employee_getName(this));/////CAMBIAR /n;
+		printf("\nLastName -- %s",employee_getLastName(this));/////CAMBIAR /n;
+		printf("\nAge -- %d",employee_getAge(this));/////CAMBIAR /n;
+		printf("\nType -- %d",employee_getType(this));/////CAMBIAR /n;
 		retorno = 0;
 	}
 	return retorno;
