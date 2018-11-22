@@ -80,6 +80,10 @@ int main(int argc, char **argv)
 
     fprintf(cFile,"\n\n********************* %s.c ************************\n\n",entityName);
     fprintf(cFile,"#include <stdio.h>\n#include <stdlib.h>\n#include <string.h>\n#include \"LinkedList.h\"\n#include \"utn.h\"\n#include \"%s.h\"\n#include \"parser.h\"\n#include \"controller.h\"\n\n",entityName);  // _EMPLOYEE_H
+    entity_buildIsValidPrototypes(entityName, members, qtyMembers, result);//STATIC
+    fprintf(cFile,"%s \n",result);
+    entity_buildIsValid(entityName, members, qtyMembers, result);
+    fprintf(cFile,"%s \n//////////////////PUBLIC//////////////////\n\n",result);
     entity_buildConstructor(entityName, members, qtyMembers, result);
     fprintf(cFile,"%s",result);
     entity_buildDestructor(entityName,result);

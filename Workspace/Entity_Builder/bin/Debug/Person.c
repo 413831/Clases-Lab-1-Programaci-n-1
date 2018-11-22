@@ -11,6 +11,65 @@
 #include "parser.h"
 #include "controller.h"
 
+static int isValidName(char* name);
+static int isValidLastName(char* lastName);
+static int isValidAge(int age);
+static int isValidAddress(char* address);
+static int isValidId(int id);
+ 
+static int isValidName(char* name)
+{
+	int retorno = 0;
+	if(name != NULL)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidLastName(char* lastName)
+{
+	int retorno = 0;
+	if(lastName != NULL)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidAge(int age)
+{
+	int retorno = 0;
+	if(age >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidAddress(char* address)
+{
+	int retorno = 0;
+	if(address != NULL)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidId(int id)
+{
+	int retorno = 0;
+	if(id >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+ 
+//////////////////PUBLIC//////////////////
+
 Person* person_constructor(char* name,char* lastName,int age,char* address,int id)
 {
 	Person* this = malloc(sizeof(Person));
@@ -48,7 +107,7 @@ int person_destructor(Person* this)
 int person_setName(Person* this,char* name)
 {
 	int retorno = -1;
-	if(this != NULL && name != NULL)
+	if(this != NULL && name != NULL && isValidName(name))
 	{
 		strcpy(this->name,name);
 		retorno = 0;
@@ -59,7 +118,7 @@ int person_setName(Person* this,char* name)
 int person_setLastName(Person* this,char* lastName)
 {
 	int retorno = -1;
-	if(this != NULL && lastName != NULL)
+	if(this != NULL && lastName != NULL && isValidLastName(lastName))
 	{
 		strcpy(this->lastName,lastName);
 		retorno = 0;
@@ -70,7 +129,7 @@ int person_setLastName(Person* this,char* lastName)
 int person_setAge(Person* this,int age)
 {
 	int retorno = -1;
-	if(this != NULL)
+	if(this != NULL && isValidAge(age))
 	{
 		this->age = age;
 		retorno = 0;
@@ -81,7 +140,7 @@ int person_setAge(Person* this,int age)
 int person_setAddress(Person* this,char* address)
 {
 	int retorno = -1;
-	if(this != NULL && address != NULL)
+	if(this != NULL && address != NULL && isValidAddress(address))
 	{
 		strcpy(this->address,address);
 		retorno = 0;
@@ -92,7 +151,7 @@ int person_setAddress(Person* this,char* address)
 int person_setId(Person* this,int id)
 {
 	int retorno = -1;
-	if(this != NULL)
+	if(this != NULL && isValidId(id))
 	{
 		this->id = id;
 		retorno = 0;
@@ -310,11 +369,11 @@ Person* person_show(char* name,char* lastName,int age,char* address,int id)
 
 	if(this != NULL)
 	{
-		printf("/nname -- %s",person_getName(this));
-		printf("/nlastName -- %s",person_getLastName(this));
-		printf("/nage -- %d",person_getAge(this));
-		printf("/naddress -- %s",person_getAddress(this));
-		printf("/nid -- %d",person_getId(this));
+		printf("/nname -- %s",person_getName(this))/////CAMBIAR /n;
+		printf("/nlastName -- %s",person_getLastName(this))/////CAMBIAR /n;
+		printf("/nage -- %d",person_getAge(this))/////CAMBIAR /n;
+		printf("/naddress -- %s",person_getAddress(this))/////CAMBIAR /n;
+		printf("/nid -- %d",person_getId(this))/////CAMBIAR /n;
 		retorno = 0;
 	}
 	return retorno;

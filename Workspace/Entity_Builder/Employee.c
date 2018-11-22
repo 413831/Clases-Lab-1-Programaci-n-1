@@ -11,6 +11,65 @@
 #include "parser.h"
 #include "controller.h"
 
+static int isValidId(int id);
+static int isValidName(char* name);
+static int isValidLastName(char* lastName);
+static int isValidAge(int age);
+static int isValidType(int type);
+ 
+static int isValidId(int id)
+{
+	int retorno = 0;
+	if(id >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidName(char* name)
+{
+	int retorno = 0;
+	if(name != NULL)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidLastName(char* lastName)
+{
+	int retorno = 0;
+	if(lastName != NULL)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidAge(int age)
+{
+	int retorno = 0;
+	if(age >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+static int isValidType(int type)
+{
+	int retorno = 0;
+	if(type >= 0)
+	{
+		retorno = 1;
+	}
+	return = retorno;
+}
+
+ 
+//////////////////PUBLIC//////////////////
+
 Employee* employee_constructor(int id,char* name,char* lastName,int age,int type)
 {
 	Employee* this = malloc(sizeof(Employee));
@@ -48,7 +107,7 @@ int employee_destructor(Employee* this)
 int employee_setId(Employee* this,int id)
 {
 	int retorno = -1;
-	if(this != NULL)
+	if(this != NULL && isValidId(id))
 	{
 		this->id = id;
 		retorno = 0;
@@ -59,7 +118,7 @@ int employee_setId(Employee* this,int id)
 int employee_setName(Employee* this,char* name)
 {
 	int retorno = -1;
-	if(this != NULL && name != NULL)
+	if(this != NULL && name != NULL && isValidName(name))
 	{
 		strcpy(this->name,name);
 		retorno = 0;
@@ -70,7 +129,7 @@ int employee_setName(Employee* this,char* name)
 int employee_setLastName(Employee* this,char* lastName)
 {
 	int retorno = -1;
-	if(this != NULL && lastName != NULL)
+	if(this != NULL && lastName != NULL && isValidLastName(lastName))
 	{
 		strcpy(this->lastName,lastName);
 		retorno = 0;
@@ -81,7 +140,7 @@ int employee_setLastName(Employee* this,char* lastName)
 int employee_setAge(Employee* this,int age)
 {
 	int retorno = -1;
-	if(this != NULL)
+	if(this != NULL && isValidAge(age))
 	{
 		this->age = age;
 		retorno = 0;
@@ -92,7 +151,7 @@ int employee_setAge(Employee* this,int age)
 int employee_setType(Employee* this,int type)
 {
 	int retorno = -1;
-	if(this != NULL)
+	if(this != NULL && isValidType(type))
 	{
 		this->type = type;
 		retorno = 0;
@@ -317,11 +376,11 @@ Employee* employee_show(int id,char* name,char* lastName,int age,int type)
 
 	if(this != NULL)
 	{
-		printf("/nid -- %d",employee_getId(this));
-		printf("/nname -- %s",employee_getName(this));
-		printf("/nlastName -- %s",employee_getLastName(this));
-		printf("/nage -- %d",employee_getAge(this));
-		printf("/ntype -- %d",employee_getType(this));
+		printf("/nid -- %d",employee_getId(this))/////CAMBIAR /n;
+		printf("/nname -- %s",employee_getName(this))/////CAMBIAR /n;
+		printf("/nlastName -- %s",employee_getLastName(this))/////CAMBIAR /n;
+		printf("/nage -- %d",employee_getAge(this))/////CAMBIAR /n;
+		printf("/ntype -- %d",employee_getType(this))/////CAMBIAR /n;
 		retorno = 0;
 	}
 	return retorno;

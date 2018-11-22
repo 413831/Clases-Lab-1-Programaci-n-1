@@ -19,4 +19,6 @@ int entity_buildComparativeFunctions(char* entityName, Member* members,int qtyMe
 int entity_buildComparativeFunctionsPrototypes(char* entityName, Member* members,int qtyMembers, char* result);
 int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, char* result);
 int entity_buildShowFunctionPrototype(char* entityName,char* result);
+int entity_buildIsValidPrototypes(char* entityName, Member* members,int qtyMembers, char* result);
+int entity_buildIsValid(char* entityName, Member* members,int qtyMembers, char* result);
 void strToUpper(char *str,char *strUp);

@@ -164,9 +164,9 @@ int entity_buildSetters(char* entityName, Member* members,int qtyMembers, char* 
 
 
         if(flagArray)
-            sprintf(auxString,"int %sset%s(%s* this,%s* %s)\n{\n\tint retorno = -1;\n\tif(this != NULL && %s != NULL)\n\t{\n\t\tstrcpy(this->%s,%s);\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", auxPrefix,auxDefinitionUp,entityName,members[i].type,auxDefinition,auxDefinition,auxDefinition,auxDefinition);
+            sprintf(auxString,"int %sset%s(%s* this,%s* %s)\n{\n\tint retorno = -1;\n\tif(this != NULL && %s != NULL && isValid%s(%s))\n\t{\n\t\tstrcpy(this->%s,%s);\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", auxPrefix,auxDefinitionUp,entityName,members[i].type,auxDefinition,auxDefinition,auxDefinitionUp,auxDefinition,auxDefinition,auxDefinition);
         else
-            sprintf(auxString,"int %sset%s(%s* this,%s %s)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tthis->%s = %s;\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", auxPrefix,auxDefinitionUp,entityName,members[i].type,auxDefinition,auxDefinition,auxDefinition);
+            sprintf(auxString,"int %sset%s(%s* this,%s %s)\n{\n\tint retorno = -1;\n\tif(this != NULL && isValid%s(%s))\n\t{\n\t\tthis->%s = %s;\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", auxPrefix,auxDefinitionUp,entityName,members[i].type,auxDefinition,auxDefinitionUp,auxDefinition,auxDefinition,auxDefinition);
 
         strcat(result,auxString);
     }
@@ -504,12 +504,12 @@ int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, c
 
         if(flagArray)
         {
-            sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this));\n\t","n",auxDefinition,"%s",auxPrefix,auxDefinitionUp);
+            sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this))/////CAMBIAR /n;\n\t","n",auxDefinition,"%s",auxPrefix,auxDefinitionUp);
                         strcat(result,auxString);
         }
         else
         {
-             sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this));\n\t","n",auxDefinition,"%d",auxPrefix,auxDefinitionUp);
+             sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this))/////CAMBIAR /n;\n\t","n",auxDefinition,"%d",auxPrefix,auxDefinitionUp);
                         strcat(result,auxString);
         }
 
@@ -521,6 +521,77 @@ int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, c
     return 0;
 }
 
+
+
+int entity_buildIsValid(char* entityName, Member* members,int qtyMembers, char* result)
+{
+    int i;
+    char auxString[1024];
+    char auxDefinition[1024];
+    char auxDefinitionUp[1024];
+    int flagArray;
+    *result = '\0';
+    char auxPrefix[1024];
+    if(strlen(entityName) > 1)
+        sprintf(auxPrefix,"%c%s_",tolower(entityName[0]),entityName+1);
+    else
+        sprintf(auxPrefix,"%c_",tolower(entityName[0]));
+
+    for(i=0;i<qtyMembers;i++)
+    {
+        flagArray = isArray(members[i].definition,auxDefinition);
+        if(strlen(auxDefinition) > 1)
+            sprintf(auxDefinitionUp,"%c%s",toupper(auxDefinition[0]),auxDefinition+1);
+        else
+            sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
+
+
+        if(flagArray)
+            sprintf(auxString,"static int isValid%s(%s* %s)\n{\n\tint retorno = 0;\n\tif(%s != NULL)\n\t\{\n\t\tretorno = 1;\n\t}\n\treturn = retorno;\n}\n\n",auxDefinitionUp,members[i].type,auxDefinition,auxDefinition);
+        else
+            sprintf(auxString,"static int isValid%s(%s %s)\n{\n\tint retorno = 0;\n\tif(%s >= 0)\n\t{\n\t\tretorno = 1;\n\t}\n\treturn = retorno;\n}\n\n",auxDefinitionUp,members[i].type,auxDefinition,auxDefinition);
+
+        strcat(result,auxString);
+    }
+
+
+    return 0;
+}
+
+int entity_buildIsValidPrototypes(char* entityName, Member* members,int qtyMembers, char* result)
+{
+    int i;
+    char auxString[1024];
+    char auxDefinition[1024];
+    char auxDefinitionUp[1024];
+    int flagArray;
+    *result = '\0';
+    char auxPrefix[1024];
+    if(strlen(entityName) > 1)
+        sprintf(auxPrefix,"%c%s_",tolower(entityName[0]),entityName+1);
+    else
+        sprintf(auxPrefix,"%c_",tolower(entityName[0]));
+
+    for(i=0;i<qtyMembers;i++)
+    {
+        flagArray = isArray(members[i].definition,auxDefinition);
+        if(strlen(auxDefinition) > 1)
+            sprintf(auxDefinitionUp,"%c%s",toupper(auxDefinition[0]),auxDefinition+1);
+        else
+            sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
+
+
+        if(flagArray)
+            sprintf(auxString,"static int isValid%s(%s* %s);\n",auxDefinitionUp,members[i].type,auxDefinition);
+        else
+            sprintf(auxString,"static int isValid%s(%s %s);\n",auxDefinitionUp,members[i].type,auxDefinition);
+
+        strcat(result,auxString);
+    }
+
+
+    return 0;
+}
 
 
 static int isArray(char* definition,char* result)
