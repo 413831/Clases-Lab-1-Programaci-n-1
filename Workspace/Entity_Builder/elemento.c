@@ -112,7 +112,7 @@ int elemento_add(void* pLinkedList)
         !input("campoCuatro",bufferCampoCuatro,BUFFER,punteroValidacionCuatro) &&
         !input("campoCinco",bufferCampoCinco,BUFFER,punteroValidacionCinco))
     {
-        this = elemento_newConParametros(bufferCampoUno,bufferCampoDos,bufferCampoTres,bufferCampoCuatro,bufferCampoCinco);
+        this = elemento_constructor(bufferCampoUno,bufferCampoDos,bufferCampoTres,bufferCampoCuatro,bufferCampoCinco);
         if(this != NULL)
         {
             elemento_show(this);
@@ -172,6 +172,7 @@ int elemento_modify(Elemento* this,
                         char* mensaje,
                         int (*validacion)(char*,int),
                         int (*set)(Elemento*,char*))
+ {
     int retorno = -1;
     char buffer[BUFFER];
 

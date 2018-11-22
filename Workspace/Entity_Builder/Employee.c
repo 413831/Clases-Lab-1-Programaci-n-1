@@ -11,7 +11,7 @@
 #include "parser.h"
 #include "controller.h"
 
-Employee* employee_new(int id,char* name,char* lastName,int age,int type)
+Employee* employee_constructor(int id,char* name,char* lastName,int age,int type)
 {
 	Employee* this = malloc(sizeof(Employee));
 
@@ -28,13 +28,13 @@ Employee* employee_new(int id,char* name,char* lastName,int age,int type)
 		}
 		else
 		{
-			employee_delete(this);
-	\ttreturn NULL;
+			employee_destructor(this);
+			return NULL;
 		}
 	}
 }
 
-int employee_delete(Employee* this)
+int employee_destructor(Employee* this)
 {
 	int retorno = -1;
 	if(this != NULL)
@@ -105,30 +105,27 @@ int employee_getId(Employee* this)
 	int retorno = -1;
 	if(this != NULL)
 	{
-		this->id;
-		retorno = 0;
+		retorno = this->id;
 	}
 	return = retorno;
 }
 
 char* employee_getName(Employee* this)
 {
-	int retorno = -1;
+	char* retorno = NULL;
 	if(this != NULL)
 	{
-		this->name;
-		retorno = 0;
+		strcpy(retorno,this->name);
 	}
 	return = retorno;
 }
 
 char* employee_getLastName(Employee* this)
 {
-	int retorno = -1;
+	char* retorno = NULL;
 	if(this != NULL)
 	{
-		this->lastName;
-		retorno = 0;
+		strcpy(retorno,this->lastName);
 	}
 	return = retorno;
 }
@@ -138,8 +135,7 @@ int employee_getAge(Employee* this)
 	int retorno = -1;
 	if(this != NULL)
 	{
-		this->age;
-		retorno = 0;
+		retorno = this->age;
 	}
 	return = retorno;
 }
@@ -149,8 +145,7 @@ int employee_getType(Employee* this)
 	int retorno = -1;
 	if(this != NULL)
 	{
-		this->type;
-		retorno = 0;
+		retorno = this->type;
 	}
 	return = retorno;
 }
@@ -160,9 +155,9 @@ Employee* employee_getById(LinkedList* pArray,int id)
 	int i;
 	Employee* aux;
 	Employee* retorno=NULL;
-	for(i=0;i<al_len(pArray);i++)
+	for(i=0;i<ll_len(pArray);i++)
 	{
-		aux = al_get(pArray,i);
+		aux = ll_get(pArray,i);
 		if(id == employee_getId(aux))
 		{
 			retorno = aux;
@@ -177,9 +172,9 @@ Employee* employee_getByName(LinkedList* pArray,char* name)
 	int i;
 	Employee* aux;
 	Employee* retorno=NULL;
-	for(i=0;i<al_len(pArray);i++)
+	for(i=0;i<ll_len(pArray);i++)
 	{
-		aux = al_get(pArray,i);
+		aux = ll_get(pArray,i);
 		if(strcmp(name,employee_getName(aux))==0)
 		{
 			retorno = aux;
@@ -194,9 +189,9 @@ Employee* employee_getByLastName(LinkedList* pArray,char* lastName)
 	int i;
 	Employee* aux;
 	Employee* retorno=NULL;
-	for(i=0;i<al_len(pArray);i++)
+	for(i=0;i<ll_len(pArray);i++)
 	{
-		aux = al_get(pArray,i);
+		aux = ll_get(pArray,i);
 		if(strcmp(lastName,employee_getLastName(aux))==0)
 		{
 			retorno = aux;
@@ -211,9 +206,9 @@ Employee* employee_getByAge(LinkedList* pArray,int age)
 	int i;
 	Employee* aux;
 	Employee* retorno=NULL;
-	for(i=0;i<al_len(pArray);i++)
+	for(i=0;i<ll_len(pArray);i++)
 	{
-		aux = al_get(pArray,i);
+		aux = ll_get(pArray,i);
 		if(age == employee_getAge(aux))
 		{
 			retorno = aux;
@@ -228,9 +223,9 @@ Employee* employee_getByType(LinkedList* pArray,int type)
 	int i;
 	Employee* aux;
 	Employee* retorno=NULL;
-	for(i=0;i<al_len(pArray);i++)
+	for(i=0;i<ll_len(pArray);i++)
 	{
-		aux = al_get(pArray,i);
+		aux = ll_get(pArray,i);
 		if(type == employee_getType(aux))
 		{
 			retorno = aux;
@@ -240,60 +235,79 @@ Employee* employee_getByType(LinkedList* pArray,int type)
 	return retorno;
 }
 
-int employee_compareById(void* pA ,void* pB)
+int employee_compareById(void* thisA ,void* thisB)
 {
-
 	int retorno = 0;
 
-	if(employee_getId(pA) > employee_getId(pB))
-		retorno = 1;
-	else if(employee_getId(pA) < employee_getId(pB))
-		retorno = -1;
-
+	if(thisA != NULL && thisB != NULL)
+	{
+		if(employee_getId(thisA) > employee_getId(thisB))
+		{
+				retorno = 1;
+		}
+		else if(employee_getId(thisA) < employee_getId(thisB))
+		{
+			retorno = -1;
+		}
+	}
 	return retorno;
 }
 
-int employee_compareByName(void* pA ,void* pB)
+int employee_compareByName(void* thisA ,void* thisB)
 {
-	int retorno;
-
-	retorno = strcmp(employee_getName(pA),employee_getName(pB));
-
-	return retorno;
-}
-
-int employee_compareByLastName(void* pA ,void* pB)
-{
-	int retorno;
-
-	retorno = strcmp(employee_getLastName(pA),employee_getLastName(pB));
-
-	return retorno;
-}
-
-int employee_compareByAge(void* pA ,void* pB)
-{
-
 	int retorno = 0;
 
-	if(employee_getAge(pA) > employee_getAge(pB))
-		retorno = 1;
-	else if(employee_getAge(pA) < employee_getAge(pB))
-		retorno = -1;
-
+	if(thisA != NULL && thisB != NULL)
+	{
+		retorno = strcmp(employee_getName(thisA),employee_getName(thisB));
+	}
 	return retorno;
 }
 
-int employee_compareByType(void* pA ,void* pB)
+int employee_compareByLastName(void* thisA ,void* thisB)
 {
-
 	int retorno = 0;
 
-	if(employee_getType(pA) > employee_getType(pB))
-		retorno = 1;
-	else if(employee_getType(pA) < employee_getType(pB))
-		retorno = -1;
+	if(thisA != NULL && thisB != NULL)
+	{
+		retorno = strcmp(employee_getLastName(thisA),employee_getLastName(thisB));
+	}
+	return retorno;
+}
 
+int employee_compareByAge(void* thisA ,void* thisB)
+{
+	int retorno = 0;
+
+	if(thisA != NULL && thisB != NULL)
+	{
+		if(employee_getAge(thisA) > employee_getAge(thisB))
+		{
+				retorno = 1;
+		}
+		else if(employee_getAge(thisA) < employee_getAge(thisB))
+		{
+			retorno = -1;
+		}
+	}
+	return retorno;
+}
+
+int employee_compareByType(void* thisA ,void* thisB)
+{
+	int retorno = 0;
+
+	if(thisA != NULL && thisB != NULL)
+	{
+		if(employee_getType(thisA) > employee_getType(thisB))
+		{
+				retorno = 1;
+		}
+		else if(employee_getType(thisA) < employee_getType(thisB))
+		{
+			retorno = -1;
+		}
+	}
 	return retorno;
 }
 

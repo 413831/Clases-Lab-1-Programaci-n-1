@@ -40,7 +40,7 @@ int entity_buildConstructorPrototype(char* entityName, Member* members,int qtyMe
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
 
-    sprintf(result,"%s* %snewConParametros(",entityName,auxPrefix);
+    sprintf(result,"%s* %sconstructor(",entityName,auxPrefix);
 
     for(i=0;i<qtyMembers;i++)
     {
@@ -71,7 +71,7 @@ int entity_buildConstructor(char* entityName, Member* members,int qtyMembers, ch
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"%s* %snew(",entityName,auxPrefix);
+    sprintf(result,"%s* %sconstructor(",entityName,auxPrefix);
 
     for(i=0;i<qtyMembers;i++)
     {
@@ -103,7 +103,7 @@ int entity_buildConstructor(char* entityName, Member* members,int qtyMembers, ch
         sprintf(auxString,"\t!%sset%s(this,%s) &&\n\t\t", auxPrefix,auxDefinitionUp,auxDefinition);
         strcat(result,auxString);
     }
-    sprintf(auxString,"\t)\n\t\t{\n\t\t\treturn this;\n\t\t}\n\t\telse\n\t\t{\n\t\t\t%sdelete(this);\n\t\\ttreturn NULL;\n\t\t}\n\t}\n}\n\n",auxPrefix);
+    sprintf(auxString,"\t)\n\t\t{\n\t\t\treturn this;\n\t\t}\n\t\telse\n\t\t{\n\t\t\t%sdestructor(this);\n\t\t\treturn NULL;\n\t\t}\n\t}\n}\n\n",auxPrefix);
     strcat(result,auxString);
 
     return 0;
@@ -119,7 +119,7 @@ int entity_buildDestructor(char* entityName,char* result)
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"int %sdelete(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tfree(this);\n\t\tretorno = 0;\n\t}\n\treturn retorno;\n}\n\n",auxPrefix,entityName);
+    sprintf(result,"int %sdestructor(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tfree(this);\n\t\tretorno = 0;\n\t}\n\treturn retorno;\n}\n\n",auxPrefix,entityName);
 
     return 0;
 }
@@ -232,9 +232,9 @@ int entity_buildGetters(char* entityName, Member* members,int qtyMembers, char* 
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
         if(flagArray)
-            sprintf(auxString,"%s* %sget%s(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tthis->%s;\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
+            sprintf(auxString,"%s* %sget%s(%s* this)\n{\n\tchar* retorno = NULL;\n\tif(this != NULL)\n\t{\n\t\tstrcpy(retorno,this->%s);\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
         else
-           sprintf(auxString,"%s %sget%s(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tthis->%s;\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
+           sprintf(auxString,"%s %sget%s(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tretorno = this->%s;\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
 
 
         strcat(result,auxString);
@@ -303,12 +303,12 @@ int entity_buildFinders(char* entityName, Member* members,int qtyMembers, char* 
 
 //"
         if(flagArray)
-            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s* %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<al_len(pArray);i++)\n\t{\n\t\taux = al_get(pArray,i);\n\t\tif(strcmp(%s,%sget%s(aux))==0)\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s* %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<ll_len(pArray);i++)\n\t{\n\t\taux = ll_get(pArray,i);\n\t\tif(strcmp(%s,%sget%s(aux))==0)\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
                         entityName,auxPrefix,auxDefinitionUp,members[i].type,auxDefinition,
                         entityName,entityName,
                         auxDefinition,auxPrefix,auxDefinitionUp);
         else
-            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<al_len(pArray);i++)\n\t{\n\t\taux = al_get(pArray,i);\n\t\tif(%s == %sget%s(aux))\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<ll_len(pArray);i++)\n\t{\n\t\taux = ll_get(pArray,i);\n\t\tif(%s == %sget%s(aux))\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
                         entityName,auxPrefix,auxDefinitionUp,members[i].type,auxDefinition,
                         entityName,entityName,
                         auxDefinition,auxPrefix,auxDefinitionUp);
@@ -383,12 +383,12 @@ int entity_buildComparativeFunctions(char* entityName, Member* members,int qtyMe
 
 //"
         if(flagArray)
-            sprintf(auxString,"int %scompareBy%s(%s* pA ,%s* pB)\n{\n\tint retorno;\n\n\tretorno = strcmp(%sget%s(pA),%sget%s(pB));\n\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB)\n{\n\tint retorno = 0;\n\n\tif(thisA != NULL && thisB != NULL)\n\t{\n\t\tretorno = strcmp(%sget%s(thisA),%sget%s(thisB));\n\t}\n\treturn retorno;\n}\n\n",
 
                         auxPrefix,auxDefinitionUp,"void","void",
                         auxPrefix,auxDefinitionUp,auxPrefix,auxDefinitionUp);
         else
-            sprintf(auxString,"int %scompareBy%s(%s* pA ,%s* pB)\n{\n\n\tint retorno = 0;\n\n\tif(%sget%s(pA) > %sget%s(pB))\n\t\tretorno = 1;\n\telse if(%sget%s(pA) < %sget%s(pB))\n\t\tretorno = -1;\n\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB)\n{\n\tint retorno = 0;\n\n\tif(thisA != NULL && thisB != NULL)\n\t{\n\t\tif(%sget%s(thisA) > %sget%s(thisB))\n\t\t{\n\t\t\t\tretorno = 1;\n\t\t}\n\t\telse if(%sget%s(thisA) < %sget%s(thisB))\n\t\t{\n\t\t\tretorno = -1;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
 
                         auxPrefix,auxDefinitionUp,"void","void",
                         auxPrefix,auxDefinitionUp,auxPrefix,auxDefinitionUp,
@@ -425,11 +425,11 @@ int entity_buildComparativeFunctionsPrototypes(char* entityName, Member* members
 
 //"
         if(flagArray)
-            sprintf(auxString,"int %scompareBy%s(%s* pA ,%s* pB);\n",
+            sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB);\n",
 
                         auxPrefix,auxDefinitionUp,"void","void");
         else
-            sprintf(auxString,"int %scompareBy%s(%s* pA ,%s* pB);\n",
+            sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB);\n",
 
                         auxPrefix,auxDefinitionUp,"void","void");
 
