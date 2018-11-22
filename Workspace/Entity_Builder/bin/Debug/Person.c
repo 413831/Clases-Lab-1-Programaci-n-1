@@ -304,6 +304,22 @@ int person_compareById(void* thisA ,void* thisB)
 	return retorno;
 }
 
+Person* person_show(char* name,char* lastName,int age,char* address,int id)
+{
+	Person* this = malloc(sizeof(Person));
+
+	if(this != NULL)
+	{
+		printf("/nname -- %s",person_getName(this));
+		printf("/nlastName -- %s",person_getLastName(this));
+		printf("/nage -- %d",person_getAge(this));
+		printf("/naddress -- %s",person_getAddress(this));
+		printf("/nid -- %d",person_getId(this));
+		retorno = 0;
+	}
+	return retorno;
+}
+
 
 
 ********************* Person.c ************************

@@ -19,7 +19,7 @@ typedef struct
 
 #define BUFFER 4000
 #define LEN_LL 6Employee* employee_constructor(int id,char* name,char* lastName,int age,int type);
-int employee_delete(Employee* this);
+int employee_destructor(Employee* this);
 int employee_setId(Employee* this,int id);
 int employee_setName(Employee* this,char* name);
 int employee_setLastName(Employee* this,char* lastName);
@@ -40,6 +40,7 @@ int employee_compareByName(void* thisA ,void* thisB);
 int employee_compareByLastName(void* thisA ,void* thisB);
 int employee_compareByAge(void* thisA ,void* thisB);
 int employee_compareByType(void* thisA ,void* thisB);
+int employee_show(Employee* this);
 
 
 ********************* Employee.h ************************

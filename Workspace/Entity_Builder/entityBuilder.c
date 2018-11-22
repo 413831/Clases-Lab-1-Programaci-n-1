@@ -134,7 +134,7 @@ int entity_buildDestructorPrototype(char* entityName,char* result)
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"int %sdelete(%s* this);\n",auxPrefix,entityName);
+    sprintf(result,"int %sdestructor(%s* this);\n",auxPrefix,entityName);
 
     return 0;
 }
@@ -209,6 +209,7 @@ int entity_buildSettersPrototypes(char* entityName, Member* members,int qtyMembe
 
     return 0;
 }
+
 int entity_buildGetters(char* entityName, Member* members,int qtyMembers, char* result)
 {
     int i;
@@ -384,7 +385,6 @@ int entity_buildComparativeFunctions(char* entityName, Member* members,int qtyMe
 //"
         if(flagArray)
             sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB)\n{\n\tint retorno = 0;\n\n\tif(thisA != NULL && thisB != NULL)\n\t{\n\t\tretorno = strcmp(%sget%s(thisA),%sget%s(thisB));\n\t}\n\treturn retorno;\n}\n\n",
-
                         auxPrefix,auxDefinitionUp,"void","void",
                         auxPrefix,auxDefinitionUp,auxPrefix,auxDefinitionUp);
         else
@@ -440,6 +440,86 @@ int entity_buildComparativeFunctionsPrototypes(char* entityName, Member* members
     return 0;
 }
 
+int entity_buildShowFunctionPrototype(char* entityName,char* result)
+{
+    char auxPrefix[1024];
+    *result = '\0';
+
+    if(strlen(entityName) > 1)
+        sprintf(auxPrefix,"%c%s_",tolower(entityName[0]),entityName+1);
+    else
+        sprintf(auxPrefix,"%c_",tolower(entityName[0]));
+
+    sprintf(result,"int %sshow(%s* this);\n",auxPrefix,entityName);
+
+    return 0;
+}
+
+
+
+int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, char* result)
+{
+    int i;
+    char auxString[1024];
+    char auxDefinition[1024];
+    char auxDefinitionUp[1024];
+    int flagArray;
+    *result = '\0';
+    char auxPrefix[1024];
+    if(strlen(entityName) > 1)
+        sprintf(auxPrefix,"%c%s_",tolower(entityName[0]),entityName+1);
+    else
+        sprintf(auxPrefix,"%c_",tolower(entityName[0]));
+
+    sprintf(result,"%s* %sshow(",entityName,auxPrefix);
+
+    for(i=0;i<qtyMembers;i++)
+    {
+        if(isArray(members[i].definition,auxDefinition) == 1)
+            sprintf(auxString,"%s* %s", members[i].type,auxDefinition);
+        else
+            sprintf(auxString,"%s %s", members[i].type,members[i].definition);
+
+        strcat(result,auxString);
+        if((i+1)<qtyMembers) strcat(result,",");
+    }
+    sprintf(auxString,")\n{\n");
+    strcat(result,auxString);
+
+    sprintf(auxString,"\t%s* this = malloc(sizeof(%s));\n", entityName, entityName);
+    strcat(result,auxString);
+
+    sprintf(auxString,"\n\tif(this != NULL)\n\t{\n\t");
+    strcat(result,auxString);
+
+    for(i=0;i<qtyMembers;i++)
+    {
+        isArray(members[i].definition,auxDefinition);
+        flagArray = isArray(members[i].definition,auxDefinition);
+        if(strlen(auxDefinition) > 1)
+            sprintf(auxDefinitionUp,"%c%s",toupper(auxDefinition[0]),auxDefinition+1);
+        else
+            sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
+
+
+        if(flagArray)
+        {
+            sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this));\n\t","n",auxDefinition,"%s",auxPrefix,auxDefinitionUp);
+                        strcat(result,auxString);
+        }
+        else
+        {
+             sprintf(auxString,"\tprintf(\"/%s%s -- %s\",%sget%s(this));\n\t","n",auxDefinition,"%d",auxPrefix,auxDefinitionUp);
+                        strcat(result,auxString);
+        }
+
+
+    }
+    sprintf(auxString,"\tretorno = 0;\n\t}\n\treturn retorno;\n}\n\n");
+    strcat(result,auxString);
+
+    return 0;
+}
 
 
 

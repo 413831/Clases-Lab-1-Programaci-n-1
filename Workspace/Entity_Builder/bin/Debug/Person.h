@@ -4,8 +4,8 @@
 
 #include "LinkedList.h"
 
-#ifndef _PERSONgetpriorit_H
-#define _PERSONgetpriorit_H
+#ifndef _PERSON_H
+#define _PERSON_H
 typedef struct
 {
 	char name[50];
@@ -14,12 +14,12 @@ typedef struct
 	char address[50];
 	int id;
 }Person;
-#endif// _PERSONgetpriorit_H
+#endif// _PERSON_H
 
 
 #define BUFFER 4000
 #define LEN_LL 6Person* person_constructor(char* name,char* lastName,int age,char* address,int id);
-int person_delete(Person* this);
+int person_destructor(Person* this);
 int person_setName(Person* this,char* name);
 int person_setLastName(Person* this,char* lastName);
 int person_setAge(Person* this,int age);
@@ -40,6 +40,7 @@ int person_compareByLastName(void* thisA ,void* thisB);
 int person_compareByAge(void* thisA ,void* thisB);
 int person_compareByAddress(void* thisA ,void* thisB);
 int person_compareById(void* thisA ,void* thisB);
+int person_show(Person* this);
 
 
 ********************* Person.h ************************

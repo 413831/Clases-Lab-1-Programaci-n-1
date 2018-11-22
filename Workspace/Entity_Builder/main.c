@@ -74,6 +74,8 @@ int main(int argc, char **argv)
     fprintf(header,"%s",result);
     entity_buildComparativeFunctionsPrototypes(entityName, members, qtyMembers, result);
     fprintf(header,"%s",result);
+    entity_buildShowFunctionPrototype(entityName,result);
+    fprintf(header,"%s",result);
     fprintf(header,"\n\n********************* %s.h ************************\n\n",entityName);
 
     fprintf(cFile,"\n\n********************* %s.c ************************\n\n",entityName);
@@ -89,6 +91,8 @@ int main(int argc, char **argv)
     entity_buildFinders(entityName, members, qtyMembers, result);
     fprintf(cFile,"%s",result);
     entity_buildComparativeFunctions(entityName, members, qtyMembers, result);
+    fprintf(cFile,"%s",result);
+    entity_buildShowFunction(entityName, members, qtyMembers, result);
     fprintf(cFile,"%s",result);
     fprintf(cFile,"\n\n********************* %s.c ************************\n\n",entityName);
 

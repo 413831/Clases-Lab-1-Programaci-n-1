@@ -311,6 +311,22 @@ int employee_compareByType(void* thisA ,void* thisB)
 	return retorno;
 }
 
+Employee* employee_show(int id,char* name,char* lastName,int age,int type)
+{
+	Employee* this = malloc(sizeof(Employee));
+
+	if(this != NULL)
+	{
+		printf("/nid -- %d",employee_getId(this));
+		printf("/nname -- %s",employee_getName(this));
+		printf("/nlastName -- %s",employee_getLastName(this));
+		printf("/nage -- %d",employee_getAge(this));
+		printf("/ntype -- %d",employee_getType(this));
+		retorno = 0;
+	}
+	return retorno;
+}
+
 
 
 ********************* Employee.c ************************
