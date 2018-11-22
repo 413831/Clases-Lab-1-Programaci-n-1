@@ -1,0 +1,27 @@
+//Uso del Entity Builder
+
+//LINUX
+
+-Compilar el programa
+-Acceder a la carpeta del archivo binario
+-Desde la terminal ejecutar el mismo agregando como parámetro el nombre de la estructura con sus miembros y sus respectivos tipos
+****
+./entityBuilder Elemento char miembroUno[] char miembroDos[] int miembroTres float miembroCuatro 
+*****
+Ejemplo:
+./entityBuilder Cat char nombre[50] char color[30] char sexo[20] int edad int id 
+
+Es posible que se requiera acceder como superusuario.
+
+//WINDOWS
+
+-Compilar el programa
+-Acceder a la carpeta del archivo ejecutable
+-Desde la terminal ejecutar el mismo agregando como parámetro el nombre de la estructura con sus miembros y sus respectivos tipos.
+
+Ejemplo:
+entityBuilder Cat char nombre[50] char color[30] char sexo[20] int edad int id 
+
+*Nota: En Windows no es necesario precisar ningun comando diferente
+/////
+El programa generará automáticamente según los campos recibidos como parámetro las funciones de setters, getters, finders y compare, como así las funciónes de constructor y destructor.

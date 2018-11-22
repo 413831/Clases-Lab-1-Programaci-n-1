@@ -1,0 +1,60 @@
+# depslib dependency file v1.0
+1511653567 source:/Users/Mauro/Documents/workspace_videos_c/entityBuilder/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1511738520 
+
+1511738520 source:/Users/Mauro/Documents/workspace_addLP1/addLP1/entityBuilder/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+
+1511965287 source:/home/mauro/Descargas/addLP1/entityBuilder/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"entityBuilder.h"
+
+1542821633 lder.h"
+
+1511964266 /home/mauro/Descargas/addLP1/entityBuilder/entityBuilder.h
+
+1511965263 source:/home/mauro/Descargas/addLP1/entityBuilder/entityBuilder.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"entityBuilder.h"
+
+1542822484 source:c:\documents and settings\usuario\mis documentos\2018c2-master\addlp1-master\entitybuilder\entitybuilder.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"entityBuilder.h"
+
+1542810504 c:\documents and settings\usuario\mis documentos\2018c2-master\addlp1-master\entitybuilder\entitybuilder.h
+
+1542821633 source:c:\documents and settings\usuario\mis documentos\2018c2-master\addlp1-master\entitybuilder\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"entityBuilder.h"
+
+1542850204 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Entity_Builder/entityBuilder.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"entityBuilder.h"
+
+1542850204 /home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Entity_Builder/entityBuilder.h
+
+1542850204 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Workspace/Entity_Builder/main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"entityBuilder.h"
+
