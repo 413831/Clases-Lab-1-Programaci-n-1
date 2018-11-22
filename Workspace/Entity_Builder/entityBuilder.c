@@ -242,7 +242,7 @@ int entity_buildGetters(char* entityName, Member* members,int qtyMembers, char* 
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
-        sprintf(auxString,"/**\n*\\brief Es el getter del campo %s del elemento\n*\\param this Es el elemento del cual se obtiene el dato %s\n*\\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR\n*/\n",auxDefinition,auxDefinition);
+        sprintf(auxString,"/**\n*\\brief Es el getter del campo %s del elemento\n*\\param this Es el elemento del cual se obtiene el dato %s\n*\\return Retorna el dato del elemento existe y si el dato es valido sino retorna COMPLETAR\n*/\n",auxDefinition,auxDefinition);
         strcat(result,auxString);
 
         if(flagArray)
