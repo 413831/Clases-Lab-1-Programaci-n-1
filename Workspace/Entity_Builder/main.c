@@ -96,6 +96,7 @@ int main(int argc, char **argv)
     fprintf(cFile,"%s",result);
     entity_buildComparativeFunctions(entityName, members, qtyMembers, result);
     fprintf(cFile,"%s",result);
+    fprintf(cFile,"/**\n*\\brief Muestra los datos de un elemento\n*\\param this Es el elemento que recibe para mostrar\n*\\return Retorna 0 si el elemento existe sino retorna -1\n*/\n");
     entity_buildShowFunction(entityName, members, qtyMembers, result);
     fprintf(cFile,"%s",result);
     fprintf(cFile,"\n\n********************* %s.c ************************\n\n",entityName);

@@ -71,7 +71,10 @@ int entity_buildConstructor(char* entityName, Member* members,int qtyMembers, ch
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"%s* %sconstructor(",entityName,auxPrefix);
+    sprintf(auxString,"/**\n*\\brief Es el constructor del elemento donde se reserva memoria y se setean los campos\n*\\param COMPLETAR\n*\\return Retorna 0 si logra agregar elemento sino retorna -1\n*/\n");
+    strcat(result,auxString);
+    sprintf(auxString,"%s* %sconstructor(",entityName,auxPrefix);
+    strcat(result,auxString);
 
     for(i=0;i<qtyMembers;i++)
     {
@@ -112,6 +115,7 @@ int entity_buildConstructor(char* entityName, Member* members,int qtyMembers, ch
 int entity_buildDestructor(char* entityName,char* result)
 {
     char auxPrefix[1024];
+    char auxString[1024];
     *result = '\0';
 
     if(strlen(entityName) > 1)
@@ -119,7 +123,11 @@ int entity_buildDestructor(char* entityName,char* result)
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"int %sdestructor(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tfree(this);\n\t\tretorno = 0;\n\t}\n\treturn retorno;\n}\n\n",auxPrefix,entityName);
+    sprintf(auxString,"/**\n*\\brief Es el destructor del elemento que funciona para liberar memoria reservada\n*\\param this Es el elemento para eliminar\n*\\return Retorna 0 si logra eliminar elemento sino retorna -1\n*/\n");
+    strcat(result,auxString);
+
+    sprintf(auxString,"int %sdestructor(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tfree(this);\n\t\tretorno = 0;\n\t}\n\treturn retorno;\n}\n\n",auxPrefix,entityName);
+    strcat(result,auxString);
 
     return 0;
 }
@@ -162,6 +170,8 @@ int entity_buildSetters(char* entityName, Member* members,int qtyMembers, char* 
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
+        sprintf(auxString,"/**\n*\\brief Es el setter del campo %s del elemento\n*\\param this Es el elemento que se recibe para setear un campo\n*\\param %s Es el dato recibido para setear el campo\n*\\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR\n*/\n",auxDefinition,auxDefinition);
+        strcat(result,auxString);
 
         if(flagArray)
             sprintf(auxString,"int %sset%s(%s* this,%s* %s)\n{\n\tint retorno = -1;\n\tif(this != NULL && %s != NULL && isValid%s(%s))\n\t{\n\t\tstrcpy(this->%s,%s);\n\t\tretorno = 0;\n\t}\n\treturn = retorno;\n}\n\n", auxPrefix,auxDefinitionUp,entityName,members[i].type,auxDefinition,auxDefinition,auxDefinitionUp,auxDefinition,auxDefinition,auxDefinition);
@@ -231,6 +241,9 @@ int entity_buildGetters(char* entityName, Member* members,int qtyMembers, char* 
             sprintf(auxDefinitionUp,"%c%s",toupper(auxDefinition[0]),auxDefinition+1);
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
+
+        sprintf(auxString,"/**\n*\\brief Es el getter del campo %s del elemento\n*\\param this Es el elemento del cual se obtiene el dato %s\n*\\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR\n*/\n",auxDefinition,auxDefinition);
+        strcat(result,auxString);
 
         if(flagArray)
             sprintf(auxString,"%s* %sget%s(%s* this)\n{\n\tchar* retorno = NULL;\n\tif(this != NULL)\n\t{\n\t\tstrcpy(retorno,this->%s);\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
@@ -302,16 +315,18 @@ int entity_buildFinders(char* entityName, Member* members,int qtyMembers, char* 
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
-//"
+        sprintf(auxString,"/**\n*\\brief Retorna un elemento segun el dato %s ingresado\n*\\param pArray Es el puntero a LinkedList recibido para buscar elemento\n*\\param %s Es el dato que se recibe para encontrar el elemento\n*\\return Retorna el elemento si lo encuentra sino retorna NULL\n*/\n",auxDefinition,auxDefinition);
+        strcat(result,auxString);
+
         if(flagArray)
-            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s* %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<ll_len(pArray);i++)\n\t{\n\t\taux = ll_get(pArray,i);\n\t\tif(strcmp(%s,%sget%s(aux))==0)\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s* %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\n\tif(pArray != NULL && isValid%s(%s))\n\t{\n\t\tfor(i=0;i<ll_len(pArray);i++)\n\t\t{\n\t\t\taux = ll_get(pArray,i);\n\t\t\tif(strcmp(%s,%sget%s(aux))==0)\n\t\t\t{\n\t\t\t\tretorno = aux;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
                         entityName,auxPrefix,auxDefinitionUp,members[i].type,auxDefinition,
-                        entityName,entityName,
+                        entityName,entityName,auxDefinitionUp,auxDefinition,
                         auxDefinition,auxPrefix,auxDefinitionUp);
         else
-            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\tfor(i=0;i<ll_len(pArray);i++)\n\t{\n\t\taux = ll_get(pArray,i);\n\t\tif(%s == %sget%s(aux))\n\t\t{\n\t\t\tretorno = aux;\n\t\t\tbreak;\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
+            sprintf(auxString,"%s* %sgetBy%s(LinkedList* pArray,%s %s)\n{\n\tint i;\n\t%s* aux;\n\t%s* retorno=NULL;\n\n\tif(pArray != NULL && isValid%s(%s))\n\t{\n\t\tfor(i=0;i<ll_len(pArray);i++)\n\t\t{\n\t\t\taux = ll_get(pArray,i);\n\t\t\tif(%s == %sget%s(aux))\n\t\t\t{\n\t\t\t\tretorno = aux;\n\t\t\t\tbreak;\n\t\t\t}\n\t\t}\n\t}\n\treturn retorno;\n}\n\n",
                         entityName,auxPrefix,auxDefinitionUp,members[i].type,auxDefinition,
-                        entityName,entityName,
+                        entityName,entityName,auxDefinitionUp,auxDefinition,
                         auxDefinition,auxPrefix,auxDefinitionUp);
 
         strcat(result,auxString);
@@ -382,7 +397,9 @@ int entity_buildComparativeFunctions(char* entityName, Member* members,int qtyMe
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
-//"
+        sprintf(auxString,"/**\n*\\brief Compara dos elementos por su campo %s\n*\\param thisA Es el puntero al primer elemento a comparar\n*\\param thisB Es el puntero al segundo elemento a comparar\n*\\return Retorna 0 si ambos campos son iguales\n\t\tRetorna 1 si el campo del primer elemento es mayor al segundo\n\t\tRetorna -1 si el campo del segundo elemento es mayor al primero\n*/\n",auxDefinition);
+        strcat(result,auxString);
+
         if(flagArray)
             sprintf(auxString,"int %scompareBy%s(%s* thisA ,%s* thisB)\n{\n\tint retorno = 0;\n\n\tif(thisA != NULL && thisB != NULL)\n\t{\n\t\tretorno = strcmp(%sget%s(thisA),%sget%s(thisB));\n\t}\n\treturn retorno;\n}\n\n",
                         auxPrefix,auxDefinitionUp,"void","void",
@@ -471,23 +488,9 @@ int entity_buildShowFunction(char* entityName, Member* members,int qtyMembers, c
     else
         sprintf(auxPrefix,"%c_",tolower(entityName[0]));
 
-    sprintf(result,"%s* %sshow(",entityName,auxPrefix);
-
-    for(i=0;i<qtyMembers;i++)
-    {
-        if(isArray(members[i].definition,auxDefinition) == 1)
-            sprintf(auxString,"%s* %s", members[i].type,auxDefinition);
-        else
-            sprintf(auxString,"%s %s", members[i].type,members[i].definition);
-
-        strcat(result,auxString);
-        if((i+1)<qtyMembers) strcat(result,",");
-    }
-    sprintf(auxString,")\n{\n");
+    sprintf(auxString,"int %sshow(%s* this)\n{",auxPrefix,entityName);
     strcat(result,auxString);
 
-    sprintf(auxString,"\t%s* this = malloc(sizeof(%s));\n", entityName, entityName);
-    strcat(result,auxString);
 
     sprintf(auxString,"\n\tif(this != NULL)\n\t{\n\t");
     strcat(result,auxString);
@@ -545,9 +548,11 @@ int entity_buildIsValid(char* entityName, Member* members,int qtyMembers, char* 
         else
             sprintf(auxDefinitionUp,"%c",toupper(auxDefinition[0]));
 
+        sprintf(auxString,"/**\n*\\brief Valida un dato del campo %s\n*\\param %s Es el dato recibido para validar\n*\\return Retorna 1 si el dato es valido sino retorna 0\n*/\n",auxDefinition,auxDefinition);
+        strcat(result,auxString);
 
         if(flagArray)
-            sprintf(auxString,"static int isValid%s(%s* %s)\n{\n\tint retorno = 0;\n\tif(%s != NULL)\n\t\{\n\t\tretorno = 1;\n\t}\n\treturn = retorno;\n}\n\n",auxDefinitionUp,members[i].type,auxDefinition,auxDefinition);
+            sprintf(auxString,"static int isValid%s(%s* %s)\n{\n\tint retorno = 0;\n\tif(%s != NULL && strlen(%s) > 1)\n\t\{\n\t\tretorno = 1;\n\t}\n\treturn = retorno;\n}\n\n",auxDefinitionUp,members[i].type,auxDefinition,auxDefinition,auxDefinition);
         else
             sprintf(auxString,"static int isValid%s(%s %s)\n{\n\tint retorno = 0;\n\tif(%s >= 0)\n\t{\n\t\tretorno = 1;\n\t}\n\treturn = retorno;\n}\n\n",auxDefinitionUp,members[i].type,auxDefinition,auxDefinition);
 

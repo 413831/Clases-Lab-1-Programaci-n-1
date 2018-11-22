@@ -17,26 +17,41 @@ static int isValidAge(int age);
 static int isValidAddress(char* address);
 static int isValidId(int id);
  
+/**
+*\brief Valida un dato del campo name
+*\param name Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
 static int isValidName(char* name)
 {
 	int retorno = 0;
-	if(name != NULL)
+	if(name != NULL && strlen(name) > 1)
 	{
 		retorno = 1;
 	}
 	return = retorno;
 }
 
+/**
+*\brief Valida un dato del campo lastName
+*\param lastName Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
 static int isValidLastName(char* lastName)
 {
 	int retorno = 0;
-	if(lastName != NULL)
+	if(lastName != NULL && strlen(lastName) > 1)
 	{
 		retorno = 1;
 	}
 	return = retorno;
 }
 
+/**
+*\brief Valida un dato del campo age
+*\param age Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
 static int isValidAge(int age)
 {
 	int retorno = 0;
@@ -47,16 +62,26 @@ static int isValidAge(int age)
 	return = retorno;
 }
 
+/**
+*\brief Valida un dato del campo address
+*\param address Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
 static int isValidAddress(char* address)
 {
 	int retorno = 0;
-	if(address != NULL)
+	if(address != NULL && strlen(address) > 1)
 	{
 		retorno = 1;
 	}
 	return = retorno;
 }
 
+/**
+*\brief Valida un dato del campo id
+*\param id Es el dato recibido para validar
+*\return Retorna 1 si el dato es valido sino retorna 0
+*/
 static int isValidId(int id)
 {
 	int retorno = 0;
@@ -70,6 +95,11 @@ static int isValidId(int id)
  
 //////////////////PUBLIC//////////////////
 
+/**
+*\brief Es el constructor del elemento donde se reserva memoria y se setean los campos
+*\param COMPLETAR
+*\return Retorna 0 si logra agregar elemento sino retorna -1
+*/
 Person* person_constructor(char* name,char* lastName,int age,char* address,int id)
 {
 	Person* this = malloc(sizeof(Person));
@@ -93,6 +123,11 @@ Person* person_constructor(char* name,char* lastName,int age,char* address,int i
 	}
 }
 
+/**
+*\brief Es el destructor del elemento que funciona para liberar memoria reservada
+*\param this Es el elemento para eliminar
+*\return Retorna 0 si logra eliminar elemento sino retorna -1
+*/
 int person_destructor(Person* this)
 {
 	int retorno = -1;
@@ -104,6 +139,12 @@ int person_destructor(Person* this)
 	return retorno;
 }
 
+/**
+*\brief Es el setter del campo name del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param name Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_setName(Person* this,char* name)
 {
 	int retorno = -1;
@@ -115,6 +156,12 @@ int person_setName(Person* this,char* name)
 	return = retorno;
 }
 
+/**
+*\brief Es el setter del campo lastName del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param lastName Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_setLastName(Person* this,char* lastName)
 {
 	int retorno = -1;
@@ -126,6 +173,12 @@ int person_setLastName(Person* this,char* lastName)
 	return = retorno;
 }
 
+/**
+*\brief Es el setter del campo age del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param age Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_setAge(Person* this,int age)
 {
 	int retorno = -1;
@@ -137,6 +190,12 @@ int person_setAge(Person* this,int age)
 	return = retorno;
 }
 
+/**
+*\brief Es el setter del campo address del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param address Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_setAddress(Person* this,char* address)
 {
 	int retorno = -1;
@@ -148,6 +207,12 @@ int person_setAddress(Person* this,char* address)
 	return = retorno;
 }
 
+/**
+*\brief Es el setter del campo id del elemento
+*\param this Es el elemento que se recibe para setear un campo
+*\param id Es el dato recibido para setear el campo
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_setId(Person* this,int id)
 {
 	int retorno = -1;
@@ -159,6 +224,11 @@ int person_setId(Person* this,int id)
 	return = retorno;
 }
 
+/**
+*\brief Es el getter del campo name del elemento
+*\param this Es el elemento del cual se obtiene el dato name
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 char* person_getName(Person* this)
 {
 	char* retorno = NULL;
@@ -169,6 +239,11 @@ char* person_getName(Person* this)
 	return = retorno;
 }
 
+/**
+*\brief Es el getter del campo lastName del elemento
+*\param this Es el elemento del cual se obtiene el dato lastName
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 char* person_getLastName(Person* this)
 {
 	char* retorno = NULL;
@@ -179,6 +254,11 @@ char* person_getLastName(Person* this)
 	return = retorno;
 }
 
+/**
+*\brief Es el getter del campo age del elemento
+*\param this Es el elemento del cual se obtiene el dato age
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_getAge(Person* this)
 {
 	int retorno = -1;
@@ -189,6 +269,11 @@ int person_getAge(Person* this)
 	return = retorno;
 }
 
+/**
+*\brief Es el getter del campo address del elemento
+*\param this Es el elemento del cual se obtiene el dato address
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 char* person_getAddress(Person* this)
 {
 	char* retorno = NULL;
@@ -199,6 +284,11 @@ char* person_getAddress(Person* this)
 	return = retorno;
 }
 
+/**
+*\brief Es el getter del campo id del elemento
+*\param this Es el elemento del cual se obtiene el dato id
+*\return Retorna 0 si el elemento existe y si el dato es valido sino retorna COMPLETAR
+*/
 int person_getId(Person* this)
 {
 	int retorno = -1;
@@ -209,91 +299,149 @@ int person_getId(Person* this)
 	return = retorno;
 }
 
+/**
+*\brief Retorna un elemento segun el dato name ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param name Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
 Person* person_getByName(LinkedList* pArray,char* name)
 {
 	int i;
 	Person* aux;
 	Person* retorno=NULL;
-	for(i=0;i<ll_len(pArray);i++)
+
+	if(pArray != NULL && isValidName(name))
 	{
-		aux = ll_get(pArray,i);
-		if(strcmp(name,person_getName(aux))==0)
+		for(i=0;i<ll_len(pArray);i++)
 		{
-			retorno = aux;
-			break;
+			aux = ll_get(pArray,i);
+			if(strcmp(name,person_getName(aux))==0)
+			{
+				retorno = aux;
+				break;
+			}
 		}
 	}
 	return retorno;
 }
 
+/**
+*\brief Retorna un elemento segun el dato lastName ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param lastName Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
 Person* person_getByLastName(LinkedList* pArray,char* lastName)
 {
 	int i;
 	Person* aux;
 	Person* retorno=NULL;
-	for(i=0;i<ll_len(pArray);i++)
+
+	if(pArray != NULL && isValidLastName(lastName))
 	{
-		aux = ll_get(pArray,i);
-		if(strcmp(lastName,person_getLastName(aux))==0)
+		for(i=0;i<ll_len(pArray);i++)
 		{
-			retorno = aux;
-			break;
+			aux = ll_get(pArray,i);
+			if(strcmp(lastName,person_getLastName(aux))==0)
+			{
+				retorno = aux;
+				break;
+			}
 		}
 	}
 	return retorno;
 }
 
+/**
+*\brief Retorna un elemento segun el dato age ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param age Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
 Person* person_getByAge(LinkedList* pArray,int age)
 {
 	int i;
 	Person* aux;
 	Person* retorno=NULL;
-	for(i=0;i<ll_len(pArray);i++)
+
+	if(pArray != NULL && isValidAge(age))
 	{
-		aux = ll_get(pArray,i);
-		if(age == person_getAge(aux))
+		for(i=0;i<ll_len(pArray);i++)
 		{
-			retorno = aux;
-			break;
+			aux = ll_get(pArray,i);
+			if(age == person_getAge(aux))
+			{
+				retorno = aux;
+				break;
+			}
 		}
 	}
 	return retorno;
 }
 
+/**
+*\brief Retorna un elemento segun el dato address ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param address Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
 Person* person_getByAddress(LinkedList* pArray,char* address)
 {
 	int i;
 	Person* aux;
 	Person* retorno=NULL;
-	for(i=0;i<ll_len(pArray);i++)
+
+	if(pArray != NULL && isValidAddress(address))
 	{
-		aux = ll_get(pArray,i);
-		if(strcmp(address,person_getAddress(aux))==0)
+		for(i=0;i<ll_len(pArray);i++)
 		{
-			retorno = aux;
-			break;
+			aux = ll_get(pArray,i);
+			if(strcmp(address,person_getAddress(aux))==0)
+			{
+				retorno = aux;
+				break;
+			}
 		}
 	}
 	return retorno;
 }
 
+/**
+*\brief Retorna un elemento segun el dato id ingresado
+*\param pArray Es el puntero a LinkedList recibido para buscar elemento
+*\param id Es el dato que se recibe para encontrar el elemento
+*\return Retorna el elemento si lo encuentra sino retorna NULL
+*/
 Person* person_getById(LinkedList* pArray,int id)
 {
 	int i;
 	Person* aux;
 	Person* retorno=NULL;
-	for(i=0;i<ll_len(pArray);i++)
+
+	if(pArray != NULL && isValidId(id))
 	{
-		aux = ll_get(pArray,i);
-		if(id == person_getId(aux))
+		for(i=0;i<ll_len(pArray);i++)
 		{
-			retorno = aux;
-			break;
+			aux = ll_get(pArray,i);
+			if(id == person_getId(aux))
+			{
+				retorno = aux;
+				break;
+			}
 		}
 	}
 	return retorno;
 }
 
+/**
+*\brief Compara dos elementos por su campo name
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
+*/
 int person_compareByName(void* thisA ,void* thisB)
 {
 	int retorno = 0;
@@ -305,6 +453,14 @@ int person_compareByName(void* thisA ,void* thisB)
 	return retorno;
 }
 
+/**
+*\brief Compara dos elementos por su campo lastName
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
+*/
 int person_compareByLastName(void* thisA ,void* thisB)
 {
 	int retorno = 0;
@@ -316,6 +472,14 @@ int person_compareByLastName(void* thisA ,void* thisB)
 	return retorno;
 }
 
+/**
+*\brief Compara dos elementos por su campo age
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
+*/
 int person_compareByAge(void* thisA ,void* thisB)
 {
 	int retorno = 0;
@@ -334,6 +498,14 @@ int person_compareByAge(void* thisA ,void* thisB)
 	return retorno;
 }
 
+/**
+*\brief Compara dos elementos por su campo address
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
+*/
 int person_compareByAddress(void* thisA ,void* thisB)
 {
 	int retorno = 0;
@@ -345,6 +517,14 @@ int person_compareByAddress(void* thisA ,void* thisB)
 	return retorno;
 }
 
+/**
+*\brief Compara dos elementos por su campo id
+*\param thisA Es el puntero al primer elemento a comparar
+*\param thisB Es el puntero al segundo elemento a comparar
+*\return Retorna 0 si ambos campos son iguales
+		Retorna 1 si el campo del primer elemento es mayor al segundo
+		Retorna -1 si el campo del segundo elemento es mayor al primero
+*/
 int person_compareById(void* thisA ,void* thisB)
 {
 	int retorno = 0;
@@ -363,10 +543,13 @@ int person_compareById(void* thisA ,void* thisB)
 	return retorno;
 }
 
-Person* person_show(char* name,char* lastName,int age,char* address,int id)
+/**
+*\brief Muestra los datos de un elemento
+*\param this Es el elemento que recibe para mostrar
+*\return Retorna 0 si el elemento existe sino retorna -1
+*/
+int person_show(Person* this)
 {
-	Person* this = malloc(sizeof(Person));
-
 	if(this != NULL)
 	{
 		printf("\nName -- %s",person_getName(this));/////CAMBIAR /n;
