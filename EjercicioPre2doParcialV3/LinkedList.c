@@ -171,9 +171,11 @@ static int addNode(LinkedList* this, int nodeIndex,void* pElement)
         {
             currentNode = getNode(this,nodeIndex);//Get del NODO a reemplazar
             previousNode = getNode(this,nodeIndex-1);//Get del NODO anterior al que reemplazo
+
             newNode->pNextNode = currentNode;//Muevo el NODO del INDICE al siguiente del NUEVO NODO
             newNode->pElement = pElement;//Asigno elemento
             previousNode->pNextNode = newNode;//Asigno al NODO ANTERIOR el NUEVO NODO como siguiente
+
             this->size = ll_len(this) + 1;
 
             returnAux = 0;
@@ -662,41 +664,8 @@ LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*))
 */
 int ll_map(LinkedList* this, int (*pFunc)(void*))
 {
-    int retorno = 0;
+    int retorno = -1;
     int i;
-    void* pElement;
-
-    if(this != NULL && pFunc != NULL)
-    {
-        for(i=0;i<ll_len(this);i++)
-        {
-            pElement = getNext(this);
-            if(pElement != NULL)
-            {
-                if(!pFunc(pElement))
-                {
-                    retorno = 1;
-                }
-                else
-                {
-                    break;
-                }
-            }
-        }
-    }
-    return retorno;
-}
-
-/**
- * \brief Recibe el LinkedList y ejecuta la funcion recibida con todos los elementos
- * \param this Es el LinkedList que recibe para recorrer
- * \param pFunc Es el puntero a la función para ejecutar dentro del mapping
- * \return Retorna 0 si logra ejecutar la función con todos los elementos sino retorna -1
-*/
-int ll_count(LinkedList* this, int (*pFunc)(void*,char*),char* parametro)
-{
-    int i;
-    int acumulador = 0;
     void* pElement;
 
     if(this != NULL && pFunc != NULL)
@@ -707,14 +676,20 @@ int ll_count(LinkedList* this, int (*pFunc)(void*,char*),char* parametro)
             pElement = getNext(this);
             if(pElement != NULL)
             {
-                acumulador += pFunc(pElement,parametro);
+                if(!pFunc(pElement))
+                {
+                    retorno = 0;
+                }
+                else
+                {
+                    break;
+                }
             }
         }
-       resetIterator(this);
+        resetIterator(this);
     }
-    return acumulador;
+    return retorno;
 }
-
 
 int ll_initLinkedList(LinkedList* pListaPrincipal[])
 {

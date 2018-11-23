@@ -12,7 +12,6 @@ struct LinkedList
 {
     Node* pFirstNode;//Dirección de memoria a nodo
     Node* itNode;//Variable para iterator
-    int itIndex;
     int size;//Cuantos nodos tiene adentro
 }typedef LinkedList;
 #endif
@@ -41,6 +40,5 @@ LinkedList* ll_clone(LinkedList* this);
 int ll_sort(LinkedList* this, int (*pFunc)(void* ,void*), int order);
 LinkedList* ll_filter(LinkedList* this,int (*pFunc)(void*));
 int ll_map(LinkedList* this, int (*pFunc)(void*));
-int ll_count(LinkedList* this, int (*pFunc)(void*,char*),char* parametro);
 int ll_initLinkedList(LinkedList* pListaPrincipal[]);
 int ll_freeLinkedList(LinkedList* pListaPrincipal[]);

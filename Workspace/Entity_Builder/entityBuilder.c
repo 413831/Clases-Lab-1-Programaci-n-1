@@ -246,7 +246,7 @@ int entity_buildGetters(char* entityName, Member* members,int qtyMembers, char* 
         strcat(result,auxString);
 
         if(flagArray)
-            sprintf(auxString,"%s* %sget%s(%s* this)\n{\n\tchar* retorno = NULL;\n\tif(this != NULL)\n\t{\n\t\tstrcpy(retorno,this->%s);\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
+            sprintf(auxString,"%s* %sget%s(%s* this)\n{\n\tchar* retorno = malloc(sizeof(char));\n\tif(this != NULL)\n\t{\n\t\tstrcpy(retorno,this->%s);\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
         else
            sprintf(auxString,"%s %sget%s(%s* this)\n{\n\tint retorno = -1;\n\tif(this != NULL)\n\t{\n\t\tretorno = this->%s;\n\t}\n\treturn = retorno;\n}\n\n", members[i].type, auxPrefix,auxDefinitionUp,entityName,auxDefinition);
 

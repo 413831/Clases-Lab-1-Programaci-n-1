@@ -48,7 +48,6 @@ int parser_VentaFromText(FILE* pFile , LinkedList* pLinkedListVenta)
                     ll_add(pLinkedListVenta,pVenta);//Se agrega ELEMENTO a LINKED LIST
                     retorno = 0;
                 }
-
             }
         }
     }

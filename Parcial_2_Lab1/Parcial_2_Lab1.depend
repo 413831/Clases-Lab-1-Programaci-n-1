@@ -71,3 +71,75 @@
 	"LinkedList.h"
 	"Venta.h"
 
+1542940924 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/Controller.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	<time.h>
+	"Controller.h"
+	"LinkedList.h"
+	"Venta.h"
+	"utn.h"
+	"parser.h"
+
+1542939770 /home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/Controller.h
+	"LinkedList.h"
+	"Venta.h"
+
+1542940942 /home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/LinkedList.h
+
+1542940882 /home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/Venta.h
+	"LinkedList.h"
+
+1542938751 /home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/utn.h
+
+1542938751 /home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/parser.h
+
+1542938751 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/input.c
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	"utn.h"
+
+1542940952 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/LinkedList.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<errno.h>
+	"LinkedList.h"
+
+1542939464 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/parser.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+	"Venta.h"
+	"utn.h"
+	"parser.h"
+
+1542938751 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/validacion.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<time.h>
+	<ctype.h>
+	"utn.h"
+
+1542940733 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/Venta.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"LinkedList.h"
+	"utn.h"
+	"Venta.h"
+
+1542940332 source:/home/alexei/Documents/UTN/ejercicios_programacion_1/Parcial_2_Lab1/main.c
+	<stdio.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"utn.h"
+	"Venta.h"
+	"parser.h"
+	"Controller.h"
+

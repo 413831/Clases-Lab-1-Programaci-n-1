@@ -97,9 +97,11 @@ int controller_ListVenta(LinkedList* pLinkedList)
     if(pLinkedList != NULL && !ll_isEmpty(pLinkedList))
     {
         retorno = 0;
-        this = ll_get(pLinkedList,2);
-       venta_show(this);
-
+        for(i=0;i<ll_len(pLinkedList);i++)
+        {
+            this = ll_get(pLinkedList,i);
+            venta_show(this);
+        }
         printf("\nTotal ventas %d",ll_len(pLinkedList));
     }
     else
@@ -128,16 +130,15 @@ int controller_generateNewList(LinkedList* listaPrincipal)
 
     if(listaPrincipal != NULL && pFile != NULL)
     {
-        printf("\nCONTROL");
-        ventasMayor20k = ll_count(listaPrincipal,venta_seleccionarVenta20k);
-        ventasMayor10k = ll_count(listaPrincipal,venta_seleccionarVenta10k);
-        cantidadLCD = ll_count(listaPrincipal,venta_seleccionarLCD);
-        unidadesTotales = ll_count(listaPrincipal,venta_unidades);
+        ventasMayor20k = ll_count(listaPrincipal,venta_seleccionarVentaPrecio,"20000");
+        ventasMayor10k = ll_count(listaPrincipal,venta_seleccionarVentaPrecio,"10000");
+        cantidadLCD = ll_count(listaPrincipal,venta_seleccionarVentaCodigo,"LCD_TV");
+        unidadesTotales = ll_count(listaPrincipal,venta_unidades,"0");
 
-        printf("\nVentas + 20k %d",ventasMayor20k);
-        printf("\nVentas + 10k %d",ventasMayor10k);
-        printf("\nLCD totales %d",cantidadLCD);
-        printf("\nUnidades totales %d",unidadesTotales);
+        printf("\nVentas + 20k: %d",ventasMayor20k);
+        printf("\nVentas + 10k: %d",ventasMayor10k);
+        printf("\nLCD totales: %d",cantidadLCD);
+        printf("\nUnidades totales: %d",unidadesTotales);
 
         sprintf(stringAux,"\n*********************\nInforme de ventas\n******************");
         strcat(informes,stringAux);

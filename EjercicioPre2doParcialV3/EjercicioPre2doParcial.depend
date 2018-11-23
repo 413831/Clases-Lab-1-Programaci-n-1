@@ -1,0 +1,54 @@
+# depslib dependency file v1.0
+1542915376 source:/home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/Compra.c
+	"Compra.h"
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+	"utn.h"
+
+1542915376 /home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/Compra.h
+	"LinkedList.h"
+
+1542909940 source:/home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/LinkedList.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"LinkedList.h"
+	"Compra.h"
+	"Parser.h"
+	<ctype.h>
+
+1542762216 /home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/LinkedList.h
+
+1542909350 /home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/Parser.h
+	"LinkedList.h"
+	"Compra.h"
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1542915428 source:/home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/main.c
+	<stdio_ext.h>
+	<stdlib.h>
+	"Compra.h"
+	"LinkedList.h"
+	"Parser.h"
+
+1542911059 source:/home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/Parser.c
+	"LinkedList.h"
+	"Compra.h"
+	<stdio_ext.h>
+	<stdlib.h>
+	<string.h>
+	<ctype.h>
+
+1542563726 /home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/utn.h
+
+1542563726 source:/home/lucas/Escritorio/Prueba-master/EjercicioPre2doParcialV3/EjercicioPre2doParcialV3/utn.c
+	<stdio_ext.h>
+	<string.h>
+	<stdlib.h>
+	<ctype.h>
+	"utn.h"
+

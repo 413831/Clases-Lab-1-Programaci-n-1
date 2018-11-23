@@ -13,8 +13,10 @@ int main()
 
     controller_loadFromText("data.csv",listadoVentas);
     counter = ll_len(listadoVentas);
-   // controller_ListVenta(listadoVentas);
+
+    controller_ListVenta(listadoVentas);
     printf("\nLEN %d",counter);
+    printf("\n\n");
     controller_generateNewList(listadoVentas);
 
    return 0;

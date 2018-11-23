@@ -330,7 +330,7 @@ int venta_getId(Venta* this)
 */
 char* venta_getFecha(Venta* this)
 {
-	char* retorno = NULL;
+	char* retorno = malloc(sizeof(char));;
 	if(this != NULL)
 	{
 		strcpy(retorno,this->fecha);
@@ -390,7 +390,8 @@ float venta_getPrecio(Venta* this)
 */
 char* venta_getCuit(Venta* this)
 {
-	char* retorno = NULL;
+	char* retorno = malloc(sizeof(char));
+
 	if(this != NULL)
 	{
 		strcpy(retorno,this->cuit);
@@ -703,47 +704,22 @@ int venta_compareByCuit(void* thisA ,void* thisB)
 int venta_show(void* this)
 {
     int retorno = -1;
-    char codigoVenta[BUFFER];
-    char fechaVenta[BUFFER];
-    char cuitVenta[BUFFER];
 
 	if(this != NULL)
 	{
-     //   strcpy(codigoVenta,venta_getCodigo(this));
-   //     strcpy(fechaVenta,venta_getFecha(this));
-   //     strcpy(cuitVenta,venta_getCuit(this));
-
 		printf("\nId -- %d",venta_getId(this));
-		printf("\nFecha -- %s",fechaVenta);
-		printf("\nCodigo -- %s",codigoVenta);
+		printf("\nFecha -- %s",venta_getFecha(this));
+		printf("\nCodigo -- %s",venta_getCodigo(this));
 		printf("\nCantidad -- %d",venta_getCantidad(this));
 		printf("\nPrecio -- %.2f",venta_getPrecio(this));
-		printf("\nCuit -- %s",cuitVenta);
+		printf("\nCuit -- %s",venta_getCuit(this));
 		retorno = 0;
 	}
 	return retorno;
 }
 
-/*
-int venta_generarLista(LinkedList* listaVentas)
-{
-    int retorno;
 
-    if(listaVentas != NULL)
-    {
-
-
-
-
-    }
-
-
-    return retorno;
-
-}
-*/
-
-int venta_seleccionarVenta10k(void* this)
+int venta_seleccionarVentaPrecio(void* this,char* parametro)
 {
     int retorno = 0;
     float valorVenta;
@@ -756,7 +732,7 @@ int venta_seleccionarVenta10k(void* this)
         cantidad = venta_getCantidad(this);
         totalVenta = valorVenta * cantidad;
 
-        if(totalVenta > 10000)//Comparo el sueldo del elemento contra el numero ingresado
+        if(totalVenta > atoi(parametro))//Comparo el sueldo del elemento contra el numero ingresado
         {
             retorno = 1;
         }
@@ -764,28 +740,7 @@ int venta_seleccionarVenta10k(void* this)
     return retorno;
 }
 
-int venta_seleccionarVenta20k(void* this)
-{
-    int retorno = 0;
-    float valorVenta;
-    int cantidad;
-    int totalVenta;
-
-    if(this != NULL)
-    {
-        valorVenta = venta_getPrecio(this);
-        cantidad = venta_getCantidad(this);
-        totalVenta = valorVenta * cantidad;
-
-        if(totalVenta > 20000)//Comparo el sueldo del elemento contra el numero ingresado
-        {
-            retorno = 1;
-        }
-    }
-    return retorno;
-}
-
-int venta_seleccionarLCD(void* this)
+int venta_seleccionarVentaCodigo(void* this,char* parametro)
 {
     int retorno = 0;
     char codigoVenta[BUFFER];
@@ -793,7 +748,7 @@ int venta_seleccionarLCD(void* this)
     if(this != NULL)
     {
         strcpy(codigoVenta,venta_getCodigo(this));
-        if(!strcmp(codigoVenta,"LCD_TV"))//Comparo el sueldo del elemento contra el numero ingresado
+        if(!strcmp(codigoVenta,parametro))//Comparo el sueldo del elemento contra el numero ingresado
         {
             retorno = 1;
         }
@@ -801,7 +756,7 @@ int venta_seleccionarLCD(void* this)
     return retorno;
 }
 
-int venta_unidades(void* this)
+int venta_unidades(void* this,char* parametro)
 {
     int retorno = 0;
     int cantidadVenta;
@@ -809,7 +764,7 @@ int venta_unidades(void* this)
     if(this != NULL)
     {
         cantidadVenta = venta_getCantidad(this);
-        if(cantidadVenta > 0)//Comparo el sueldo del elemento contra el numero ingresado
+        if(cantidadVenta > atoi(parametro))//Comparo el sueldo del elemento contra el numero ingresado
         {
             retorno = cantidadVenta;
         }
